@@ -1,0 +1,28 @@
+
+img{
+    height: 100px;
+    width: 100px;
+   
+   
+}
+form{
+    text-align: center;
+}
+.inline-center{
+    display: block;
+    margin: 10px auto;
+}
+.controls{
+    display: inline-block;
+    text-align: left;
+}
+button{
+    float: right;
+    
+}
+.remember{
+    clear: both;
+    float: right;
+    font-size: 13px
+}
+
