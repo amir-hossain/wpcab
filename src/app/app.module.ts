@@ -4,9 +4,9 @@ import {FormsModule,ReactiveFormsModule} from '@angular/forms'
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { UserHomeComponent } from './user-home/user-home.component';
 import { AppRoutingModule } from './app.routing';
-import { RegisterHomeComponent } from './register-home/register-home.component';
+import { HomeComponent } from './home/home.component';
+
 
 
 
@@ -14,8 +14,7 @@ import { RegisterHomeComponent } from './register-home/register-home.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    UserHomeComponent,
-    RegisterHomeComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
