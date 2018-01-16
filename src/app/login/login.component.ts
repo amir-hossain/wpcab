@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("email_phone",this.loginForm.controls.phone_email.value);
         localStorage.setItem("password",this.loginForm.controls.password.value);
       }
-      this.router.navigate(["user_home"]);
+      this.router.navigate(["register_home"]);
     }
   }
 

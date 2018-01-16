@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { UserHomeComponent } from './user-home/user-home.component';
 import { AppRoutingModule } from './app.routing';
+import { RegisterHomeComponent } from './register-home/register-home.component';
 
 
 
@@ -14,6 +15,7 @@ import { AppRoutingModule } from './app.routing';
     AppComponent,
     LoginComponent,
     UserHomeComponent,
+    RegisterHomeComponent,
   ],
   imports: [
     BrowserModule,
