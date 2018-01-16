@@ -6,6 +6,11 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app.routing';
 import { HomeComponent } from './home/home.component';
+import { RegisterNavComponent } from './register-nav/register-nav.component';
+import { ProfileComponent } from './profile/profile.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { NotificaionComponent } from './notificaion/notificaion.component';
+import { FinanceComponent } from './finance/finance.component';
 
 
 
@@ -15,6 +20,11 @@ import { HomeComponent } from './home/home.component';
     AppComponent,
     LoginComponent,
     HomeComponent,
+    RegisterNavComponent,
+    ProfileComponent,
+    RegistrationComponent,
+    NotificaionComponent,
+    FinanceComponent,
   ],
   imports: [
     BrowserModule,
