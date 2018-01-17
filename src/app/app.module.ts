@@ -30,7 +30,7 @@ import {Meterial} from './meterial'
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
     Meterial,
     AppRoutingModule,
     FormsModule,

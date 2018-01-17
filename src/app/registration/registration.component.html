@@ -2,48 +2,54 @@
 <div class="main-container">
   <app-register-nav></app-register-nav>
   <h1>Member Registration</h1>
-  <form>
+  <form [formGroup]="registrationForm" (ngSubmit)="signup()">
     <div class="mandatory">
       <h3>Madatory Fields</h3>
-        <input type="text" placeholder="Name">
-        <input type="password"  placeholder="Password">
-        <input type="number" placeholder="Phone">
-        <input type="email"  placeholder="Email">
+        <input type="text" placeholder="Name" formControlName="name">
+        <input type="password"  placeholder="Password" formControlName="password">
+        <input type="number" placeholder="Phone" formControlName="phone">
+        <input type="email"  placeholder="Email" formControlName="email">
         <div class="role">
           <h5>Role</h5>
-          <label for="User">User<input type="radio" name="role" id="User"></label>
-          <label for="Register">Register<input type="radio" name="role" id="Register"></label>
-          <label for="Leader">Leader<input type="radio" name="role" id="Leader"></label>
-          <label for="Admin">Admin<input type="radio" name="role" id="Admin"></label>
-          <label for="Accountant">Accountant<input type="radio" name="role" id="Accountant"></label>
-          <label for="Super">Super<input type="radio" name="role" id="Super"></label>
+          <label for="User">User<input type="radio" name="role" id="User" value="user" formControlName="role"></label>
+
+          <label for="Register">Register<input type="radio" name="role" id="Register" value="gegister" formControlName="role"></label>
+
+          <label for="Leader">Leader<input type="radio" name="role" id="Leader" value="leader" formControlName="role"></label>
+
+          <label for="Admin">Admin<input type="radio" name="role" id="Admin" value="admin" formControlName="role"></label>
+
+          <label for="Accountant">Accountant<input type="radio" name="role" id="Accountant" value="accountant" formControlName="role"></label>
+
+          <label for="Super">Super<input type="radio" name="role" id="Super" value="super" formControlName="role"></label>
+
         </div> <!-- role -->
-        <input type="text"  placeholder="Area/Thana (current)">
-        <input type="text" placeholder="District (current)">
-        <input type="text" placeholder="Upozela (current)">
-        <input type="text"  placeholder="Father's name">
-        <input type="text" placeholder="Mother's name">
-        <input type="textarea" placeholder="Parmemt Address">
+        <input type="text"  placeholder="Area/Thana (current)" formControlName="area">
+        <input type="text" placeholder="District (current)" formControlName="district">
+        <input type="text" placeholder="Upozilla (current)" formControlName="upozilla">
+        <input type="text"  placeholder="Father's name" formControlName="fatherName">
+        <input type="text" placeholder="Mother's name" formControlName="motherName">
+        <input type="textarea" placeholder="Parmemt Address" formControlName="permanentAddress">
         <mat-form-field>
-          <input matInput [matDatepicker]="picker" placeholder="Age">
+          <input matInput [matDatepicker]="picker" placeholder="Age" formControlName="age">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
         </mat-form-field> <!-- age -->
-        <input type="textarea" placeholder="Invited by">
+        <input type="textarea" placeholder="Invited by" formControlName="invitedBy">
     </div> <!-- mandatory -->
     <div class="optional">
       <h3>Optional Field</h3>
       <div class="occupation">
         <h5>Occupation</h5>
-        <label for="student">Student<input type="radio" name="occupation" id="student"></label>
-        <label for="job holder">Job holder<input type="radio" name="occupation" id="job holder"></label>
-        <label for="bussneeman">Bussneeman<input type="radio" name="occupation" id="bussneeman"></label>
-        <label for="others">Others<input type="radio" name="occupation" id="others"></label>
+        <label for="student">Student<input type="radio" name="occupation" id="student" value="" formControlName="occupation"></label>
+        <label for="job holder">Job holder<input type="radio" name="occupation" id="job holder" value="JOb Holder" formControlName="occupation"></label>
+        <label for="bussnessman">Bussnessman<input type="radio" name="occupation" id="bussnessman" value="Bussnessman" formControlName="occupation"></label>
+        <label for="others">Others<input type="radio" name="occupation" id="others" value="Others" formControlName="occupation"></label>
       </div>
-      <input type="text" placeholder="Nationality">
-      <input type="text" placeholder="Nationl ID">
-      <input type="text" placeholder="Blood Group">
-      <input type="text" placeholder="Country">
+      <input type="text" placeholder="Nationality" formControlName="nationality">
+      <input type="text" placeholder="National ID" formControlName="nationalId">
+      <input type="text" placeholder="Blood Group" formControlName="bloodGroup">
+      <input type="text" placeholder="Country" formControlName="country">
     </div> <!-- optional -->
     <button type="submit">Signup</button>
   </form> <!-- Form -->
