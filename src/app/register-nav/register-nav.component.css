@@ -1,0 +1,12 @@
+.nav-bar{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.nav-bar li{
+    float: left;
+    margin-right: 2em;
+}
+.search-bar{
+    clear: both;
+}

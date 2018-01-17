@@ -1,0 +1,14 @@
+input{
+    display: block;
+    margin-bottom: 2em;
+}
+
+.role input{
+    display: inline;
+    margin-left:1em;
+    
+}
+
+.role label{
+    margin-right: 1em;
+}
