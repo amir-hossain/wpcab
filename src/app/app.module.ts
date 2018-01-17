@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms'
 
 import { AppComponent } from './app.component';
@@ -11,6 +12,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { NotificaionComponent } from './notificaion/notificaion.component';
 import { FinanceComponent } from './finance/finance.component';
+import {Meterial} from './meterial'
 
 
 
@@ -28,6 +30,8 @@ import { FinanceComponent } from './finance/finance.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule
+    Meterial,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule
