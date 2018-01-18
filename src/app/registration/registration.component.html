@@ -6,14 +6,29 @@
     <div class="mandatory">
       <h3>Madatory Fields</h3>
         <input type="text" placeholder="Name" formControlName="name">
+        <div *ngIf="registrationForm.controls.name.invalid">
+          Name required
+        </div>
         <input type="password"  placeholder="Password" formControlName="password">
+        <div *ngIf="registrationForm.controls.password.invalid">
+          Password required
+        </div>
         <input type="number" placeholder="Phone" formControlName="phone">
+        <div *ngIf="registrationForm.controls.phone.invalid">
+          Phone required
+        </div>
         <input type="email"  placeholder="Email" formControlName="email">
+        <div *ngIf="registrationForm.controls.email.value !='' && registrationForm.controls.email.invalid">
+          Invalid email
+        </div>
         <div class="role">
           <h5>Role</h5>
-          <label for="User">User<input type="radio" name="role" id="User" value="user" formControlName="role"></label>
+          <div *ngIf="registrationForm.controls.role.invalid">
+          Role required
+        </div>
+          <label for="User">User<input type="radio" name="role" id="User" value="user" checked="checked" formControlName="role"></label>
 
-          <label for="Register">Register<input type="radio" name="role" id="Register" value="gegister" formControlName="role"></label>
+          <label for="Register">Register<input type="radio" name="role" id="Register" value="register" formControlName="role"></label>
 
           <label for="Leader">Leader<input type="radio" name="role" id="Leader" value="leader" formControlName="role"></label>
 
@@ -25,29 +40,53 @@
 
         </div> <!-- role -->
         <input type="text"  placeholder="Area/Thana (current)" formControlName="area">
+        <div *ngIf="registrationForm.controls.area.invalid">
+          Area required
+        </div>
         <input type="text" placeholder="District (current)" formControlName="district">
+        <div *ngIf="registrationForm.controls.district.invalid">
+          District required
+        </div>
         <input type="text" placeholder="Upozilla (current)" formControlName="upozilla">
+        <div *ngIf="registrationForm.controls.upozilla.invalid">
+          Upozilla required
+        </div>
         <input type="text"  placeholder="Father's name" formControlName="fatherName">
+        <div *ngIf="registrationForm.controls.fatherName.invalid">
+          Father name required
+        </div>
         <input type="text" placeholder="Mother's name" formControlName="motherName">
+        <div *ngIf="registrationForm.controls.motherName.invalid">
+          Mother name required
+        </div>
         <input type="textarea" placeholder="Parmemt Address" formControlName="permanentAddress">
+        <div *ngIf="registrationForm.controls.permanentAddress.invalid">
+          Permanent address required
+        </div>
         <mat-form-field>
           <input matInput [matDatepicker]="picker" placeholder="Age" formControlName="age">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
         </mat-form-field> <!-- age -->
+        <div *ngIf="registrationForm.controls.age.invalid">
+          Age required
+        </div>
         <input type="textarea" placeholder="Invited by" formControlName="invitedBy">
     </div> <!-- mandatory -->
+    <div *ngIf="registrationForm.controls.invitedBy.invalid">
+      Invited by required
+    </div>
     <div class="optional">
       <h3>Optional Field</h3>
       <div class="occupation">
         <h5>Occupation</h5>
-        <label for="student">Student<input type="radio" name="occupation" id="student" value="" formControlName="occupation"></label>
+        <label for="student">Student<input type="radio" name="occupation" id="student" value="Student" formControlName="occupation"></label>
         <label for="job holder">Job holder<input type="radio" name="occupation" id="job holder" value="JOb Holder" formControlName="occupation"></label>
         <label for="bussnessman">Bussnessman<input type="radio" name="occupation" id="bussnessman" value="Bussnessman" formControlName="occupation"></label>
         <label for="others">Others<input type="radio" name="occupation" id="others" value="Others" formControlName="occupation"></label>
       </div>
       <input type="text" placeholder="Nationality" formControlName="nationality">
-      <input type="text" placeholder="National ID" formControlName="nationalId">
+      <input type="number" placeholder="National ID" formControlName="nationalId">
       <input type="text" placeholder="Blood Group" formControlName="bloodGroup">
       <input type="text" placeholder="Country" formControlName="country">
     </div> <!-- optional -->
