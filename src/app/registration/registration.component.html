@@ -17,10 +17,7 @@
         <div *ngIf="registrationForm.controls.phone.invalid">
           Phone required
         </div>
-        <input type="email"  placeholder="Email" formControlName="email">
-        <div *ngIf="registrationForm.controls.email.value !='' && registrationForm.controls.email.invalid">
-          Invalid email
-        </div>
+       
         <div class="role">
           <h5>Role</h5>
           <div *ngIf="registrationForm.controls.role.invalid">
@@ -78,6 +75,10 @@
     </div>
     <div class="optional">
       <h3>Optional Field</h3>
+      <input type="email"  placeholder="Email" formControlName="email">
+      <div *ngIf="registrationForm.controls.email.value !='' && registrationForm.controls.email.invalid">
+        Invalid email
+      </div>
       <div class="occupation">
         <h5>Occupation</h5>
         <label for="student">Student<input type="radio" name="occupation" id="student" value="Student" formControlName="occupation"></label>
