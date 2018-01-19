@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators,FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import {AngularFireAuth} from 'angularfire2/auth'
+import {AngularFireAuth} from 'angularfire2/auth';
+
 
 @Component({
   selector: 'app-login',

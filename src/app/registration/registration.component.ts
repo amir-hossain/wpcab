@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Validators,FormGroup,FormBuilder} from "@angular/forms"
+import {Validators,FormGroup,FormBuilder} from "@angular/forms";
+import { AngularFireDatabase } from "angularfire2/database";
 
 @Component({
   selector: 'app-registration',
@@ -9,7 +10,7 @@ import {Validators,FormGroup,FormBuilder} from "@angular/forms"
 export class RegistrationComponent implements OnInit {
   startDate = new Date(1990, 0, 1);
   registrationForm:FormGroup;
-  constructor(private builder:FormBuilder) { }
+  constructor(private builder:FormBuilder,private db:AngularFireDatabase) { }
 
   ngOnInit() {
     this.registrationForm=this.builder.group({
@@ -35,6 +36,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   signup(){
+    this.db.list("wpcab-96299").push(this.registrationForm.value);
     console.log(this.registrationForm.value);
   }
 

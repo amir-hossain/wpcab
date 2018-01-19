@@ -14,7 +14,8 @@ import { NotificaionComponent } from './notificaion/notificaion.component';
 import { FinanceComponent } from './finance/finance.component';
 import {Meterial} from './meterial'
 import {AngularFireModule} from "angularfire2";
-import {AngularFireAuth} from "angularfire2/auth"
+import {AngularFireAuth} from "angularfire2/auth";
+import {AngularFireDatabaseModule } from "angularfire2/database";
 
 
 const confiq={
@@ -44,7 +45,8 @@ const confiq={
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(confiq)
+    AngularFireModule.initializeApp(confiq),
+    AngularFireDatabaseModule
   ],
   providers: [AngularFireAuth],
   bootstrap: [AppComponent]
