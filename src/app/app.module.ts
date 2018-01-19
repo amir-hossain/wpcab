@@ -13,9 +13,18 @@ import { RegistrationComponent } from './registration/registration.component';
 import { NotificaionComponent } from './notificaion/notificaion.component';
 import { FinanceComponent } from './finance/finance.component';
 import {Meterial} from './meterial'
+import {AngularFireModule} from "angularfire2";
+import {AngularFireAuth} from "angularfire2/auth"
 
 
-
+const confiq={
+  apiKey: "AIzaSyAgWD72SmEEKlxHoKW1ZcsoR5qo583LM78",
+  authDomain: "wpcab-96299.firebaseapp.com",
+  databaseURL: "https://wpcab-96299.firebaseio.com",
+  projectId: "wpcab-96299",
+  storageBucket: "wpcab-96299.appspot.com",
+  messagingSenderId: "967144772560"
+}
 
 @NgModule({
   declarations: [
@@ -34,9 +43,10 @@ import {Meterial} from './meterial'
     Meterial,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(confiq)
   ],
-  providers: [],
+  providers: [AngularFireAuth],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
