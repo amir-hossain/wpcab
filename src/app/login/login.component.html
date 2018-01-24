@@ -1,19 +1,39 @@
-<form [formGroup]="loginForm" (ngSubmit)="login()">
-  <img class="inline-center" src="../../assets/img/logo.jpg">
-  <div class="controls">
-    <input  class="inline-center" type="text" placeholder="Name or Email" formControlName="phone_email">
-    <div *ngIf="loginForm.controls.phone_email.invalid">
-      Not a Valid email
-    </div>
-    <input type="password" class="inline-center" placeholder="Password" formControlName="password">
-    <div *ngIf="loginForm.controls.password.invalid">
-      Password field is empty
-    </div>
-   
-    <button type="submit">Login</button>
-    <div class="remember">
-      <input  type="checkbox" formControlName="remember">Remember password
-    </div>
-  </div>
 
-</form>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <mat-card class="card">
+        <img  class="inline-center" src="../../assets/img/logo.jpg">
+        <div class="controls">
+          <div>
+            <mat-form-field>
+              <input matInput class="inline-center" type="text" placeholder="Name or Email" formControlName="phone_email">
+            </mat-form-field>
+          </div>
+          <mat-error class="error" *ngIf="loginForm.controls.phone_email.invalid && loginForm.controls.phone_email.touched">
+            Not a Valid email
+          </mat-error>
+          <mat-error class="error">
+              {{unError}}
+            </mat-error>
+          <div>
+            <mat-form-field>
+              <input matInput type="password" class="inline-center" placeholder="Password" formControlName="password">
+            </mat-form-field>
+          </div>
+          <mat-error class="error" *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched">
+            Password field is empty
+          </mat-error>
+          <mat-error class="error">
+              {{passError}}
+            </mat-error>
+         
+          <button mat-raised-button color="primary" type="submit">Login</button>
+          <div class="remember">
+            <mat-checkbox  formControlName="remember">Remember password</mat-checkbox>
+          </div>
+        </div> <!-- controls -->
+  </mat-card> 
+
+      </form>
+
+    
+   

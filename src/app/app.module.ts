@@ -16,6 +16,7 @@ import {Meterial} from './meterial'
 import {AngularFireModule} from "angularfire2";
 import {AngularFireAuth} from "angularfire2/auth";
 import {AngularFireDatabaseModule } from "angularfire2/database";
+import { CollectComponent } from './collect/collect.component';
 
 
 const confiq={
@@ -37,6 +38,7 @@ const confiq={
     RegistrationComponent,
     NotificaionComponent,
     FinanceComponent,
+    CollectComponent,
   ],
   imports: [
     BrowserModule,

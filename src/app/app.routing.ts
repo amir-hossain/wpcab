@@ -6,6 +6,7 @@ import {ProfileComponent} from './profile/profile.component';
 import {RegistrationComponent} from './registration/registration.component';
 import {FinanceComponent} from "./finance/finance.component";
 import {NotificaionComponent} from './notificaion/notificaion.component';
+import {CollectComponent} from "./collect/collect.component"
 const routes:Routes=[
     {
         path:"login",
@@ -38,11 +39,12 @@ const routes:Routes=[
                 path:"notification",
                 component:NotificaionComponent,
 
-            }
-            
-            
+            },
+            {
+                path:"collect",
+                component:CollectComponent,
 
-            
+            }
         ]
     }
     

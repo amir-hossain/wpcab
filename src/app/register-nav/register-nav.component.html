@@ -1,14 +1,24 @@
 <ul class="nav-bar">
-  <li><a routerLink="/register/home">Home</a></li>
-  <li><a routerLink="/register/profile">Profile</a></li>
-  <li><a routerLink="/register/registration">Registration</a></li>
-  <li><a routerLink="/register/finance">Finnce</a></li>
-  <li><a routerLink="/register/notification">Notifiction</a></li>
-  <li><a routerLink="/login">Logout</a></li>
+  <mat-tab-group (focusChange)="changeTab($event)">
+    <mat-tab label="Home">
+    </mat-tab>
+    <mat-tab label="Profile">  
+  </mat-tab>
+  <mat-tab label="Registration">  
+  </mat-tab>
+  <mat-tab label="Finnce">  
+  </mat-tab>
+    <mat-tab label="Notifiction">  
+    </mat-tab>
+    <mat-tab label="Collect">  
+      </mat-tab>
+    <mat-tab disabled>
+        <ng-template mat-tab-label>
+            <button mat-icon-button >
+                <button type="button" mat-raised-button color="primary" class="logout-btn" (click)="logout()" >Logout</button>
+            </button>
+        </ng-template>
+    </mat-tab> 
+  </mat-tab-group>
 </ul>
-<form [formGroup]="searchForm" (ngSubmit)="search()" class="search-bar">
-  <input type="text" placeholder="name" formControlName="name">
-  <input type="text" placeholder="area" formControlName="area">
-  <input type="text" placeholder="father's name" formControlName="fatherName">
-  <button type="submit">Search</button>
-</form>
+

@@ -7,6 +7,7 @@
     float: left;
     margin-right: 2em;
 }
-.search-bar{
-    clear: both;
+
+.logout-btn{
+    background: red;
 }
