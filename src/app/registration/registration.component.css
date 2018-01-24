@@ -1,14 +1,54 @@
-input{
-    display: block;
-    margin-bottom: 2em;
-}
+
 
 .occupation input,.role input{
     display: inline;
     margin-left:1em;
+    margin-right: 1em;
+    background: red;
     
 }
 
-.occupation input,.role label{
-    margin-right: 1em;
+::ng-deep .mat-form-field-infix{
+    width: 38em !important;
+    
 }
+
+
+.mandatory,.optional{
+    display: table;
+    margin: auto;
+}
+
+.card{
+    display: inline-block;
+  }
+  .card2{
+    background: #ffffff9d;
+    display: inline-block;
+  }
+
+  h1,h3{
+    font-size: 30px;
+    text-align: center;
+}
+
+h3{
+    font-size: 1.2em;
+}
+.card-container{
+    display: table;
+    margin: auto;
+    
+}
+.mat-radio-button{
+    padding-right: 1.8em;
+}
+
+button{
+    float: right;
+    margin: 2em 0;
+    padding: .5em 3em;
+}
+
+
+

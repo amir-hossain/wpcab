@@ -1,22 +1,17 @@
-.nav-bar{
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-.nav-bar li{
-    float: left;
-    margin-right: 2em;
-}
 
 .logout-btn{
     background: red;
 }
 
-::ng-deep .mat-tab-label{
-    font-family: 'Ubuntu', sans-serif !important;
+.nav-container{
+    background: #ffffffb4
 }
 
-::ng-deep .mat-tab-label:nth-child(6){
-    margin-right: -60px;
-  
+::ng-deep .mat-tab-link{
+    position: relative;
+    left: 20%;
+    display: table;
+    margin: auto;
 }
+
+

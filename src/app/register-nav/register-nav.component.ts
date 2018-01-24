@@ -7,10 +7,40 @@ import {Router} from "@angular/router";
   styleUrls: ['./register-nav.component.css']
 })
 export class RegisterNavComponent implements OnInit {
+  routerLinks=[
+    {
+      label:"Home",
+      link:"/register/home"
+    },
+    {
+      label:"Profile",
+      link:"/register/profile"
+    },
+    {
+      label:"Registration",
+      link:"/register/registration"
+    },
+    {
+      label:"Finance",
+      link:"/register/finance"
+    },
+    {
+      label:"Notification",
+      link:"/register/notification"
+    },
+    {
+      label:"Collection",
+      link:"/register/collection"
+    }
+    
+    
+  ];
+  constructor(private router:Router) { 
 
-  constructor(private router:Router) { }
+  }
 
   ngOnInit() {
+  
 
   }
 

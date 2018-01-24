@@ -6,7 +6,7 @@ import {ProfileComponent} from './profile/profile.component';
 import {RegistrationComponent} from './registration/registration.component';
 import {FinanceComponent} from "./finance/finance.component";
 import {NotificaionComponent} from './notificaion/notificaion.component';
-import {CollectComponent} from "./collect/collect.component"
+import {CollectionComponent} from "./collection/collection.component"
 const routes:Routes=[
     {
         path:"login",
@@ -41,8 +41,8 @@ const routes:Routes=[
 
             },
             {
-                path:"collect",
-                component:CollectComponent,
+                path:"collection",
+                component:CollectionComponent,
 
             }
         ]

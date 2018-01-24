@@ -1,24 +1,11 @@
-<ul class="nav-bar">
-  <mat-tab-group (focusChange)="changeTab($event)">
-    <mat-tab class="label" label="Home">
-    </mat-tab>
-    <mat-tab label="Profile">  
-  </mat-tab>
-  <mat-tab label="Registration">  
-  </mat-tab>
-  <mat-tab label="Finnce">  
-  </mat-tab>
-    <mat-tab label="Notifiction">  
-    </mat-tab>
-    <mat-tab label="Collect">  
-      </mat-tab>
-    <mat-tab disabled>
-        <ng-template mat-tab-label>
-            <button mat-icon-button >
-                <button type="button" mat-raised-button color="primary" class="logout-btn" (click)="logout()" >Logout</button>
-            </button>
-        </ng-template>
-    </mat-tab> 
-  </mat-tab-group>
-</ul>
-
+ <div mat-tab-nav-bar class="nav-container">
+  <a mat-tab-link *ngFor="let routerLink of routerLinks"
+  [routerLink]="routerLink.link"
+  routerLinkActive #rla="routerLinkActive"
+  [active]="rla.isActive">
+  {{routerLink.label}}
+</a>
+<a mat-tab-link disabled>
+  <button mat-raised-button color="primary" type="button" (click)="logout()" class="logout-btn">Logout</button>
+</a>
+ </div>

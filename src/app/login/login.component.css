@@ -36,13 +36,8 @@ form {
   .card{
     background: #ffffffb4;
     display: inline-block;
-    font-family :'Ubuntu', sans-serif !important;
   }
 
-  ::ng-deep .mat-card{
-    font-family:'Ubuntu', sans-serif !important;
-    background: red !important;
-  }
   ::ng-deep .mat-form-field-infix{
       width: 400px !important;
   }

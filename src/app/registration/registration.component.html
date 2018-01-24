@@ -1,84 +1,132 @@
+<app-register-nav></app-register-nav>
 
-<div class="main-container">
-  <app-register-nav></app-register-nav>
   <h1>Member Registration</h1>
   <form [formGroup]="registrationForm" (ngSubmit)="signup()">
     <div class="mandatory">
       <h3>Madatory Fields</h3>
-        <input type="text" placeholder="Name" formControlName="name">
-        <div *ngIf="registrationForm.controls.name.invalid">
+      <mat-card class="card">
+        <div>
+          <mat-form-field>
+        <input matInput type="text" placeholder="Name" formControlName="name">
+      </mat-form-field>
+        <mat-error *ngIf="registrationForm.controls.name.invalid && registrationForm.controls.name.touched">
           Name required
-        </div>
-        <input type="password"  placeholder="Password" formControlName="password">
-        <div *ngIf="registrationForm.controls.password.invalid">
+        </mat-error>
+      </div>
+      <div>
+        <mat-form-field>
+        <input matInput type="password"  placeholder="Password" formControlName="password">
+      </mat-form-field>
+        <mat-error *ngIf="registrationForm.controls.password.invalid && registrationForm.controls.password.touched">
           Password required
-        </div>
-        <input type="number" placeholder="Phone" formControlName="phone">
-        <div *ngIf="registrationForm.controls.phone.invalid">
+        </mat-error>
+      </div>
+      <div>
+        <mat-form-field>
+        <input matInput type="number" placeholder="Phone" formControlName="phone">
+      </mat-form-field>
+        <mat-error *ngIf="registrationForm.controls.phone.invalid && registrationForm.controls.phone.touched">
           Phone required
-        </div>
+        </mat-error>
+      </div>
        
-        <div class="role">
+        <mat-radio-group class="role">
           <h5>Role</h5>
-          <div *ngIf="registrationForm.controls.role.invalid">
+          <mat-error *ngIf="registrationForm.controls.role.invalid && registrationForm.controls.role.touched">
           Role required
-        </div>
-          <label for="User">User<input type="radio" name="role" id="User" value="user" checked="checked" formControlName="role"></label>
+        </mat-error>
+          <mat-radio-button type="radio" name="role" id="User" value="User" checked="checked">User</mat-radio-button>
 
-          <label for="Register">Register<input type="radio" name="role" id="Register" value="register" formControlName="role"></label>
+         <mat-radio-button type="radio" name="role" id="Register" value="Register">Register</mat-radio-button>
 
-          <label for="Leader">Leader<input type="radio" name="role" id="Leader" value="leader" formControlName="role"></label>
+          <mat-radio-button type="radio" name="role" id="Leader" value="Leader" >Leader</mat-radio-button>
 
-          <label for="Admin">Admin<input type="radio" name="role" id="Admin" value="admin" formControlName="role"></label>
+          <mat-radio-button type="radio" name="role" id="Admin" value="Admin" >Admin</mat-radio-button>
 
-          <label for="Accountant">Accountant<input type="radio" name="role" id="Accountant" value="accountant" formControlName="role"></label>
+          <mat-radio-button type="radio" name="role" id="Accountant" value="Accountant" >Accountant</mat-radio-button>
 
-          <label for="Super">Super<input type="radio" name="role" id="Super" value="super" formControlName="role"></label>
+         <mat-radio-button type="radio" name="role" id="Super" value="Super" >Super</mat-radio-button>
 
-        </div> <!-- role -->
-        <input type="text"  placeholder="Area/Thana (current)" formControlName="area">
-        <div *ngIf="registrationForm.controls.area.invalid">
+        </mat-radio-group> <!-- role -->
+        <div>
+        <mat-form-field>
+        <input matInput type="text"  placeholder="Area/Thana (current)" formControlName="area">
+      </mat-form-field>
+        <mat-error *ngIf="registrationForm.controls.area.invalid && registrationForm.controls.area.touched">
           Area required
-        </div>
-        <input type="text" placeholder="District (current)" formControlName="district">
-        <div *ngIf="registrationForm.controls.district.invalid">
+        </mat-error>
+      </div>
+      <div>
+        <mat-form-field>
+        <input matInput type="text" placeholder="District (current)" formControlName="district">
+      </mat-form-field>
+        <mat-error *ngIf="registrationForm.controls.district.invalid && registrationForm.controls.district.touched">
           District required
-        </div>
-        <input type="text" placeholder="Upozilla (current)" formControlName="upozilla">
-        <div *ngIf="registrationForm.controls.upozilla.invalid">
+        </mat-error>
+      </div>
+      <div>
+        <mat-form-field>
+        <input matInput type="text" placeholder="Upozilla (current)" formControlName="upozilla">
+      </mat-form-field>
+        <mat-error *ngIf="registrationForm.controls.upozilla.invalid && registrationForm.controls.upozilla.touched">
           Upozilla required
-        </div>
-        <input type="text"  placeholder="Father's name" formControlName="fatherName">
-        <div *ngIf="registrationForm.controls.fatherName.invalid">
+        </mat-error>
+      </div>
+      <div>
+        <mat-form-field>
+        <input matInput type="text"  placeholder="Father's name" formControlName="fatherName">
+      </mat-form-field>
+        <mat-error *ngIf="registrationForm.controls.fatherName.invalid && registrationForm.controls.fatherName.touched">
           Father name required
-        </div>
-        <input type="text" placeholder="Mother's name" formControlName="motherName">
-        <div *ngIf="registrationForm.controls.motherName.invalid">
+        </mat-error>
+      </div>
+      <div>        <mat-form-field>
+        <input matInput type="text" placeholder="Mother's name" formControlName="motherName">
+      </mat-form-field>
+        <mat-error *ngIf="registrationForm.controls.motherName.invalid && registrationForm.controls.motherName.touched">
           Mother name required
-        </div>
-        <input type="textarea" placeholder="Parmemt Address" formControlName="permanentAddress">
-        <div *ngIf="registrationForm.controls.permanentAddress.invalid">
+        </mat-error>
+      </div>
+        <div>
+        <mat-form-field>
+        <input matInput type="textarea" placeholder="Parmemt Address" formControlName="permanentAddress">
+      </mat-form-field>
+        <mat-error *ngIf="registrationForm.controls.permanentAddress.invalid && registrationForm.controls.permanentAddress.touched">
           Permanent address required
-        </div>
+        </mat-error>
+      </div>
+      <div>
         <mat-form-field>
           <input matInput [matDatepicker]="picker" placeholder="Age" formControlName="age">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
         </mat-form-field> <!-- age -->
-        <div *ngIf="registrationForm.controls.age.invalid">
+        <mat-error *ngIf="registrationForm.controls.age.invalid && registrationForm.controls.age.touched">
           Age required
+        </mat-error>
+      </div>
+      <div>
+        <mat-form-field>
+        <input matInput type="textarea" placeholder="Invited by" formControlName="invitedBy">
+      </mat-form-field>
+        <mat-error *ngIf="registrationForm.controls.invitedBy.invalid && registrationForm.controls.invitedBy.touched">
+            Invited by required
+          </mat-error>
         </div>
-        <input type="textarea" placeholder="Invited by" formControlName="invitedBy">
+      </mat-card>
     </div> <!-- mandatory -->
-    <div *ngIf="registrationForm.controls.invitedBy.invalid">
-      Invited by required
-    </div>
+    
     <div class="optional">
       <h3>Optional Field</h3>
-      <input type="email"  placeholder="Email" formControlName="email">
-      <div *ngIf="registrationForm.controls.email.value !='' && registrationForm.controls.email.invalid">
+      <mat-card class="card2">
+        <div>
+      <mat-form-field>
+        <input matInput type="email"  placeholder="Email" formControlName="email">
+      </mat-form-field>
+      <mat-error  *ngIf="registrationForm.controls.email.value !='' && registrationForm.controls.email.invalid">
         Invalid email
-      </div>
+      </mat-error >
+    </div>
       <div class="occupation">
         <h5>Occupation</h5>
         <label for="student">Student<input type="radio" name="occupation" id="student" value="Student" formControlName="occupation"></label>
@@ -86,11 +134,33 @@
         <label for="bussnessman">Bussnessman<input type="radio" name="occupation" id="bussnessman" value="Bussnessman" formControlName="occupation"></label>
         <label for="others">Others<input type="radio" name="occupation" id="others" value="Others" formControlName="occupation"></label>
       </div>
-      <input type="text" placeholder="Nationality" formControlName="nationality">
-      <input type="number" placeholder="National ID" formControlName="nationalId">
-      <input type="text" placeholder="Blood Group" formControlName="bloodGroup">
-      <input type="text" placeholder="Country" formControlName="country">
+      <div>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Nationality" formControlName="nationality">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput type="number" placeholder="National ID" formControlName="nationalId">
+      </mat-form-field> 
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Blood Group" formControlName="bloodGroup">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+      <input matInput type="text" placeholder="Country" formControlName="country">
+    </mat-form-field>
+  </div>
+  
+    </mat-card>
+    <div>
+    <button type="submit"  mat-raised-button color="primary">Signup</button>
+  </div>
     </div> <!-- optional -->
-    <button type="submit">Signup</button>
+    
+    
   </form> <!-- Form -->
-</div> <!-- main container -->
+
