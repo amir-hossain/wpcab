@@ -30,13 +30,22 @@ form {
     left: 50%;
     top: 40%;
     -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -40%);
   }
 
   .card{
-      display: inline-block;
+    background: #ffffffb4;
+    display: inline-block;
+    font-family :'Ubuntu', sans-serif !important;
   }
 
+  ::ng-deep .mat-card{
+    font-family:'Ubuntu', sans-serif !important;
+    background: red !important;
+  }
+  ::ng-deep .mat-form-field-infix{
+      width: 400px !important;
+  }
   .error{
     margin-bottom: 1em;
   }

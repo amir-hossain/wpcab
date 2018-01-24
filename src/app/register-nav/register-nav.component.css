@@ -11,3 +11,12 @@
 .logout-btn{
     background: red;
 }
+
+::ng-deep .mat-tab-label{
+    font-family: 'Ubuntu', sans-serif !important;
+}
+
+::ng-deep .mat-tab-label:nth-child(6){
+    margin-right: -60px;
+  
+}

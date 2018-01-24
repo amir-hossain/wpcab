@@ -2,3 +2,25 @@
 .up-comming td,.all td{
     padding-right: 2em;
 }
+
+.card{
+    background: #ffffffb4;
+    display: inline-block;
+    
+}
+
+h1{
+    font-size: 30px;
+    text-align: center;
+}
+
+.main-container{
+    width: 60%;
+    margin: auto;
+}
+
+.up-comming, .all{
+    display: table;
+    margin: auto;
+}
+
