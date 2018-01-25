@@ -38,8 +38,8 @@ form {
     display: inline-block;
   }
 
-  ::ng-deep .mat-form-field-infix{
-      width: 400px !important;
+  mat-form-field{
+    width: 15em !important;
   }
   .error{
     margin-bottom: 1em;

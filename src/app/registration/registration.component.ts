@@ -36,8 +36,15 @@ export class RegistrationComponent implements OnInit {
   }
 
   signup(){
-    this.db.list("wpcab-96299").push(this.registrationForm.value);
-    console.log(this.registrationForm.value);
+    if(this.registrationForm.valid){
+      this.db.list("wpcab-96299").push(this.registrationForm.value);
+      console.log(this.registrationForm.value);
+    }else{
+      Object.keys(this.registrationForm.controls).forEach(field=>{
+        this.registrationForm.get(field).markAsTouched({onlySelf:true});
+      })
+    }
+  
   }
 
 }

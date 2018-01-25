@@ -73,7 +73,7 @@ export class RegisterNavComponent implements OnInit {
   }
 
   logout(){
-    this.router.navigateByUrl("/login")
+    this.router.navigate(["login"]);
   }
 
 
