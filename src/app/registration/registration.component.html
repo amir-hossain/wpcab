@@ -30,7 +30,7 @@
         </mat-error>
       </div>
        
-        <mat-radio-group class="role">
+        <mat-radio-group class="role" formControlName="role">
           <h5>Role</h5>
           <mat-error *ngIf="registrationForm.controls.role.invalid && registrationForm.controls.role.touched">
           Role required
@@ -127,13 +127,13 @@
         Invalid email
       </mat-error >
     </div>
-      <div class="occupation">
+      <mat-radio-group class="occupation" formControlName="occupation">
         <h5>Occupation</h5>
-        <label for="student">Student<input type="radio" name="occupation" id="student" value="Student" formControlName="occupation"></label>
-        <label for="job holder">Job holder<input type="radio" name="occupation" id="job holder" value="JOb Holder" formControlName="occupation"></label>
-        <label for="bussnessman">Bussnessman<input type="radio" name="occupation" id="bussnessman" value="Bussnessman" formControlName="occupation"></label>
-        <label for="others">Others<input type="radio" name="occupation" id="others" value="Others" formControlName="occupation"></label>
-      </div>
+        <mat-radio-button type="radio" name="occupation" id="student" value="Student" >Student</mat-radio-button>
+       <mat-radio-button type="radio" name="occupation" id="job holder" value="JOb Holder" > Job holder</mat-radio-button>
+        <mat-radio-button type="radio" name="occupation" id="bussnessman" value="Bussnessman" >Bussnessman</mat-radio-button>
+        <mat-radio-button type="radio" name="occupation" id="others" value="Others" >Others</mat-radio-button>
+      </mat-radio-group>
       <div>
       <mat-form-field>
         <input matInput type="text" placeholder="Nationality" formControlName="nationality">

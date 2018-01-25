@@ -23,8 +23,9 @@
     display: inline-block;
   }
   .card2{
-    background: #ffffff9d;
+    background: #ffffff63;
     display: inline-block;
+    padding: 1.4em 2em;
   }
 
   h1,h3{
