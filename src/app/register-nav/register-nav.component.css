@@ -4,12 +4,12 @@
 }
 
 .nav-container{
-    background: #ffffffb4
+    background: #ffffffb4;
 }
 
-::ng-deep .mat-tab-link{
-    position: relative;
-    left: 20%;
+
+
+.nav-content{
     display: table;
     margin: auto;
 }

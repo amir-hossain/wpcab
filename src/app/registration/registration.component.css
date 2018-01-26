@@ -19,13 +19,16 @@ mat-form-field{
     margin: auto;
 }
 
+
 .card{
     display: inline-block;
   }
   .card2{
     background: #ffffff63;
+    padding: 4% 5%;
+    margin-left: -5%;
     display: inline-block;
-    padding: 1.4em 2em;
+    
   }
 
   h1,h3{
@@ -43,6 +46,16 @@ h3{
 }
 .mat-radio-button{
     padding-right: 1.8em;
+   
+}
+
+::ng-deep .mat-radio-inner-circle {
+    background: rgba(114, 5, 187, 0.808) !important;
+}
+
+::ng-deep .mat-radio-outer-circle{
+    border-color: rgba(114, 5, 187, 0.808) !important;
+
 }
 
 button{

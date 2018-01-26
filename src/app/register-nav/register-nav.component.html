@@ -1,4 +1,5 @@
  <div mat-tab-nav-bar class="nav-container">
+   <div class="nav-content">
   <a mat-tab-link *ngFor="let routerLink of routerLinks"
   [routerLink]="routerLink.link"
   routerLinkActive #rla="routerLinkActive"
@@ -8,4 +9,5 @@
 <a mat-tab-link disabled>
   <button mat-raised-button color="primary" type="button" (click)="logout()" class="logout-btn">Logout</button>
 </a>
+</div>
  </div>
