@@ -32,9 +32,6 @@
        
         <mat-radio-group class="role" formControlName="role">
           <h5>Role</h5>
-          <mat-error *ngIf="registrationForm.controls.role.invalid && registrationForm.controls.role.touched">
-          Role required
-        </mat-error>
           <mat-radio-button type="radio" name="role" id="User" value="User" checked="checked">User</mat-radio-button>
 
          <mat-radio-button type="radio" name="role" id="Register" value="Register">Register</mat-radio-button>

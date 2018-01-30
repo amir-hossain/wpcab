@@ -6,6 +6,7 @@
 .card{
     background: #ffffffb4;
     display: inline-block;
+    padding-left:0px; 
     
 }
 
@@ -21,3 +22,22 @@ h1{
     margin: auto;
 }
 
+table th{
+    width: 19em;
+    font-size: 25px;
+    padding: 10px;
+    text-align: start;
+}
+
+table td{
+    padding-left:10px; 
+    width: 34em;
+    font-size: 22px;
+    
+}
+
+.main-container {
+    width: 59%;
+    margin: auto;
+    
+}

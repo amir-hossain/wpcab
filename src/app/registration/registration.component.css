@@ -9,26 +9,30 @@
 }
 
 mat-form-field{
-    width: 38em !important;
+    width: 50em !important;
     
 }
 
 
-.mandatory,.optional{
-    display: table;
-    margin: auto;
-}
+
+
+
 
 
 .card{
     display: inline-block;
+    
   }
   .card2{
     background: #ffffff63;
-    padding: 4% 5%;
     display: inline-block;
     
   }
+
+  .mandatory,.optional{
+    display: table;
+    margin: auto;
+}
 
   h1,h3{
     font-size: 30px;
@@ -38,11 +42,7 @@ mat-form-field{
 h3{
     font-size: 1.2em;
 }
-.card-container{
-    display: table;
-    margin: auto;
-    
-}
+
 .mat-radio-button{
     padding-right: 1.8em;
    
