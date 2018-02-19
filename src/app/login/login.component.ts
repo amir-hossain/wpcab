@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators,FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import {AngularFireAuth} from 'angularfire2/auth';
-
-
-const USER_NAME_ERROR_CODE="auth/user-not-found";
-const PASSWORD_ERROR_CODE="auth/wrong-password";
+import {AngularFireDatabase} from 'angularfire2/database';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,37 +13,69 @@ export class LoginComponent implements OnInit {
   loginForm:FormGroup;
   unError="";
   passError="";
-  constructor(private builder:FormBuilder,private router:Router,private auth:AngularFireAuth) { }
+  
+  constructor(private builder:FormBuilder,private router:Router,private db:AngularFireDatabase) { }
 
   ngOnInit() {
     this.loginForm=this.builder.group({
-      phone_email:[localStorage.getItem("email_phone"),[Validators.email]],
+      userInfo:[localStorage.getItem("userInfo"),[Validators.required]],
       password:[localStorage.getItem("password"),[Validators.required]],
       remember:[""]
     })
+
+  
+  }
+
+  auth(userInfo,password){
+    this.db.database.ref('online').once('value')
+    .then(snap=>{
+      // console.log(snap.val());
+      let data=snap.val();
+      let objArry=[];
+      Object.keys(data).forEach(key=>objArry.push(data[""+key]));
+      this.check(userInfo,password,objArry);
+    });
+
+  }
+
+  check(userInfo,password,objArry:any[]){
+    let userInfoMatch;
+    for(let obj of objArry){
+      userInfoMatch=false;
+      switch(userInfo){
+        case obj.phone.toString():
+        userInfoMatch=true;
+        break;
+        case obj.email:
+        userInfoMatch=true;
+        break;
+        case obj.userName:
+        userInfoMatch=true;
+        break;
+      }
+
+      if(userInfoMatch){
+        if(password===obj.password){
+          this.router.navigateByUrl('home');
+          break;
+        }else{
+          this.passError='Wrong password';
+          break;
+        }
+      }
+    }
+    if(!userInfoMatch){
+      this.unError='Wrong info';
+    }
+   
+
   }
 
   login(){
     this.unError="";
     this.passError="";
     if(this.loginForm.valid){
-      this.auth.auth.signInWithEmailAndPassword(this.loginForm.controls.phone_email.value,this.loginForm.controls.password.value)
-      .then(()=>{
-          if(this.loginForm.controls.remember.value){
-          localStorage.setItem("email_phone",this.loginForm.controls.phone_email.value);
-          localStorage.setItem("password",this.loginForm.controls.password.value);
-        }
-        this.router.navigate(["register/home"]);
-      })
-      .catch(error=>{
-        console.log(error.code);
-        if(error.code===USER_NAME_ERROR_CODE){
-          console.log(error.code);
-          this.unError="Email or number is worng";
-        }else if(error.code===PASSWORD_ERROR_CODE){
-          this.passError="Password is wrong";
-        }
-      });
+      this.auth(this.loginForm.controls.userInfo.value,this.loginForm.controls.password.value);
     }else{
       Object.keys(this.loginForm.controls).forEach(field=>{
         this.loginForm.get(field).markAsTouched({onlySelf:true})
