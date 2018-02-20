@@ -1,11 +1,14 @@
 
 
-.occupation input,.role input{
-    display: inline;
-    margin-left:1em;
-    margin-right: 1em;
-    background: red;
-    
+img{
+    border: #adadad solid 6px;
+    width:150px;
+    height:150px;
+}
+
+label{
+    display:table;
+    margin:auto;
 }
 
 mat-form-field{
@@ -14,25 +17,14 @@ mat-form-field{
 }
 
 
-
-
-
-
-
 .card{
     display: inline-block;
-    
-  }
-  .card2{
-    background: #ffffff63;
-    display: inline-block;
-    
-  }
+    }
 
-  .mandatory,.optional{
+  .container{
     display: table;
     margin: auto;
-}
+    }
 
   h1,h3{
     font-size: 30px;
@@ -41,6 +33,7 @@ mat-form-field{
 
 h3{
     font-size: 1.2em;
+    padding: 30px 0px;
 }
 
 .mat-radio-button{

@@ -56,6 +56,11 @@ export class LoginComponent implements OnInit {
 
       if(userInfoMatch){
         if(password===obj.password){
+          if(this.loginForm.controls.remember.value){
+            localStorage.setItem('userInfo',userInfo);
+            localStorage.setItem('password',password);
+          }
+         
           this.router.navigateByUrl('home');
           break;
         }else{

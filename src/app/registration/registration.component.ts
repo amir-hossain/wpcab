@@ -14,6 +14,7 @@ export class RegistrationComponent implements OnInit {
   registrationForm:FormGroup;
   fireList :AngularFireList<{}>;
   dbRef;
+  url='./assets/img/add.png';
   constructor(private builder:FormBuilder,private db:AngularFireDatabase) {
     this.dbRef=this.db.database.ref("/users");
     console.log(this.fireList);
@@ -26,25 +27,47 @@ starCountRef.on('value', function(snapshot) {
 
   ngOnInit() {
     this.registrationForm=this.builder.group({
-      name:["",Validators.required],
-      password:["",Validators.required],
-      phone:["",Validators.required],
-      role:["User"],
-      area:["",Validators.required],
-      district:["",Validators.required],
-      upozilla:["",Validators.required],
-      fatherName:["",Validators.required],
-      motherName:["",Validators.required],
-      permanentAddress:["",Validators.required],
-      age:["",Validators.required],
-      invitedBy:["",Validators.required],
-      email:[""],
-      occupation:["Student"],
-      nationality:[""],
-      nationalId:[""],
-      bloodGroup:[""],
-      country:[""]
+      userInfo:this.builder.group({
+        photo:[""],
+        fullName:["",Validators.required],
+        gender:['male'],
+        dob:["",Validators.required],
+        fatherName:["",Validators.required],
+        motherName:["",Validators.required],
+        invitedBy:["",Validators.required],
+        occupation:["student"],
+        bloodGroup:[""],
+      }),
+      address:this.builder.group({
+        area:["",Validators.required],
+        upozilla:["",Validators.required],
+        permanentAddress:["",Validators.required],
+        district:["",Validators.required],
+        country:[""],
+        nationality:[""],
+        nId:[""],
+      }),
+      auth:this.builder.group({
+        userName:[''],
+        password:["",Validators.required],
+        conPassword:["",Validators.required],
+        phone:["",Validators.required],
+        role:["User"],
+        email:[""],
+      })
     })
+  }
+
+  readUrl(event:any) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+  
+      reader.onload = (event:any) => {
+        this.url = event.target.result;
+      }
+  
+      reader.readAsDataURL(event.target.files[0]);
+    }
   }
 
   

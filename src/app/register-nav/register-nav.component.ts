@@ -10,27 +10,27 @@ export class RegisterNavComponent implements OnInit {
   routerLinks=[
     {
       label:"Home",
-      link:"/register/home"
+      link:"/home"
     },
     {
       label:"Profile",
-      link:"/register/profile"
+      link:"/profile"
     },
     {
       label:"Registration",
-      link:"/register/registration"
+      link:"/registration"
     },
     {
       label:"Finance",
-      link:"/register/finance"
+      link:"/finance"
     },
     {
       label:"Notification",
-      link:"/register/notification"
+      link:"/notification"
     },
     {
       label:"Collection",
-      link:"/register/collection"
+      link:"/collection"
     }
     
     
@@ -49,22 +49,22 @@ export class RegisterNavComponent implements OnInit {
  
     switch(e.index){
       case 0:
-        this.router.navigateByUrl("/register/home");
+        this.router.navigateByUrl("/home");
       break;
       case 1:
-        this.router.navigateByUrl("/register/profile");
+        this.router.navigateByUrl("/profile");
       break;
       case 2:
-      this.router.navigateByUrl("/register/registration");
+      this.router.navigateByUrl("/registration");
       break;
       case 3:
-      this.router.navigateByUrl("/register/finance");
+      this.router.navigateByUrl("/finance");
       break;
       case 4:
-      this.router.navigateByUrl("/register/notification");
+      this.router.navigateByUrl("/notification");
       break;
       case 5:
-      this.router.navigateByUrl("/register/collect");
+      this.router.navigateByUrl("/collect");
       break;
       case 6:
       this.router.navigateByUrl("/login");
