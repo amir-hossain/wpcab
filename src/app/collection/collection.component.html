@@ -1,0 +1,23 @@
+<div *ngIf='activeUserRole=="Admin"'>
+  <app-admin-nav></app-admin-nav>
+</div>
+<div *ngIf='activeUserRole=="Register"'>
+  <app-register-nav></app-register-nav>
+</div>
+<table>
+  <div class="thead">
+    <th>Picture</th>
+    <th>Name</th>
+    <th>Mother name</th>
+    <th>Father name</th>
+  </div>
+  <tr *ngFor='let obj of objArry'>
+    <mat-card>
+    <td>{{obj.fullName}}</td>
+    <td>{{obj.fullName}}</td>
+    <td>{{obj.fatherName}}</td>
+    <td>{{obj.motherName}}</td>
+  </mat-card>
+  </tr>
+</table>
+

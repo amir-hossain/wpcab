@@ -1,0 +1,22 @@
+table,tbody{
+    display: table;
+    margin:40px auto;
+}
+mat-card{
+    display: inline-block;
+}
+
+td{
+    width: 19.2vw;
+    font-size: 25px;
+}
+.thead{
+    padding-left:1.5vw; 
+}
+
+th{
+    width: 19.2vw;
+    text-align: left;
+    font-size: 25px;
+   
+}
