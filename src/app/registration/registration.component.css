@@ -39,9 +39,18 @@ mat-form-field{
     font-size:22px;
 }
 
-.p ::ng-deep label.mat-input-placeholder {
+h5{
+    font-size: 22px;
+}
+
+  mat-label,h5,span{
+    color:rgb(218, 142, 3);
+  }
+
+  input::placeholder {
     color: red;
   }
+
 
 ::ng-deep .mat-snack-bar-container.mat-snack-bar-center{
     margin:30px !important; 

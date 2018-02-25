@@ -10,6 +10,7 @@
     <div class="container">
       <h3>User info</h3>
       <mat-card class="card" formGroupName='userInfo'>
+        <span>* Requred field</span>
         <label for='upload'>
           <input type='file'  id='upload' (change)="readUrl($event)" style='display:none;'>
        
@@ -17,20 +18,22 @@
         </label>
         <div>
           <mat-form-field>
-        <input class="p" matInput type="text" placeholder="Name" formControlName="fullName">
+        <mat-label>*Full name</mat-label>
+        <input class="p" matInput type="text" formControlName="fullName">
       </mat-form-field>
         <mat-error *ngIf="registrationForm.controls.userInfo.controls.fullName.invalid && registrationForm.controls.userInfo.controls.fullName.touched">
           Full name required
         </mat-error>
       </div><!-- full name -->
       <mat-radio-group  formControlName="gender">
-        <h5>Gender (required)</h5>
+        <h5>*Gender</h5>
         <mat-radio-button type="radio" name="gender" id="male" value="male" >Male</mat-radio-button>
        <mat-radio-button type="radio" name="gender" id="female" value="female" > Female</mat-radio-button>
       </mat-radio-group><!-- gender -->
       <div>
         <mat-form-field>
-          <input matInput [matDatepicker]="picker" placeholder="Date of birth" formControlName="dob">
+            <mat-label>*Date of birth</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="dob">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
         </mat-form-field> <!-- dob -->
@@ -40,7 +43,8 @@
       </div><!-- dob -->
       <div>
           <mat-form-field>
-          <input matInput type="text"  placeholder="Father's name" formControlName="fatherName" [matAutocomplete]='auto'>
+          <mat-label>*Father's name</mat-label>
+          <input matInput type="text" formControlName="fatherName" [matAutocomplete]='auto'>
           <mat-autocomplete #auto='matAutocomplete'>
             <mat-option  *ngFor='let option of filteredOptions' [value]='option'>
               {{option}}
@@ -53,7 +57,8 @@
         </div><!-- father name -->
         <div>        
           <mat-form-field>
-          <input matInput type="text" placeholder="Mother's name" formControlName="motherName" [matAutocomplete]='auto'>
+          <mat-label>*Mother's name</mat-label>
+          <input matInput type="text" formControlName="motherName" [matAutocomplete]='auto'>
           <mat-autocomplete #auto='matAutocomplete'>
             <mat-option  *ngFor='let option of filteredOptions' [value]='option'>
               {{option}}
@@ -66,7 +71,8 @@
         </div><!-- mother name -->
         <div>
             <mat-form-field>
-            <input matInput type="textarea" placeholder="Invited by" formControlName="invitedBy" [matAutocomplete]='auto'>
+            <mat-label>*Invited by</mat-label>
+            <input matInput type="textarea" formControlName="invitedBy" [matAutocomplete]='auto'>
             <mat-autocomplete #auto='matAutocomplete'>
               <mat-option  *ngFor='let option of filteredOptions' [value]='option'>
                 {{option}}
@@ -83,7 +89,7 @@
                 </mat-form-field>
               </div> <!-- blood group -->
       <mat-radio-group formControlName="occupation">
-        <h5>Occupation (required)</h5>
+        <h5>*Occupation</h5>
         <mat-radio-button type="radio" name="occupation" id="student" value="student" >Student</mat-radio-button>
        <mat-radio-button type="radio" name="occupation" id="job holder" value="job holder" > Job holder</mat-radio-button>
         <mat-radio-button type="radio" name="occupation" id="bussnessman" value="bussnessman" >Bussnessman</mat-radio-button>
@@ -96,7 +102,8 @@
         <mat-card class="card" formGroupName='address'>
     <div>
         <mat-form-field>
-        <input matInput type="text"  placeholder="Area/Thana (current)" formControlName="area">
+        <mat-label>*Area/Thana (current)</mat-label>
+        <input matInput type="text" formControlName="area">
       </mat-form-field>
         <mat-error *ngIf="registrationForm.controls.address.controls.area.invalid && registrationForm.controls.address.controls.area.touched">
           Area required
@@ -104,7 +111,8 @@
       </div><!-- area -->
       <div>
           <mat-form-field>
-          <input matInput type="text" placeholder="Upozilla (current)" formControlName="upozilla">
+            <mat-label>*Upozilla (current)</mat-label>
+          <input matInput type="text" formControlName="upozilla">
         </mat-form-field>
           <mat-error *ngIf="registrationForm.controls.address.controls.upozilla.invalid && registrationForm.controls.address.controls.upozilla.touched">
             Upozilla required
@@ -112,7 +120,8 @@
         </div><!-- upozilla -->
         <div>
             <mat-form-field>
-            <input matInput type="textarea" placeholder="Parmemt Address" formControlName="permanentAddress">
+                <mat-label>*Parmemt Address</mat-label>
+            <input matInput type="textarea" formControlName="permanentAddress">
           </mat-form-field>
             <mat-error *ngIf="registrationForm.controls.address.controls.permanentAddress.invalid && registrationForm.controls.address.controls.permanentAddress.touched">
               Permanent address required
@@ -120,7 +129,8 @@
           </div><!-- permanent address -->
           <div>
               <mat-form-field>
-              <input matInput type="text" placeholder="District (current)" formControlName="district">
+              <mat-label>*District (current)</mat-label>
+              <input matInput type="text" formControlName="district">
             </mat-form-field>
               <mat-error *ngIf="registrationForm.controls.address.controls.district.invalid && registrationForm.controls.address.controls.district.touched">
                 District required
@@ -153,7 +163,8 @@
               </div><!-- user name -->
       <div>
         <mat-form-field>
-        <input matInput type="password"  placeholder="Password (required)" formControlName="password">
+        <mat-label>*Password </mat-label>
+        <input matInput type="password" formControlName="password">
       </mat-form-field>
         <mat-error *ngIf="registrationForm.controls.auth.controls.password.invalid && registrationForm.controls.auth.controls.password.touched">
           Password required
@@ -161,7 +172,8 @@
       </div><!-- password -->
       <div>
           <mat-form-field>
-          <input matInput type="password"  placeholder="Conform password (required)" formControlName="conPassword">
+              <mat-label>*Conform password </mat-label>
+          <input matInput type="password" formControlName="conPassword">
         </mat-form-field>
           <mat-error *ngIf="registrationForm.controls.auth.controls.conPassword.hasError('required') && registrationForm.controls.auth.controls.conPassword.touched">
             Conform password required
@@ -172,7 +184,8 @@
         </div><!--conform password -->
       <div>
         <mat-form-field>
-        <input matInput type="number" placeholder="Phone" formControlName="phone">
+            <mat-label>*Phone </mat-label>
+        <input matInput type="number" formControlName="phone">
       </mat-form-field>
         <mat-error *ngIf="registrationForm.controls.auth.controls.phone.invalid && registrationForm.controls.auth.controls.phone.touched">
           Phone required
@@ -187,7 +200,7 @@
           </mat-error >
         </div> <!-- email -->
         <mat-radio-group formControlName="role">
-          <h5>Role</h5>
+          <h5>*Role</h5>
           <mat-radio-button type="radio" name="role" id="User" value="User" checked="checked">User</mat-radio-button>
 
          <mat-radio-button type="radio" name="role" id="Register" value="Register">Register</mat-radio-button>
