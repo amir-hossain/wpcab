@@ -20,6 +20,10 @@ button{
     font-size: 13px;
 }
 
+mat-input-container label {
+  color: red !important;
+}
+
 example-margin {
     margin: 0 10px;
   }

@@ -7,10 +7,11 @@ import {Validators,FormBuilder,FormGroup} from "@angular/forms"
 })
 export class HomeComponent implements OnInit {
   searchForm:FormGroup;
+  activeUserRole;
   constructor(private builder:FormBuilder) { }
 
   ngOnInit() {
-
+    this.activeUserRole=localStorage.getItem('activeUserRole');
   }
 
 }

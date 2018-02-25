@@ -1,4 +1,9 @@
-<app-register-nav></app-register-nav>
+<div *ngIf='activeUserRole=="Admin"'>
+  <app-admin-nav></app-admin-nav>
+</div>
+<div *ngIf='activeUserRole=="Register"'>
+  <app-register-nav></app-register-nav>
+</div>
 
   <h1>Member Registration</h1>
   <form [formGroup]="registrationForm" (ngSubmit)="signup()">
@@ -12,7 +17,7 @@
         </label>
         <div>
           <mat-form-field>
-        <input matInput type="text" placeholder="Name" formControlName="fullName">
+        <input class="p" matInput type="text" placeholder="Name" formControlName="fullName">
       </mat-form-field>
         <mat-error *ngIf="registrationForm.controls.userInfo.controls.fullName.invalid && registrationForm.controls.userInfo.controls.fullName.touched">
           Full name required
@@ -35,7 +40,12 @@
       </div><!-- dob -->
       <div>
           <mat-form-field>
-          <input matInput type="text"  placeholder="Father's name" formControlName="fatherName">
+          <input matInput type="text"  placeholder="Father's name" formControlName="fatherName" [matAutocomplete]='auto'>
+          <mat-autocomplete #auto='matAutocomplete'>
+            <mat-option  *ngFor='let option of filteredOptions' [value]='option'>
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
         </mat-form-field>
           <mat-error *ngIf="registrationForm.controls.userInfo.controls.fatherName.invalid && registrationForm.controls.userInfo.controls.fatherName.touched">
             Father name required
@@ -43,7 +53,12 @@
         </div><!-- father name -->
         <div>        
           <mat-form-field>
-          <input matInput type="text" placeholder="Mother's name" formControlName="motherName">
+          <input matInput type="text" placeholder="Mother's name" formControlName="motherName" [matAutocomplete]='auto'>
+          <mat-autocomplete #auto='matAutocomplete'>
+            <mat-option  *ngFor='let option of filteredOptions' [value]='option'>
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
         </mat-form-field>
           <mat-error *ngIf="registrationForm.controls.userInfo.controls.motherName.invalid && registrationForm.controls.userInfo.controls.motherName.touched">
             Mother name required
@@ -51,7 +66,12 @@
         </div><!-- mother name -->
         <div>
             <mat-form-field>
-            <input matInput type="textarea" placeholder="Invited by" formControlName="invitedBy">
+            <input matInput type="textarea" placeholder="Invited by" formControlName="invitedBy" [matAutocomplete]='auto'>
+            <mat-autocomplete #auto='matAutocomplete'>
+              <mat-option  *ngFor='let option of filteredOptions' [value]='option'>
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
           </mat-form-field>
             <mat-error *ngIf="registrationForm.controls.userInfo.controls.invitedBy.invalid && registrationForm.controls.userInfo.controls.invitedBy.touched">
                 Invited by required
@@ -143,10 +163,13 @@
           <mat-form-field>
           <input matInput type="password"  placeholder="Conform password (required)" formControlName="conPassword">
         </mat-form-field>
-          <mat-error *ngIf="registrationForm.controls.auth.controls.conPassword.invalid && registrationForm.controls.auth.controls.conPassword.touched">
+          <mat-error *ngIf="registrationForm.controls.auth.controls.conPassword.hasError('required') && registrationForm.controls.auth.controls.conPassword.touched">
             Conform password required
           </mat-error>
-        </div><!-- password -->
+          <mat-error *ngIf='registrationForm.controls.auth.controls.conPassword.hasError("matchPassword") && registrationForm.controls.auth.controls.conPassword.touched'>
+              Conform password did not match
+            </mat-error>
+        </div><!--conform password -->
       <div>
         <mat-form-field>
         <input matInput type="number" placeholder="Phone" formControlName="phone">

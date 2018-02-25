@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./finance.component.css']
 })
 export class FinanceComponent implements OnInit {
-
+  activeUserRole;
   constructor() { }
 
   ngOnInit() {
+    this.activeUserRole=localStorage.getItem('activeUserRole');
   }
 
 }

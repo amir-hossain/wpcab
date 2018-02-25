@@ -27,9 +27,9 @@ export class LoginComponent implements OnInit {
   }
 
   auth(userInfo,password){
-    this.db.database.ref('online').once('value')
+    this.db.database.ref('auth').once('value')
     .then(snap=>{
-      // console.log(snap.val());
+      console.log(snap.val());
       let data=snap.val();
       let objArry=[];
       Object.keys(data).forEach(key=>objArry.push(data[""+key]));
@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('userInfo',userInfo);
             localStorage.setItem('password',password);
           }
-         
+          localStorage.setItem('activeUserRole',obj.role);
           this.router.navigateByUrl('home');
           break;
         }else{

@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./notificaion.component.css']
 })
 export class NotificaionComponent implements OnInit {
+  activeUserRole;
 
   constructor() { }
 
   ngOnInit() {
+    this.activeUserRole=localStorage.getItem('activeUserRole');
   }
 
 }

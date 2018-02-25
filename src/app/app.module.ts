@@ -17,6 +17,11 @@ import {AngularFireModule} from "angularfire2";
 import {AngularFireAuth} from "angularfire2/auth";
 import {AngularFireDatabaseModule } from "angularfire2/database";
 import { CollectionComponent } from './collection/collection.component';
+import { AdminComponent } from './admin/admin.component';
+import { AdminNavComponent } from './admin-nav/admin-nav.component';
+import { CreateNotificationComponent } from './create-notification/create-notification.component';
+import { RequestComponent } from './request/request.component';
+import { ApproveComponent } from './approve/approve.component';
 
 
 const confiq={
@@ -39,6 +44,11 @@ const confiq={
     NotificaionComponent,
     FinanceComponent,
     CollectionComponent,
+    AdminComponent,
+    AdminNavComponent,
+    CreateNotificationComponent,
+    RequestComponent,
+    ApproveComponent,
   ],
   imports: [
     BrowserModule,
