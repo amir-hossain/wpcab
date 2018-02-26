@@ -13,7 +13,14 @@
   </div>
   <tr *ngFor='let obj of objArry'>
     <mat-card>
-    <td>{{obj.fullName}}</td>
+    <td>
+      <span *ngIf="obj.photo!==''">
+        <img src='{{obj.photo}}'>
+      </span>
+      <span *ngIf="obj.photo===''">
+          <img src='./assets/img/defult-pic.png'>
+        </span>
+    </td>
     <td>{{obj.fullName}}</td>
     <td>{{obj.fatherName}}</td>
     <td>{{obj.motherName}}</td>

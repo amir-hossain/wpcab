@@ -9,6 +9,8 @@ mat-card{
 td{
     width: 19.2vw;
     font-size: 25px;
+    display: table-cell;
+    vertical-align: middle;
 }
 .thead{
     padding-left:1.5vw; 
@@ -19,4 +21,9 @@ th{
     text-align: left;
     font-size: 25px;
    
+}
+
+img{
+    width: 80px;
+    height: 80px;
 }
