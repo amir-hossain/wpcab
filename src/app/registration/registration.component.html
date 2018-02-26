@@ -46,9 +46,10 @@
           <mat-label>*Father's name</mat-label>
           <input matInput type="text" formControlName="fatherName" [matAutocomplete]='auto'>
           <mat-autocomplete #auto='matAutocomplete'>
-            <mat-option  *ngFor='let option of filteredOptions' [value]='option'>
-              {{option}}
-            </mat-option>
+              <mat-option  *ngFor='let option of filteredOptions' [value]='option.name'>
+                  <img style="vertical-align:middle;" aria-hidden src="{{option.photo}}" height="2px" width="2px" />
+                  <span>{{option.name}}</span> 
+              </mat-option>
           </mat-autocomplete>
         </mat-form-field>
           <mat-error *ngIf="registrationForm.controls.userInfo.controls.fatherName.invalid && registrationForm.controls.userInfo.controls.fatherName.touched">
@@ -60,8 +61,9 @@
           <mat-label>*Mother's name</mat-label>
           <input matInput type="text" formControlName="motherName" [matAutocomplete]='auto'>
           <mat-autocomplete #auto='matAutocomplete'>
-            <mat-option  *ngFor='let option of filteredOptions' [value]='option'>
-              {{option}}
+            <mat-option  *ngFor='let option of filteredOptions' [value]='option.name'>
+                <img style="vertical-align:middle;" aria-hidden src="{{option.photo}}" height="2px" width="2px" />
+                <span>{{option.name}}</span> 
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
@@ -74,9 +76,10 @@
             <mat-label>*Invited by</mat-label>
             <input matInput type="textarea" formControlName="invitedBy" [matAutocomplete]='auto'>
             <mat-autocomplete #auto='matAutocomplete'>
-              <mat-option  *ngFor='let option of filteredOptions' [value]='option'>
-                {{option}}
-              </mat-option>
+                <mat-option  *ngFor='let option of filteredOptions' [value]='option.name'>
+                    <img style="vertical-align:middle;" aria-hidden src="{{option.photo}}" height="2px" width="2px" />
+                    <span>{{option.name}}</span> 
+                </mat-option>
             </mat-autocomplete>
           </mat-form-field>
             <mat-error *ngIf="registrationForm.controls.userInfo.controls.invitedBy.invalid && registrationForm.controls.userInfo.controls.invitedBy.touched">

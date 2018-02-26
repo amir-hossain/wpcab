@@ -72,7 +72,10 @@ export class RegistrationComponent implements OnInit {
       // console.log(snap.val());
       let data=snap.val();
       if(data!=null){
-        Object.keys(data).forEach(key=>this.options.push(data[''+key].fullName));
+        Object.keys(data).forEach(key=>this.options.push(
+          {name:data[''+key].fullName,
+        photo:data[''+key].photo}
+        ));
       console.log(this.options);
       }
       
@@ -110,9 +113,9 @@ export class RegistrationComponent implements OnInit {
 }
 
 
-filter(val: string): string[] {
+filter(val){
   return this.options.filter(option =>
-    option.toLowerCase().includes(val.toLowerCase()));
+    option.name.toLowerCase().includes(val.toLowerCase()));
 }
 
   displaySnackBar(){
