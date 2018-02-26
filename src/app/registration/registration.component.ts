@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {Validators,FormGroup,FormBuilder,AbstractControl,ValidationErrors} from "@angular/forms";
 import{MatSnackBar} from '@angular/material';
 import {AngularFireDatabase} from "angularfire2/database";
-import { FirebaseApp } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
-import{map} from 'rxjs/operators/map'
+import{map} from 'rxjs/operators/map';
+import 'firebase/storage';
+import * as firebase from 'firebase/app'; // for typings
+import { FirebaseApp } from 'angularfire2'; // for methods
 
 @Component({
   selector: 'app-registration',
@@ -23,14 +25,11 @@ export class RegistrationComponent implements OnInit {
   options=[];
   url='./assets/img/add.png';
   photo;
-  constructor(private builder:FormBuilder,private db:AngularFireDatabase,private snackBar:MatSnackBar,private fa:FirebaseApp) {
+  constructor(private builder:FormBuilder,private db:AngularFireDatabase,private snackBar:MatSnackBar,private fb: FirebaseApp) {
     this.userInfoRef=this.db.database.ref("/userInfo");
     this.addressRef=this.db.database.ref('/address');
     this.authRef=this.db.database.ref('/auth');
-    
    }
-
-  
 
   ngOnInit() {
     this.activeUserRole=localStorage.getItem('activeUserRole');
@@ -72,15 +71,15 @@ export class RegistrationComponent implements OnInit {
       this.options=[];
       // console.log(snap.val());
       let data=snap.val();
-      Object.keys(data).forEach(key=>this.options.push(data[''+key].fullName));
+      if(data!=null){
+        Object.keys(data).forEach(key=>this.options.push(data[''+key].fullName));
       console.log(this.options);
+      }
       
-
-
     }
-
-    
   );
+
+  
   let fg2=<FormGroup>this.registrationForm.controls.userInfo;
   fg2.controls.fatherName.valueChanges
   .subscribe(val=>{
@@ -147,27 +146,44 @@ filter(val: string): string[] {
     }else{
       return null;
     }
-    console.log(password);
+    // console.log(password);
   }
 
   
+  uploadPhoto(userInfo){
+    let storageRef = this.fb.storage().ref('img/'+this.photo.name);
+        var task=storageRef.put(this.photo);
+        task.on('state_changed',
+        snap=>
+          console.log(snap)
+          ,
+      err=>console.log(err)
+        ,()=>{
+         // push to userinfo table
+         userInfo.photo=task.snapshot.downloadURL;
+      console.log(task.snapshot.downloadURL);
+      this.userInfoRef.push(userInfo);
+      this.displaySnackBar();
 
+    })
+  }
   signup(){
     if(this.registrationForm.valid){
       // this.storageRef.put(this.photo);
       let temp=this.registrationForm.controls.userInfo.value;
-      console.log(temp);
       let fg=<FormGroup>this.registrationForm.controls.userInfo;
       temp.dob=(<Date>fg.controls.dob.value).toLocaleDateString();
-      // push to userinfo table
-          this.userInfoRef.push(temp);
+   
           console.log(temp);
       // push to address table
         this.addressRef.push(this.registrationForm.controls.address.value);
       // push to auth table
         this.authRef.push(this.registrationForm.controls.auth.value);
         // this.registrationForm.reset();
-        this.displaySnackBar();
+      this.uploadPhoto(temp);
+      
+    
+        
     }else{
       Object.keys(this.registrationForm.controls).forEach(field=>{
         this.registrationForm.get(field).markAsTouched({onlySelf:true});
