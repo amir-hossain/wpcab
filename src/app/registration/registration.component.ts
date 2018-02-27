@@ -172,7 +172,6 @@ filter(val){
   }
   signup(){
     if(this.registrationForm.valid){
-      // this.storageRef.put(this.photo);
       let temp=this.registrationForm.controls.userInfo.value;
       let fg=<FormGroup>this.registrationForm.controls.userInfo;
       temp.dob=(<Date>fg.controls.dob.value).toLocaleDateString();
@@ -182,16 +181,14 @@ filter(val){
         this.addressRef.push(this.registrationForm.controls.address.value);
       // push to auth table
         this.authRef.push(this.registrationForm.controls.auth.value);
-        this.registrationForm.reset();
+        // this.registrationForm.controls.userInfo.reset();
+        // this.registrationForm.controls.address.reset();
+        // this.registrationForm.controls.auth.reset();
         if(this.photo){
           this.uploadPhoto(temp);
         }else{
           this.userInfoRef.push(temp);
-        }
-      
-      
-    
-        
+        }    
     }else{
       Object.keys(this.registrationForm.controls).forEach(field=>{
         this.registrationForm.get(field).markAsTouched({onlySelf:true});

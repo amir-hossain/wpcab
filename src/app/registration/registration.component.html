@@ -9,7 +9,7 @@
   <form [formGroup]="registrationForm" (ngSubmit)="signup()">
     <div class="container">
       <h3>User info</h3>
-      <span>* Required field</span>
+      <span class="warning">* Required field</span>
       <mat-card class="card" formGroupName='userInfo'>
         <label for='upload'>
           <input type='file'  id='upload' (change)="readUrl($event)" style='display:none;'>
@@ -19,9 +19,9 @@
         <div>
           <mat-form-field>
         <mat-label>*Full name</mat-label>
-        <input class="p" matInput type="text" formControlName="fullName">
+        <input  matInput type="text" formControlName="fullName">
       </mat-form-field>
-        <mat-error *ngIf="registrationForm.controls.userInfo.controls.fullName.invalid && registrationForm.controls.userInfo.controls.fullName.touched">
+        <mat-error *ngIf="registrationForm.get('userInfo').get('fullName').invalid && registrationForm.get('userInfo').get('fullName').touched">
           Full name required
         </mat-error>
       </div><!-- full name -->
@@ -37,7 +37,7 @@
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
         </mat-form-field> <!-- dob -->
-        <mat-error *ngIf="registrationForm.controls.userInfo.controls.dob.invalid && registrationForm.controls.userInfo.controls.dob.touched">
+        <mat-error *ngIf="registrationForm.get('userInfo').get('dob').invalid && registrationForm.get('userInfo').get('dob').touched">
           Date of birth required
         </mat-error>
       </div><!-- dob -->
@@ -47,12 +47,17 @@
           <input matInput type="text" formControlName="fatherName" [matAutocomplete]='auto'>
           <mat-autocomplete #auto='matAutocomplete'>
               <mat-option  *ngFor='let option of filteredOptions' [value]='option.name'>
-                  <img class="thumb" aria-hidden src="{{option.photo}}"/>
-                  <span>{{option.name}}</span> 
+                <span *ngIf='option.photo!==""'>
+                    <img class="thumb" aria-hidden src="{{option.photo}}"/>
+                </span>
+                <span *ngIf='option.photo===""'>
+                <img class="thumb" aria-hidden src="./assets/img/defult-pic.png"/>
+                </span>
+                <span>{{option.name}}</span> 
               </mat-option>
           </mat-autocomplete>
         </mat-form-field>
-          <mat-error *ngIf="registrationForm.controls.userInfo.controls.fatherName.invalid && registrationForm.controls.userInfo.controls.fatherName.touched">
+          <mat-error *ngIf="registrationForm.get('userInfo').get('fatherName').invalid && registrationForm.get('userInfo').get('fatherName').touched">
             Father name required
           </mat-error>
         </div><!-- father name -->
@@ -61,13 +66,18 @@
           <mat-label>*Mother's name</mat-label>
           <input matInput type="text" formControlName="motherName" [matAutocomplete]='auto'>
           <mat-autocomplete #auto='matAutocomplete'>
-            <mat-option  *ngFor='let option of filteredOptions' [value]='option.name'>
-                <img class="thumb" aria-hidden src="{{option.photo}}"/>
-                <span>{{option.name}}</span> 
-            </mat-option>
+              <mat-option  *ngFor='let option of filteredOptions' [value]='option.name'>
+                  <span *ngIf='option.photo!==""'>
+                      <img class="thumb" aria-hidden src="{{option.photo}}"/>
+                  </span>
+                  <span *ngIf='option.photo===""'>
+                  <img class="thumb" aria-hidden src="./assets/img/defult-pic.png"/>
+                  </span>
+                  <span>{{option.name}}</span> 
+                </mat-option>
           </mat-autocomplete>
         </mat-form-field>
-          <mat-error *ngIf="registrationForm.controls.userInfo.controls.motherName.invalid && registrationForm.controls.userInfo.controls.motherName.touched">
+          <mat-error *ngIf="registrationForm.get('userInfo').get('motherName').invalid && registrationForm.get('userInfo').get('motherName').touched">
             Mother name required
           </mat-error>
         </div><!-- mother name -->
@@ -77,18 +87,17 @@
             <input matInput type="textarea" formControlName="invitedBy" [matAutocomplete]='auto'>
             <mat-autocomplete #auto='matAutocomplete'>
                 <mat-option  *ngFor='let option of filteredOptions' [value]='option.name'>
-                  <span *ngIf='option.photo===""'>
-                      <img class="thumb" aria-hidden src="./assets/img/defult-pic.png"/>
-                      <span>{{option.name}}</span>
-                  </span>
-                  <span *ngIf='option.photo!==""'>
-                    <img class="thumb" aria-hidden src="{{option.photo}}"/>
-                  </span>
+                    <span *ngIf='option.photo!==""'>
+                        <img class="thumb" aria-hidden src="{{option.photo}}"/>
+                    </span>
+                    <span *ngIf='option.photo===""'>
+                    <img class="thumb" aria-hidden src="./assets/img/defult-pic.png"/>
+                    </span>
                     <span>{{option.name}}</span> 
-                </mat-option>
+                  </mat-option>
             </mat-autocomplete>
           </mat-form-field>
-            <mat-error *ngIf="registrationForm.controls.userInfo.controls.invitedBy.invalid && registrationForm.controls.userInfo.controls.invitedBy.touched">
+            <mat-error *ngIf="registrationForm.get('userInfo').get('invitedBy').invalid && registrationForm.get('userInfo').get('invitedBy').touched">
                 Invited by required
               </mat-error>
             </div><!-- invited by -->
@@ -114,7 +123,7 @@
         <mat-label>*Area/Thana (current)</mat-label>
         <input matInput type="text" formControlName="area">
       </mat-form-field>
-        <mat-error *ngIf="registrationForm.controls.address.controls.area.invalid && registrationForm.controls.address.controls.area.touched">
+        <mat-error *ngIf="registrationForm.get('address').get('area').invalid && registrationForm.get('address').get('area').touched">
           Area required
         </mat-error>
       </div><!-- area -->
@@ -123,7 +132,7 @@
             <mat-label>*Upozilla (current)</mat-label>
           <input matInput type="text" formControlName="upozilla">
         </mat-form-field>
-          <mat-error *ngIf="registrationForm.controls.address.controls.upozilla.invalid && registrationForm.controls.address.controls.upozilla.touched">
+          <mat-error *ngIf="registrationForm.get('address').get('upozilla').invalid && registrationForm.get('address').get('upozilla').touched">
             Upozilla required
           </mat-error>
         </div><!-- upozilla -->
@@ -132,7 +141,7 @@
                 <mat-label>*Parmemt Address</mat-label>
             <input matInput type="textarea" formControlName="permanentAddress">
           </mat-form-field>
-            <mat-error *ngIf="registrationForm.controls.address.controls.permanentAddress.invalid && registrationForm.controls.address.controls.permanentAddress.touched">
+            <mat-error *ngIf="registrationForm.get('address').get('permanentAddress').invalid && registrationForm.get('address').get('permanentAddress').touched">
               Permanent address required
             </mat-error>
           </div><!-- permanent address -->
@@ -141,7 +150,7 @@
               <mat-label>*District (current)</mat-label>
               <input matInput type="text" formControlName="district">
             </mat-form-field>
-              <mat-error *ngIf="registrationForm.controls.address.controls.district.invalid && registrationForm.controls.address.controls.district.touched">
+              <mat-error *ngIf="registrationForm.get('address').get('district').invalid && registrationForm.get('address').get('district').touched">
                 District required
               </mat-error>
             </div><!-- district -->
@@ -175,7 +184,7 @@
         <mat-label>*Password </mat-label>
         <input matInput type="password" formControlName="password">
       </mat-form-field>
-        <mat-error *ngIf="registrationForm.controls.auth.controls.password.invalid && registrationForm.controls.auth.controls.password.touched">
+        <mat-error *ngIf="registrationForm.get('auth').get('password').invalid && registrationForm.get('auth').get('password').touched">
           Password required
         </mat-error>
       </div><!-- password -->
@@ -184,10 +193,10 @@
               <mat-label>*Conform password </mat-label>
           <input matInput type="password" formControlName="conPassword">
         </mat-form-field>
-          <mat-error *ngIf="registrationForm.controls.auth.controls.conPassword.hasError('required') && registrationForm.controls.auth.controls.conPassword.touched">
+          <mat-error *ngIf="registrationForm.get('auth').get('conPassword').hasError('required') && registrationForm.get('auth').get('conPassword').touched">
             Conform password required
           </mat-error>
-          <mat-error *ngIf='registrationForm.controls.auth.controls.conPassword.hasError("matchPassword") && registrationForm.controls.auth.controls.conPassword.touched'>
+          <mat-error *ngIf="registrationForm.get('auth').get('conPassword').hasError('matchPassword') && registrationForm.get('auth').get('conPassword').touched">
               Conform password did not match
             </mat-error>
         </div><!--conform password -->
@@ -196,7 +205,7 @@
             <mat-label>*Phone </mat-label>
         <input matInput type="number" formControlName="phone">
       </mat-form-field>
-        <mat-error *ngIf="registrationForm.controls.auth.controls.phone.invalid && registrationForm.controls.auth.controls.phone.touched">
+        <mat-error *ngIf="registrationForm.get('auth').get('phone').invalid && registrationForm.get('auth').get('phone').touched">
           Phone required
         </mat-error>
       </div><!-- phone -->
@@ -204,7 +213,7 @@
           <mat-form-field>
             <input matInput type="email"  placeholder="Email" formControlName="email">
           </mat-form-field>
-          <mat-error  *ngIf="registrationForm.controls.auth.controls.email.value !='' && registrationForm.controls.auth.controls.email.invalid">
+          <mat-error  *ngIf="registrationForm.get('auth').get('email').value !='' && registrationForm.get('auth').get('email').invalid">
             Invalid email
           </mat-error >
         </div> <!-- email -->
