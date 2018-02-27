@@ -1,9 +1,20 @@
 
 
-img{
+.pic{
     border: #adadad solid 6px;
     width:150px;
     height:150px;
+}
+mat-option{
+   border-bottom: rgba(255, 255, 255, 0.76) solid 5px;
+}
+
+.thumb{
+    vertical-align:middle;
+    height:50px;
+    width:50px;
+    padding-right: 5px;
+    
 }
 
 label{

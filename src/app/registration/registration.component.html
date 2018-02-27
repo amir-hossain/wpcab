@@ -14,7 +14,7 @@
         <label for='upload'>
           <input type='file'  id='upload' (change)="readUrl($event)" style='display:none;'>
        
-          <img [src]="url">
+          <img class="pic" [src]="url">
         </label>
         <div>
           <mat-form-field>
@@ -47,7 +47,7 @@
           <input matInput type="text" formControlName="fatherName" [matAutocomplete]='auto'>
           <mat-autocomplete #auto='matAutocomplete'>
               <mat-option  *ngFor='let option of filteredOptions' [value]='option.name'>
-                  <img style="vertical-align:middle;" aria-hidden src="{{option.photo}}" height="2px" width="2px" />
+                  <img class="thumb" aria-hidden src="{{option.photo}}"/>
                   <span>{{option.name}}</span> 
               </mat-option>
           </mat-autocomplete>
@@ -62,7 +62,7 @@
           <input matInput type="text" formControlName="motherName" [matAutocomplete]='auto'>
           <mat-autocomplete #auto='matAutocomplete'>
             <mat-option  *ngFor='let option of filteredOptions' [value]='option.name'>
-                <img style="vertical-align:middle;" aria-hidden src="{{option.photo}}" height="2px" width="2px" />
+                <img class="thumb" aria-hidden src="{{option.photo}}"/>
                 <span>{{option.name}}</span> 
             </mat-option>
           </mat-autocomplete>
@@ -77,7 +77,13 @@
             <input matInput type="textarea" formControlName="invitedBy" [matAutocomplete]='auto'>
             <mat-autocomplete #auto='matAutocomplete'>
                 <mat-option  *ngFor='let option of filteredOptions' [value]='option.name'>
-                    <img style="vertical-align:middle;" aria-hidden src="{{option.photo}}" height="2px" width="2px" />
+                  <span *ngIf='option.photo===""'>
+                      <img class="thumb" aria-hidden src="./assets/img/defult-pic.png"/>
+                      <span>{{option.name}}</span>
+                  </span>
+                  <span *ngIf='option.photo!==""'>
+                    <img class="thumb" aria-hidden src="{{option.photo}}"/>
+                  </span>
                     <span>{{option.name}}</span> 
                 </mat-option>
             </mat-autocomplete>

@@ -182,7 +182,7 @@ filter(val){
         this.addressRef.push(this.registrationForm.controls.address.value);
       // push to auth table
         this.authRef.push(this.registrationForm.controls.auth.value);
-        // this.registrationForm.reset();
+        this.registrationForm.reset();
         if(this.photo){
           this.uploadPhoto(temp);
         }else{

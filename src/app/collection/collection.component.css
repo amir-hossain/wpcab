@@ -5,11 +5,13 @@ table,tbody{
 mat-card{
     display: inline-block;
 }
+tr{
+    line-height:90px;
+}
 
 td{
     width: 19.2vw;
     font-size: 25px;
-    display: table-cell;
     vertical-align: middle;
 }
 .thead{
@@ -26,4 +28,5 @@ th{
 img{
     width: 80px;
     height: 80px;
+    vertical-align: middle;
 }
