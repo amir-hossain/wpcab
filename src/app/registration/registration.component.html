@@ -9,8 +9,8 @@
   <form [formGroup]="registrationForm" (ngSubmit)="signup()">
     <div class="container">
       <h3>User info</h3>
+      <span>* Required field</span>
       <mat-card class="card" formGroupName='userInfo'>
-        <span>* Requred field</span>
         <label for='upload'>
           <input type='file'  id='upload' (change)="readUrl($event)" style='display:none;'>
        
@@ -25,10 +25,10 @@
           Full name required
         </mat-error>
       </div><!-- full name -->
-      <mat-radio-group  formControlName="gender">
+      <mat-radio-group   formControlName="gender">
         <h5>*Gender</h5>
-        <mat-radio-button type="radio" name="gender" id="male" value="male" >Male</mat-radio-button>
-       <mat-radio-button type="radio" name="gender" id="female" value="female" > Female</mat-radio-button>
+        <mat-radio-button type="radio" color='primary'  name="gender" id="male" value="male" >Male</mat-radio-button>
+       <mat-radio-button type="radio" color='primary' name="gender" id="female" value="female" > Female</mat-radio-button>
       </mat-radio-group><!-- gender -->
       <div>
         <mat-form-field>
@@ -99,10 +99,10 @@
               </div> <!-- blood group -->
       <mat-radio-group formControlName="occupation">
         <h5>*Occupation</h5>
-        <mat-radio-button type="radio" name="occupation" id="student" value="student" >Student</mat-radio-button>
-       <mat-radio-button type="radio" name="occupation" id="job holder" value="job holder" > Job holder</mat-radio-button>
-        <mat-radio-button type="radio" name="occupation" id="bussnessman" value="bussnessman" >Bussnessman</mat-radio-button>
-        <mat-radio-button type="radio" name="occupation" id="others" value="others" >Others</mat-radio-button>
+        <mat-radio-button type="radio" color='primary' name="occupation" id="student" value="student" >Student</mat-radio-button>
+       <mat-radio-button type="radio" color='primary' name="occupation" id="job holder" value="job holder" > Job holder</mat-radio-button>
+        <mat-radio-button type="radio" color='primary' name="occupation" id="bussnessman" value="bussnessman" >Bussnessman</mat-radio-button>
+        <mat-radio-button type="radio" color='primary' name="occupation" id="others" value="others" >Others</mat-radio-button>
       </mat-radio-group><!-- occupation -->
       </mat-card>
     </div><!-- user info -->
@@ -210,17 +210,17 @@
         </div> <!-- email -->
         <mat-radio-group formControlName="role">
           <h5>*Role</h5>
-          <mat-radio-button type="radio" name="role" id="User" value="User" checked="checked">User</mat-radio-button>
+          <mat-radio-button type="radio" color='primary' name="role" id="User" value="User" checked="checked">User</mat-radio-button>
 
-         <mat-radio-button type="radio" name="role" id="Register" value="Register">Register</mat-radio-button>
+         <mat-radio-button type="radio" color='primary' name="role" id="Register" value="Register">Register</mat-radio-button>
 
-          <mat-radio-button type="radio" name="role" id="Leader" value="Leader" >Leader</mat-radio-button>
+          <mat-radio-button type="radio" color='primary' name="role" id="Leader" value="Leader" >Leader</mat-radio-button>
 
-          <mat-radio-button type="radio" name="role" id="Admin" value="Admin" >Admin</mat-radio-button>
+          <mat-radio-button type="radio" color='primary' name="role" id="Admin" value="Admin" >Admin</mat-radio-button>
 
-          <mat-radio-button type="radio" name="role" id="Accountant" value="Accountant" >Accountant</mat-radio-button>
+          <mat-radio-button type="radio" color='primary' name="role" id="Accountant" value="Accountant" >Accountant</mat-radio-button>
 
-         <mat-radio-button type="radio" name="role" id="Super" value="Super" >Super</mat-radio-button>
+         <mat-radio-button type="radio" color='primary' name="role" id="Super" value="Super" >Super</mat-radio-button>
 
         </mat-radio-group> <!-- role -->
     </mat-card>

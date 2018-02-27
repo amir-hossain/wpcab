@@ -57,6 +57,13 @@ h5{
   mat-label,h5,span{
     color:rgb(218, 142, 3);
   }
+  span{
+      display: block;
+      margin-bottom:20px;
+      font-size: 20px; 
+  }
+
+  
 
   input::placeholder {
     color: red;
@@ -75,15 +82,6 @@ h3{
 .mat-radio-button{
     padding-right: 1.8em;
    
-}
-
-::ng-deep .mat-radio-inner-circle {
-    background: rgba(114, 5, 187, 0.808) !important;
-}
-
-::ng-deep .mat-radio-outer-circle{
-    border-color: rgba(114, 5, 187, 0.808) !important;
-
 }
 
 button{
