@@ -25,6 +25,14 @@ export class RegistrationComponent implements OnInit {
   options=[];
   url='./assets/img/add.png';
   photo;
+  roles=[
+    'User',
+    'Leader',
+    'Operator',
+    'Admin',
+    'Account',
+    'Super'
+  ]
   constructor(private builder:FormBuilder,private db:AngularFireDatabase,private snackBar:MatSnackBar,private fb: FirebaseApp) {
     this.userInfoRef=this.db.database.ref("/userInfo");
     this.addressRef=this.db.database.ref('/address');
@@ -176,11 +184,12 @@ filter(val){
       let fg=<FormGroup>this.registrationForm.controls.userInfo;
       temp.dob=(<Date>fg.controls.dob.value).toLocaleDateString();
    
-          console.log(temp);
+          // console.log(temp);
       // push to address table
         this.addressRef.push(this.registrationForm.controls.address.value);
       // push to auth table
         this.authRef.push(this.registrationForm.controls.auth.value);
+        console.log(this.registrationForm.controls.auth.value);
         // this.registrationForm.controls.userInfo.reset();
         // this.registrationForm.controls.address.reset();
         // this.registrationForm.controls.auth.reset();

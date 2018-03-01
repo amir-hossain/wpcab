@@ -217,21 +217,14 @@
             Invalid email
           </mat-error >
         </div> <!-- email -->
-        <mat-radio-group formControlName="role">
-          <h5>*Role</h5>
-          <mat-radio-button type="radio" color='primary' name="role" id="User" value="User" checked="checked">User</mat-radio-button>
-
-         <mat-radio-button type="radio" color='primary' name="role" id="Register" value="Register">Register</mat-radio-button>
-
-          <mat-radio-button type="radio" color='primary' name="role" id="Leader" value="Leader" >Leader</mat-radio-button>
-
-          <mat-radio-button type="radio" color='primary' name="role" id="Admin" value="Admin" >Admin</mat-radio-button>
-
-          <mat-radio-button type="radio" color='primary' name="role" id="Accountant" value="Accountant" >Accountant</mat-radio-button>
-
-         <mat-radio-button type="radio" color='primary' name="role" id="Super" value="Super" >Super</mat-radio-button>
-
-        </mat-radio-group> <!-- role -->
+        <h5>*Role (click on field to change)</h5>
+        <mat-form-field>
+        <mat-select formControlName='role'>
+          <mat-option *ngFor='let role of roles' [value]='role'>
+            {{role}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </mat-card>
     <div>
     <button type="submit"  mat-raised-button color="primary">Signup</button>
