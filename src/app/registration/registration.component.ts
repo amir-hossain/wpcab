@@ -5,38 +5,42 @@ import {AngularFireDatabase} from "angularfire2/database";
 import { Observable } from 'rxjs/Observable';
 import{map} from 'rxjs/operators/map';
 import 'firebase/storage';
-import * as firebase from 'firebase/app'; // for typings
-import { FirebaseApp } from 'angularfire2'; // for methods
+import * as firebase from 'firebase/app';
+import { FirebaseApp } from 'angularfire2';
+import {DropDownItemsService} from '../drop-down-items.service';
+import { SOURCE } from '@angular/core/src/di/injector';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css']
+  styleUrls: ['./registration.component.css'],
+  providers: [DropDownItemsService]
 })
 export class RegistrationComponent implements OnInit {
   startDate = new Date(1990, 0, 1);
   activeUserRole
   registrationForm:FormGroup;
-  filteredOptions;
+  filteredNames=[];
   userInfoRef;
   addressRef;
   authRef;
   storageRef;
-  options=[];
+  names=[];
   url='./assets/img/add.png';
   photo;
-  roles=[
-    'User',
-    'Leader',
-    'Operator',
-    'Admin',
-    'Account',
-    'Super'
-  ]
-  constructor(private builder:FormBuilder,private db:AngularFireDatabase,private snackBar:MatSnackBar,private fb: FirebaseApp) {
+  roles;
+  districts=[];
+  filteredDistricts=[];
+  subDistricts=[];
+  filteredSubDistrict=[];
+
+  constructor(private builder:FormBuilder,private db:AngularFireDatabase,private snackBar:MatSnackBar,private fb: FirebaseApp,private ddis:DropDownItemsService) {
     this.userInfoRef=this.db.database.ref("/userInfo");
     this.addressRef=this.db.database.ref('/address');
     this.authRef=this.db.database.ref('/auth');
+    this.roles=this.ddis.getRoles();
+    this.districts=this.ddis.getDistricts();
+    this.subDistricts=this.ddis.getSubDistrict();
    }
 
   ngOnInit() {
@@ -54,8 +58,8 @@ export class RegistrationComponent implements OnInit {
         bloodGroup:[""],
       }),
       address:this.builder.group({
-        area:["",Validators.required],
-        upozilla:["",Validators.required],
+        zone:["",Validators.required],
+        subDistrict:["",Validators.required],
         permanentAddress:["",Validators.required],
         district:["",Validators.required],
         country:[""],
@@ -76,54 +80,82 @@ export class RegistrationComponent implements OnInit {
 
     // get user name list
     this.userInfoRef.on('value',snap=>{
-      this.options=[];
+      this.names=[];
       // console.log(snap.val());
       let data=snap.val();
       if(data!=null){
-        Object.keys(data).forEach(key=>this.options.push(
+        Object.keys(data).forEach(key=>this.names.push(
           {name:data[''+key].fullName,
         photo:data[''+key].photo}
         ));
-      console.log(this.options);
+      // console.log(this.options);
       }
       
     }
   );
 
-  
-  let fg2=<FormGroup>this.registrationForm.controls.userInfo;
-  fg2.controls.fatherName.valueChanges
-  .subscribe(val=>{
-    if(val===''){
-      this.filteredOptions=[];
-    }else{
-      this.filteredOptions=this.filter(val)
-    } 
-  });
-  
-  fg2.controls.motherName.valueChanges
-  .subscribe(val=>{
-    if(val===''){
-      this.filteredOptions=[];
-    }else{
-      this.filteredOptions=this.filter(val)
-    } 
-  });
 
-  fg2.controls.invitedBy.valueChanges
+  
+  let userInfoGroup=<FormGroup>this.registrationForm.controls.userInfo;
+  this.nameAutoSuggestion(userInfoGroup,'fatherName');
+  this.nameAutoSuggestion(userInfoGroup,'motherName');
+  this.nameAutoSuggestion(userInfoGroup,'invitedBy');
+
+  let addressGroup=<FormGroup>this.registrationForm.controls.address;
+  this.districtAutoSuggestion(addressGroup);
+  this.subDistrictAutoSuggestion(addressGroup);
+
+}
+
+districtAutoSuggestion(addressGroup:FormGroup){
+  
+  addressGroup.controls.district.valueChanges
   .subscribe(val=>{
     if(val===''){
-      this.filteredOptions=[];
+      this.filteredDistricts=[];
     }else{
-      this.filteredOptions=this.filter(val)
+      this.filteredDistricts=this.districtFilter(val);
+    }
+  })
+
+}
+
+subDistrictAutoSuggestion(addressGroup:FormGroup){
+  addressGroup.controls.subDistrict.valueChanges
+  .subscribe(val=>{
+    if(val===''){
+      this.filteredSubDistrict=[];
+    }else{
+      this.filteredSubDistrict=this.subDistrictFilter(val);
+    }
+  })
+}
+
+nameAutoSuggestion(fg:FormGroup,controlName:string){
+  fg.get(controlName).valueChanges
+  .subscribe(val=>{
+    if(val===''){
+      this.filteredNames=[];
+    }else{
+      this.filteredNames=this.nameFilter(val);
     } 
   });
 }
 
 
-filter(val){
-  return this.options.filter(option =>
-    option.name.toLowerCase().includes(val.toLowerCase()));
+districtFilter(val){
+  return this.districts.filter(option =>
+    option.toLowerCase().includes(val.toLowerCase()));
+}
+
+subDistrictFilter(val){
+  return this.subDistricts.filter(option=>
+  option.toLowerCase().includes(val.toLowerCase()));
+}
+
+nameFilter(val){
+  return this.names.filter(item =>
+    item.name.toLowerCase().includes(val.toLowerCase()));
 }
 
   displaySnackBar(){

@@ -17,6 +17,12 @@ mat-option{
     
 }
 
+.instraction{
+    color:gray;
+    font-size:14px;
+
+}
+
 .warning{
     display: block;
     font-size: 20px;

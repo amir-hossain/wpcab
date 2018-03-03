@@ -46,7 +46,7 @@
           <mat-label>*Father's name</mat-label>
           <input matInput type="text" formControlName="fatherName" [matAutocomplete]='auto'>
           <mat-autocomplete #auto='matAutocomplete'>
-              <mat-option  *ngFor='let option of filteredOptions' [value]='option.name'>
+              <mat-option  *ngFor='let option of filteredNames' [value]='option.name'>
                 <span *ngIf='option.photo!==""'>
                     <img class="thumb" aria-hidden src="{{option.photo}}"/>
                 </span>
@@ -66,7 +66,7 @@
           <mat-label>*Mother's name</mat-label>
           <input matInput type="text" formControlName="motherName" [matAutocomplete]='auto'>
           <mat-autocomplete #auto='matAutocomplete'>
-              <mat-option  *ngFor='let option of filteredOptions' [value]='option.name'>
+              <mat-option  *ngFor='let option of filteredNames' [value]='option.name'>
                   <span *ngIf='option.photo!==""'>
                       <img class="thumb" aria-hidden src="{{option.photo}}"/>
                   </span>
@@ -86,7 +86,7 @@
             <mat-label>*Invited by</mat-label>
             <input matInput type="textarea" formControlName="invitedBy" [matAutocomplete]='auto'>
             <mat-autocomplete #auto='matAutocomplete'>
-                <mat-option  *ngFor='let option of filteredOptions' [value]='option.name'>
+                <mat-option  *ngFor='let option of filteredNames' [value]='option.name'>
                     <span *ngIf='option.photo!==""'>
                         <img class="thumb" aria-hidden src="{{option.photo}}"/>
                     </span>
@@ -120,22 +120,27 @@
         <mat-card class="card" formGroupName='address'>
     <div>
         <mat-form-field>
-        <mat-label>*Area/Thana (current)</mat-label>
-        <input matInput type="text" formControlName="area">
+        <mat-label>*Zone (current)</mat-label>
+        <input matInput type="text" formControlName="zone">
       </mat-form-field>
-        <mat-error *ngIf="registrationForm.get('address').get('area').invalid && registrationForm.get('address').get('area').touched">
-          Area required
+        <mat-error *ngIf="registrationForm.get('address').get('zone').invalid && registrationForm.get('address').get('zone').touched">
+          Zone required
         </mat-error>
-      </div><!-- area -->
+      </div><!-- zone -->
       <div>
           <mat-form-field>
-            <mat-label>*Upozilla (current)</mat-label>
-          <input matInput type="text" formControlName="upozilla">
+            <mat-label>*Sub district (current)</mat-label>
+          <input matInput type="text" formControlName="subDistrict" [matAutocomplete]='subDist'>
+          <mat-autocomplete #subDist='matAutocomplete'>
+            <mat-option *ngFor='let option of filteredSubDistrict' [value]='option'>
+                {{option}}
+            </mat-option>
+          </mat-autocomplete>
         </mat-form-field>
-          <mat-error *ngIf="registrationForm.get('address').get('upozilla').invalid && registrationForm.get('address').get('upozilla').touched">
-            Upozilla required
+          <mat-error *ngIf="registrationForm.get('address').get('subDistrict').invalid && registrationForm.get('address').get('subDistrict').touched">
+            Sub district required
           </mat-error>
-        </div><!-- upozilla -->
+        </div><!-- subDistrict -->
         <div>
             <mat-form-field>
                 <mat-label>*Parmemt Address</mat-label>
@@ -148,7 +153,12 @@
           <div>
               <mat-form-field>
               <mat-label>*District (current)</mat-label>
-              <input matInput type="text" formControlName="district">
+              <input matInput type="text" formControlName="district" [matAutocomplete]='dist'>
+              <mat-autocomplete #dist='matAutocomplete'>
+                <mat-option *ngFor='let option of  filteredDistricts' [value]='option'>
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
             </mat-form-field>
               <mat-error *ngIf="registrationForm.get('address').get('district').invalid && registrationForm.get('address').get('district').touched">
                 District required
@@ -217,7 +227,7 @@
             Invalid email
           </mat-error >
         </div> <!-- email -->
-        <h5>*Role (click on field to change)</h5>
+        <h5>*Role <span class='instraction'>(click on user to change)</span></h5>
         <mat-form-field>
         <mat-select formControlName='role'>
           <mat-option *ngFor='let role of roles' [value]='role'>
