@@ -4,7 +4,7 @@
 <div *ngIf='activeUserRole=="Register"'>
   <app-register-nav></app-register-nav>
 </div>
-<table>
+<!-- <table>
   <div class="thead">
     <th>Picture</th>
     <th>Name</th>
@@ -26,5 +26,39 @@
     <td>{{obj.motherName}}</td>
   </mat-card>
   </tr>
-</table>
+</table> -->
+
+<div class="example-container mat-elevation-z8">
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+
+  <mat-table [dataSource]="dataSource">
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.fullName}} </mat-cell>
+    </ng-container>
+
+    <!-- father name Column -->
+    <ng-container matColumnDef="father name">
+      <mat-header-cell *matHeaderCellDef> Father name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.fatherName}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="mother name">
+      <mat-header-cell *matHeaderCellDef> Mother name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.motherName}} </mat-cell>
+    </ng-container>
+
+    
+  </mat-table>
+</div>
+
 
