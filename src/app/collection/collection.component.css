@@ -2,11 +2,17 @@ table,tbody{
     display: table;
     margin:40px auto;
 }
-mat-card{
-    display: inline-block;
-}
+
 tr{
     line-height:90px;
+    
+}
+mat-card{
+    /* margin-top: 30px; */
+    margin-bottom: 1px;
+    padding-top: 10px; 
+    padding-bottom: 10px; 
+    
 }
 
 td{
@@ -14,15 +20,18 @@ td{
     font-size: 25px;
     vertical-align: middle;
 }
-.thead{
-    padding-left:1.5vw; 
-}
+
 
 th{
     width: 19.2vw;
     text-align: left;
-    font-size: 25px;
+    font-size: 20px;
+    padding-bottom: 30px;
    
+}
+
+.thead{
+    padding: 24px;
 }
 
 img{
@@ -31,24 +40,3 @@ img{
     vertical-align: middle;
 }
 
-/* Structure */
-.example-container {
-    display: flex;
-    flex-direction: column;
-    min-width: 300px;
-  }
-  
-  .example-header {
-    min-height: 64px;
-    padding: 8px 24px 0;
-  }
-  
-  .mat-form-field {
-    font-size: 14px;
-    width: 100%;
-  }
-  
-  .mat-table {
-    overflow: auto;
-    max-height: 500px;
-  }

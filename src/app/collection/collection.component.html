@@ -4,61 +4,39 @@
 <div *ngIf='activeUserRole=="Register"'>
   <app-register-nav></app-register-nav>
 </div>
-<!-- <table>
-  <div class="thead">
-    <th>Picture</th>
-    <th>Name</th>
-    <th>Mother name</th>
-    <th>Father name</th>
+<table>
+    
+  <div >
+
+    <!-- <th>
+        <span class="thead">Picture</span>
+    </th> -->
+    <th>
+        <span class="thead">Name</span>
+    </th>
+    <th>
+        <span class="thead">Mother name</span>
+    </th>
+    <th>
+        <span class="thead">Father name</span>
+    </th>
   </div>
-  <tr *ngFor='let obj of objArry'>
-    <mat-card>
-    <td>
+  <!-- <mat-card> -->
+  <mat-card *ngFor='let obj of objArry'>
+    <!-- <td>
       <span *ngIf="obj.photo!==''">
         <img src='{{obj.photo}}'>
       </span>
       <span *ngIf="obj.photo===''">
           <img src='./assets/img/defult-pic.png'>
         </span>
-    </td>
+    </td> -->
     <td>{{obj.fullName}}</td>
     <td>{{obj.fatherName}}</td>
     <td>{{obj.motherName}}</td>
   </mat-card>
-  </tr>
-</table> -->
+<!-- </mat-card> -->
+</table>
 
-<div class="example-container mat-elevation-z8">
-  <div class="example-header">
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field>
-  </div>
-
-  <mat-table [dataSource]="dataSource">
-
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.fullName}} </mat-cell>
-    </ng-container>
-
-    <!-- father name Column -->
-    <ng-container matColumnDef="father name">
-      <mat-header-cell *matHeaderCellDef> Father name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.fatherName}} </mat-cell>
-    </ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="mother name">
-      <mat-header-cell *matHeaderCellDef> Mother name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.motherName}} </mat-cell>
-    </ng-container>
-
-    
-  </mat-table>
-</div>
 
 
