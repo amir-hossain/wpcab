@@ -111,7 +111,7 @@ districtAutoSuggestion(addressGroup:FormGroup){
   
   addressGroup.controls.district.valueChanges
   .subscribe(val=>{
-    if(val===''){
+    if(val==='' || val===null){
       this.filteredDistricts=[];
     }else{
       this.filteredDistricts=this.districtFilter(val);
@@ -123,7 +123,7 @@ districtAutoSuggestion(addressGroup:FormGroup){
 subDistrictAutoSuggestion(addressGroup:FormGroup){
   addressGroup.controls.subDistrict.valueChanges
   .subscribe(val=>{
-    if(val===''){
+    if(val==='' || val===null){
       this.filteredSubDistrict=[];
     }else{
       this.filteredSubDistrict=this.subDistrictFilter(val);
@@ -134,7 +134,7 @@ subDistrictAutoSuggestion(addressGroup:FormGroup){
 nameAutoSuggestion(fg:FormGroup,controlName:string){
   fg.get(controlName).valueChanges
   .subscribe(val=>{
-    if(val===''){
+    if(val==='' || val===null){
       this.filteredNames=[];
     }else{
       this.filteredNames=this.nameFilter(val);
@@ -224,7 +224,7 @@ nameFilter(val){
         console.log(this.registrationForm.controls.auth.value);
         // this.registrationForm.controls.userInfo.reset();
         // this.registrationForm.controls.address.reset();
-        // this.registrationForm.controls.auth.reset();
+        this.registrationForm.reset();
         if(this.photo){
           this.uploadPhoto(temp);
         }else{
