@@ -4,10 +4,21 @@
 <div *ngIf='activeUserRole=="Register"'>
   <app-register-nav></app-register-nav>
 </div>
+
 <table>
+    <mat-card class="search-card">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+        <mat-form-field class="middle-filter">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+          </mat-form-field>
+          <mat-form-field>
+              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+      </mat-card>
     
   <div >
-
     <!-- <th>
         <span class="thead">Picture</span>
     </th> -->
@@ -21,8 +32,7 @@
         <span class="thead">Father name</span>
     </th>
   </div>
-  <!-- <mat-card> -->
-  <mat-card *ngFor='let obj of objArry'>
+  <mat-card *ngFor='let obj of objArry' class="table-card">
     <!-- <td>
       <span *ngIf="obj.photo!==''">
         <img src='{{obj.photo}}'>
@@ -35,7 +45,6 @@
     <td>{{obj.fatherName}}</td>
     <td>{{obj.motherName}}</td>
   </mat-card>
-<!-- </mat-card> -->
 </table>
 
 

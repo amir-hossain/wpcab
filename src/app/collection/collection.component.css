@@ -7,8 +7,7 @@ tr{
     line-height:90px;
     
 }
-mat-card{
-    /* margin-top: 30px; */
+.table-card{
     margin-bottom: 1px;
     padding-top: 10px; 
     padding-bottom: 10px; 
@@ -39,4 +38,18 @@ img{
     height: 80px;
     vertical-align: middle;
 }
+
+.search-card{
+    margin-bottom: 30px;
+}
+
+
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 30%;
+  }
+  .middle-filter{
+      margin: 0% 4%;
+  }
 
