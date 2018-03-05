@@ -27,8 +27,8 @@
       </div><!-- full name -->
       <mat-radio-group   formControlName="gender">
         <h5>*Gender</h5>
-        <mat-radio-button type="radio" color='primary'  name="gender" id="male" value="male" >Male</mat-radio-button>
-       <mat-radio-button type="radio" color='primary' name="gender" id="female" value="female" > Female</mat-radio-button>
+        <mat-radio-button type="radio" color='primary'  name="gender" id="male" value="Male" >Male</mat-radio-button>
+       <mat-radio-button type="radio" color='primary' name="gender" id="female" value="Female" > Female</mat-radio-button>
       </mat-radio-group><!-- gender -->
       <div>
         <mat-form-field>
@@ -108,10 +108,10 @@
               </div> <!-- blood group -->
       <mat-radio-group formControlName="occupation">
         <h5>*Occupation</h5>
-        <mat-radio-button type="radio" color='primary' name="occupation" id="student" value="student" >Student</mat-radio-button>
-       <mat-radio-button type="radio" color='primary' name="occupation" id="job holder" value="job holder" > Job holder</mat-radio-button>
-        <mat-radio-button type="radio" color='primary' name="occupation" id="bussnessman" value="bussnessman" >Bussnessman</mat-radio-button>
-        <mat-radio-button type="radio" color='primary' name="occupation" id="others" value="others" >Others</mat-radio-button>
+        <mat-radio-button type="radio" color='primary' name="occupation" id="student" value="Student" >Student</mat-radio-button>
+       <mat-radio-button type="radio" color='primary' name="occupation" id="job holder" value="Job holder" > Job holder</mat-radio-button>
+        <mat-radio-button type="radio" color='primary' name="occupation" id="bussnessman" value="Bussnessman" >Bussnessman</mat-radio-button>
+        <mat-radio-button type="radio" color='primary' name="occupation" id="others" value="Others" >Others</mat-radio-button>
       </mat-radio-group><!-- occupation -->
       </mat-card>
     </div><!-- user info -->
@@ -227,7 +227,7 @@
             Invalid email
           </mat-error >
         </div> <!-- email -->
-        <h5>*Role <span class='instraction'>(click on user for more)</span></h5>
+        <h5>*Role <span class='instraction'>(click on below field for more options)</span></h5>
         <mat-form-field>
         <mat-select formControlName='role'>
           <mat-option *ngFor='let role of roles' [value]='role'>

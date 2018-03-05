@@ -76,12 +76,12 @@ export class RegistrationComponent implements OnInit {
       userInfo:this.builder.group({
         photo:[""],
         fullName:["",Validators.required],
-        gender:['male'],
+        gender:['Male'],
         dob:["",Validators.required],
         fatherName:["",Validators.required],
         motherName:["",Validators.required],
         invitedBy:["",Validators.required],
-        occupation:["student"],
+        occupation:["Student"],
         bloodGroup:[""],
       }),
       address:this.builder.group({
@@ -240,6 +240,19 @@ nameFilter(val){
 
     })
   }
+
+  resetValidator(){
+    Object.keys(this.registrationForm.controls).forEach(groupName=>{
+      let formGroup=<FormGroup>this.registrationForm.get(groupName);
+      // console.log()
+      if(formGroup.controls!==undefined){
+        Object.keys(formGroup.controls).forEach(controlName=>
+          formGroup.get(controlName).setErrors(null)
+        )
+      }
+      
+    })
+  }
   signup(){
     if(this.registrationForm.valid){
       let temp=this.registrationForm.controls.userInfo.value;
@@ -253,15 +266,27 @@ nameFilter(val){
         this.authRef.push(this.registrationForm.controls.auth.value);
         console.log(this.registrationForm.controls.auth.value);
         this.displaySnackBar();
+        
         this.registrationForm.reset();
+        this.registrationForm.markAsUntouched({onlySelf:true});
+        this.registrationForm.markAsPristine({onlySelf:true});
+        // this.resetValidator();
         if(this.photo){
           this.uploadPhoto(temp);
         }else{
           this.userInfoRef.push(temp);
+          
         }    
     }else if(!this.registrationComplete){
-      Object.keys(this.registrationForm.controls).forEach(field=>{
-        this.registrationForm.get(field).markAsTouched({onlySelf:true});
+      Object.keys(this.registrationForm.controls).forEach(groupName=>{
+        let formGroup=<FormGroup>this.registrationForm.get(groupName);
+        // console.log()
+        if(formGroup.controls!==undefined){
+          Object.keys(formGroup.controls).forEach(controlName=>
+            formGroup.get(controlName).markAsTouched({onlySelf:true})
+          )
+        }
+        
       })
     
     }
