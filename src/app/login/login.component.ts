@@ -13,6 +13,10 @@ export class LoginComponent implements OnInit {
   loginForm:FormGroup;
   unError="";
   passError="";
+
+  get userInfo() { return this.loginForm.get('userInfo'); }
+
+  get password() { return this.loginForm.get('password'); }
   
   constructor(private builder:FormBuilder,private router:Router,private db:AngularFireDatabase) { }
 
@@ -80,7 +84,7 @@ export class LoginComponent implements OnInit {
     this.unError="";
     this.passError="";
     if(this.loginForm.valid){
-      this.auth(this.loginForm.controls.userInfo.value,this.loginForm.controls.password.value);
+      this.auth(this.userInfo.value,this.password.value);
     }else{
       Object.keys(this.loginForm.controls).forEach(field=>{
         this.loginForm.get(field).markAsTouched({onlySelf:true})

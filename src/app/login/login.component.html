@@ -8,7 +8,7 @@
               <input matInput class="inline-center input-field" type="text" placeholder="Name or Email" formControlName="userInfo">
             </mat-form-field>
           </div>
-          <mat-error class="error" *ngIf="loginForm.controls.userInfo.invalid && loginForm.controls.userInfo.touched">
+          <mat-error class="error" *ngIf="userInfo.invalid && userInfo.touched">
             Field is empty
           </mat-error>
           <mat-error class="error">
@@ -19,7 +19,7 @@
               <input matInput type="password" class="inline-center" placeholder="Password" formControlName="password">
             </mat-form-field>
           </div>
-          <mat-error class="error" *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched">
+          <mat-error class="error" *ngIf="password.invalid && password.touched">
            Field is empty
           </mat-error>
           <mat-error class="error">
