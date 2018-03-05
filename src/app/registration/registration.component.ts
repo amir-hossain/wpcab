@@ -174,17 +174,17 @@ nameAutoSuggestion(fg:FormGroup,controlName:string){
 
 districtFilter(val){
   return this.districts.filter(option =>
-    option.toLowerCase().includes(val.toLowerCase()));
+    option.toLowerCase().startsWith(val.toLowerCase()));
 }
 
 subDistrictFilter(val){
   return this.subDistricts.filter(option=>
-  option.toLowerCase().includes(val.toLowerCase()));
+  option.toLowerCase().startsWith(val.toLowerCase()));
 }
 
 nameFilter(val){
   return this.names.filter(item =>
-    item.name.toLowerCase().includes(val.toLowerCase()));
+    item.name.toLowerCase().startsWith(val.toLowerCase()));
 }
 
   displaySnackBar(){
@@ -260,8 +260,8 @@ nameFilter(val){
           this.userInfoRef.push(temp);
         }    
     }else if(!this.registrationComplete){
-      // Object.keys(this.registrationForm.controls).forEach(field=>{
-      //   this.registrationForm.get(field).markAsTouched({onlySelf:true});
+      Object.keys(this.registrationForm.controls).forEach(field=>{
+        this.registrationForm.get(field).markAsTouched({onlySelf:true});
       })
     
     }
