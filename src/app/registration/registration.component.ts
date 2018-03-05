@@ -33,6 +33,9 @@ export class RegistrationComponent implements OnInit {
   filteredDistricts=[];
   subDistricts=[];
   filteredSubDistrict=[];
+  zones=[];
+  filteredZone=[];
+
   registrationComplete=false;
 
   get fullName() { return this.registrationForm.get('userInfo').get('fullName'); }
@@ -68,6 +71,7 @@ export class RegistrationComponent implements OnInit {
     this.roles=this.ddis.getRoles();
     this.districts=this.ddis.getDistricts();
     this.subDistricts=this.ddis.getSubDistrict();
+    this.zones=this.ddis.gerZone();
    }
 
   ngOnInit() {
@@ -133,7 +137,24 @@ export class RegistrationComponent implements OnInit {
   let addressGroup=<FormGroup>this.registrationForm.controls.address;
   this.districtAutoSuggestion(addressGroup);
   this.subDistrictAutoSuggestion(addressGroup);
+  this.zoneAutoSuggestion(addressGroup);
 
+}
+
+zoneAutoSuggestion(addressGroup:FormGroup){
+  addressGroup.controls.zone.valueChanges
+  .subscribe(val=>{
+    if(val=='' || val===null){
+      this.filteredZone=[];
+    }else{
+      this.filteredZone=this.zoneFilter(val)
+    }
+  })
+}
+
+zoneFilter(val:string){
+  return this.zones.filter(option=>
+    option.toLowerCase().includes(val.toLowerCase()))
 }
 
 districtAutoSuggestion(addressGroup:FormGroup){

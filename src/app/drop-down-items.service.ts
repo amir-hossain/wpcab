@@ -7,6 +7,39 @@ const roles=[
   'Account',
   'Super'
 ]
+
+const zone=[
+  'Murpur 6',
+  'Shahalibag',
+  'Mohakhali',
+  'Gazipur',
+  'Norshingdi',
+  'Tepra',
+  'Vuiyapur',
+  'Mirpur 14',
+  'Babu bazar',
+  'Zinzira-Shuvada-Belna',
+  'Badda-Batara-Gulshan',
+  'Shekher gau',
+  'Vober chor',
+  'KAchpur-Narayanganj',
+  'Savar',
+  'Chadpur',
+  'Shingair(Manikganj)',
+  'Bibidh',
+  'Mymensing(Haluyagat)',
+  'Chittagong',
+  'Khulna',
+  'Kaula',
+  'Kamrangichor',
+  'Barha',
+  'Barisal(Babu bazar)',
+  'Zinzira(Taoyapatti)',
+  'Tongi(Tilergati)',
+  'Rajbari',
+  'Dhalla(Singair)',
+  'Madaripur'
+]
 const districts=[
 'Barguna',
 'Barisal',
@@ -596,5 +629,9 @@ export class DropDownItemsService {
 
   getSubDistrict(){
     return subDistrict;
+  }
+
+  gerZone(){
+    return zone;
   }
 }

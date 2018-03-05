@@ -121,7 +121,12 @@
     <div>
         <mat-form-field>
         <mat-label>*Zone (current)</mat-label>
-        <input matInput type="text" formControlName="zone">
+        <input matInput type="text" formControlName="zone" [matAutocomplete]='z'>
+        <mat-autocomplete #z='matAutocomplete'>
+          <mat-option *ngFor='let option of filteredZone' [value]='option'>
+              {{option}}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
         <mat-error *ngIf="zone.invalid && zone.touched">
           Zone required
