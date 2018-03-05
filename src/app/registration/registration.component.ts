@@ -33,6 +33,7 @@ export class RegistrationComponent implements OnInit {
   filteredDistricts=[];
   subDistricts=[];
   filteredSubDistrict=[];
+  registrationComplete=false;
 
   constructor(private builder:FormBuilder,private db:AngularFireDatabase,private snackBar:MatSnackBar,private fb: FirebaseApp,private ddis:DropDownItemsService) {
     this.userInfoRef=this.db.database.ref("/userInfo");
@@ -160,8 +161,9 @@ nameFilter(val){
 
   displaySnackBar(){
     this.snackBar.open("Registration sucessfull",'',{
-      duration:2000
+      duration:2000,verticalPosition:'top'
     });
+    this.registrationComplete=true;
   }
 
    emailOrEmpty(control: AbstractControl): ValidationErrors | null {
@@ -206,7 +208,7 @@ nameFilter(val){
          userInfo.photo=task.snapshot.downloadURL;
       console.log(task.snapshot.downloadURL);
       this.userInfoRef.push(userInfo);
-      this.displaySnackBar();
+      
 
     })
   }
@@ -222,17 +224,16 @@ nameFilter(val){
       // push to auth table
         this.authRef.push(this.registrationForm.controls.auth.value);
         console.log(this.registrationForm.controls.auth.value);
-        // this.registrationForm.controls.userInfo.reset();
-        // this.registrationForm.controls.address.reset();
+        this.displaySnackBar();
         this.registrationForm.reset();
         if(this.photo){
           this.uploadPhoto(temp);
         }else{
           this.userInfoRef.push(temp);
         }    
-    }else{
-      Object.keys(this.registrationForm.controls).forEach(field=>{
-        this.registrationForm.get(field).markAsTouched({onlySelf:true});
+    }else if(!this.registrationComplete){
+      // Object.keys(this.registrationForm.controls).forEach(field=>{
+      //   this.registrationForm.get(field).markAsTouched({onlySelf:true});
       })
     
     }

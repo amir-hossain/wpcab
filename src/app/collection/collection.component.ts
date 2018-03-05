@@ -42,11 +42,7 @@ export class CollectionComponent implements OnInit {
       let bakFilteredArray=this.filteredArry.slice();
       this.filteredArry=this.objArry.filter(val=>
         val.motherName.toLowerCase().includes(motherName.toLowerCase()))
-     
-      }
-
     // console.log(bakFilteredArray);
-    
   }
 }
 

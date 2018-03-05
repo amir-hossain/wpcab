@@ -72,15 +72,9 @@ h5{
   }
 
 
-  
-
-  input::placeholder {
-    color: red;
-  }
-
 
 ::ng-deep .mat-snack-bar-container.mat-snack-bar-center{
-    margin:30px !important; 
+    margin-top:65% !important; 
 }
 
 h3{
