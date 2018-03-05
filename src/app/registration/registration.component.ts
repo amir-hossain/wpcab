@@ -35,6 +35,32 @@ export class RegistrationComponent implements OnInit {
   filteredSubDistrict=[];
   registrationComplete=false;
 
+  get fullName() { return this.registrationForm.get('userInfo').get('fullName'); }
+
+  get dob() { return this.registrationForm.get('userInfo').get('dob'); }
+
+  get fatherName() { return this.registrationForm.get('userInfo').get('fatherName'); }
+
+  get motherName() { return this.registrationForm.get('userInfo').get('motherName'); }
+
+  get invitedBy() { return this.registrationForm.get('userInfo').get('invitedBy'); }
+
+  get zone() { return this.registrationForm.get('address').get('zone'); }
+
+  get subDistrict() { return this.registrationForm.get('address').get('subDistrict'); }
+
+  get permanentAddress() { return this.registrationForm.get('address').get('permanentAddress'); }
+
+  get district() {  return this.registrationForm.get('address').get('district');}
+
+  get password() { return this.registrationForm.get('auth').get('password'); }
+
+  get conPassword() { return this.registrationForm.get('auth').get('conPassword'); }
+
+  get phone() { return this.registrationForm.get('auth').get('phone');}
+
+  get email() { return this.registrationForm.get('auth').get('email'); }
+
   constructor(private builder:FormBuilder,private db:AngularFireDatabase,private snackBar:MatSnackBar,private fb: FirebaseApp,private ddis:DropDownItemsService) {
     this.userInfoRef=this.db.database.ref("/userInfo");
     this.addressRef=this.db.database.ref('/address');
@@ -94,6 +120,8 @@ export class RegistrationComponent implements OnInit {
       
     }
   );
+
+  
 
 
   

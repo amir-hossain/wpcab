@@ -21,7 +21,7 @@
         <mat-label>*Full name</mat-label>
         <input  matInput type="text" formControlName="fullName">
       </mat-form-field>
-        <mat-error *ngIf="registrationForm.get('userInfo').get('fullName').invalid && registrationForm.get('userInfo').get('fullName').touched">
+        <mat-error *ngIf="fullName.invalid && fullName.touched">
           Full name required
         </mat-error>
       </div><!-- full name -->
@@ -37,7 +37,7 @@
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
         </mat-form-field> <!-- dob -->
-        <mat-error *ngIf="registrationForm.get('userInfo').get('dob').invalid && registrationForm.get('userInfo').get('dob').touched">
+        <mat-error *ngIf="dob.invalid && dob.touched">
           Date of birth required
         </mat-error>
       </div><!-- dob -->
@@ -57,7 +57,7 @@
               </mat-option>
           </mat-autocomplete>
         </mat-form-field>
-          <mat-error *ngIf="registrationForm.get('userInfo').get('fatherName').invalid && registrationForm.get('userInfo').get('fatherName').touched">
+          <mat-error *ngIf="fatherName.invalid && fatherName.touched">
             Father name required
           </mat-error>
         </div><!-- father name -->
@@ -77,7 +77,7 @@
                 </mat-option>
           </mat-autocomplete>
         </mat-form-field>
-          <mat-error *ngIf="registrationForm.get('userInfo').get('motherName').invalid && registrationForm.get('userInfo').get('motherName').touched">
+          <mat-error *ngIf="motherName.invalid && motherName.touched">
             Mother name required
           </mat-error>
         </div><!-- mother name -->
@@ -97,7 +97,7 @@
                   </mat-option>
             </mat-autocomplete>
           </mat-form-field>
-            <mat-error *ngIf="registrationForm.get('userInfo').get('invitedBy').invalid && registrationForm.get('userInfo').get('invitedBy').touched">
+            <mat-error *ngIf="invitedBy.invalid && invitedBy.touched">
                 Invited by required
               </mat-error>
             </div><!-- invited by -->
@@ -123,7 +123,7 @@
         <mat-label>*Zone (current)</mat-label>
         <input matInput type="text" formControlName="zone">
       </mat-form-field>
-        <mat-error *ngIf="registrationForm.get('address').get('zone').invalid && registrationForm.get('address').get('zone').touched">
+        <mat-error *ngIf="zone.invalid && zone.touched">
           Zone required
         </mat-error>
       </div><!-- zone -->
@@ -137,7 +137,7 @@
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
-          <mat-error *ngIf="registrationForm.get('address').get('subDistrict').invalid && registrationForm.get('address').get('subDistrict').touched">
+          <mat-error *ngIf="subDistrict.invalid && subDistrict.touched">
             Sub district required
           </mat-error>
         </div><!-- subDistrict -->
@@ -146,7 +146,7 @@
                 <mat-label>*Parmemt Address</mat-label>
             <input matInput type="textarea" formControlName="permanentAddress">
           </mat-form-field>
-            <mat-error *ngIf="registrationForm.get('address').get('permanentAddress').invalid && registrationForm.get('address').get('permanentAddress').touched">
+            <mat-error *ngIf="permanentAddress.invalid && permanentAddress.touched">
               Permanent address required
             </mat-error>
           </div><!-- permanent address -->
@@ -160,7 +160,7 @@
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
-              <mat-error *ngIf="registrationForm.get('address').get('district').invalid && registrationForm.get('address').get('district').touched">
+              <mat-error *ngIf="district.invalid && district.touched">
                 District required
               </mat-error>
             </div><!-- district -->
@@ -194,7 +194,7 @@
         <mat-label>*Password </mat-label>
         <input matInput type="password" formControlName="password">
       </mat-form-field>
-        <mat-error *ngIf="registrationForm.get('auth').get('password').invalid && registrationForm.get('auth').get('password').touched">
+        <mat-error *ngIf="password.invalid && password.touched">
           Password required
         </mat-error>
       </div><!-- password -->
@@ -203,10 +203,10 @@
               <mat-label>*Conform password </mat-label>
           <input matInput type="password" formControlName="conPassword">
         </mat-form-field>
-          <mat-error *ngIf="registrationForm.get('auth').get('conPassword').hasError('required') && registrationForm.get('auth').get('conPassword').touched">
+          <mat-error *ngIf="conPassword.hasError('required') && conPassword.touched">
             Conform password required
           </mat-error>
-          <mat-error *ngIf="registrationForm.get('auth').get('conPassword').hasError('matchPassword') && registrationForm.get('auth').get('conPassword').touched">
+          <mat-error *ngIf="conPassword.hasError('matchPassword') && conPassword.touched">
               Conform password did not match
             </mat-error>
         </div><!--conform password -->
@@ -215,7 +215,7 @@
             <mat-label>*Phone </mat-label>
         <input matInput type="number" formControlName="phone">
       </mat-form-field>
-        <mat-error *ngIf="registrationForm.get('auth').get('phone').invalid && registrationForm.get('auth').get('phone').touched">
+        <mat-error *ngIf="phone.invalid && phone.touched">
           Phone required
         </mat-error>
       </div><!-- phone -->
@@ -223,7 +223,7 @@
           <mat-form-field>
             <input matInput type="email"  placeholder="Email" formControlName="email">
           </mat-form-field>
-          <mat-error  *ngIf="registrationForm.get('auth').get('email').value !='' && registrationForm.get('auth').get('email').invalid">
+          <mat-error  *ngIf="email.value !='' && email.invalid">
             Invalid email
           </mat-error >
         </div> <!-- email -->
