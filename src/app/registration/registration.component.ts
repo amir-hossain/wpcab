@@ -35,6 +35,7 @@ export class RegistrationComponent implements OnInit {
   filteredSubDistrict=[];
   zones=[];
   filteredZone=[];
+  bloodGroups=[];
 
   registrationComplete=false;
 
@@ -72,6 +73,7 @@ export class RegistrationComponent implements OnInit {
     this.districts=this.ddis.getDistricts();
     this.subDistricts=this.ddis.getSubDistrict();
     this.zones=this.ddis.gerZone();
+    this.bloodGroups=this.ddis.getBloodGroup();
    }
 
   ngOnInit() {
@@ -86,7 +88,7 @@ export class RegistrationComponent implements OnInit {
         motherName:["",Validators.required],
         invitedBy:["",Validators.required],
         occupation:["Student"],
-        bloodGroup:[""],
+        bloodGroup:['B +'],
       }),
       address:this.builder.group({
         zone:["",Validators.required],

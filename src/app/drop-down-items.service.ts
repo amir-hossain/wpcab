@@ -8,6 +8,17 @@ const roles=[
   'Super'
 ]
 
+const bloodGroup=[
+  'A +',
+  'A -',
+  'B +',
+  'B -',
+  'O +',
+  'O -',
+  'AB +',
+  'AB -'
+]
+
 const zone=[
   'Murpur 6',
   'Shahalibag',
@@ -633,5 +644,9 @@ export class DropDownItemsService {
 
   gerZone(){
     return zone;
+  }
+
+  getBloodGroup(){
+    return bloodGroup;
   }
 }

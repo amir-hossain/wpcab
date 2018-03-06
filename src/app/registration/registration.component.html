@@ -102,8 +102,13 @@
               </mat-error>
             </div><!-- invited by -->
             <div>
+              <h5>*Blood group<span class='instraction'>(click on below field for more options)</span></h5>
                 <mat-form-field>
-                  <input matInput type="text" placeholder="Blood Group" formControlName="bloodGroup">
+                 <mat-select formControlName='bloodGroup'>
+                    <mat-option *ngFor='let option of bloodGroups' [value]='option'>
+                      {{option}}
+                    </mat-option>
+                 </mat-select>
                 </mat-form-field>
               </div> <!-- blood group -->
       <mat-radio-group formControlName="occupation">
