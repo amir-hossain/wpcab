@@ -8,8 +8,11 @@ import {AngularFireDatabase} from 'angularfire2/database';
 })
 export class CollectionComponent implements OnInit {
   activeUserRole;
-  objArry=[];
-  filteredArry=[];
+  userInfoArry=[];
+  filteredUserInfoArry=[];
+  addressArry=[];
+  filteredAddressArry=[];
+  filteredSubDistrictArry=[];
   constructor(private db:AngularFireDatabase) { }
 
   ngOnInit() {
@@ -18,31 +21,54 @@ export class CollectionComponent implements OnInit {
     // get user info
     this.db.database.ref('userInfo').once('value')
     .then(snap=>{
-      console.log(snap.val());
+      // console.log(snap.val());
       let data=snap.val();
-      Object.keys(data).forEach(key=>this.objArry.push(data[''+key]));
-  this.filteredArry=this.objArry;
+      if(data){
+        Object.keys(data).forEach(key=>this.userInfoArry.push(data[''+key]));
+  this.filteredUserInfoArry=this.userInfoArry
+      }
+      
     });
+
+    // ger address 
+    this.db.database.ref('address').once('value')
+    .then(snap=>{
+      
+      let data=snap.val();
+      if(data){
+        console.log(snap.val());
+        Object.keys(data).forEach(key=>
+          this.addressArry.push(data[''+key]));
+          this.filteredAddressArry=this.addressArry;
+      }
+  
+    })
   }
 
   nameFilter(name:string){
     // console.log(name);
-    this.filteredArry=this.objArry.filter(val=>
-    val.fullName.toLowerCase().includes(name.toLowerCase()))
+    if(this.nameFilter){
+      this.filteredUserInfoArry=this.userInfoArry.filter(val=>
+        val.fullName.toLowerCase().startsWith(name.toLowerCase()))
+    }
+   
   }
 
-  fatherNameFilter(fatherName:string){
-    let bakFilteredArray=this.filteredArry.slice();
-    this.filteredArry=this.objArry.filter(val=>
-      val.fatherName.toLowerCase().includes(fatherName.toLowerCase()))
+  fatherNameFilter(zone:string){
+    if(this.addressArry){
+      this.filteredAddressArry=this.addressArry.filter(val=>
+        val.zone.toLowerCase().startsWith(zone.toLowerCase()))
+    }
    
     }
 
-    motherNameFilter(motherName:string){
-      let bakFilteredArray=this.filteredArry.slice();
-      this.filteredArry=this.objArry.filter(val=>
-        val.motherName.toLowerCase().includes(motherName.toLowerCase()))
-    // console.log(bakFilteredArray);
+    motherNameFilter(subDistrict:string){
+      if(this.userInfoArry){
+        this.filteredSubDistrictArry=this.userInfoArry.filter(val=>
+          val.subDistrict.toLowerCase().startsWith(subDistrict.toLowerCase()))
+      // console.log(bakFilteredArray);
+      }
+      
   }
 }
 

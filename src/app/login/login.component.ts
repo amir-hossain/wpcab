@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   loginForm:FormGroup;
   unError="";
   passError="";
+  serverError='';
 
   get userInfo() { return this.loginForm.get('userInfo'); }
 
@@ -35,9 +36,14 @@ export class LoginComponent implements OnInit {
     .then(snap=>{
       console.log(snap.val());
       let data=snap.val();
-      let objArry=[];
+      if(data){
+        let objArry=[];
       Object.keys(data).forEach(key=>objArry.push(data[""+key]));
       this.check(userInfo,password,objArry);
+      }else{
+        this.serverError='Internal problem';
+      }
+      
     });
 
   }

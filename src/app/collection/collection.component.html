@@ -1,7 +1,7 @@
 <div *ngIf='activeUserRole=="Admin"'>
   <app-admin-nav></app-admin-nav>
 </div>
-<div *ngIf='activeUserRole=="Register"'>
+<div *ngIf='activeUserRole=="Operator"'>
   <app-register-nav></app-register-nav>
 </div>
 
@@ -32,7 +32,7 @@
         <span class="thead">Mother name</span>
     </th>
   </div>
-  <mat-card *ngFor='let obj of filteredArry' class="table-card">
+  <mat-card *ngFor='let obj of filteredUserInfoArry' class="table-card">
     <!-- <td>
       <span *ngIf="obj.photo!==''">
         <img src='{{obj.photo}}'>

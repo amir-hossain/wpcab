@@ -32,12 +32,10 @@ export class RegistrationComponent implements OnInit {
   districts=[];
   filteredDistricts=[];
   subDistricts=[];
-  filteredSubDistrict=[];
+  filteredSubDistricts=[];
   zones=[];
   filteredZone=[];
   bloodGroups=[];
-
-  registrationComplete=false;
 
   get fullName() { return this.registrationForm.get('userInfo').get('fullName'); }
 
@@ -116,7 +114,7 @@ export class RegistrationComponent implements OnInit {
       this.names=[];
       // console.log(snap.val());
       let data=snap.val();
-      if(data!=null){
+      if(data){
         Object.keys(data).forEach(key=>this.names.push(
           {name:data[''+key].fullName,
         photo:data[''+key].photo}
@@ -146,27 +144,24 @@ export class RegistrationComponent implements OnInit {
 zoneAutoSuggestion(addressGroup:FormGroup){
   addressGroup.controls.zone.valueChanges
   .subscribe(val=>{
-    if(val=='' || val===null){
+    if(!val){
       this.filteredZone=[];
     }else{
-      this.filteredZone=this.zoneFilter(val)
+      this.filteredZone=this.zones.filter(option=>
+        option.toLowerCase().includes(val.toLowerCase()))
+
     }
   })
-}
-
-zoneFilter(val:string){
-  return this.zones.filter(option=>
-    option.toLowerCase().includes(val.toLowerCase()))
 }
 
 districtAutoSuggestion(addressGroup:FormGroup){
   
   addressGroup.controls.district.valueChanges
   .subscribe(val=>{
-    if(val==='' || val===null){
+    if(!val){
       this.filteredDistricts=[];
     }else{
-      this.filteredDistricts=this.districtFilter(val);
+      this.filteredDistricts=this.districts.filter(option=>option.toLowerCase().startsWith(val.toLowerCase()));
     }
   })
 
@@ -175,10 +170,10 @@ districtAutoSuggestion(addressGroup:FormGroup){
 subDistrictAutoSuggestion(addressGroup:FormGroup){
   addressGroup.controls.subDistrict.valueChanges
   .subscribe(val=>{
-    if(val==='' || val===null){
-      this.filteredSubDistrict=[];
+    if(!val){
+      this.filteredSubDistricts=[];
     }else{
-      this.filteredSubDistrict=this.subDistrictFilter(val);
+      this.filteredSubDistricts=this.subDistricts.filter(option=>option.toLowerCase().startsWith(val.toLowerCase()));
     }
   })
 }
@@ -186,29 +181,15 @@ subDistrictAutoSuggestion(addressGroup:FormGroup){
 nameAutoSuggestion(fg:FormGroup,controlName:string){
   fg.get(controlName).valueChanges
   .subscribe(val=>{
-    if(val==='' || val===null){
+    if(!val){
       this.filteredNames=[];
     }else{
-      this.filteredNames=this.nameFilter(val);
+      this.filteredNames=this.names.filter(item =>
+        item.name.toLowerCase().startsWith(val.toLowerCase()));
     } 
   });
 }
 
-
-districtFilter(val){
-  return this.districts.filter(option =>
-    option.toLowerCase().startsWith(val.toLowerCase()));
-}
-
-subDistrictFilter(val){
-  return this.subDistricts.filter(option=>
-  option.toLowerCase().startsWith(val.toLowerCase()));
-}
-
-nameFilter(val){
-  return this.names.filter(item =>
-    item.name.toLowerCase().startsWith(val.toLowerCase()));
-}
 
   displaySnackBar(){
     this.snackBar.open("Registration sucessfull",'',{
@@ -263,19 +244,6 @@ nameFilter(val){
 
     })
   }
-
-  resetValidator(){
-    Object.keys(this.registrationForm.controls).forEach(groupName=>{
-      let formGroup=<FormGroup>this.registrationForm.get(groupName);
-      // console.log()
-      if(formGroup.controls!==undefined){
-        Object.keys(formGroup.controls).forEach(controlName=>
-          formGroup.get(controlName).setErrors(null)
-        )
-      }
-      
-    })
-  }
   signup(){
     if(this.registrationForm.valid){
       let temp=this.registrationForm.controls.userInfo.value;
@@ -300,11 +268,11 @@ nameFilter(val){
           this.userInfoRef.push(temp);
           
         }    
-    }else if(!this.registrationComplete){
+    }else{
       Object.keys(this.registrationForm.controls).forEach(groupName=>{
         let formGroup=<FormGroup>this.registrationForm.get(groupName);
         // console.log()
-        if(formGroup.controls!==undefined){
+        if(formGroup.controls){
           Object.keys(formGroup.controls).forEach(controlName=>
             formGroup.get(controlName).markAsTouched({onlySelf:true})
           )

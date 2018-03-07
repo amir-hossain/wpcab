@@ -27,6 +27,9 @@
             </mat-error>
          
           <button mat-raised-button color="primary" type="submit">Login</button>
+          <div *ngIf='serverError' class="otherError">
+            {{serverError}}
+          </div>
           <div class="remember">
             <mat-checkbox  color='primary' formControlName="remember">Remember password</mat-checkbox>
           </div>

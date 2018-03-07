@@ -1,7 +1,7 @@
 <div *ngIf='activeUserRole=="Admin"'>
   <app-admin-nav></app-admin-nav>
 </div>
-<div *ngIf='activeUserRole=="Register"'>
+<div *ngIf='activeUserRole=="Operator"'>
   <app-register-nav></app-register-nav>
 </div>
 
@@ -123,6 +123,15 @@
     <div class="container">
         <h3>Address</h3>
         <mat-card class="card" formGroupName='address'>
+            <div>
+                <mat-form-field>
+                    <mat-label>*Parmemt Address</mat-label>
+                <input matInput type="textarea" formControlName="permanentAddress">
+              </mat-form-field>
+                <mat-error *ngIf="permanentAddress.invalid && permanentAddress.touched">
+                  Permanent address required
+                </mat-error>
+              </div><!-- permanent address -->
     <div>
         <mat-form-field>
         <mat-label>*Zone (current)</mat-label>
@@ -142,7 +151,7 @@
             <mat-label>*Sub district (current)</mat-label>
           <input matInput type="text" formControlName="subDistrict" [matAutocomplete]='subDist'>
           <mat-autocomplete #subDist='matAutocomplete'>
-            <mat-option *ngFor='let option of filteredSubDistrict' [value]='option'>
+            <mat-option *ngFor='let option of filteredSubDistricts' [value]='option'>
                 {{option}}
             </mat-option>
           </mat-autocomplete>
@@ -151,15 +160,6 @@
             Sub district required
           </mat-error>
         </div><!-- subDistrict -->
-        <div>
-            <mat-form-field>
-                <mat-label>*Parmemt Address</mat-label>
-            <input matInput type="textarea" formControlName="permanentAddress">
-          </mat-form-field>
-            <mat-error *ngIf="permanentAddress.invalid && permanentAddress.touched">
-              Permanent address required
-            </mat-error>
-          </div><!-- permanent address -->
           <div>
               <mat-form-field>
               <mat-label>*District (current)</mat-label>
