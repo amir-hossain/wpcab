@@ -88,7 +88,7 @@ export class RegistrationComponent implements OnInit {
         motherName:["",Validators.required],
         invitedBy:["",Validators.required],
         occupation:["Student"],
-        bloodGroup:['B +'],
+        bloodGroup:[''],
       }),
       address:this.builder.group({
         zone:["",Validators.required],

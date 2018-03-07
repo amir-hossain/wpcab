@@ -17,8 +17,11 @@ mat-option{
     
 }
 
-.instraction{
+.not-required,.instraction{
     color:gray;
+}
+
+.instraction{
     font-size:14px;
 
 }
@@ -66,6 +69,8 @@ mat-form-field{
 h5{
     font-size: 22px;
 }
+
+
 
   mat-label,h5,span{
     color:rgb(32, 2, 138);
