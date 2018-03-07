@@ -20,7 +20,7 @@ const bloodGroup=[
 ]
 
 const zone=[
-  'Murpur 6',
+  'Mirpur 6',
   'Shahalibag',
   'Mohakhali',
   'Gazipur',

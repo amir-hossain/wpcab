@@ -11,10 +11,10 @@
           <input matInput (keyup)="nameFilter($event.target.value)" placeholder="Search name">
         </mat-form-field>
         <mat-form-field class="middle-filter">
-            <input matInput (keyup)="fatherNameFilter($event.target.value)" placeholder="Search father name">
+            <input matInput (keyup)="zoneFilter($event.target.value)" placeholder="Search father name">
           </mat-form-field>
           <mat-form-field>
-              <input matInput (keyup)="motherNameFilter($event.target.value)" placeholder="Search mother name">
+              <input matInput (keyup)="subDistrictFilter($event.target.value)" placeholder="Search mother name">
             </mat-form-field>
       </mat-card>
     
@@ -26,13 +26,13 @@
         <span class="thead">Name</span>
     </th>
     <th>
-        <span class="thead">Father name</span>
+        <span class="thead">Zone</span>
     </th>
     <th>
-        <span class="thead">Mother name</span>
+        <span class="thead">Sub District</span>
     </th>
   </div>
-  <mat-card *ngFor='let obj of filteredUserInfoArry' class="table-card">
+  <mat-card *ngFor='let obj of filteredArry' class="table-card">
     <!-- <td>
       <span *ngIf="obj.photo!==''">
         <img src='{{obj.photo}}'>
@@ -42,8 +42,8 @@
         </span>
     </td> -->
     <td>{{obj.fullName}}</td>
-    <td>{{obj.fatherName}}</td>
-    <td>{{obj.motherName}}</td>
+    <td>{{obj.zone}}</td>
+    <td>{{obj.subDistrict}}</td>
   </mat-card>
 </table>
 
