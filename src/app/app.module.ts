@@ -22,6 +22,7 @@ import { AdminNavComponent } from './admin-nav/admin-nav.component';
 import { CreateNotificationComponent } from './create-notification/create-notification.component';
 import { RequestComponent } from './request/request.component';
 import { ApproveComponent } from './approve/approve.component';
+import { SucessPageComponent } from './sucess-page/sucess-page.component';
 
 
 const confiq={
@@ -49,6 +50,7 @@ const confiq={
     CreateNotificationComponent,
     RequestComponent,
     ApproveComponent,
+    SucessPageComponent,
   ],
   imports: [
     BrowserModule,

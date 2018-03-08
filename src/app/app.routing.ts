@@ -10,6 +10,7 @@ import {CollectionComponent} from "./collection/collection.component";
 import {CreateNotificationComponent} from './create-notification/create-notification.component';
 import {RequestComponent} from './request/request.component';
 import {ApproveComponent} from './approve/approve.component';
+import {SucessPageComponent} from './sucess-page/sucess-page.component';
 const routes:Routes=[
     {
         path:"login",
@@ -59,6 +60,10 @@ const routes:Routes=[
             {
                 path:'approve',
                 component:ApproveComponent
+            },
+            {
+                path:'sucess',
+                component:SucessPageComponent
             }
         ]
     }

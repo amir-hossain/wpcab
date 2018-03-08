@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Validators,FormGroup,FormBuilder,AbstractControl,ValidationErrors} from "@angular/forms";
-import{MatSnackBar} from '@angular/material';
+import {Router} from '@angular/router'
 import {AngularFireDatabase} from "angularfire2/database";
 import { Observable } from 'rxjs/Observable';
 import{map} from 'rxjs/operators/map';
@@ -63,7 +63,7 @@ export class RegistrationComponent implements OnInit {
 
   get email() { return this.registrationForm.get('auth').get('email'); }
 
-  constructor(private builder:FormBuilder,private db:AngularFireDatabase,private snackBar:MatSnackBar,private fb: FirebaseApp,private ddis:DropDownItemsService) {
+  constructor(private builder:FormBuilder,private db:AngularFireDatabase,private router:Router,private fb: FirebaseApp,private ddis:DropDownItemsService) {
     this.userInfoRef=this.db.database.ref("/userInfo");
     this.addressRef=this.db.database.ref('/address');
     this.authRef=this.db.database.ref('/auth');
@@ -190,14 +190,6 @@ nameAutoSuggestion(fg:FormGroup,controlName:string){
   });
 }
 
-
-  displaySnackBar(){
-    this.snackBar.open("Registration sucessfull",'',{
-      duration:2000,verticalPosition:'top'
-    });
-    this.registrationComplete=true;
-  }
-
    emailOrEmpty(control: AbstractControl): ValidationErrors | null {
     return control.value === '' ? null : Validators.email(control);
 }
@@ -256,18 +248,12 @@ nameAutoSuggestion(fg:FormGroup,controlName:string){
       // push to auth table
         this.authRef.push(this.registrationForm.controls.auth.value);
         console.log(this.registrationForm.controls.auth.value);
-        this.displaySnackBar();
-        
-        this.registrationForm.reset();
-        this.registrationForm.markAsUntouched({onlySelf:true});
-        this.registrationForm.markAsPristine({onlySelf:true});
-        // this.resetValidator();
         if(this.photo){
           this.uploadPhoto(temp);
         }else{
           this.userInfoRef.push(temp);
-          
-        }    
+        }   
+        this.router.navigateByUrl('sucess'); 
     }else{
       Object.keys(this.registrationForm.controls).forEach(groupName=>{
         let formGroup=<FormGroup>this.registrationForm.get(groupName);
