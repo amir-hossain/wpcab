@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AngularFireDatabase} from 'angularfire2/database';
+import{Router} from '@angular/router';
 
 @Component({
   selector: 'app-collection',
@@ -12,7 +13,7 @@ export class CollectionComponent implements OnInit {
   filteredArry=[];
   addressArry=[];
   mixedArray=[];
-  constructor(private db:AngularFireDatabase) { }
+  constructor(private db:AngularFireDatabase,private router:Router) { }
 
   ngOnInit() {
     this.activeUserRole=localStorage.getItem('activeUserRole');
@@ -76,6 +77,14 @@ export class CollectionComponent implements OnInit {
    
     }
 
+    itemClick(index){
+      localStorage.setItem('index',index);
+      if(localStorage.getItem('activeUserRole')==='Admin'){
+        this.router.navigateByUrl('aDetails');
+      }
+      
+
+    }
     subDistrictFilter(subDistrict:string){
       if(this.userInfoArry){
         this.filteredArry=this.mixedArray.filter(val=>

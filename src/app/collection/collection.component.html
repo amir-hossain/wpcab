@@ -32,7 +32,7 @@
         <span class="thead">Sub District</span>
     </th>
   </div>
-  <mat-card *ngFor='let obj of filteredArry' class="table-card">
+  <mat-card *ngFor='let obj of filteredArry; let i=index' class="table-card" (click)='itemClick(i)'>
     <!-- <td>
       <span *ngIf="obj.photo!==''">
         <img src='{{obj.photo}}'>
