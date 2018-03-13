@@ -1,3 +1,51 @@
-<p>
-  admin-details works!
-</p>
+<div class='container'>
+  <div>
+      <a href='collection' mat-raised-button color='primary' class="back-btn">Back</a>
+      <h1 *ngIf='userInfo'>Detail's of {{userInfo.fullName}}</h1>
+  </div>
+  <mat-card>
+      <ul *ngIf='userInfo' class='sub-1'>
+      <span *ngIf='!userInfo.photo'>
+        <img src='./assets/img/default-pic.png'>
+      </span>
+      <span *ngIf='userInfo.photo'>
+        <img src="{{userInfo.photo}}">
+      </span>
+      
+      <a  mat-raised-button color='primary' class="payment-btn">Take Payment</a>
+      <div class="clearfix"></div>
+      </ul>
+      <div class='sub-2'>
+      <ul *ngIf='userInfo' >
+      <h2 style="margin-top:0px;">Info</h2>
+      <li><h4>Name</h4> {{userInfo.fullName}}</li>
+      <li><h4>Occupation</h4> {{userInfo.occupation}}</li>
+      <span *ngIf='auth'>
+        <li><h4>Phone</h4> {{auth.phone}}</li>
+        <li *ngIf='auth.email'><h4>Email</h4> {{auth.email}}</li>
+        <li *ngIf='auth.userName'><h4>User Name</h4> {{auth.userName}}</li>
+        <li><h4>Role</h4> {{auth.role}}</li>
+    </span>
+    <div class="clearfix"></div>
+    </ul>
+    <ul *ngIf='address'>
+        <h2>Address</h2>
+      <li><h4>Zone</h4> {{address.zone}}</li>
+      <li><h4>Sub district</h4> {{address.subDistrict}}</li>
+      <li><h4>Permanent address</h4> {{address.permanentAddress}}</li>
+      <li><h4>District</h4> {{address.district}}</li>
+      <li><h4>Country</h4> {{address.country}}</li>
+      <li *ngIf='address.nationalily'><h4>Nationality</h4> {{address.nationalily}}</li>
+      <li *ngIf='address.nId'><h4>Natioal ID</h4> {{address.nId}}</li>
+    </ul>
+  </div>
+    <div class="clearfix"></div>
+  </mat-card>
+  <mat-card class="footer">
+    <div>
+      <a class="more-btn" mat-raised-button color='primary' >See more</a>
+    <h1>Payment Clear December 2017</h1>
+  </div>
+    <div class="clearfix"></div>
+  </mat-card>
+</div>
