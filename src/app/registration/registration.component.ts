@@ -36,6 +36,8 @@ export class RegistrationComponent implements OnInit {
   zones=[];
   filteredZone=[];
   bloodGroups=[];
+  autoInfo=[];
+  phoneList=[];
 
   get fullName() { return this.registrationForm.get('userInfo').get('fullName'); }
 
@@ -54,6 +56,8 @@ export class RegistrationComponent implements OnInit {
   get permanentAddress() { return this.registrationForm.get('address').get('permanentAddress'); }
 
   get district() {  return this.registrationForm.get('address').get('district');}
+
+  get userName() { return this.registrationForm.get('auth').get('userName'); }
 
   get password() { return this.registrationForm.get('auth').get('password'); }
 
@@ -98,12 +102,12 @@ export class RegistrationComponent implements OnInit {
         nId:[""],
       }),
       auth:this.builder.group({
-        userName:[''],
+        userName:['',[this.existUserName.bind(this)]],
         password:["",Validators.required],
         conPassword:["",Validators.required],
-        phone:["",Validators.required],
+        phone:["",[Validators.required,this.existPhone.bind(this)]],
         role:["User"],
-        email:['',[this.emailOrEmpty]],
+        email:['',[this.emailOrEmpty,this.existEmail.bind(this)]],
       },{
         validator:this.matchPassword
       })
@@ -121,11 +125,18 @@ export class RegistrationComponent implements OnInit {
         ));
       // console.log(this.options);
       }
-      
-    }
-  );
+    });
 
-  
+    //get auth table
+    this.authRef.once('value',snap=>{
+      let data=snap.val();
+      if(data){
+        Object.keys(data).forEach(key=>{
+          this.autoInfo.push(data[''+key])
+        })
+        console.log(this.autoInfo)
+      }
+    })
 
 
   
@@ -192,7 +203,33 @@ nameAutoSuggestion(fg:FormGroup,controlName:string){
 
    emailOrEmpty(control: AbstractControl): ValidationErrors | null {
     return control.value === '' ? null : Validators.email(control);
-}
+  }
+  existPhone(control:AbstractControl):
+  ValidationErrors | null{
+    return control.value==='' ? null : this.existenceCheck(this.autoInfo,control,'phone')
+  }
+
+  existUserName(control:AbstractControl):
+  ValidationErrors | null{
+    return control.value==='' ? null : this.existenceCheck(this.autoInfo,control,'userName')
+  }
+
+  existEmail(control:AbstractControl):
+  ValidationErrors | null{
+    return control.value==='' ? null : this.existenceCheck(this.autoInfo,control,'email')
+  }
+
+  existenceCheck(list:any[],control:AbstractControl,fieldName){
+    let error=null;
+    list.forEach(val=>{
+        if(val[fieldName].toString().startsWith(control.value)){
+          // console.log('true');
+          error={exist:true};
+        }
+    })
+    
+    return error;
+  }
 
   readUrl(event:any) {
     if (event.target.files && event.target.files[0]) {
