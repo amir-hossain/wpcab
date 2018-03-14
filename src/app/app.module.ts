@@ -23,7 +23,7 @@ import { CreateNotificationComponent } from './create-notification/create-notifi
 import { RequestComponent } from './request/request.component';
 import { ApproveComponent } from './approve/approve.component';
 import { SucessPageComponent } from './sucess-page/sucess-page.component';
-import { AdminDetailsComponent } from './admin-details/admin-details.component';
+import { DetailsComponent } from './details/details.component';
 import { SuleNavComponent } from './sule-nav/sule-nav.component';
 import { AccountantNavComponent } from './accountant-nav/accountant-nav.component';
 import { UserNavComponent } from './user-nav/user-nav.component';
@@ -57,7 +57,7 @@ const confiq={
     RequestComponent,
     ApproveComponent,
     SucessPageComponent,
-    AdminDetailsComponent,
+    DetailsComponent,
     SuleNavComponent,
     AccountantNavComponent,
     UserNavComponent,

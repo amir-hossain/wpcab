@@ -25,6 +25,10 @@ export class SuleNavComponent implements OnInit {
       link:'/finance'
     },
     {
+      label:"Collection",
+      link:"/collection"
+    },
+    {
       label:'Notification',
       link:'/notification'
     },

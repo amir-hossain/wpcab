@@ -4,6 +4,12 @@
 <div *ngIf='activeUserRole=="Operator"'>
   <app-register-nav></app-register-nav>
 </div>
+<div *ngIf='activeUserRole=="Super" || activeRole==="Leader"'>
+  <app-sule-nav></app-sule-nav>
+</div>
+<div *ngIf='activeUserRole=="Accountant"'>
+  <app-accountant-nav></app-accountant-nav>
+</div>
 
 <table>
     <mat-card class="search-card">

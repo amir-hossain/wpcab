@@ -79,7 +79,7 @@ export class CollectionComponent implements OnInit {
 
     itemClick(index){
       localStorage.setItem('index',index);
-        this.router.navigateByUrl('aDetails');
+        this.router.navigateByUrl('details');
     }
     subDistrictFilter(subDistrict:string){
       if(this.userInfoArry){

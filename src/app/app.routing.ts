@@ -11,7 +11,7 @@ import {CreateNotificationComponent} from './create-notification/create-notifica
 import {RequestComponent} from './request/request.component';
 import {ApproveComponent} from './approve/approve.component';
 import {SucessPageComponent} from './sucess-page/sucess-page.component';
-import{AdminDetailsComponent} from './admin-details/admin-details.component';
+import{DetailsComponent} from './details/details.component';
 import{AccountsComponent} from './accounts/accounts.component'
 const routes:Routes=[
     {
@@ -68,8 +68,8 @@ const routes:Routes=[
                 component:SucessPageComponent
             },
             {
-                path:'aDetails',
-                component:AdminDetailsComponent
+                path:'details',
+                component:DetailsComponent
             },
             {
                 path:'accounts',

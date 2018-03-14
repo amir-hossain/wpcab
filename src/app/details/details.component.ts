@@ -3,17 +3,19 @@ import {AngularFireDatabase} from 'angularfire2/database';
 import {Location} from '@angular/common'
 
 @Component({
-  selector: 'app-admin-details',
-  templateUrl: './admin-details.component.html',
-  styleUrls: ['./admin-details.component.css']
+  selector: 'app-details',
+  templateUrl: './details.component.html',
+  styleUrls: ['./details.component.css']
 })
-export class AdminDetailsComponent implements OnInit {
+export class DetailsComponent implements OnInit {
   userInfo;
   address;
   auth;
+  activeUserRole;
   constructor(private db:AngularFireDatabase,private loc:Location) { }
 
   ngOnInit() {
+    this.activeUserRole=localStorage.getItem('activeUserRole');
     let selectedIndex=localStorage.getItem('index');
     //ger user info
     this.fetchData('userInfo',selectedIndex).then(val=>this.userInfo=val);

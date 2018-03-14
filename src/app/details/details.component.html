@@ -13,7 +13,9 @@
         <img src="{{userInfo.photo}}">
       </span>
       
-      <a  mat-raised-button color='primary' class="payment-btn">Take Payment</a>
+      <a  mat-raised-button class="payment-btn">Payment</a>
+      <a *ngIf="activeUserRole==='Super' || activeUserRole==='Accountant'" mat-raised-button class="spayment-btn">Special Payment</a>
+      <a *ngIf="activeUserRole==='Super'" mat-raised-button class="delete-btn">Delete</a>
       <div class="clearfix"></div>
       </ul>
       <div class='sub-2'>

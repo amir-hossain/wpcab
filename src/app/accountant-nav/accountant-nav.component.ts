@@ -24,6 +24,10 @@ export class AccountantNavComponent implements OnInit {
       link:'/finance'
     },
     {
+      label:'Collection',
+      link:'/collection'
+    },
+    {
       label:'Notification',
       link:'/notification'
     },
