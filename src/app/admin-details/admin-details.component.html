@@ -1,6 +1,7 @@
 <div class='container'>
   <div>
-      <a href='collection' mat-raised-button color='primary' class="back-btn">Back</a>
+      <!-- <a href='collection' mat-raised-button color='primary' class="back-btn">Back</a> -->
+      <button  mat-raised-button color='primary' class="back-btn" (click)='back()'>Back</button>
       <h1 *ngIf='userInfo'>Detail's of {{userInfo.fullName}}</h1>
   </div>
   <mat-card>

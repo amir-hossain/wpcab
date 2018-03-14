@@ -79,11 +79,7 @@ export class CollectionComponent implements OnInit {
 
     itemClick(index){
       localStorage.setItem('index',index);
-      if(localStorage.getItem('activeUserRole')==='Admin'){
         this.router.navigateByUrl('aDetails');
-      }
-      
-
     }
     subDistrictFilter(subDistrict:string){
       if(this.userInfoArry){

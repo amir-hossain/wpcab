@@ -1,0 +1,12 @@
+.containter{
+    background:red;
+}
+
+.content{
+    display:table;
+    margin:auto;
+}
+
+.btn{
+    background:red;
+}

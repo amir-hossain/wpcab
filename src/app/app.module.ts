@@ -24,6 +24,11 @@ import { RequestComponent } from './request/request.component';
 import { ApproveComponent } from './approve/approve.component';
 import { SucessPageComponent } from './sucess-page/sucess-page.component';
 import { AdminDetailsComponent } from './admin-details/admin-details.component';
+import { SuleNavComponent } from './sule-nav/sule-nav.component';
+import { AccountantNavComponent } from './accountant-nav/accountant-nav.component';
+import { UserNavComponent } from './user-nav/user-nav.component';
+import { AccountsComponent } from './accounts/accounts.component';
+
 
 
 const confiq={
@@ -53,6 +58,10 @@ const confiq={
     ApproveComponent,
     SucessPageComponent,
     AdminDetailsComponent,
+    SuleNavComponent,
+    AccountantNavComponent,
+    UserNavComponent,
+    AccountsComponent,
   ],
   imports: [
     BrowserModule,

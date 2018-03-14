@@ -25,13 +25,14 @@ export class RegisterNavComponent implements OnInit {
       link:"/finance"
     },
     {
-      label:"Notification",
-      link:"/notification"
-    },
-    {
       label:"Collection",
       link:"/collection"
     }
+    {
+      label:"Notification",
+      link:"/notification"
+    }
+    
     
     
   ];

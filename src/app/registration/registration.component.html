@@ -4,6 +4,12 @@
 <div *ngIf='activeUserRole=="Operator"'>
   <app-register-nav></app-register-nav>
 </div>
+<div *ngIf='activeUserRole=="Accountant"'>
+    <app-accountant-nav></app-accountant-nav>
+</div>
+<div *ngIf='activeUserRole=="Super" || activeUserRole=="Leader"'>
+    <app-sule-nav></app-sule-nav>
+</div>
 
   <h1>Member Registration</h1>
   <form [formGroup]="registrationForm" (ngSubmit)="signup()">

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AngularFireDatabase} from 'angularfire2/database';
+import {Location} from '@angular/common'
 
 @Component({
   selector: 'app-admin-details',
@@ -10,7 +11,7 @@ export class AdminDetailsComponent implements OnInit {
   userInfo;
   address;
   auth;
-  constructor(private db:AngularFireDatabase) { }
+  constructor(private db:AngularFireDatabase,private loc:Location) { }
 
   ngOnInit() {
     let selectedIndex=localStorage.getItem('index');
@@ -38,6 +39,10 @@ export class AdminDetailsComponent implements OnInit {
       }
     }
   )
+  }
+
+  back(){
+    this.loc.back();
   }
 
 }
