@@ -37,7 +37,7 @@
       <li><h4>Sub district</h4> {{address.subDistrict}}</li>
       <li><h4>Permanent address</h4> {{address.permanentAddress}}</li>
       <li><h4>District</h4> {{address.district}}</li>
-      <li><h4>Country</h4> {{address.country}}</li>
+      <li *ngIf='address.country'><h4>Country</h4> {{address.country}}</li>
       <li *ngIf='address.nationalily'><h4>Nationality</h4> {{address.nationalily}}</li>
       <li *ngIf='address.nId'><h4>Natioal ID</h4> {{address.nId}}</li>
     </ul>
