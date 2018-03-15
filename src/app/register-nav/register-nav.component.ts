@@ -27,7 +27,7 @@ export class RegisterNavComponent implements OnInit {
     {
       label:"Collection",
       link:"/collection"
-    }
+    },
     {
       label:"Notification",
       link:"/notification"

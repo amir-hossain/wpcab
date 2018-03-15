@@ -14,70 +14,66 @@ import {SucessPageComponent} from './sucess-page/sucess-page.component';
 import{DetailsComponent} from './details/details.component';
 import{AccountsComponent} from './accounts/accounts.component'
 const routes:Routes=[
+ 
+    {
+        path:"",
+        redirectTo:'login',
+        pathMatch:'full'
+    },
     {
         path:"login",
         component:LoginComponent
     },
     {
-        path:"",
-        children:[
-            {
-                path:"home",
-                component:HomeComponent,
+        path:"home",
+        component:HomeComponent,
 
-            },
-            {
-                path:"profile",
-                component:ProfileComponent,
+    },
+    {
+        path:"profile",
+        component:ProfileComponent,
 
-            },
-            {
-                path:"registration",
-                component:RegistrationComponent,
-
-            },
-            {
-                path:"finance",
-                component:FinanceComponent,
-
-            },
-            {
-                path:"notification",
-                component:NotificaionComponent,
-
-            },
-            {
-                path:"collection",
-                component:CollectionComponent,
-
-            },
-            {
-                path:'create-notification',
-                component:CreateNotificationComponent
-            },
-            {
-                path:'request',
-                component:RequestComponent
-            },
-            {
-                path:'approve',
-                component:ApproveComponent
-            },
-            {
-                path:'sucess',
-                component:SucessPageComponent
-            },
-            {
-                path:'details',
-                component:DetailsComponent
-            },
-            {
-                path:'accounts',
-                component:AccountsComponent
-            }
-        ]
-    }
-    
+    },
+    {
+        path:"registration",
+        component:RegistrationComponent,
+    },
+    {
+        path:"finance",
+        component:FinanceComponent,
+    },
+    {
+        path:"notification",
+        component:NotificaionComponent,
+    },
+    {
+        path:"collection",
+        component:CollectionComponent,
+    },
+    {
+        path:'create-notification',
+        component:CreateNotificationComponent
+    },
+    {
+        path:'request',
+        component:RequestComponent
+    },
+    {
+        path:'approve',
+        component:ApproveComponent
+    },
+    {
+        path:'sucess',
+        component:SucessPageComponent
+    },
+    {
+        path:'details',
+        component:DetailsComponent
+    },
+    {
+        path:'accounts',
+        component:AccountsComponent
+    } 
 ]
 
 @NgModule({
