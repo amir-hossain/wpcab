@@ -82,12 +82,16 @@ const routes:Routes=[
                 path:'accounts',
                 canActivate:[AccountantGuard],
                 component:AccountsComponent
-            } 
+            }
         ]
     },
     {
         path:"login",
         component:LoginComponent
+    },
+    {
+        path:'**',
+        redirectTo:'login'
     }
 ]
 

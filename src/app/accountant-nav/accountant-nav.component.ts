@@ -51,6 +51,7 @@ export class AccountantNavComponent implements OnInit {
   }
 
   logout(){
+    localStorage.removeItem('activeUserRole');
     this.router.navigateByUrl('login');
   }
 }

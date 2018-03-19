@@ -31,6 +31,7 @@ export class UserNavComponent implements OnInit {
   }
 
   logout(){
+    localStorage.removeItem('activeUserRole');
     this.router.navigateByUrl('login');
   }
 

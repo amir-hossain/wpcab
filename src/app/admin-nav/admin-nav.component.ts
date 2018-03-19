@@ -53,6 +53,7 @@ export class AdminNavComponent implements OnInit {
   }
 
   logout(){
+    localStorage.removeItem('activeUserRole');
     this.router.navigate(["login"]);
   }
 

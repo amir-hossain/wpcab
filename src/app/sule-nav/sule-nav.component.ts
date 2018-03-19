@@ -43,6 +43,7 @@ export class SuleNavComponent implements OnInit {
   }
 
   logout(){
+    localStorage.removeItem('activeUserRole');
     this.router.navigateByUrl('login');
   }
 
