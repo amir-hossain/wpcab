@@ -12,68 +12,83 @@ import {RequestComponent} from './request/request.component';
 import {ApproveComponent} from './approve/approve.component';
 import {SucessPageComponent} from './sucess-page/sucess-page.component';
 import{DetailsComponent} from './details/details.component';
-import{AccountsComponent} from './accounts/accounts.component'
+import{AccountsComponent} from './accounts/accounts.component';
+import {LoginGuard} from './login.guard';
+import {AntiUserGuard} from './anti-user.guard';
+import {AccountantGuard} from './accountant.guard';
+import {AdminGuard} from './admin.guard';
+import {AdcountGuard} from './adcount.guard';
+import {AntiUtorGuard} from './anti-utor.guard';
 const routes:Routes=[
  
     {
-        path:"",
-        redirectTo:'login',
-        pathMatch:'full'
+        path:'',
+        canActivate:[LoginGuard],
+        children:[
+            {
+                path:"home",
+                component:HomeComponent
+        
+            },
+            {
+                path:"profile",
+                component:ProfileComponent
+        
+            },
+            {
+                path:"finance",
+                component:FinanceComponent
+            },
+            {
+                path:"notification",
+                component:NotificaionComponent
+            },
+            {
+                path:"registration",
+                canActivate:[AntiUserGuard],
+                component:RegistrationComponent,
+            },
+            {
+                path:"collection",
+                canActivate:[AntiUserGuard],
+                component:CollectionComponent,
+            },
+            {
+                path:'create-notification',
+                canActivate:[AntiUtorGuard],
+                component:CreateNotificationComponent
+            },
+            {
+                path:'request',
+                canActivate:[AdminGuard],
+                component:RequestComponent
+            },
+            {
+                path:'approve',
+                canActivate:[AdcountGuard],
+                component:ApproveComponent
+            },
+            {
+                path:'sucess',
+                canActivate:[AntiUserGuard],
+                component:SucessPageComponent
+            },
+            {
+                path:'details',
+                canActivate:[AntiUserGuard],
+                component:DetailsComponent
+            },
+            {
+                path:'accounts',
+                canActivate:[AccountantGuard],
+                component:AccountsComponent
+            } 
+        ]
     },
     {
         path:"login",
         component:LoginComponent
-    },
-    {
-        path:"home",
-        component:HomeComponent,
-
-    },
-    {
-        path:"profile",
-        component:ProfileComponent,
-
-    },
-    {
-        path:"registration",
-        component:RegistrationComponent,
-    },
-    {
-        path:"finance",
-        component:FinanceComponent,
-    },
-    {
-        path:"notification",
-        component:NotificaionComponent,
-    },
-    {
-        path:"collection",
-        component:CollectionComponent,
-    },
-    {
-        path:'create-notification',
-        component:CreateNotificationComponent
-    },
-    {
-        path:'request',
-        component:RequestComponent
-    },
-    {
-        path:'approve',
-        component:ApproveComponent
-    },
-    {
-        path:'sucess',
-        component:SucessPageComponent
-    },
-    {
-        path:'details',
-        component:DetailsComponent
-    },
-    {
-        path:'accounts',
-        component:AccountsComponent
-    } 
+    }
 ]
 
 @NgModule({

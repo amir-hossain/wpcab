@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms'
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app.routing';
@@ -28,7 +27,12 @@ import { SuleNavComponent } from './sule-nav/sule-nav.component';
 import { AccountantNavComponent } from './accountant-nav/accountant-nav.component';
 import { UserNavComponent } from './user-nav/user-nav.component';
 import { AccountsComponent } from './accounts/accounts.component';
-
+import {LoginGuard} from './login.guard';
+import {AntiUserGuard} from './anti-user.guard';
+import {AccountantGuard} from './accountant.guard';
+import {AdminGuard} from './admin.guard';
+import {AdcountGuard} from './adcount.guard';
+import {AntiUtorGuard} from './anti-utor.guard';
 
 
 const confiq={
@@ -73,7 +77,7 @@ const confiq={
     AngularFireModule.initializeApp(confiq),
     AngularFireDatabaseModule
   ],
-  providers: [AngularFireAuth],
+  providers: [AngularFireAuth,LoginGuard,AntiUserGuard,AccountantGuard,AdminGuard,AdcountGuard,AntiUtorGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
