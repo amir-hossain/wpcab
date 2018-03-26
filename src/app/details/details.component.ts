@@ -46,5 +46,4 @@ export class DetailsComponent implements OnInit {
   back(){
     this.loc.back();
   }
-
 }

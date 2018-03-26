@@ -642,7 +642,7 @@ export class DropDownItemsService {
     return subDistrict;
   }
 
-  gerZone(){
+  getZone(){
     return zone;
   }
 

@@ -1,0 +1,249 @@
+<div class='container'>
+  <div>
+      <button  mat-raised-button color='primary' class="back-btn" (click)='back()'>Back</button>
+      <h1 *ngIf='userInfo'>Edit info of {{userInfo.fullName}}</h1>
+  </div>
+  <mat-card>
+      <ul *ngIf='userInfo' class='sub-1'>
+      <span *ngIf='!userInfo.photo'>
+        <img src='./assets/img/default-pic.png'>
+      </span>
+      <span *ngIf='userInfo.photo'>
+        <img src="{{userInfo.photo}}">
+      </span>
+      <div class="instraction">
+        <img src="assets/img/info.png" alt="">
+        <span> click on photo to edit</span>
+      </div>
+      </ul>
+      <div class='sub-2'>
+      <ul *ngIf='userInfo' >
+      <h2 style="margin-top:0;">Info</h2>
+      <li *ngIf='!nameEditing'>
+        <img src="assets/img/edit-icon.png" class="icon" (click)='nameEditing=true'>
+        <h4>Name</h4>{{userInfo.fullName}}
+      </li>
+      <li *ngIf='nameEditing' class="alter">
+        <h4>Name</h4> <input  type="text" #name [value]='userInfo.fullName'>
+        <img src="assets/img/wrong.png" (click)='nameEditing=false'>
+        <img src="assets/img/right.png" (click)='done(name.value,"nameEditing")'>
+        <div class="clearfix"></div>
+      </li>
+      <li *ngIf='!occupationEditing'>
+          <img src="assets/img/edit-icon.png" class="icon" (click)='occupationEditing=true'>
+        <h4>Occupation</h4>{{userInfo.occupation}}
+      </li>
+      <li *ngIf='occupationEditing' class="alter">
+        <h4>Occupation</h4>
+        <mat-radio-group [value]='userInfo.occupation' (change)="radioChange($event)">
+          <mat-radio-button type="radio" color='primary' name="occupation" id="student" value="Student"   >Student</mat-radio-button>
+         <mat-radio-button type="radio" color='primary' name="occupation" id="job holder" value="Job holder" > Job holder</mat-radio-button>
+          <mat-radio-button type="radio" color='primary' name="occupation" id="bussnessman" value="Bussnessman" >Bussnessman</mat-radio-button>
+          <mat-radio-button type="radio" color='primary' name="occupation" id="others" value="Others" >Others</mat-radio-button>
+        </mat-radio-group>
+        <img src="assets/img/wrong.png" (click)='occupationEditing=false'>
+        <img src="assets/img/right.png" (click)='done(role,"occupationEditing")'>
+        <div class="clearfix"></div>
+      </li>
+      <li *ngIf='userInfo.bloodGroup && !bloodGroupEditing'>
+          <img src="assets/img/edit-icon.png" class="icon" (click)='bloodGroupEditing=true'>
+        <h4>Blood group</h4>{{userInfo.bloodGroup}}
+        </li>
+      <li *ngIf='!userInfo.bloodGroup && !bloodGroupEditing'>
+          <img src="assets/img/edit-icon.png" class="icon" (click)='bloodGroupEditing=true'>
+        <h4>Blood group</h4>None
+      </li>
+      <li *ngIf='bloodGroupEditing' class="alter">
+        <h4>Blood Group</h4> 
+        <mat-form-field>
+          <mat-select [value]='userInfo.bloodGroup' #bloodGroup>
+             <mat-option *ngFor='let option of bloodGroups' [value]='option'>
+               {{option}}
+             </mat-option>
+          </mat-select>
+         </mat-form-field>
+        <img src="assets/img/wrong.png" (click)='bloodGroupEditing=false'>
+        <img src="assets/img/right.png" (click)='done(bloodGroup.value,"bloodGroupEditing")'>
+        <div class="clearfix"></div>
+      </li>
+      
+      <span *ngIf='auth'>
+        <li *ngIf='!phoneEditing'>
+            <img src="assets/img/edit-icon.png" class="icon" (click)='phoneEditing=true'>
+          <h4>Phone</h4>{{auth.phone}}
+        </li>
+        <li *ngIf='phoneEditing' class="alter">
+          <h4>Phone</h4> <input  type="number" #phone [value]='auth.phone'>
+          <img src="assets/img/wrong.png" (click)='phoneEditing=false'>
+          <img src="assets/img/right.png" (click)='done(phone.value,"phoneEditing")'>
+          <div class="clearfix"></div>
+        </li>
+        <li *ngIf='!passwordEditing'>
+          <img src="assets/img/edit-icon.png" class="icon" (click)='passwordEditing=true'>
+        <h4>Password</h4>Hidden
+      </li>
+      <li *ngIf='passwordEditing' class="alter">
+        <h4>Password</h4> <input  type="password" #password [value]='auth.password'>
+        <img src="assets/img/wrong.png" (click)='passwordEditing=false'>
+        <img src="assets/img/right.png" (click)='done(password.value,"passwordEditing")'>
+        <div class="clearfix"></div>
+      </li>
+        <li *ngIf='auth.email && !emailEditing'>
+        <img src="assets/img/edit-icon.png" class="icon" (click)='emailEditing=true'>
+        <h4>Email</h4>{{auth.email}}
+        </li>
+        <li *ngIf='!auth.email && !emailEditing'>
+          <img src="assets/img/edit-icon.png" class="icon" (click)='emailEditing=true'>
+          <h4>Email</h4>None</li>
+          <li *ngIf='emailEditing' class="alter">
+            <h4>Email</h4> <input  type="email" #email [value]='auth.email'>
+            <img src="assets/img/wrong.png" (click)='emailEditing=false'>
+            <img src="assets/img/right.png" (click)='done(email.value,"emailEditing")'>
+            <div class="clearfix"></div>
+          </li>
+        <li *ngIf='auth.userName && !userNameEditing'>
+            <img src="assets/img/edit-icon.png" class="icon" (click)='userNameEditing=true'>
+          <h4>User Name</h4>{{auth.userName}}
+        </li>
+        <li *ngIf='!auth.userName && !userNameEditing'>
+            <img src="assets/img/edit-icon.png" class="icon" (click)='userNameEditing=true'>
+          <h4>User Name</h4>None
+        </li>
+        <li *ngIf='userNameEditing' class="alter">
+          <h4>User Name</h4> <input  type="text" #userName [value]='auth.userName'>
+          <img src="assets/img/wrong.png" (click)='userNameEditing=false'>
+          <img src="assets/img/right.png" (click)='done(userName.value,"userNameEditing")'>
+          <div class="clearfix"></div>
+        </li>
+        <li *ngIf='!roleEditing'>
+            <img src="assets/img/edit-icon.png" class="icon" (click)='roleEditing=true'>
+          <h4>Role</h4>{{auth.role}}
+        </li>
+        <li *ngIf='roleEditing' class="alter">
+          <h4>Role</h4>
+          <mat-form-field>
+            <mat-select [value]='auth.role' #role>
+               <mat-option *ngFor='let option of roles' [value]='option'>
+                 {{option}}
+               </mat-option>
+            </mat-select>
+           </mat-form-field>
+          <img src="assets/img/wrong.png" (click)='roleEditing=false'>
+          <img src="assets/img/right.png" (click)='done(role.value,"roleEditing")'>
+          <div class="clearfix"></div>
+        </li>
+    </span>
+    <div class="clearfix"></div>
+    </ul>
+    <ul *ngIf='address'>
+        <h2>Address</h2>
+      <li *ngIf='!zoneEditing'>
+          <img src="assets/img/edit-icon.png" class="icon" (click)='zoneEditing=true'>
+        <h4>Zone</h4>{{address.zone}}
+      </li>
+      <li *ngIf='zoneEditing' class="alter">
+        <h4>Zone</h4> 
+        <span>
+        <input  type="text" #zone [value]='address.zone' [matAutocomplete]='z' (keyup)='autoSuggestion($event.target.value,"zones","filteredZone")'>
+        <mat-autocomplete #z='matAutocomplete'>
+          <mat-option *ngFor='let option of filteredZone' [value]='option'>
+              {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </span>
+        <img src="assets/img/wrong.png" (click)='zoneEditing=false'>
+        <img src="assets/img/right.png" (click)='done(zone.value,"zoneEditing")'>
+        <div class="clearfix"></div>
+      </li>
+      <li *ngIf='!subDistrictEditing'>
+          <img src="assets/img/edit-icon.png" class="icon" (click)='subDistrictEditing=true'>
+        <h4>Sub district</h4>{{address.subDistrict}}</li>
+        <li *ngIf='subDistrictEditing' class="alter">
+          <h4>Sub district</h4> 
+          <span>
+            <input  type="text" #subDistrict [value]='address.subDistrict' [matAutocomplete]='subDist' (keyup)='autoSuggestion($event.target.value,"subDistricts","filteredsubDistrict")'>
+            <mat-autocomplete #subDist='matAutocomplete'>
+              <mat-option *ngFor='let option of filteredsubDistrict' [value]='option'>
+                  {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </span>
+          <img src="assets/img/wrong.png" (click)='subDistrictEditing=false'>
+          <img src="assets/img/right.png" (click)='done(subDistrict.value,"subDistrictEditing")'>
+          <div class="clearfix"></div>
+        </li>
+      <li *ngIf='!permanentAddressEditing'>
+          <img src="assets/img/edit-icon.png" class="icon" (click)='permanentAddressEditing=true'>
+        <h4>Permanent address</h4>{{address.permanentAddress}}
+      </li>
+      <li *ngIf='permanentAddressEditing' class="alter">
+        <h4>Permanent address</h4> <input  type="text" #permanentAddress [value]='address.permanentAddress'>
+        <img src="assets/img/wrong.png" (click)='permanentAddressEditing=false'>
+        <img src="assets/img/right.png" (click)='done(permanentAddress.value,"permanentAddressEditing")'>
+        <div class="clearfix"></div>
+      </li>
+      <li *ngIf='!districtEditing'>
+          <img src="assets/img/edit-icon.png" class="icon" (click)='districtEditing=true'>
+        <h4>District</h4>{{address.district}}
+      </li>
+      <li *ngIf='districtEditing' class="alter">
+        <h4>District</h4> 
+        <span>
+          <input  type="text" #district [value]='address.district' [matAutocomplete]='dist' (keyup)='autoSuggestion($event.target.value,"districts","filteredDistrict")'>
+          <mat-autocomplete #dist='matAutocomplete'>
+            <mat-option *ngFor='let option of filteredDistrict' [value]='option'>
+                {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </span>
+        <img src="assets/img/wrong.png" (click)='districtEditing=false'>
+        <img src="assets/img/right.png" (click)='done(district.value,"districtEditing")'>
+        <div class="clearfix"></div>
+      </li>
+      <li *ngIf='address.country && !countryEditing'>
+          <img src="assets/img/edit-icon.png" class="icon" (click)='countryEditing=true'>
+        <h4>Country</h4>{{address.country}}
+      </li>
+      <li *ngIf='!address.country && !countryEditing'>
+          <img src="assets/img/edit-icon.png" class="icon" (click)='countryEditing=true'>
+        <h4>Country</h4>None
+      </li>
+      <li *ngIf='countryEditing' class="alter">
+        <h4>Country</h4> <input  type="text" #country [value]='address.country'>
+        <img src="assets/img/wrong.png" (click)='countryEditing=false'>
+        <img src="assets/img/right.png" (click)='done(country.value,"countryEditing")'>
+        <div class="clearfix"></div>
+      </li>
+      <li *ngIf='address.nationality && !nationalityEditing'>
+          <img src="assets/img/edit-icon.png" class="icon" (click)='nationalityEditing=true'>
+        <h4>Nationality</h4>{{address.nationality}}</li>
+      <li *ngIf='!address.nationality && !nationalityEditing'>
+          <img src="assets/img/edit-icon.png" class="icon" (click)='nationalityEditing=true'>
+        <h4>Nationality</h4>None
+      </li>
+      <li *ngIf='nationalityEditing' class="alter">
+        <h4>Nationality</h4> <input  type="text" #nationality [value]='address.nationality'>
+        <img src="assets/img/wrong.png" (click)='nationalityEditing=false'>
+        <img src="assets/img/right.png" (click)='done(nationality.value,"nationalityEditing")'>
+        <div class="clearfix"></div>
+      </li>
+      <li *ngIf='address.nId && !nIdEditing'>
+          <img src="assets/img/edit-icon.png" class="icon" (click)='nIdEditing=true'>
+        <h4>Natioal ID</h4>{{address.nId}}
+      </li>
+      <li *ngIf='!address.nId && !nIdEditing'>
+          <img src="assets/img/edit-icon.png" class="icon" (click)='nIdEditing=true'>
+        <h4>Natioal ID</h4>None
+      </li>
+      <li *ngIf='nIdEditing' class="alter">
+        <h4>Natioal ID</h4> <input  type="text" #nId [value]='address.nId'>
+        <img src="assets/img/wrong.png" (click)='nIdEditing=false'>
+        <img src="assets/img/right.png" (click)='done(nId.value,"nIdEditing")'>
+        <div class="clearfix"></div>
+      </li>
+    </ul>
+  </div>
+    <div class="clearfix"></div>
+  </mat-card>
+</div>
+

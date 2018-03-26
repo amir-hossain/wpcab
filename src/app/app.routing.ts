@@ -19,6 +19,7 @@ import {AccountantGuard} from './accountant.guard';
 import {AdminGuard} from './admin.guard';
 import {AdcountGuard} from './adcount.guard';
 import {AntiUtorGuard} from './anti-utor.guard';
+import {EditComponent} from './edit/edit.component';
 const routes:Routes=[
  
     {
@@ -42,6 +43,10 @@ const routes:Routes=[
             {
                 path:"notification",
                 component:NotificaionComponent
+            },
+            {
+                path:'edit',
+                component:EditComponent
             },
             {
                 path:"registration",
@@ -82,7 +87,7 @@ const routes:Routes=[
                 path:'accounts',
                 canActivate:[AccountantGuard],
                 component:AccountsComponent
-            }
+            },
         ]
     },
     {

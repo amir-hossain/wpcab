@@ -4,7 +4,7 @@
 <div *ngIf='activeUserRole=="Operator"'>
   <app-register-nav></app-register-nav>
 </div>
-<div *ngIf='activeUserRole=="Super" || activeRole==="Leader"'>
+<div *ngIf='activeUserRole=="Super" || activeUserRole==="Leader"'>
   <app-sule-nav></app-sule-nav>
 </div>
 <div *ngIf='activeUserRole=="Accountant"'>
@@ -17,10 +17,10 @@
           <input matInput (keyup)="nameFilter($event.target.value)" placeholder="Search name">
         </mat-form-field>
         <mat-form-field class="middle-filter">
-            <input matInput (keyup)="zoneFilter($event.target.value)" placeholder="Search father name">
+            <input matInput (keyup)="zoneFilter($event.target.value)" placeholder="Search district">
           </mat-form-field>
           <mat-form-field>
-              <input matInput (keyup)="subDistrictFilter($event.target.value)" placeholder="Search mother name">
+              <input matInput (keyup)="subDistrictFilter($event.target.value)" placeholder="Search sub district">
             </mat-form-field>
       </mat-card>
     

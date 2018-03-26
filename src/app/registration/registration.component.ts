@@ -8,7 +8,6 @@ import 'firebase/storage';
 import * as firebase from 'firebase/app';
 import { FirebaseApp } from 'angularfire2';
 import {DropDownItemsService} from '../drop-down-items.service';
-import { SOURCE } from '@angular/core/src/di/injector';
 
 @Component({
   selector: 'app-registration',
@@ -74,7 +73,7 @@ export class RegistrationComponent implements OnInit {
     this.roles=this.ddis.getRoles();
     this.districts=this.ddis.getDistricts();
     this.subDistricts=this.ddis.getSubDistrict();
-    this.zones=this.ddis.gerZone();
+    this.zones=this.ddis.getZone();
     this.bloodGroups=this.ddis.getBloodGroup();
    }
 

@@ -24,7 +24,7 @@ ul{
 
 .delete-btn{
    
-    background: red;
+    background: rgb(212, 3, 3);
 }
 
 .spayment-btn{
@@ -72,9 +72,7 @@ h4{
 }
 
 .footer h1{
-    display: inline;
-    vertical-align: middle;
-   
+    display: inline;  
 }
 
 .footer div{
@@ -85,7 +83,18 @@ h4{
 .more-btn{
     float: right;
     margin-left:20px;
-    vertical-align: middle;
     padding:2px 0; 
     background:black;
+}
+.sub-header{
+    margin-bottom:1.2em; 
+}
+
+.sub-header h2{
+    display: inline;
+}
+
+.sub-header a{
+    float: right;
+    background: rgb(255, 166, 0);
 }

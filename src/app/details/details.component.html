@@ -20,13 +20,18 @@
       </ul>
       <div class='sub-2'>
       <ul *ngIf='userInfo' >
-      <h2 style="margin-top:0px;">Info</h2>
+        <div class="sub-header">
+            <h2>Info</h2>
+            <a href="/edit" mat-raised-button>Edit</a>
+            <div class="clearfix"></div>
+        </div>
       <li><h4>Name</h4>{{userInfo.fullName}}</li>
       <li><h4>Occupation</h4>{{userInfo.occupation}}</li>
       <li *ngIf='userInfo.bloodGroup'><h4>Blood group</h4>{{userInfo.bloodGroup}}</li>
       <li *ngIf='!userInfo.bloodGroup'><h4>Blood group</h4>None</li>
       <span *ngIf='auth'>
         <li><h4>Phone</h4>{{auth.phone}}</li>
+        <li><h4>Password</h4>Hidden</li>
         <li *ngIf='auth.email'><h4>Email</h4>{{auth.email}}</li>
         <li *ngIf='!auth.email'><h4>Email</h4>None</li>
         <li *ngIf='auth.userName'><h4>User Name</h4>{{auth.userName}}</li>

@@ -33,6 +33,7 @@ import {AccountantGuard} from './accountant.guard';
 import {AdminGuard} from './admin.guard';
 import {AdcountGuard} from './adcount.guard';
 import {AntiUtorGuard} from './anti-utor.guard';
+import { EditComponent } from './edit/edit.component';
 
 
 const confiq={
@@ -66,6 +67,7 @@ const confiq={
     AccountantNavComponent,
     UserNavComponent,
     AccountsComponent,
+    EditComponent,
   ],
   imports: [
     BrowserModule,
