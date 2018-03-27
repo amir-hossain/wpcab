@@ -1,6 +1,5 @@
 <div class='container'>
   <div>
-      <!-- <a href='collection' mat-raised-button color='primary' class="back-btn">Back</a> -->
       <button  mat-raised-button color='primary' class="back-btn" (click)='back()'>Back</button>
       <h1 *ngIf='userInfo'>Detail's of {{userInfo.fullName}}</h1>
   </div>
@@ -26,18 +25,36 @@
             <div class="clearfix"></div>
         </div>
       <li><h4>Name</h4>{{userInfo.fullName}}</li>
+      <li>
+          <h4>Gender</h4>{{userInfo.gender}}
+        </li>
+        <li>
+            <h4>Date of Birth</h4>{{userInfo.dob}}
+          </li>
+          <li>
+            <h4>Father name</h4>{{userInfo.fatherName}}
+            </li>
+            <li>
+                <h4>Mother name</h4>{{userInfo.motherName}}
+              </li>
+              <li>
+                  <h4>Invited by</h4>{{userInfo.invitedBy}}
+                </li>
       <li><h4>Occupation</h4>{{userInfo.occupation}}</li>
       <li *ngIf='userInfo.bloodGroup'><h4>Blood group</h4>{{userInfo.bloodGroup}}</li>
-      <li *ngIf='!userInfo.bloodGroup'><h4>Blood group</h4>None</li>
-      <span *ngIf='auth'>
+      <li *ngIf='!userInfo.bloodGroup'><h4>Blood group</h4>None
+      </li>
+      <div class="clearfix"></div>
+    </ul>
+      <ul *ngIf='auth'>
+          <h2>Auth</h2>
         <li><h4>Phone</h4>{{auth.phone}}</li>
         <li><h4>Password</h4>Hidden</li>
         <li *ngIf='auth.email'><h4>Email</h4>{{auth.email}}</li>
         <li *ngIf='!auth.email'><h4>Email</h4>None</li>
         <li *ngIf='auth.userName'><h4>User Name</h4>{{auth.userName}}</li>
         <li *ngIf='!auth.userName'><h4>User Name</h4>None</li>
-        <li><h4>Role</h4> {{auth.role}}</li>
-    </span>
+        <li><h4>Role</h4>{{auth.role}}</li>
     <div class="clearfix"></div>
     </ul>
     <ul *ngIf='address'>

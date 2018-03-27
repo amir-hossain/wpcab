@@ -29,6 +29,68 @@
         <img src="assets/img/right.png" (click)='done(name.value,"nameEditing")'>
         <div class="clearfix"></div>
       </li>
+      <li *ngIf='!genderEditing'>
+          <img src="assets/img/edit-icon.png" class="icon" (click)='genderEditing=true'>
+          <h4>Gender</h4>{{userInfo.gender}}
+        </li>
+        <li *ngIf='genderEditing' class="alter">
+          <h4>Gender</h4> 
+          <mat-radio-group [value]='userInfo.gender' (change)="radioChange($event)">
+              <mat-radio-button type="radio" color='primary' name="gender" id="male" value="Male"   >Male</mat-radio-button>
+             <mat-radio-button type="radio" color='primary' name="gender" id="female" value="Female" >Female</mat-radio-button>
+            </mat-radio-group>
+          <img src="assets/img/wrong.png" (click)='done(role,"genderEditing")'>
+          <img src="assets/img/right.png" (click)='done(role,"genderEditing")'>
+          <div class="clearfix"></div>
+        </li>
+        <li *ngIf='!dobEditing'>
+            <img src="assets/img/edit-icon.png" class="icon" (click)='dobEditing=true'>
+            <h4>Date of Birth</h4>{{userInfo.dob}}
+          </li>
+          <li *ngIf='dobEditing' class="alter">
+            <h4>Date of birth</h4> 
+            <input  type="text" #dob [value]='userInfo.dob'>
+            <img src="assets/img/wrong.png" (click)='dobEditing=false'>
+            <img src="assets/img/right.png" (click)='done(dob.value,"dobEditing")'>
+            <div class="clearfix"></div>
+          </li>
+          <li *ngIf='!fatherNameEditing'>
+              <img src="assets/img/edit-icon.png" class="icon" (click)='fatherNameEditing=true'>
+              <h4>Father name</h4>{{userInfo.fatherName}}
+            </li>
+            <li *ngIf='fatherNameEditing' class="alter">
+              <h4>Faher name</h4> 
+              <input  type="text" #fatherName [value]='userInfo.fatherName'>
+              <img src="assets/img/wrong.png" (click)='fatherNameEditing=false'>
+              <img src="assets/img/right.png" (click)='done(fatherName.value,"fatherNameEditing")'>
+              <div class="clearfix"></div>
+            </li>
+            <li *ngIf='!motherNameEditing'>
+                <img src="assets/img/edit-icon.png" class="icon" (click)='motherNameEditing=true'>
+                <h4>Mother name</h4>{{userInfo.motherName}}
+              </li>
+              <li *ngIf='motherNameEditing' class="alter">
+                <h4>Mother name</h4> 
+                <input  type="text" #motherName [value]='userInfo.motherName'>
+                <img src="assets/img/wrong.png" (click)='motherNameEditing=false'>
+                <img src="assets/img/right.png" (click)='done(motherName.value,"motherNameEditing")'>
+                <div class="clearfix"></div>
+              </li>
+              <li *ngIf='userInfo.invitedBy && !invitedByEditing'>
+                  <img src="assets/img/edit-icon.png" class="icon" (click)='invitedByEditing=true'>
+                  <h4>Invited by</h4>{{userInfo.invitedBy}}
+                </li>
+                <li *ngIf='!userInfo.invitedBy && !invitedByEditing'>
+                    <img src="assets/img/edit-icon.png" class="icon" (click)='invitedByEditing=true'>
+                    <h4>Invited by</h4>None
+                  </li>
+                <li *ngIf='invitedByEditing' class="alter">
+                  <h4>Invited by</h4> 
+                  <input  type="text" #invitedBy [value]='userInfo.invitedBy'>
+                  <img src="assets/img/wrong.png" (click)='invitedByEditing=false'>
+                  <img src="assets/img/right.png" (click)='done(invitedBy.value,"invitedByEditing")'>
+                  <div class="clearfix"></div>
+                </li>
       <li *ngIf='!occupationEditing'>
           <img src="assets/img/edit-icon.png" class="icon" (click)='occupationEditing=true'>
         <h4>Occupation</h4>{{userInfo.occupation}}
@@ -66,8 +128,11 @@
         <img src="assets/img/right.png" (click)='done(bloodGroup.value,"bloodGroupEditing")'>
         <div class="clearfix"></div>
       </li>
+      <div class="clearfix"></div>
+    </ul>
       
-      <span *ngIf='auth'>
+      <ul *ngIf='auth'>
+          <h2>Online</h2>
         <li *ngIf='!phoneEditing'>
             <img src="assets/img/edit-icon.png" class="icon" (click)='phoneEditing=true'>
           <h4>Phone</h4>{{auth.phone}}
@@ -132,7 +197,6 @@
           <img src="assets/img/right.png" (click)='done(role.value,"roleEditing")'>
           <div class="clearfix"></div>
         </li>
-    </span>
     <div class="clearfix"></div>
     </ul>
     <ul *ngIf='address'>

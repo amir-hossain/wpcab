@@ -10,20 +10,33 @@ import {DropDownItemsService} from '../drop-down-items.service';
   providers: [DropDownItemsService]
 })
 export class EditComponent implements OnInit {
+  activeUserRole;
+
+  //table name
   userInfo;
   address;
   auth;
+
+  //drop down list
   selectedRole;
   roles;
   districts;
-  filteredDistrict=[];
   subDistricts;
-  filteredsubDistrict=[];
   zones;
-  filteredZone=[];
   bloodGroups;
-  activeUserRole;
+
+  // filtered list
+  filteredDistrict=[];
+  filteredsubDistrict=[];
+  filteredZone=[];
+
+  //editing flag
   nameEditing=false;
+  genderEditing=false;
+  dobEditing=false;
+  fatherNameEditing=false;
+  motherNameEditing=false;
+  invitedByEditing=false;
   occupationEditing=false;
   bloodGroupEditing=false;
   phoneEdition=false;
@@ -38,6 +51,13 @@ export class EditComponent implements OnInit {
   countryEditing=false;
   nationlityEditing=false;
   nidEditing=false;
+
+  //temp
+  name;
+  occupation;
+  bloodGroup;
+  phone;
+  
 
   constructor(private db:AngularFireDatabase,private loc:Location,private ddis:DropDownItemsService) { }
 
