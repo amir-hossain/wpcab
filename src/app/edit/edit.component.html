@@ -45,7 +45,7 @@
         </li>
         <li *ngIf='!dobEditing'>
             <img src="assets/img/edit-icon.png" class="icon" (click)='dobEditing=true'>
-            <h4>Date of Birth</h4>{{userInfo.dob}}
+            <h4>Date of birth</h4>{{userInfo.dob}}
           </li>
           <li *ngIf='dobEditing' class="alter">
             <h4>Date of birth</h4> 
@@ -168,7 +168,7 @@
           </li>
         <li *ngIf='auth.userName && !userNameEditing'>
             <img src="assets/img/edit-icon.png" class="icon" (click)='userNameEditing=true'>
-          <h4>User Name</h4>{{auth.userName}}
+          <h4>User name</h4>{{auth.userName}}
         </li>
         <li *ngIf='!auth.userName && !userNameEditing'>
             <img src="assets/img/edit-icon.png" class="icon" (click)='userNameEditing=true'>

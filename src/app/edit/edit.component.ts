@@ -54,9 +54,45 @@ export class EditComponent implements OnInit {
 
   //temp
   name;
+  gender;
+  dob;
+  fatherName;
+  motherName;
+  invitedBy;
   occupation;
   bloodGroup;
   phone;
+  password;
+  email;
+  userName;
+  role;
+  zone;
+  subDistrict;
+  permatentAddress;
+  district;
+  country;
+  nationality;
+  nid;
+
+  //Empty flag
+  nameEmpty;
+  dobEmpty;
+  fatherNameEmpty;
+  motherEmpty;
+  invitedByEmpty;
+  phoneEmpty;
+  phoneExist;
+  passwordEmpty;
+  passwordMissMatch;
+  notEmail;
+  emailExist;
+  userNameExist;
+  zoneEmpty;
+  subDistrictEmpty;
+  permanentAddressEmpty;
+  districtEmpty;
+
+
   
 
   constructor(private db:AngularFireDatabase,private loc:Location,private ddis:DropDownItemsService) { }
