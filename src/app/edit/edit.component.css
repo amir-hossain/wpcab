@@ -72,10 +72,20 @@ h4{
 }
 
 
-.alter img{
+.alter img,.submit-button {
     float: right;
-    width: 2em;
-    height: 2em;
+    width: 2em !important;
+    height: 2em !important;
     margin-left:15px;
     
+}
+
+.submit-button{
+    background: transparent !important;
+}
+
+.errorMessege{
+    margin:.3em 0em .5em 11.1em;
+    color:red;
+
 }

@@ -24,57 +24,85 @@
         <h4>Name</h4>{{userInfo.fullName}}
       </li>
       <li *ngIf='nameEditing' class="alter">
-        <h4>Name</h4> <input  type="text" #name [value]='userInfo.fullName'>
-        <img src="assets/img/wrong.png" (click)='nameEditing=false'>
-        <img src="assets/img/right.png" (click)='done(name.value,"nameEditing")'>
+        <form [formGroup]='nameForm' (ngSubmit)='done("nameForm","fullName","userInfo","nameEditing")'>
+            <h4>Name</h4>
+         <input  type="text" formControlName='fullName'>
+        <img src="assets/img/wrong.png" (click)='cencel("nameForm","fullName","userInfo","nameEditing")'>
+        <!-- input type submit image button -->
+        <input src="assets/img/right.png" type='image' class='submit-button'>
         <div class="clearfix"></div>
+        <div *ngIf='nameForm.controls.fullName.invalid' class="errorMessege">
+          Name can not be empty
+        </div>
+      </form>
       </li>
       <li *ngIf='!genderEditing'>
           <img src="assets/img/edit-icon.png" class="icon" (click)='genderEditing=true'>
           <h4>Gender</h4>{{userInfo.gender}}
         </li>
         <li *ngIf='genderEditing' class="alter">
-          <h4>Gender</h4> 
-          <mat-radio-group [value]='userInfo.gender' (change)="radioChange($event)">
-              <mat-radio-button type="radio" color='primary' name="gender" id="male" value="Male"   >Male</mat-radio-button>
-             <mat-radio-button type="radio" color='primary' name="gender" id="female" value="Female" >Female</mat-radio-button>
-            </mat-radio-group>
-          <img src="assets/img/wrong.png" (click)='done(role,"genderEditing")'>
-          <img src="assets/img/right.png" (click)='done(role,"genderEditing")'>
-          <div class="clearfix"></div>
+            <form [formGroup]='genderForm' (ngSubmit)='done("genderForm","gender","userInfo","genderEditing")'>
+                <h4>Gender</h4> 
+             <mat-radio-group formControlName='gender'>
+                <mat-radio-button type="radio" color='primary' name="gender" id="male" value="Male"   >Male</mat-radio-button>
+               <mat-radio-button type="radio" color='primary' name="gender" id="female" value="Female" >Female</mat-radio-button>
+              </mat-radio-group>
+            <img src="assets/img/wrong.png" (click)='cencel("genderForm","gender","userInfo","genderEditing")'>
+            <!-- input type submit image button -->
+            <input src="assets/img/right.png" type='image' class='submit-button'>
+            <div class="clearfix"></div>
+          </form>
         </li>
         <li *ngIf='!dobEditing'>
             <img src="assets/img/edit-icon.png" class="icon" (click)='dobEditing=true'>
             <h4>Date of birth</h4>{{userInfo.dob}}
           </li>
           <li *ngIf='dobEditing' class="alter">
-            <h4>Date of birth</h4> 
-            <input  type="text" #dob [value]='userInfo.dob'>
-            <img src="assets/img/wrong.png" (click)='dobEditing=false'>
-            <img src="assets/img/right.png" (click)='done(dob.value,"dobEditing")'>
+            <form [formGroup]='dobForm' (ngSubmit)='done("dobForm","dob","userInfo","dobEditing")'>
+                <h4>Date of birth</h4> 
+             <input  type="text" formControlName='dob'>
+            <img src="assets/img/wrong.png" (click)='cencel("dobForm","dob","userInfo","dobEditing")'>
+            <!-- input type submit image button -->
+            <input src="assets/img/right.png" type='image' class='submit-button'>
             <div class="clearfix"></div>
+            <div *ngIf='dobForm.controls.dob.invalid' class="errorMessege">
+              Date of birth can not be empty
+            </div>
+          </form>
           </li>
           <li *ngIf='!fatherNameEditing'>
               <img src="assets/img/edit-icon.png" class="icon" (click)='fatherNameEditing=true'>
               <h4>Father name</h4>{{userInfo.fatherName}}
             </li>
             <li *ngIf='fatherNameEditing' class="alter">
-              <h4>Faher name</h4> 
-              <input  type="text" #fatherName [value]='userInfo.fatherName'>
-              <img src="assets/img/wrong.png" (click)='fatherNameEditing=false'>
-              <img src="assets/img/right.png" (click)='done(fatherName.value,"fatherNameEditing")'>
-              <div class="clearfix"></div>
+                <form [formGroup]='fatherNameForm' (ngSubmit)='done("fatherNameForm","fatherName","userInfo","fatherNameEditing")'>
+                    <h4>Faher name</h4> 
+                 <input  type="text" formControlName='fatherName'>
+                <img src="assets/img/wrong.png" (click)='cencel("fatherNameForm","fatherName","userInfo","fatherNameEditing")'>
+                <!-- input type submit image button -->
+                <input src="assets/img/right.png" type='image' class='submit-button'>
+                <div class="clearfix"></div>
+                <div *ngIf='fatherNameForm.controls.fatherName.invalid' class="errorMessege">
+                  Father name can not be empty
+                </div>
+              </form>
             </li>
             <li *ngIf='!motherNameEditing'>
                 <img src="assets/img/edit-icon.png" class="icon" (click)='motherNameEditing=true'>
                 <h4>Mother name</h4>{{userInfo.motherName}}
               </li>
               <li *ngIf='motherNameEditing' class="alter">
-                <h4>Mother name</h4> 
-                <input  type="text" #motherName [value]='userInfo.motherName'>
-                <img src="assets/img/wrong.png" (click)='motherNameEditing=false'>
-                <img src="assets/img/right.png" (click)='done(motherName.value,"motherNameEditing")'>
-                <div class="clearfix"></div>
+                  <form [formGroup]='motherNameForm' (ngSubmit)='done("motherNameForm","motherName","userInfo","motherNameEditing")'>
+                      <h4>Mother name</h4> 
+                   <input  type="text" formControlName='motherName'>
+                  <img src="assets/img/wrong.png" (click)='cencel("motherNameForm","motherName","userInfo","motherNameEditing")'>
+                  <!-- input type submit image button -->
+                  <input src="assets/img/right.png" type='image' class='submit-button'>
+                  <div class="clearfix"></div>
+                  <div *ngIf='motherNameForm.controls.motherName.invalid' class="errorMessege">
+                    Mother name can not be empty
+                  </div>
+                </form>
               </li>
               <li *ngIf='userInfo.invitedBy && !invitedByEditing'>
                   <img src="assets/img/edit-icon.png" class="icon" (click)='invitedByEditing=true'>
@@ -85,27 +113,36 @@
                     <h4>Invited by</h4>None
                   </li>
                 <li *ngIf='invitedByEditing' class="alter">
-                  <h4>Invited by</h4> 
-                  <input  type="text" #invitedBy [value]='userInfo.invitedBy'>
-                  <img src="assets/img/wrong.png" (click)='invitedByEditing=false'>
-                  <img src="assets/img/right.png" (click)='done(invitedBy.value,"invitedByEditing")'>
-                  <div class="clearfix"></div>
+                    <form [formGroup]='invitedByForm' (ngSubmit)='done("invitedByForm","invitedBy","userInfo","invitedByEditing")'>
+                        <h4>Invited by</h4> 
+                     <input  type="text" formControlName='invitedBy'>
+                    <img src="assets/img/wrong.png" (click)='cencel("invitedByForm","invitedBy","userInfo","invitedByEditing")'>
+                    <!-- input type submit image button -->
+                    <input src="assets/img/right.png" type='image' class='submit-button'>
+                    <div class="clearfix"></div>
+                    <div *ngIf='invitedByForm.controls.invitedBy.invalid' class="errorMessege">
+                      Invited by can not be empty
+                    </div>
+                  </form>
                 </li>
       <li *ngIf='!occupationEditing'>
           <img src="assets/img/edit-icon.png" class="icon" (click)='occupationEditing=true'>
         <h4>Occupation</h4>{{userInfo.occupation}}
       </li>
       <li *ngIf='occupationEditing' class="alter">
-        <h4>Occupation</h4>
-        <mat-radio-group [value]='userInfo.occupation' (change)="radioChange($event)">
-          <mat-radio-button type="radio" color='primary' name="occupation" id="student" value="Student"   >Student</mat-radio-button>
-         <mat-radio-button type="radio" color='primary' name="occupation" id="job holder" value="Job holder" > Job holder</mat-radio-button>
-          <mat-radio-button type="radio" color='primary' name="occupation" id="bussnessman" value="Bussnessman" >Bussnessman</mat-radio-button>
-          <mat-radio-button type="radio" color='primary' name="occupation" id="others" value="Others" >Others</mat-radio-button>
-        </mat-radio-group>
-        <img src="assets/img/wrong.png" (click)='occupationEditing=false'>
-        <img src="assets/img/right.png" (click)='done(role,"occupationEditing")'>
-        <div class="clearfix"></div>
+          <form [formGroup]='occupationForm' (ngSubmit)='done("occupationForm","occupation","userInfo","occupationEditing")'>
+              <h4>Occupation</h4>
+              <mat-radio-group formControlName='occupation'>
+                  <mat-radio-button type="radio" color='primary' name="occupation" id="student" value="Student"   >Student</mat-radio-button>
+                 <mat-radio-button type="radio" color='primary' name="occupation" id="job holder" value="Job holder" > Job holder</mat-radio-button>
+                  <mat-radio-button type="radio" color='primary' name="occupation" id="bussnessman" value="Bussnessman" >Bussnessman</mat-radio-button>
+                  <mat-radio-button type="radio" color='primary' name="occupation" id="others" value="Others" >Others</mat-radio-button>
+                </mat-radio-group>
+          <img src="assets/img/wrong.png" (click)='cencel("occupationForm","occupation","userInfo","occupationEditing")'>
+          <!-- input type submit image button -->
+          <input src="assets/img/right.png" type='image' class='submit-button'>
+          <div class="clearfix"></div>
+        </form>
       </li>
       <li *ngIf='userInfo.bloodGroup && !bloodGroupEditing'>
           <img src="assets/img/edit-icon.png" class="icon" (click)='bloodGroupEditing=true'>
@@ -116,17 +153,20 @@
         <h4>Blood group</h4>None
       </li>
       <li *ngIf='bloodGroupEditing' class="alter">
-        <h4>Blood Group</h4> 
-        <mat-form-field>
-          <mat-select [value]='userInfo.bloodGroup' #bloodGroup>
-             <mat-option *ngFor='let option of bloodGroups' [value]='option'>
-               {{option}}
-             </mat-option>
-          </mat-select>
-         </mat-form-field>
-        <img src="assets/img/wrong.png" (click)='bloodGroupEditing=false'>
-        <img src="assets/img/right.png" (click)='done(bloodGroup.value,"bloodGroupEditing")'>
-        <div class="clearfix"></div>
+          <form [formGroup]='bloodGroupForm' (ngSubmit)='done("bloodGroupForm","bloodGroup","userInfo","bloodGroupEditing")'>
+              <h4>Blood Group</h4> 
+              <mat-form-field>
+                  <mat-select formControlName='bloodGroup'>
+                     <mat-option *ngFor='let option of bloodGroups' [value]='option'>
+                       {{option}}
+                     </mat-option>
+                  </mat-select>
+                 </mat-form-field>
+          <img src="assets/img/wrong.png" (click)='cencel("bloodGroupForm","bloodGroup","userInfo","bloodGroupEditing")'>
+          <!-- input type submit image button -->
+          <input src="assets/img/right.png" type='image' class='submit-button'>
+          <div class="clearfix"></div>
+        </form>
       </li>
       <div class="clearfix"></div>
     </ul>
@@ -138,20 +178,34 @@
           <h4>Phone</h4>{{auth.phone}}
         </li>
         <li *ngIf='phoneEditing' class="alter">
-          <h4>Phone</h4> <input  type="number" #phone [value]='auth.phone'>
-          <img src="assets/img/wrong.png" (click)='phoneEditing=false'>
-          <img src="assets/img/right.png" (click)='done(phone.value,"phoneEditing")'>
-          <div class="clearfix"></div>
+            <form [formGroup]='phoneForm' (ngSubmit)='done("phoneForm","phone","auth","phoneEditing")'>
+                <h4>Phone</h4>
+             <input  type="number" formControlName='phone'>
+            <img src="assets/img/wrong.png" (click)='cencel("phoneForm","phone","auth","phoneEditing")'>
+            <!-- input type submit image button -->
+            <input src="assets/img/right.png" type='image' class='submit-button'>
+            <div class="clearfix"></div>
+            <div *ngIf='phoneForm.controls.phone.invalid' class="errorMessege">
+              Phone can not be empty
+            </div>
+          </form>
         </li>
         <li *ngIf='!passwordEditing'>
           <img src="assets/img/edit-icon.png" class="icon" (click)='passwordEditing=true'>
         <h4>Password</h4>Hidden
       </li>
       <li *ngIf='passwordEditing' class="alter">
-        <h4>Password</h4> <input  type="password" #password [value]='auth.password'>
-        <img src="assets/img/wrong.png" (click)='passwordEditing=false'>
-        <img src="assets/img/right.png" (click)='done(password.value,"passwordEditing")'>
-        <div class="clearfix"></div>
+          <form [formGroup]='passwordForm' (ngSubmit)='done("passwordForm","password","auth","passwordEditing")'>
+              <h4>Password</h4>
+           <input  type="password" formControlName='password'>
+          <img src="assets/img/wrong.png" (click)='cencel("passwordForm","password","auth","passwordEditing")'>
+          <!-- input type submit image button -->
+          <input src="assets/img/right.png" type='image' class='submit-button'>
+          <div class="clearfix"></div>
+          <div *ngIf='passwordForm.controls.password.invalid' class="errorMessege">
+            password can not be empty
+          </div>
+        </form>
       </li>
         <li *ngIf='auth.email && !emailEditing'>
         <img src="assets/img/edit-icon.png" class="icon" (click)='emailEditing=true'>
@@ -161,10 +215,14 @@
           <img src="assets/img/edit-icon.png" class="icon" (click)='emailEditing=true'>
           <h4>Email</h4>None</li>
           <li *ngIf='emailEditing' class="alter">
-            <h4>Email</h4> <input  type="email" #email [value]='auth.email'>
-            <img src="assets/img/wrong.png" (click)='emailEditing=false'>
-            <img src="assets/img/right.png" (click)='done(email.value,"emailEditing")'>
-            <div class="clearfix"></div>
+              <form [formGroup]='emailForm' (ngSubmit)='done("emailForm","email","auth","emailEditing")'>
+                  <h4>Email</h4>
+               <input  type="email" formControlName='email'>
+              <img src="assets/img/wrong.png" (click)='cencel("emailForm","email","auth","emailEditing")'>
+              <!-- input type submit image button -->
+              <input src="assets/img/right.png" type='image' class='submit-button'>
+              <div class="clearfix"></div>
+            </form>
           </li>
         <li *ngIf='auth.userName && !userNameEditing'>
             <img src="assets/img/edit-icon.png" class="icon" (click)='userNameEditing=true'>
@@ -175,27 +233,34 @@
           <h4>User Name</h4>None
         </li>
         <li *ngIf='userNameEditing' class="alter">
-          <h4>User Name</h4> <input  type="text" #userName [value]='auth.userName'>
-          <img src="assets/img/wrong.png" (click)='userNameEditing=false'>
-          <img src="assets/img/right.png" (click)='done(userName.value,"userNameEditing")'>
-          <div class="clearfix"></div>
+            <form [formGroup]='userNameForm' (ngSubmit)='done("userNameForm","userName","auth","userNameEditing")'>
+                <h4>User Name</h4>
+             <input  type="userName" formControlName='userName'>
+            <img src="assets/img/wrong.png" (click)='cencel("userNameForm","userName","auth","userNameEditing")'>
+            <!-- input type submit image button -->
+            <input src="assets/img/right.png" type='image' class='submit-button'>
+            <div class="clearfix"></div>
+          </form>
         </li>
         <li *ngIf='!roleEditing'>
             <img src="assets/img/edit-icon.png" class="icon" (click)='roleEditing=true'>
           <h4>Role</h4>{{auth.role}}
         </li>
         <li *ngIf='roleEditing' class="alter">
-          <h4>Role</h4>
-          <mat-form-field>
-            <mat-select [value]='auth.role' #role>
-               <mat-option *ngFor='let option of roles' [value]='option'>
-                 {{option}}
-               </mat-option>
-            </mat-select>
-           </mat-form-field>
-          <img src="assets/img/wrong.png" (click)='roleEditing=false'>
-          <img src="assets/img/right.png" (click)='done(role.value,"roleEditing")'>
-          <div class="clearfix"></div>
+            <form [formGroup]='roleForm' (ngSubmit)='done("roleForm","role","auth","roleEditing")'>
+                <h4>Role</h4>
+                <mat-form-field>
+                    <mat-select formControlName='role'>
+                       <mat-option *ngFor='let option of roles' [value]='option'>
+                         {{option}}
+                       </mat-option>
+                    </mat-select>
+                   </mat-form-field>
+            <img src="assets/img/wrong.png" (click)='cencel("roleForm","role","auth","roleEditing")'>
+            <!-- input type submit image button -->
+            <input src="assets/img/right.png" type='image' class='submit-button'>
+            <div class="clearfix"></div>
+          </form>
         </li>
     <div class="clearfix"></div>
     </ul>
@@ -206,63 +271,88 @@
         <h4>Zone</h4>{{address.zone}}
       </li>
       <li *ngIf='zoneEditing' class="alter">
-        <h4>Zone</h4> 
-        <span>
-        <input  type="text" #zone [value]='address.zone' [matAutocomplete]='z' (keyup)='autoSuggestion($event.target.value,"zones","filteredZone")'>
-        <mat-autocomplete #z='matAutocomplete'>
-          <mat-option *ngFor='let option of filteredZone' [value]='option'>
-              {{option}}
-          </mat-option>
-        </mat-autocomplete>
-      </span>
-        <img src="assets/img/wrong.png" (click)='zoneEditing=false'>
-        <img src="assets/img/right.png" (click)='done(zone.value,"zoneEditing")'>
-        <div class="clearfix"></div>
+          <form [formGroup]='zoneForm' (ngSubmit)='done("zoneForm","zone","address","zoneEditing")'>
+              <h4>Zone</h4> 
+              <span>
+                  <input  type="text" formControlName='zone' [matAutocomplete]='z' (keyup)='autoSuggestion($event.target.value,"zones","filteredZone")'>
+                  <mat-autocomplete #z='matAutocomplete'>
+                    <mat-option *ngFor='let option of filteredZone' [value]='option'>
+                        {{option}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </span>
+          <img src="assets/img/wrong.png" (click)='cencel("zoneForm","zone","address","zoneEditing")'>
+          <!-- input type submit image button -->
+          <input src="assets/img/right.png" type='image' class='submit-button'>
+          <div class="clearfix"></div>
+          <div *ngIf='zoneForm.controls.zone.invalid' class="errorMessege">
+            Zone can not be empty
+          </div>
+        </form>
       </li>
       <li *ngIf='!subDistrictEditing'>
           <img src="assets/img/edit-icon.png" class="icon" (click)='subDistrictEditing=true'>
         <h4>Sub district</h4>{{address.subDistrict}}</li>
         <li *ngIf='subDistrictEditing' class="alter">
-          <h4>Sub district</h4> 
-          <span>
-            <input  type="text" #subDistrict [value]='address.subDistrict' [matAutocomplete]='subDist' (keyup)='autoSuggestion($event.target.value,"subDistricts","filteredsubDistrict")'>
-            <mat-autocomplete #subDist='matAutocomplete'>
-              <mat-option *ngFor='let option of filteredsubDistrict' [value]='option'>
-                  {{option}}
-              </mat-option>
-            </mat-autocomplete>
-          </span>
-          <img src="assets/img/wrong.png" (click)='subDistrictEditing=false'>
-          <img src="assets/img/right.png" (click)='done(subDistrict.value,"subDistrictEditing")'>
-          <div class="clearfix"></div>
+            <form [formGroup]='subDistrictForm' (ngSubmit)='done("subDistrictForm","subDistrict","address","subDistrictEditing")'>
+                <h4>Sub district</h4> 
+                <span>
+                    <input  type="text" formControlName='subDistrict' [matAutocomplete]='subDist' (keyup)='autoSuggestion($event.target.value,"subDistricts","filteredsubDistrict")'>
+                    <mat-autocomplete #subDist='matAutocomplete'>
+                      <mat-option *ngFor='let option of filteredsubDistrict' [value]='option'>
+                          {{option}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </span>
+            <img src="assets/img/wrong.png" (click)='cencel("subDistrictForm","subDistrict","address","subDistrictEditing")'>
+            <!-- input type submit image button -->
+            <input src="assets/img/right.png" type='image' class='submit-button'>
+            <div class="clearfix"></div>
+            <div *ngIf='subDistrictForm.controls.subDistrict.invalid' class="errorMessege">
+              Sub district can not be empty
+            </div>
+          </form>
         </li>
       <li *ngIf='!permanentAddressEditing'>
           <img src="assets/img/edit-icon.png" class="icon" (click)='permanentAddressEditing=true'>
         <h4>Permanent address</h4>{{address.permanentAddress}}
       </li>
       <li *ngIf='permanentAddressEditing' class="alter">
-        <h4>Permanent address</h4> <input  type="text" #permanentAddress [value]='address.permanentAddress'>
-        <img src="assets/img/wrong.png" (click)='permanentAddressEditing=false'>
-        <img src="assets/img/right.png" (click)='done(permanentAddress.value,"permanentAddressEditing")'>
-        <div class="clearfix"></div>
+          <form [formGroup]='permanentAddressForm' (ngSubmit)='done("permanentAddressForm","permanentAddress","address","permanentAddressEditing")'>
+              <h4>Permanent address</h4>
+           <input  type="permanentAddress" formControlName='permanentAddress'>
+          <img src="assets/img/wrong.png" (click)='cencel("permanentAddressForm","permanentAddress","address","permanentAddressEditing")'>
+          <!-- input type submit image button -->
+          <input src="assets/img/right.png" type='image' class='submit-button'>
+          <div class="clearfix"></div>
+          <div *ngIf='permanentAddressForm.controls.permanentAddress.invalid' class="errorMessege">
+            Parmanent address can not be empty
+          </div>
+        </form>
       </li>
       <li *ngIf='!districtEditing'>
           <img src="assets/img/edit-icon.png" class="icon" (click)='districtEditing=true'>
         <h4>District</h4>{{address.district}}
       </li>
       <li *ngIf='districtEditing' class="alter">
-        <h4>District</h4> 
-        <span>
-          <input  type="text" #district [value]='address.district' [matAutocomplete]='dist' (keyup)='autoSuggestion($event.target.value,"districts","filteredDistrict")'>
-          <mat-autocomplete #dist='matAutocomplete'>
-            <mat-option *ngFor='let option of filteredDistrict' [value]='option'>
-                {{option}}
-            </mat-option>
-          </mat-autocomplete>
-        </span>
-        <img src="assets/img/wrong.png" (click)='districtEditing=false'>
-        <img src="assets/img/right.png" (click)='done(district.value,"districtEditing")'>
-        <div class="clearfix"></div>
+          <form [formGroup]='districtForm' (ngSubmit)='done("districtForm","district","address","districtEditing")'>
+              <h4>District</h4> 
+              <span>
+                  <input  type="text" formControlName='district' [matAutocomplete]='dist' (keyup)='autoSuggestion($event.target.value,"districts","filtereddistrict")'>
+                  <mat-autocomplete #dist='matAutocomplete'>
+                    <mat-option *ngFor='let option of filtereddistrict' [value]='option'>
+                        {{option}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </span>
+          <img src="assets/img/wrong.png" (click)='cencel("districtForm","district","address","districtEditing")'>
+          <!-- input type submit image button -->
+          <input src="assets/img/right.png" type='image' class='submit-button'>
+          <div class="clearfix"></div>
+          <div *ngIf='districtForm.controls.district.invalid' class="errorMessege">
+            District can not be empty
+          </div>
+        </form>
       </li>
       <li *ngIf='address.country && !countryEditing'>
           <img src="assets/img/edit-icon.png" class="icon" (click)='countryEditing=true'>
@@ -273,10 +363,14 @@
         <h4>Country</h4>None
       </li>
       <li *ngIf='countryEditing' class="alter">
-        <h4>Country</h4> <input  type="text" #country [value]='address.country'>
-        <img src="assets/img/wrong.png" (click)='countryEditing=false'>
-        <img src="assets/img/right.png" (click)='done(country.value,"countryEditing")'>
-        <div class="clearfix"></div>
+          <form [formGroup]='countryForm' (ngSubmit)='done("countryForm","country","address","countryEditing")'>
+              <h4>Country</h4>
+           <input  type="text" formControlName='country'>
+          <img src="assets/img/wrong.png" (click)='cencel("countryForm","country","address","countryEditing")'>
+          <!-- input type submit image button -->
+          <input src="assets/img/right.png" type='image' class='submit-button'>
+          <div class="clearfix"></div>
+        </form>
       </li>
       <li *ngIf='address.nationality && !nationalityEditing'>
           <img src="assets/img/edit-icon.png" class="icon" (click)='nationalityEditing=true'>
@@ -286,10 +380,14 @@
         <h4>Nationality</h4>None
       </li>
       <li *ngIf='nationalityEditing' class="alter">
-        <h4>Nationality</h4> <input  type="text" #nationality [value]='address.nationality'>
-        <img src="assets/img/wrong.png" (click)='nationalityEditing=false'>
-        <img src="assets/img/right.png" (click)='done(nationality.value,"nationalityEditing")'>
-        <div class="clearfix"></div>
+          <form [formGroup]='nationalityForm' (ngSubmit)='done("nationalityForm","nationality","address","nationalityEditing")'>
+              <h4>Nationality</h4> 
+           <input  type="text" formControlName='nationality'>
+          <img src="assets/img/wrong.png" (click)='cencel("nationalityForm","nationality","address","nationalityEditing")'>
+          <!-- input type submit image button -->
+          <input src="assets/img/right.png" type='image' class='submit-button'>
+          <div class="clearfix"></div>
+        </form>
       </li>
       <li *ngIf='address.nId && !nIdEditing'>
           <img src="assets/img/edit-icon.png" class="icon" (click)='nIdEditing=true'>
@@ -300,10 +398,14 @@
         <h4>Natioal ID</h4>None
       </li>
       <li *ngIf='nIdEditing' class="alter">
-        <h4>Natioal ID</h4> <input  type="text" #nId [value]='address.nId'>
-        <img src="assets/img/wrong.png" (click)='nIdEditing=false'>
-        <img src="assets/img/right.png" (click)='done(nId.value,"nIdEditing")'>
-        <div class="clearfix"></div>
+          <form [formGroup]='nIdForm' (ngSubmit)='done("nIdForm","nId","address","nIdEditing")'>
+              <h4>Natioal ID</h4>
+           <input  type="text" formControlName='nId'>
+          <img src="assets/img/wrong.png" (click)='cencel("nIdForm","nId","address","nIdEditing")'>
+          <!-- input type submit image button -->
+          <input src="assets/img/right.png" type='image' class='submit-button'>
+          <div class="clearfix"></div>
+        </form>
       </li>
     </ul>
   </div>
