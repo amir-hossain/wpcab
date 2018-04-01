@@ -6,15 +6,20 @@
   <mat-card>
       <ul *ngIf='userInfo' class='sub-1'>
       <span *ngIf='!userInfo.photo'>
-        <img src='./assets/img/default-pic.png'>
+        <label for='upload'>
+            <input type='file'  id='upload' (change)="readUrl($event)" style='display:none;'>
+         
+            <img class="pic" [src]="url">
+          </label>
       </span>
       <span *ngIf='userInfo.photo'>
-        <img src="{{userInfo.photo}}">
-      </span>
-      <div class="instraction">
-        <img src="assets/img/info.png" alt="">
-        <span> click on photo to edit</span>
-      </div>
+          <label for='upload'>
+              <input type='file'  id='upload' (change)="readUrl($event)" style='display:none;' #file>
+           
+              <img class="pic" [src]="url">
+              <button mat-raised-button (click)='file.click()' class="upload-button">Upload</button>
+            </label>
+      </span>      
       </ul>
       <div class='sub-2'>
       <ul *ngIf='userInfo' >
@@ -58,15 +63,27 @@
             <h4>Date of birth</h4>{{userInfo.dob}}
           </li>
           <li *ngIf='dobEditing' class="alter">
-            <form [formGroup]='dobForm' (ngSubmit)='done("dobForm","dob","userInfo","dobEditing")'>
-                <h4>Date of birth</h4> 
-             <input  type="text" formControlName='dob'>
-            <img src="assets/img/wrong.png" (click)='cencel("dobForm","dob","userInfo","dobEditing")'>
+            <form [formGroup]='dobForm' (ngSubmit)='datedone()'>
+                <h4>Date of birth</h4>
+                <span class="dob">
+                  <input  type="number" placeholder="Day" formControlName='day'>
+                  <select formControlName='month'>
+                  <option *ngFor='let option of months' [value]='option'>
+                    {{option}}
+                  </option>
+               </select>
+                  <input  type="number" placeholder="Year" formControlName='year'>
+                </span> 
+             
+            <img src="assets/img/wrong.png" (click)='cencelDate()'>
             <!-- input type submit image button -->
             <input src="assets/img/right.png" type='image' class='submit-button'>
             <div class="clearfix"></div>
-            <div *ngIf='dobForm.controls.dob.invalid' class="errorMessege">
-              Date of birth can not be empty
+            <div *ngIf='dobForm.controls.day.invalid' class="errorMessege">
+              Day of birth can not be empty
+            </div>
+            <div *ngIf='dobForm.controls.month.invalid' class="errorMessege">
+              Month of birth can not be empty
             </div>
           </form>
           </li>
@@ -185,8 +202,11 @@
             <!-- input type submit image button -->
             <input src="assets/img/right.png" type='image' class='submit-button'>
             <div class="clearfix"></div>
-            <div *ngIf='phoneForm.controls.phone.invalid' class="errorMessege">
+            <div *ngIf='phoneForm.controls.phone.hasError("required")' class="errorMessege">
               Phone can not be empty
+            </div>
+            <div *ngIf='phoneForm.controls.phone.hasError("exist")' class="errorMessege">
+              Phone exist
             </div>
           </form>
         </li>
@@ -197,13 +217,23 @@
       <li *ngIf='passwordEditing' class="alter">
           <form [formGroup]='passwordForm' (ngSubmit)='done("passwordForm","password","auth","passwordEditing")'>
               <h4>Password</h4>
-           <input  type="password" formControlName='password'>
-          <img src="assets/img/wrong.png" (click)='cencel("passwordForm","password","auth","passwordEditing")'>
-          <!-- input type submit image button -->
-          <input src="assets/img/right.png" type='image' class='submit-button'>
-          <div class="clearfix"></div>
+           <input  type="password"  formControlName='password'>
           <div *ngIf='passwordForm.controls.password.invalid' class="errorMessege">
             password can not be empty
+          </div>
+          <div>
+              <h4>confirm Password</h4>
+            <input  type="password"  formControlName='conPassword' class="con-password">
+           <img src="assets/img/wrong.png" (click)='cencelPassword()'>
+           <!-- input type submit image button -->
+           <input src="assets/img/right.png" type='image' class='submit-button'>
+           <div class="clearfix"></div>
+         </div>
+         <div *ngIf='passwordForm.controls.conPassword.hasError("required")' class="errorMessege">
+          Confirm password can not be empty
+        </div>
+        <div *ngIf='passwordForm.controls.conPassword.hasError("missMatchedPassword")' class="errorMessege">
+            Confirm password not matched
           </div>
         </form>
       </li>
@@ -222,6 +252,12 @@
               <!-- input type submit image button -->
               <input src="assets/img/right.png" type='image' class='submit-button'>
               <div class="clearfix"></div>
+              <div *ngIf='emailForm.controls.email.hasError("exist")' class="errorMessege">
+                  Email exist
+                </div>
+                <div *ngIf='emailForm.controls.email.hasError("email")' class="errorMessege">
+                    Invaid email
+                  </div>
             </form>
           </li>
         <li *ngIf='auth.userName && !userNameEditing'>

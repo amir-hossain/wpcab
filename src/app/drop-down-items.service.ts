@@ -51,7 +51,7 @@ const zone=[
   'Dhalla(Singair)',
   'Madaripur'
 ]
-const districts=[
+const district=[
 'Barguna',
 'Barisal',
 'Bhola',
@@ -626,7 +626,21 @@ const subDistrict=[
 'Sylhet Sadar',
 'Zakiganj',
 'South Shurma'
+]
 
+const month=[
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec'
 ]
 @Injectable()
 export class DropDownItemsService {
@@ -634,19 +648,23 @@ export class DropDownItemsService {
     return roles;
   }
 
-  getDistricts(){
-    return districts;
+  getMonths(){
+    return month;
   }
 
-  getSubDistrict(){
+  getDistricts(){
+    return district;
+  }
+
+  getSubDistricts(){
     return subDistrict;
   }
 
-  getZone(){
+  getZones(){
     return zone;
   }
 
-  getBloodGroup(){
+  getBloodGroups(){
     return bloodGroup;
   }
 }

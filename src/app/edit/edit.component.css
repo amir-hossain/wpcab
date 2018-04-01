@@ -35,6 +35,7 @@ h4{
 .sub-1 img{
     width: 20vh;
     height: 20vh;
+    border: gray solid 5px;
 }
 
 .clearfix::after {
@@ -47,19 +48,15 @@ h4{
     width:1em;
     height:1em;
 }
-.instraction{
-    background:orange;
-    padding: 4px 6px;
-}
 
-.instraction span{
-    font-weight: bold;
-    vertical-align: middle;
-}
-.instraction img{
-    width: 1em;
-    height: 1em;
-    vertical-align: middle;
+
+.upload-button{
+    background:orange;
+    display: block;
+    margin-top:5px; 
+    width: 21vh;
+    
+    
 }
 
 .alter h4{
@@ -69,6 +66,11 @@ h4{
 .alter input{
     width:18em;
     background: wheat;
+}
+
+
+.dob input,.dob select{
+    width: 6em;
 }
 
 

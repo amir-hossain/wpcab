@@ -225,7 +225,7 @@
           <mat-error *ngIf="conPassword.hasError('required') && conPassword.touched">
             Conform password required
           </mat-error>
-          <mat-error *ngIf="conPassword.hasError('matchPassword') && conPassword.touched">
+          <mat-error *ngIf="conPassword.hasError('missMatchPassword') && conPassword.touched">
               Conform password did not match
             </mat-error>
         </div><!--conform password -->

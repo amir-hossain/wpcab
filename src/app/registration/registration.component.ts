@@ -72,9 +72,9 @@ export class RegistrationComponent implements OnInit {
     this.authRef=this.db.database.ref('/auth');
     this.roles=this.ddis.getRoles();
     this.districts=this.ddis.getDistricts();
-    this.subDistricts=this.ddis.getSubDistrict();
-    this.zones=this.ddis.getZone();
-    this.bloodGroups=this.ddis.getBloodGroup();
+    this.subDistricts=this.ddis.getSubDistricts();
+    this.zones=this.ddis.getZones();
+    this.bloodGroups=this.ddis.getBloodGroups();
    }
 
   ngOnInit() {
@@ -247,7 +247,7 @@ nameAutoSuggestion(fg:FormGroup,controlName:string){
     let password=ac.controls.password.value;
     let conPasswordCon=ac.controls.conPassword;
     if(password!=conPasswordCon.value){
-      conPasswordCon.setErrors({matchPassword:true});
+      conPasswordCon.setErrors({missMatchPassword:true});
     }else{
       return null;
     }

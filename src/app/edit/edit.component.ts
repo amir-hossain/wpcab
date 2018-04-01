@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {Location} from '@angular/common';
 import {DropDownItemsService} from '../drop-down-items.service';
-import {FormBuilder,Validators,FormGroup} from '@angular/forms';
+import {FormBuilder,Validators,FormGroup, AbstractControl, ValidationErrors} from '@angular/forms';
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
@@ -11,11 +11,18 @@ import {FormBuilder,Validators,FormGroup} from '@angular/forms';
 })
 export class EditComponent implements OnInit{
   activeUserRole;
+  dateSegment;
+  photo;
+  //temporary profile url
+  url;
+  
 
   //table name
   userInfo;
   address;
   auth;
+  // fetch full auth table data
+  authFull=[];
 
   //drop down list
   selectedRole;
@@ -24,6 +31,7 @@ export class EditComponent implements OnInit{
   subDistricts;
   zones;
   bloodGroups;
+  months;
 
   // filtered list
   filteredDistrict=[];
@@ -80,34 +88,47 @@ export class EditComponent implements OnInit{
     this.activeUserRole=localStorage.getItem('activeUserRole');
     let selectedIndex=localStorage.getItem('index');
     //ger user info
-    this.fetchData('userInfo',selectedIndex).then(val=>this.userInfo=val);
-    this.fetchData('address',selectedIndex).then(val=>this.address=val);
-    this.fetchData('auth',selectedIndex).then(val=>{
+    this.fetchSelectedData('userInfo',selectedIndex).then(val=>this.userInfo=val);
+    this.fetchSelectedData('address',selectedIndex).then(val=>this.address=val);
+    this.fetchSelectedData('auth',selectedIndex).then(val=>{
       this.auth=val;
       //form created after data received
       this.intilizeForm();
+      if(this.userInfo.photo){
+        this.url=this.userInfo.photo;
+      }else{
+        this.url='./assets/img/default-pic.png';
+      }
     });
+
+    // get dropdown items
     this.roles=this.ddis.getRoles();
     this.districts=this.ddis.getDistricts();
-    this.subDistricts=this.ddis.getSubDistrict();
-    this.zones=this.ddis.getZone();
-    this.bloodGroups=this.ddis.getBloodGroup();
-    this.roles=this.ddis.getRoles();
-    this.zones=this.ddis.getZone();
+    this.subDistricts=this.ddis.getSubDistricts();
+    this.bloodGroups=this.ddis.getBloodGroups();
+    this.zones=this.ddis.getZones();
+    this.months=this.ddis.getMonths();
    
   }
 
-  fetchData(tableName,index){
+  fetchSelectedData(tableName,index){
     //return the promise after resolve
     return this.db.database.ref(tableName).once('value')
     //then is a resolved promise
     .then(snap=>{
       let temp;
+      if(!index){
+        temp=[];
+      }
+      
       if(snap){
         let data=snap.val();
         Object.keys(data).forEach((key,i)=>{
         if(i.toString()===index){
-          temp=data[''+key];
+          temp=data[key];
+        }
+        if(tableName==='auth'){
+          this.authFull.push(data[key])
         }
         })
         //return main data in main callback function
@@ -115,6 +136,47 @@ export class EditComponent implements OnInit{
       }
     }
   )
+  }
+
+  readUrl(event:any) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+  
+      reader.onload = (event:any) => {
+        this.url = event.target.result;
+      }
+  
+      reader.readAsDataURL(event.target.files[0]);
+      this.photo=event.target.files[0];
+    }
+  }
+
+  existPhone(control:AbstractControl):
+  ValidationErrors | null{
+    return control.value==='' ? null : this.existenceCheck(this.authFull,control,'phone')
+  }
+
+  emailOrEmpty(control: AbstractControl): ValidationErrors | null {
+    return control.value === '' ? null : Validators.email(control);
+  }
+
+  existEmail(control:AbstractControl):
+  ValidationErrors | null{
+    return control.value==='' ? null : this.existenceCheck(this.authFull,control,'email')
+  }
+
+  existenceCheck(list:any[],control:AbstractControl,fieldName){
+    // console.log(fieldName);
+    let error=null;
+    list.forEach(val=>{
+        // console.log(val);
+        if(val[fieldName].toString().startsWith(control.value)){
+          // console.log('true');
+          error={exist:true};
+        } 
+    })
+    
+    return error;
   }
   back(){
     this.loc.back();
@@ -127,8 +189,13 @@ export class EditComponent implements OnInit{
     this.genderForm=this.fb.group({
       gender:[this.userInfo.gender]
     });
+    // spite dd/mm/yy
+    this.dateSegment=(<string>this.userInfo.dob).split('/');
     this.dobForm=this.fb.group({
-      dob:[this.userInfo.dob,Validators.required]
+      day:[this.dateSegment[0],Validators.required],
+      month:[this.dateSegment[1]],
+      year:[this.dateSegment[2],Validators.required]
+
     });
     this.fatherNameForm=this.fb.group({
       fatherName:[this.userInfo.fatherName,Validators.required]
@@ -146,13 +213,17 @@ export class EditComponent implements OnInit{
       bloodGroup:[this.userInfo.bloodGroup]
     });
     this.phoneForm=this.fb.group({
-      phone:[this.auth.phone,Validators.required]
+      phone:[this.auth.phone,[Validators.required,this.existPhone.bind(this)]]
     });
     this.passwordForm=this.fb.group({
-      password:[this.auth.password,Validators.required]
+      password:[this.auth.password,Validators.required],
+      conPassword:[this.auth.password,Validators.required],
+    },
+    {
+      validator:this.matchPassword
     });
     this.emailForm=this.fb.group({
-      email:[this.auth.email]
+      email:[this.auth.email,[this.emailOrEmpty,this.existEmail.bind(this)]]
     });
     this.userNameForm=this.fb.group({
       userName:[this.auth.userName]
@@ -183,6 +254,17 @@ export class EditComponent implements OnInit{
     });
   }
 
+  matchPassword(ac:FormGroup){
+    let password=ac.controls.password.value;
+    let conPasswordCon=ac.controls.conPassword;
+    if(password!=conPasswordCon.value){
+      conPasswordCon.setErrors({missMatchedPassword:true});
+    }else{
+      return null;
+    }
+    // console.log(password);
+  }
+
   done(formName,fieldName,tableName,flagName){
     if(this[formName].valid){
       console.log(this[formName].get(fieldName).value);
@@ -192,12 +274,46 @@ export class EditComponent implements OnInit{
     }
   }
 
+  datedone(){
+    if(this.dobForm.valid){
+      console.log(this.dobForm.controls.day.value);
+      console.log(this.dobForm.controls.month.value);
+      console.log(this.dobForm.controls.year.value);
+      let day=this.dobForm.controls.day.value;
+      let month=this.dobForm.controls.month.value;
+      let year=this.dobForm.controls.year.value;
+      this.dateSegment[0]=day;
+      this.dateSegment[1]=month;
+      this.dateSegment[2]=year;
+      this.userInfo.dob=day+"/"+month+"/"+year;
+      this.dobEditing=false;
+    }
+  }
+
   cencel(formName,fieldName,tableName,flagName){
       this[formName].setValue({
         [fieldName]:this[tableName][fieldName]
       })
     this[flagName]=false;
   }
+  cencelPassword(){
+    this.passwordForm.setValue({
+      password:this.auth.password,
+      conPassword:this.auth.password,
+    })
+  this.passwordEditing=false;
+}
+
+  cencelDate(){
+    this.dobForm.setValue({
+      day:this.dateSegment[0],
+      month:this.dateSegment[1],
+      year:this.dateSegment[2],
+    })
+  this.dobEditing=false;
+}
+
+
   autoSuggestion(val,source,temp){
     // console.log(val);
     if(!val){
