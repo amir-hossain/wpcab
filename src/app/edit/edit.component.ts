@@ -3,6 +3,8 @@ import {AngularFireDatabase} from 'angularfire2/database';
 import {Location} from '@angular/common';
 import {DropDownItemsService} from '../drop-down-items.service';
 import {FormBuilder,Validators,FormGroup, AbstractControl, ValidationErrors} from '@angular/forms';
+import * as firebase from 'firebase/app';
+import { FirebaseApp } from 'angularfire2';
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
@@ -10,12 +12,19 @@ import {FormBuilder,Validators,FormGroup, AbstractControl, ValidationErrors} fro
   providers: [DropDownItemsService]
 })
 export class EditComponent implements OnInit{
+  userInfoKey;
+  addressKey;
+  authKey;
   activeUserRole;
   dateSegment;
   photo;
   //temporary profile url
   url;
   
+  // changes flage
+  authChanges=0;
+  userInfoChanges=0;
+  addressChanges=0;
 
   //table name
   userInfo;
@@ -82,7 +91,7 @@ export class EditComponent implements OnInit{
   nationalityForm;
   nIdForm;
 
-  constructor(private db:AngularFireDatabase,private loc:Location,private ddis:DropDownItemsService,private fb:FormBuilder) { }
+  constructor(private db:AngularFireDatabase,private loc:Location,private ddis:DropDownItemsService,private fb:FormBuilder,private fa: FirebaseApp) { }
 
   ngOnInit() {
     this.activeUserRole=localStorage.getItem('activeUserRole');
@@ -126,6 +135,13 @@ export class EditComponent implements OnInit{
         Object.keys(data).forEach((key,i)=>{
         if(i.toString()===index){
           temp=data[key];
+          if(tableName==='auth'){
+            this.authKey=key;
+          }else if(tableName==='address'){
+            this.addressKey=key;
+          }else{
+            this.userInfoKey=key;
+          }
         }
         if(tableName==='auth'){
           this.authFull.push(data[key])
@@ -148,13 +164,43 @@ export class EditComponent implements OnInit{
   
       reader.readAsDataURL(event.target.files[0]);
       this.photo=event.target.files[0];
+      this.userInfoChanges++;
+      console.log(this.userInfoChanges)
+      
     }
+  }
+
+  uploadPhoto(){
+    let storageRef = this.fa.storage().ref('img/'+this.photo.name);
+        var task=storageRef.put(this.photo);
+        task.on('state_changed',
+        snap=>
+          console.log(snap)
+          ,
+      err=>console.log(err)
+        ,()=>{
+         // push to userinfo table
+         this.userInfo.photo=task.snapshot.downloadURL;
+      console.log(task.snapshot.downloadURL);
+      var updates = {};
+      updates['/userInfo/' + this.userInfoKey] = this.userInfo;
+      this.db.database.ref().update(updates);
+      this.loc.back();
+      })
   }
 
   existPhone(control:AbstractControl):
   ValidationErrors | null{
     return control.value==='' ? null : this.existenceCheck(this.authFull,control,'phone')
   }
+
+  // notNumber(control:AbstractControl){
+  //   var temp=Number(control.value);
+  //   if()
+  //   return (temp!==NaN) ? null : control.setErrors({nan:'Not number'})
+  // }
+
+  
 
   emailOrEmpty(control: AbstractControl): ValidationErrors | null {
     return control.value === '' ? null : Validators.email(control);
@@ -179,7 +225,31 @@ export class EditComponent implements OnInit{
     return error;
   }
   back(){
-    this.loc.back();
+    if(this.userInfoChanges){
+      if(this.photo){
+        this.uploadPhoto();
+      }else{
+        var updates = {};
+        updates['/userInfo/' + this.userInfoKey] = this.userInfo;
+        this.db.database.ref().update(updates);
+      }
+  
+    }
+    if(this.addressChanges){
+      var updates = {};
+      updates['/address/' + this.addressKey] = this.address;
+      this.db.database.ref().update(updates);
+
+    }
+    if(this.authChanges){
+      var updates = {};
+      updates['/auth/' + this.authKey] = this.auth;
+      this.db.database.ref().update(updates);
+    }
+    if(!this.photo){
+      this.loc.back();
+    }
+   
   }
 
   intilizeForm(){
@@ -213,7 +283,7 @@ export class EditComponent implements OnInit{
       bloodGroup:[this.userInfo.bloodGroup]
     });
     this.phoneForm=this.fb.group({
-      phone:[this.auth.phone,[Validators.required,this.existPhone.bind(this)]]
+      phone:[this.auth.phone,[Validators.required,this.existPhone.bind(this),Validators.pattern('^\\d+$')]]
     });
     this.passwordForm=this.fb.group({
       password:[this.auth.password,Validators.required],
@@ -265,16 +335,18 @@ export class EditComponent implements OnInit{
     // console.log(password);
   }
 
-  done(formName,fieldName,tableName,flagName){
+  done(formName,fieldName,tableName,flagName,changesFlag){
     if(this[formName].valid){
-      console.log(this[formName].get(fieldName).value);
+      // console.log(this[formName].get(fieldName).value);
     let val=this[formName].get(fieldName).value;
     (<Object>this[tableName])[fieldName]=val;
     this[flagName]=false;
+    this[changesFlag]++;
+    console.log(this[changesFlag]);
     }
   }
 
-  datedone(){
+  dobDone(){
     if(this.dobForm.valid){
       console.log(this.dobForm.controls.day.value);
       console.log(this.dobForm.controls.month.value);
@@ -287,6 +359,8 @@ export class EditComponent implements OnInit{
       this.dateSegment[2]=year;
       this.userInfo.dob=day+"/"+month+"/"+year;
       this.dobEditing=false;
+      this.userInfoChanges++;
+      console.log(this.userInfoChanges);
     }
   }
 
@@ -304,7 +378,7 @@ export class EditComponent implements OnInit{
   this.passwordEditing=false;
 }
 
-  cencelDate(){
+  cencelDob(){
     this.dobForm.setValue({
       day:this.dateSegment[0],
       month:this.dateSegment[1],

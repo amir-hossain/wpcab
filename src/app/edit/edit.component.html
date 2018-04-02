@@ -7,9 +7,10 @@
       <ul *ngIf='userInfo' class='sub-1'>
       <span *ngIf='!userInfo.photo'>
         <label for='upload'>
-            <input type='file'  id='upload' (change)="readUrl($event)" style='display:none;'>
+            <input type='file'  id='upload' (change)="readUrl($event)" style='display:none;' #file>
          
             <img class="pic" [src]="url">
+            <button mat-raised-button (click)='file.click()' class="upload-button">Upload</button>
           </label>
       </span>
       <span *ngIf='userInfo.photo'>
@@ -29,7 +30,7 @@
         <h4>Name</h4>{{userInfo.fullName}}
       </li>
       <li *ngIf='nameEditing' class="alter">
-        <form [formGroup]='nameForm' (ngSubmit)='done("nameForm","fullName","userInfo","nameEditing")'>
+        <form [formGroup]='nameForm' (ngSubmit)='done("nameForm","fullName","userInfo","nameEditing","userInfoChanges")'>
             <h4>Name</h4>
          <input  type="text" formControlName='fullName'>
         <img src="assets/img/wrong.png" (click)='cencel("nameForm","fullName","userInfo","nameEditing")'>
@@ -46,7 +47,7 @@
           <h4>Gender</h4>{{userInfo.gender}}
         </li>
         <li *ngIf='genderEditing' class="alter">
-            <form [formGroup]='genderForm' (ngSubmit)='done("genderForm","gender","userInfo","genderEditing")'>
+            <form [formGroup]='genderForm' (ngSubmit)='done("genderForm","gender","userInfo","genderEditing","userInfoChanges")'>
                 <h4>Gender</h4> 
              <mat-radio-group formControlName='gender'>
                 <mat-radio-button type="radio" color='primary' name="gender" id="male" value="Male"   >Male</mat-radio-button>
@@ -63,7 +64,7 @@
             <h4>Date of birth</h4>{{userInfo.dob}}
           </li>
           <li *ngIf='dobEditing' class="alter">
-            <form [formGroup]='dobForm' (ngSubmit)='datedone()'>
+            <form [formGroup]='dobForm' (ngSubmit)='dobDone()'>
                 <h4>Date of birth</h4>
                 <span class="dob">
                   <input  type="number" placeholder="Day" formControlName='day'>
@@ -75,7 +76,7 @@
                   <input  type="number" placeholder="Year" formControlName='year'>
                 </span> 
              
-            <img src="assets/img/wrong.png" (click)='cencelDate()'>
+            <img src="assets/img/wrong.png" (click)='cencelDob()'>
             <!-- input type submit image button -->
             <input src="assets/img/right.png" type='image' class='submit-button'>
             <div class="clearfix"></div>
@@ -92,7 +93,7 @@
               <h4>Father name</h4>{{userInfo.fatherName}}
             </li>
             <li *ngIf='fatherNameEditing' class="alter">
-                <form [formGroup]='fatherNameForm' (ngSubmit)='done("fatherNameForm","fatherName","userInfo","fatherNameEditing")'>
+                <form [formGroup]='fatherNameForm' (ngSubmit)='done("fatherNameForm","fatherName","userInfo","fatherNameEditing","userInfoChanges")'>
                     <h4>Faher name</h4> 
                  <input  type="text" formControlName='fatherName'>
                 <img src="assets/img/wrong.png" (click)='cencel("fatherNameForm","fatherName","userInfo","fatherNameEditing")'>
@@ -109,7 +110,7 @@
                 <h4>Mother name</h4>{{userInfo.motherName}}
               </li>
               <li *ngIf='motherNameEditing' class="alter">
-                  <form [formGroup]='motherNameForm' (ngSubmit)='done("motherNameForm","motherName","userInfo","motherNameEditing")'>
+                  <form [formGroup]='motherNameForm' (ngSubmit)='done("motherNameForm","motherName","userInfo","motherNameEditing","userInfoChanges")'>
                       <h4>Mother name</h4> 
                    <input  type="text" formControlName='motherName'>
                   <img src="assets/img/wrong.png" (click)='cencel("motherNameForm","motherName","userInfo","motherNameEditing")'>
@@ -130,7 +131,7 @@
                     <h4>Invited by</h4>None
                   </li>
                 <li *ngIf='invitedByEditing' class="alter">
-                    <form [formGroup]='invitedByForm' (ngSubmit)='done("invitedByForm","invitedBy","userInfo","invitedByEditing")'>
+                    <form [formGroup]='invitedByForm' (ngSubmit)='done("invitedByForm","invitedBy","userInfo","invitedByEditing","userInfoChanges")'>
                         <h4>Invited by</h4> 
                      <input  type="text" formControlName='invitedBy'>
                     <img src="assets/img/wrong.png" (click)='cencel("invitedByForm","invitedBy","userInfo","invitedByEditing")'>
@@ -147,7 +148,7 @@
         <h4>Occupation</h4>{{userInfo.occupation}}
       </li>
       <li *ngIf='occupationEditing' class="alter">
-          <form [formGroup]='occupationForm' (ngSubmit)='done("occupationForm","occupation","userInfo","occupationEditing")'>
+          <form [formGroup]='occupationForm' (ngSubmit)='done("occupationForm","occupation","userInfo","occupationEditing","userInfoChanges")'>
               <h4>Occupation</h4>
               <mat-radio-group formControlName='occupation'>
                   <mat-radio-button type="radio" color='primary' name="occupation" id="student" value="Student"   >Student</mat-radio-button>
@@ -170,7 +171,7 @@
         <h4>Blood group</h4>None
       </li>
       <li *ngIf='bloodGroupEditing' class="alter">
-          <form [formGroup]='bloodGroupForm' (ngSubmit)='done("bloodGroupForm","bloodGroup","userInfo","bloodGroupEditing")'>
+          <form [formGroup]='bloodGroupForm' (ngSubmit)='done("bloodGroupForm","bloodGroup","userInfo","bloodGroupEditing","userInfoChanges")'>
               <h4>Blood Group</h4> 
               <mat-form-field>
                   <mat-select formControlName='bloodGroup'>
@@ -195,9 +196,9 @@
           <h4>Phone</h4>{{auth.phone}}
         </li>
         <li *ngIf='phoneEditing' class="alter">
-            <form [formGroup]='phoneForm' (ngSubmit)='done("phoneForm","phone","auth","phoneEditing")'>
+            <form [formGroup]='phoneForm' (ngSubmit)='done("phoneForm","phone","auth","phoneEditing","authChanges")'>
                 <h4>Phone</h4>
-             <input  type="number" formControlName='phone'>
+             <input  type="text" formControlName='phone'>
             <img src="assets/img/wrong.png" (click)='cencel("phoneForm","phone","auth","phoneEditing")'>
             <!-- input type submit image button -->
             <input src="assets/img/right.png" type='image' class='submit-button'>
@@ -208,6 +209,9 @@
             <div *ngIf='phoneForm.controls.phone.hasError("exist")' class="errorMessege">
               Phone exist
             </div>
+            <div *ngIf='phoneForm.controls.phone.hasError("pattern")' class="errorMessege">
+              Not a number
+            </div>
           </form>
         </li>
         <li *ngIf='!passwordEditing'>
@@ -215,7 +219,7 @@
         <h4>Password</h4>Hidden
       </li>
       <li *ngIf='passwordEditing' class="alter">
-          <form [formGroup]='passwordForm' (ngSubmit)='done("passwordForm","password","auth","passwordEditing")'>
+          <form [formGroup]='passwordForm' (ngSubmit)='done("passwordForm","password","auth","passwordEditing","authChanges")'>
               <h4>Password</h4>
            <input  type="password"  formControlName='password'>
           <div *ngIf='passwordForm.controls.password.invalid' class="errorMessege">
@@ -245,7 +249,7 @@
           <img src="assets/img/edit-icon.png" class="icon" (click)='emailEditing=true'>
           <h4>Email</h4>None</li>
           <li *ngIf='emailEditing' class="alter">
-              <form [formGroup]='emailForm' (ngSubmit)='done("emailForm","email","auth","emailEditing")'>
+              <form [formGroup]='emailForm' (ngSubmit)='done("emailForm","email","auth","emailEditing","authChanges")'>
                   <h4>Email</h4>
                <input  type="email" formControlName='email'>
               <img src="assets/img/wrong.png" (click)='cencel("emailForm","email","auth","emailEditing")'>
@@ -269,7 +273,7 @@
           <h4>User Name</h4>None
         </li>
         <li *ngIf='userNameEditing' class="alter">
-            <form [formGroup]='userNameForm' (ngSubmit)='done("userNameForm","userName","auth","userNameEditing")'>
+            <form [formGroup]='userNameForm' (ngSubmit)='done("userNameForm","userName","auth","userNameEditing","authChanges")'>
                 <h4>User Name</h4>
              <input  type="userName" formControlName='userName'>
             <img src="assets/img/wrong.png" (click)='cencel("userNameForm","userName","auth","userNameEditing")'>
@@ -283,7 +287,7 @@
           <h4>Role</h4>{{auth.role}}
         </li>
         <li *ngIf='roleEditing' class="alter">
-            <form [formGroup]='roleForm' (ngSubmit)='done("roleForm","role","auth","roleEditing")'>
+            <form [formGroup]='roleForm' (ngSubmit)='done("roleForm","role","auth","roleEditing","authChanges")'>
                 <h4>Role</h4>
                 <mat-form-field>
                     <mat-select formControlName='role'>
@@ -307,7 +311,7 @@
         <h4>Zone</h4>{{address.zone}}
       </li>
       <li *ngIf='zoneEditing' class="alter">
-          <form [formGroup]='zoneForm' (ngSubmit)='done("zoneForm","zone","address","zoneEditing")'>
+          <form [formGroup]='zoneForm' (ngSubmit)='done("zoneForm","zone","address","zoneEditing","addressChanges")'>
               <h4>Zone</h4> 
               <span>
                   <input  type="text" formControlName='zone' [matAutocomplete]='z' (keyup)='autoSuggestion($event.target.value,"zones","filteredZone")'>
@@ -330,7 +334,7 @@
           <img src="assets/img/edit-icon.png" class="icon" (click)='subDistrictEditing=true'>
         <h4>Sub district</h4>{{address.subDistrict}}</li>
         <li *ngIf='subDistrictEditing' class="alter">
-            <form [formGroup]='subDistrictForm' (ngSubmit)='done("subDistrictForm","subDistrict","address","subDistrictEditing")'>
+            <form [formGroup]='subDistrictForm' (ngSubmit)='done("subDistrictForm","subDistrict","address","subDistrictEditing","addressChanges")'>
                 <h4>Sub district</h4> 
                 <span>
                     <input  type="text" formControlName='subDistrict' [matAutocomplete]='subDist' (keyup)='autoSuggestion($event.target.value,"subDistricts","filteredsubDistrict")'>
@@ -354,7 +358,7 @@
         <h4>Permanent address</h4>{{address.permanentAddress}}
       </li>
       <li *ngIf='permanentAddressEditing' class="alter">
-          <form [formGroup]='permanentAddressForm' (ngSubmit)='done("permanentAddressForm","permanentAddress","address","permanentAddressEditing")'>
+          <form [formGroup]='permanentAddressForm' (ngSubmit)='done("permanentAddressForm","permanentAddress","address","permanentAddressEditing","addressChanges")'>
               <h4>Permanent address</h4>
            <input  type="permanentAddress" formControlName='permanentAddress'>
           <img src="assets/img/wrong.png" (click)='cencel("permanentAddressForm","permanentAddress","address","permanentAddressEditing")'>
@@ -371,7 +375,7 @@
         <h4>District</h4>{{address.district}}
       </li>
       <li *ngIf='districtEditing' class="alter">
-          <form [formGroup]='districtForm' (ngSubmit)='done("districtForm","district","address","districtEditing")'>
+          <form [formGroup]='districtForm' (ngSubmit)='done("districtForm","district","address","districtEditing","addressChanges")'>
               <h4>District</h4> 
               <span>
                   <input  type="text" formControlName='district' [matAutocomplete]='dist' (keyup)='autoSuggestion($event.target.value,"districts","filtereddistrict")'>
@@ -399,7 +403,7 @@
         <h4>Country</h4>None
       </li>
       <li *ngIf='countryEditing' class="alter">
-          <form [formGroup]='countryForm' (ngSubmit)='done("countryForm","country","address","countryEditing")'>
+          <form [formGroup]='countryForm' (ngSubmit)='done("countryForm","country","address","countryEditing","addressChanges")'>
               <h4>Country</h4>
            <input  type="text" formControlName='country'>
           <img src="assets/img/wrong.png" (click)='cencel("countryForm","country","address","countryEditing")'>
@@ -416,7 +420,7 @@
         <h4>Nationality</h4>None
       </li>
       <li *ngIf='nationalityEditing' class="alter">
-          <form [formGroup]='nationalityForm' (ngSubmit)='done("nationalityForm","nationality","address","nationalityEditing")'>
+          <form [formGroup]='nationalityForm' (ngSubmit)='done("nationalityForm","nationality","address","nationalityEditing","addressChanges")'>
               <h4>Nationality</h4> 
            <input  type="text" formControlName='nationality'>
           <img src="assets/img/wrong.png" (click)='cencel("nationalityForm","nationality","address","nationalityEditing")'>
@@ -434,7 +438,7 @@
         <h4>Natioal ID</h4>None
       </li>
       <li *ngIf='nIdEditing' class="alter">
-          <form [formGroup]='nIdForm' (ngSubmit)='done("nIdForm","nId","address","nIdEditing")'>
+          <form [formGroup]='nIdForm' (ngSubmit)='done("nIdForm","nId","address","nIdEditing","addressChanges")'>
               <h4>Natioal ID</h4>
            <input  type="text" formControlName='nId'>
           <img src="assets/img/wrong.png" (click)='cencel("nIdForm","nId","address","nIdEditing")'>
