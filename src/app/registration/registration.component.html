@@ -18,9 +18,9 @@
       <span class="warning">* Required field</span>
       <mat-card class="card" formGroupName='userInfo'>
         <label for='upload'>
-          <input type='file'  id='upload' (change)="readUrl($event)" style='display:none;'>
-       
+          <input type='file'  id='upload' (change)="readUrl($event)" style='display:none;' #file > 
           <img class="pic" [src]="url">
+          <a mat-raised-button class='upload-button' (click)='file.click()'>Upload</a>
         </label>
         <div>
           <mat-form-field>
@@ -32,20 +32,43 @@
         </mat-error>
       </div><!-- full name -->
       <mat-radio-group   formControlName="gender">
-        <h5>*Gender</h5>
+        <div class="label">*Gender</div>
         <mat-radio-button type="radio" color='primary'  name="gender" id="male" value="Male" >Male</mat-radio-button>
        <mat-radio-button type="radio" color='primary' name="gender" id="female" value="Female" > Female</mat-radio-button>
       </mat-radio-group><!-- gender -->
+      <mat-error class='custom-error' *ngIf="gender.invalid && gender.touched">
+        Gender required
+      </mat-error>
       <div>
-        <mat-form-field>
-            <mat-label>*Date of birth</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="dob">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
-        </mat-form-field> <!-- dob -->
-        <mat-error *ngIf="dob.invalid && dob.touched">
-          Date of birth required
-        </mat-error>
+      <div class="label">*Date of birth</div>
+      <div class="dob">
+      <mat-form-field class='day'>
+          <mat-label>Day</mat-label>
+          <input matInput  type="number" formControlName='day'>
+          <mat-error *ngIf="day.invalid && day.touched">
+              Day of birth required
+            </mat-error>
+      </mat-form-field>
+      <mat-form-field class="middle">
+          <mat-label>Month</mat-label>
+          <mat-select formControlName='month'>
+              <mat-option *ngFor='let option of months' [value]='option'>
+                {{option}}
+              </mat-option>
+           </mat-select>
+           <mat-error *ngIf="month.invalid && month.touched">
+              Month of birth required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+              <mat-label>Year</mat-label>
+              <input matInput type="number" formControlName='year'>
+              <mat-error *ngIf="year.invalid && year.touched">
+                  Year of birth required
+                </mat-error>
+          </mat-form-field>
+        </div>
+        
       </div><!-- dob -->
       <div>
           <mat-form-field>
@@ -108,8 +131,8 @@
               </mat-error>
             </div><!-- invited by -->
             <div>
-              <h5 class='not-required'>Blood group <span class='instraction'>(click on below field for more options)</span></h5>
                 <mat-form-field>
+                    <mat-label class="not-required">Blood group</mat-label>
                  <mat-select formControlName='bloodGroup'>
                     <mat-option *ngFor='let option of bloodGroups' [value]='option'>
                       {{option}}
@@ -118,12 +141,15 @@
                 </mat-form-field>
               </div> <!-- blood group -->
       <mat-radio-group formControlName="occupation">
-        <h5>*Occupation</h5>
+        <div class="label">*Occupation</div>
         <mat-radio-button type="radio" color='primary' name="occupation" id="student" value="Student" >Student</mat-radio-button>
        <mat-radio-button type="radio" color='primary' name="occupation" id="job holder" value="Job holder" > Job holder</mat-radio-button>
         <mat-radio-button type="radio" color='primary' name="occupation" id="bussnessman" value="Bussnessman" >Bussnessman</mat-radio-button>
         <mat-radio-button type="radio" color='primary' name="occupation" id="others" value="Others" >Others</mat-radio-button>
       </mat-radio-group><!-- occupation -->
+      <mat-error class='custom-error' *ngIf="occupation.invalid && occupation.touched">
+        Occupation required
+      </mat-error>
       </mat-card>
     </div><!-- user info -->
     <div class="container">
@@ -252,17 +278,23 @@
             Email exist
           </mat-error>
         </div> <!-- email -->
-        <h5>*Role <span class='instraction'>(click on below field for more options)</span></h5>
         <mat-form-field>
+            <mat-label>Role</mat-label>
         <mat-select formControlName='role'>
           <mat-option *ngFor='let role of roles' [value]='role'>
             {{role}}
           </mat-option>
         </mat-select>
       </mat-form-field>
+      <mat-error *ngIf="role.invalid && role.touched">
+          Role required
+        </mat-error>
     </mat-card>
     <div>
+    
     <button type="submit"  mat-raised-button color="primary">Signup</button>
+    <span class="footer-error" *ngIf='footerError'>Try agin after fill up all required field! </span>
+    <div class="clearfix"></div>
   </div>
     </div> <!-- online -->
     

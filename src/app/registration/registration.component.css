@@ -1,13 +1,13 @@
-
-
 .pic{
-    border: #adadad solid 6px;
+    border:gray solid 5px;
     width:150px;
     height:150px;
 }
 mat-option{
    border-bottom: rgba(255, 255, 255, 0.76) solid 5px;
 }
+
+
 
 .thumb{
     vertical-align:middle;
@@ -40,7 +40,24 @@ label{
 
 mat-form-field{
     width: 50em !important;
-    
+
+}
+
+.day{
+    margin-bottom:10px; 
+}
+
+.dob mat-form-field{
+    width:30% !important;
+}
+
+.dob .middle{
+    margin: 0 2em;
+}
+
+.dob mat-error{
+    font-size: 17px;
+    padding: 2px !important;
 }
 
 
@@ -66,20 +83,33 @@ mat-form-field{
     font-size:22px;
 }
 
-h5{
-    font-size: 22px;
+.label{
+    font-size: 18px;
+    margin-top:10px;
+    margin-bottom: 10px; 
 }
 
 
 
-  mat-label,h5,span{
+  mat-label,.label,span{
     color:rgb(32, 2, 138);
+    font-weight: bold;
   }
 
+  .not-required{
+      color:grey;
+      font-weight:normal; 
+  }
 
+  .custom-error{
+      margin-top:15px;
+  }
 
-::ng-deep .mat-snack-bar-container.mat-snack-bar-center{
-    margin-top:65% !important; 
+  .upload-button{
+    background:orange;
+    display: block;
+    margin-top:5px; 
+    width: 160px;
 }
 
 h3{
@@ -89,13 +119,25 @@ h3{
 
 .mat-radio-button{
     padding-right: 1.8em;
-   
 }
 
+.footer-error{
+    display: table;
+    padding: 2em 0;
+    color:red;
+    margin: auto;
+    font-size: 20px;
+}
 button{
     float: right;
     margin: 2em 0;
     padding: .5em 3em;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
 }
 
 

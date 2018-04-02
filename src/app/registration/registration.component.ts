@@ -16,35 +16,53 @@ import {DropDownItemsService} from '../drop-down-items.service';
   providers: [DropDownItemsService]
 })
 export class RegistrationComponent implements OnInit {
-  startDate = new Date(1990, 0, 1);
-  activeUserRole
+  activeUserRole;
+  storageRef;
   registrationForm:FormGroup;
-  filteredNames=[];
+  photo;
+  roles;
+  phoneList=[];
+  autoInfo=[];
+  footerError=false;
+
+  // table
   userInfoRef;
   addressRef;
   authRef;
-  storageRef;
-  names=[];
+  // preview profile  url
   url='./assets/img/add.png';
-  photo;
-  roles;
+  
+  // drop down source
+  names=[];
   districts=[];
-  filteredDistricts=[];
-  subDistricts=[];
-  filteredSubDistricts=[];
-  zones=[];
-  filteredZone=[];
   bloodGroups=[];
-  autoInfo=[];
-  phoneList=[];
+  subDistricts=[];
+  months=[];
+  zones=[];
 
+  //drop down suggestion
+  filteredNames=[];
+  filteredDistricts=[];
+  filteredSubDistricts=[];
+  filteredZone=[];
+  
   get fullName() { return this.registrationForm.get('userInfo').get('fullName'); }
 
-  get dob() { return this.registrationForm.get('userInfo').get('dob'); }
+  // get dob() { return this.registrationForm.get('userInfo').get('dob'); }
+
+  get gender() { return this.registrationForm.get('userInfo').get('gender'); }
+
+  get month() { return this.registrationForm.get('userInfo').get('month'); }
+
+  get day() { return this.registrationForm.get('userInfo').get('day'); }
+
+  get year() { return this.registrationForm.get('userInfo').get('year'); }
 
   get fatherName() { return this.registrationForm.get('userInfo').get('fatherName'); }
 
   get motherName() { return this.registrationForm.get('userInfo').get('motherName'); }
+
+  get occupation() { return this.registrationForm.get('userInfo').get('occupation'); }
 
   get invitedBy() { return this.registrationForm.get('userInfo').get('invitedBy'); }
 
@@ -66,6 +84,8 @@ export class RegistrationComponent implements OnInit {
 
   get email() { return this.registrationForm.get('auth').get('email'); }
 
+  get role() { return this.registrationForm.get('auth').get('role'); }
+
   constructor(private builder:FormBuilder,private db:AngularFireDatabase,private router:Router,private fb: FirebaseApp,private ddis:DropDownItemsService) {
     this.userInfoRef=this.db.database.ref("/userInfo");
     this.addressRef=this.db.database.ref('/address');
@@ -75,6 +95,7 @@ export class RegistrationComponent implements OnInit {
     this.subDistricts=this.ddis.getSubDistricts();
     this.zones=this.ddis.getZones();
     this.bloodGroups=this.ddis.getBloodGroups();
+    this.months=this.ddis.getMonths();
    }
 
   ngOnInit() {
@@ -83,12 +104,15 @@ export class RegistrationComponent implements OnInit {
       userInfo:this.builder.group({
         photo:[""],
         fullName:["",Validators.required],
-        gender:['Male'],
-        dob:["",Validators.required],
+        gender:['',Validators.required],
+        dob:[""],
+        day:["",Validators.required],
+        month:["",Validators.required],
+        year:["",Validators.required],
         fatherName:["",Validators.required],
         motherName:["",Validators.required],
         invitedBy:["",Validators.required],
-        occupation:["Student"],
+        occupation:["",Validators.required],
         bloodGroup:[''],
       }),
       address:this.builder.group({
@@ -105,7 +129,7 @@ export class RegistrationComponent implements OnInit {
         password:["",Validators.required],
         conPassword:["",Validators.required],
         phone:["",[Validators.required,this.existPhone.bind(this)]],
-        role:["User"],
+        role:['',Validators.required],
         email:['',[this.emailOrEmpty,this.existEmail.bind(this)]],
       },{
         validator:this.matchPassword
@@ -276,7 +300,7 @@ nameAutoSuggestion(fg:FormGroup,controlName:string){
     if(this.registrationForm.valid){
       let temp=this.registrationForm.controls.userInfo.value;
       let fg=<FormGroup>this.registrationForm.controls.userInfo;
-      temp.dob=(<Date>fg.controls.dob.value).toLocaleDateString();
+      temp.dob=this.day.value+'/'+this.month.value+'/'+this.year.value;
    
           // console.log(temp);
       // push to address table
@@ -301,7 +325,7 @@ nameAutoSuggestion(fg:FormGroup,controlName:string){
         }
         
       })
-    
+      this.footerError=true;
     }
   
   }
