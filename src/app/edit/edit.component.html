@@ -445,6 +445,9 @@
           <!-- input type submit image button -->
           <input src="assets/img/right.png" type='image' class='submit-button'>
           <div class="clearfix"></div>
+          <div *ngIf='nIdForm.controls.nId.hasError("pattern")' class="errorMessege">
+              Not a number
+            </div>
         </form>
       </li>
     </ul>

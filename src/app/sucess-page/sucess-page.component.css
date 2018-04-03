@@ -12,15 +12,36 @@ mat-card{
     display: table;
     margin:auto;
 }
-.home-btn{
-    width: 200px;
-    float: left;
-    margin: 30px 15px 0px 0px;
+.home-btn,.registration-btn{
+    margin: 1em 0em;
+    width: 10em;
+    padding:.5em 0em;
+    font-size: 20px;
+}
+
+.ok-btn{
+    display: table;
+    margin: 1em auto;
+    width: 14em;
+    font-size: 20px;
+    padding:.5em 0em;
     
+}
+.home-btn{
+    float: left;
 }
 
 .registration-btn{
-    float:right;
-    width: 200px;
-    margin: 30px 0px 0px 0px;
+    float: right;
 }
+
+/* .action{
+    display: table;
+    margin: auto;
+} */
+
+img{
+    width: 256px;
+    height: 256px;
+}
+

@@ -3,7 +3,6 @@ import {AngularFireDatabase} from 'angularfire2/database';
 import {Location} from '@angular/common';
 import {DropDownItemsService} from '../drop-down-items.service';
 import {FormBuilder,Validators,FormGroup, AbstractControl, ValidationErrors} from '@angular/forms';
-import * as firebase from 'firebase/app';
 import { FirebaseApp } from 'angularfire2';
 @Component({
   selector: 'app-edit',
@@ -320,7 +319,7 @@ export class EditComponent implements OnInit{
       nationality:[this.address.nationality]
     });
     this.nIdForm=this.fb.group({
-      nId:[this.address.nid]
+      nId:[this.address.nid,Validators.pattern('^\\d+$')]
     });
   }
 

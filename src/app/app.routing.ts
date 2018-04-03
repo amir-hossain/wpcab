@@ -74,7 +74,12 @@ const routes:Routes=[
                 component:ApproveComponent
             },
             {
-                path:'sucess',
+                path:'registration-sucessfull',
+                canActivate:[AntiUserGuard],
+                component:SucessPageComponent
+            },
+            {
+                path:'delete-sucessfull',
                 canActivate:[AntiUserGuard],
                 component:SucessPageComponent
             },

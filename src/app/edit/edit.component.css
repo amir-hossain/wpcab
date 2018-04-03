@@ -74,8 +74,8 @@ h4{
 
 .alter img,.submit-button {
     float: right;
-    width: 2em !important;
-    height: 2em !important;
+    width: 25px !important;
+    height: 25px !important;
     margin-left:15px;
     
 }

@@ -1,10 +1,13 @@
 <div class='container'>
   <mat-card>
-    <h4>Registration sucessfull !</h4>
+    <img src="./assets/img/right.png" alt="">
+    <h4 *ngIf='path==="/registration-sucessfull"'>Registration sucessfull !</h4>
+    <h4 *ngIf='path==="/delete-sucessfull"'>sucessfully deleted !</h4>
   </mat-card>
-  <div>
+  <div *ngIf='path==="/registration-sucessfull"'>
   <a href='home' class='home-btn' mat-raised-button color='primary' >Home</a>
   <a href="registration" mat-raised-button class="registration-btn" color='primary'>Registration</a>
-
 </div>
+
+<a href='home' *ngIf='path==="/delete-sucessfull"' class='ok-btn' mat-raised-button color='primary' >Ok</a>
 </div>

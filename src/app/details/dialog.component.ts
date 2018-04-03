@@ -1,5 +1,7 @@
 import {Component, Inject} from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {AngularFireDatabase} from 'angularfire2/database';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dialog',
@@ -10,10 +12,20 @@ export class DialogComponent{
 
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any,private db:AngularFireDatabase,private router:Router) { }
 
-  onNoClick(): void {
+  no(): void {
     this.dialogRef.close();
+  }
+  yes(): void {
+    this.dialogRef.close();
+    // console.log(this.data.userInfoKey);
+    // console.log(this.data.addressKey);
+    // console.log(this.data.authKey);
+    this.db.database.ref('/userInfo/' + this.data.userInfoKey).remove();
+    this.db.database.ref('/address/' + this.data.addressKey).remove();
+    this.db.database.ref('/auth/' + this.data.authKey).remove();
+    this.router.navigateByUrl('delete-sucessfull');
   }
 
 }

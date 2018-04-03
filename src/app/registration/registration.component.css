@@ -91,7 +91,7 @@ mat-form-field{
 
 
 
-  mat-label,.label,span{
+  mat-label,.label,span,mat-option{
     color:rgb(32, 2, 138);
     font-weight: bold;
   }

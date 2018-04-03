@@ -74,6 +74,8 @@ export class RegistrationComponent implements OnInit {
 
   get district() {  return this.registrationForm.get('address').get('district');}
 
+  get nId() { return this.registrationForm.get('address').get('nId'); }
+
   get userName() { return this.registrationForm.get('auth').get('userName'); }
 
   get password() { return this.registrationForm.get('auth').get('password'); }
@@ -85,6 +87,7 @@ export class RegistrationComponent implements OnInit {
   get email() { return this.registrationForm.get('auth').get('email'); }
 
   get role() { return this.registrationForm.get('auth').get('role'); }
+
 
   constructor(private builder:FormBuilder,private db:AngularFireDatabase,private router:Router,private fb: FirebaseApp,private ddis:DropDownItemsService) {
     this.userInfoRef=this.db.database.ref("/userInfo");
@@ -106,9 +109,9 @@ export class RegistrationComponent implements OnInit {
         fullName:["",Validators.required],
         gender:['',Validators.required],
         dob:[""],
-        day:["",Validators.required],
+        day:["",[Validators.required,Validators.pattern('^\\d+$')]],
         month:["",Validators.required],
-        year:["",Validators.required],
+        year:["",[Validators.required,Validators.pattern('^\\d+$')]],
         fatherName:["",Validators.required],
         motherName:["",Validators.required],
         invitedBy:["",Validators.required],
@@ -122,13 +125,13 @@ export class RegistrationComponent implements OnInit {
         district:["",Validators.required],
         country:[""],
         nationality:[""],
-        nId:[""],
+        nId:["",Validators.pattern('^\\d+$')],
       }),
       auth:this.builder.group({
         userName:['',[this.existUserName.bind(this)]],
         password:["",Validators.required],
         conPassword:["",Validators.required],
-        phone:["",[Validators.required,this.existPhone.bind(this)]],
+        phone:["",[Validators.required,this.existPhone.bind(this),Validators.pattern('^\\d+$')]],
         role:['',Validators.required],
         email:['',[this.emailOrEmpty,this.existEmail.bind(this)]],
       },{
@@ -313,7 +316,7 @@ nameAutoSuggestion(fg:FormGroup,controlName:string){
         }else{
           this.userInfoRef.push(temp);
         }   
-        this.router.navigateByUrl('sucess'); 
+        this.router.navigateByUrl('registration-sucessfull'); 
     }else{
       Object.keys(this.registrationForm.controls).forEach(groupName=>{
         let formGroup=<FormGroup>this.registrationForm.get(groupName);

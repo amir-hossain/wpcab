@@ -44,10 +44,13 @@
       <div class="dob">
       <mat-form-field class='day'>
           <mat-label>Day</mat-label>
-          <input matInput  type="number" formControlName='day'>
-          <mat-error *ngIf="day.invalid && day.touched">
+          <input matInput  type="text" formControlName='day'>
+          <mat-error *ngIf="day.hasError('required') && day.touched">
               Day of birth required
             </mat-error>
+            <mat-error *ngIf="day.hasError('pattern')">
+                Not a number
+              </mat-error>
       </mat-form-field>
       <mat-form-field class="middle">
           <mat-label>Month</mat-label>
@@ -58,14 +61,17 @@
            </mat-select>
            <mat-error *ngIf="month.invalid && month.touched">
               Month of birth required
-            </mat-error>
+           </mat-error>
           </mat-form-field>
           <mat-form-field>
               <mat-label>Year</mat-label>
-              <input matInput type="number" formControlName='year'>
-              <mat-error *ngIf="year.invalid && year.touched">
+              <input matInput type="text" formControlName='year'>
+              <mat-error *ngIf="year.hasError('required') && year.touched">
                   Year of birth required
                 </mat-error>
+                <mat-error *ngIf="year.hasError('pattern')">
+                    Not a number
+                  </mat-error>
           </mat-form-field>
         </div>
         
@@ -218,8 +224,11 @@
             </div><!-- nationality -->
           <div>
               <mat-form-field>
-                <input matInput type="number" placeholder="National ID" formControlName="nId">
-              </mat-form-field> 
+                <input matInput type="text" placeholder="National ID" formControlName="nId">
+              </mat-form-field>
+              <mat-error *ngIf="nId.hasError('pattern')">
+                  Not a number
+                </mat-error> 
             </div><!-- nid -->
         </mat-card>
     </div><!-- address -->
@@ -258,7 +267,7 @@
       <div>
         <mat-form-field>
             <mat-label>*Phone </mat-label>
-        <input matInput type="number" formControlName="phone">
+        <input matInput type="text" formControlName="phone">
       </mat-form-field>
         <mat-error *ngIf="phone.hasError('required') && phone.touched">
           Phone required
@@ -266,6 +275,9 @@
         <mat-error *ngIf="phone.hasError('exist')">
           Phone exist
         </mat-error>
+        <mat-error *ngIf="phone.hasError('pattern')">
+            Not a number
+          </mat-error>
       </div><!-- phone -->
       <div>
           <mat-form-field>

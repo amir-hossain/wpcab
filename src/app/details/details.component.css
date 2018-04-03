@@ -15,7 +15,7 @@ ul{
 .payment-btn, .spayment-btn ,.delete-btn{
     display: block;
     margin-top:4vh; 
-    width: 20vh;
+    width: 180px;
     padding: .5em 0;
     font-size: 20px;
     background: green;
@@ -54,8 +54,9 @@ h4{
 }
 
 .sub-1 img{
-    width: 20vh;
-    height: 20vh;
+    width: 170px;
+    height: 170px;
+    border: 5px solid gray;
 }
 
 

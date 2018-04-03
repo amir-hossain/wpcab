@@ -14,6 +14,9 @@ export class DetailsComponent implements OnInit {
   address;
   auth;
   activeUserRole;
+  userInfoKey;
+  addressKey;
+  authKey;
   constructor(private db:AngularFireDatabase,private loc:Location,public dialog: MatDialog) { }
 
   ngOnInit() {
@@ -36,6 +39,8 @@ export class DetailsComponent implements OnInit {
         Object.keys(data).forEach((key,i)=>{
         if(i.toString()===index){
           temp=data[''+key];
+          this[tableName+'Key']=key;
+          // console.log(tableName+'key');
         }
         })
         //return main data in main callback function
@@ -50,9 +55,12 @@ export class DetailsComponent implements OnInit {
   }
 
   delete(){
+    console.log(this.userInfoKey);
+    console.log(this.addressKey);
+    console.log(this.authKey);
     let dialogRef = this.dialog.open(DialogComponent, {
       disableClose:true,
-      data: { name: this.userInfo.fullName}
+      data: { name: this.userInfo.fullName,userInfoKey:this.userInfoKey,authKey:this.authKey,addressKey:this.addressKey}
     });
     
   }
