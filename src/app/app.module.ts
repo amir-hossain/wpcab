@@ -34,6 +34,7 @@ import {AdminGuard} from './admin.guard';
 import {AdcountGuard} from './adcount.guard';
 import {AntiUtorGuard} from './anti-utor.guard';
 import { EditComponent } from './edit/edit.component';
+import { DialogComponent } from './details/dialog.component';
 
 
 const confiq={
@@ -68,6 +69,7 @@ const confiq={
     UserNavComponent,
     AccountsComponent,
     EditComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -79,6 +81,7 @@ const confiq={
     AngularFireModule.initializeApp(confiq),
     AngularFireDatabaseModule
   ],
+  entryComponents:[DialogComponent],
   providers: [AngularFireAuth,LoginGuard,AntiUserGuard,AccountantGuard,AdminGuard,AdcountGuard,AntiUtorGuard],
   bootstrap: [AppComponent]
 })

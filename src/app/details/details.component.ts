@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {AngularFireDatabase} from 'angularfire2/database';
-import {Location} from '@angular/common'
+import {Location} from '@angular/common';
+import {MatDialog} from '@angular/material';
+import {DialogComponent} from './dialog.component';
 
 @Component({
   selector: 'app-details',
@@ -12,7 +14,7 @@ export class DetailsComponent implements OnInit {
   address;
   auth;
   activeUserRole;
-  constructor(private db:AngularFireDatabase,private loc:Location) { }
+  constructor(private db:AngularFireDatabase,private loc:Location,public dialog: MatDialog) { }
 
   ngOnInit() {
     this.activeUserRole=localStorage.getItem('activeUserRole');
@@ -45,5 +47,13 @@ export class DetailsComponent implements OnInit {
 
   back(){
     this.loc.back();
+  }
+
+  delete(){
+    let dialogRef = this.dialog.open(DialogComponent, {
+      disableClose:true,
+      data: { name: this.userInfo.fullName}
+    });
+    
   }
 }
