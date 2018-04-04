@@ -35,6 +35,7 @@ import {AdcountGuard} from './adcount.guard';
 import {AntiUtorGuard} from './anti-utor.guard';
 import { EditComponent } from './edit/edit.component';
 import { DialogComponent } from './details/dialog.component';
+import { IgxRippleModule } from 'igniteui-angular/main';
 
 
 const confiq={
@@ -74,6 +75,7 @@ const confiq={
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    IgxRippleModule,
     Meterial,
     AppRoutingModule,
     FormsModule,

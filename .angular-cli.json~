@@ -20,10 +20,9 @@
       "prefix": "app",
       "styles": [
         "styles.css",
-        "custom.theme.scss",
-        "../node_modules/igniteui-angular/styles/igniteui-angular.css"
+        "custom.theme.scss"
       ],
-       "scripts": ["../node_modules/hammerjs/hammer.min.js"],
+      "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
