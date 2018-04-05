@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AngularFireDatabase} from 'angularfire2/database';
 import{Router} from '@angular/router';
+import {PageEvent} from '@angular/material';
 
 @Component({
   selector: 'app-collection',
@@ -52,7 +53,7 @@ export class CollectionComponent implements OnInit {
         zone:this.addressArry[i].zone,
         subDistrict:this.addressArry[i].subDistrict
       };
-      console.log(temp)
+      // console.log(temp)
       this.mixedArray.push(temp);
     }
 
@@ -87,7 +88,22 @@ export class CollectionComponent implements OnInit {
           val.subDistrict.toLowerCase().startsWith(subDistrict.toLowerCase()))
       // console.log(bakFilteredArray);
       }
-      
+  }
+
+  length = 100;
+  pageSize = 10;
+  pageSizeOptions = [5, 10, 25, 100];
+
+  // MatPaginator Output
+  pageEvent: PageEvent;
+
+  pageSizeChange(){
+    console.log('size changed');
+  }
+
+  pageChange(){
+    console.log('page changed');
   }
 }
+
 

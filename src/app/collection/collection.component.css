@@ -9,12 +9,12 @@ tr{
 }
 .table-card{
     margin-bottom: 1px;
-    padding-top: 10px; 
-    padding-bottom: 10px; 
+    padding-top: 20px; 
+    padding-bottom: 20px; 
     
 }
 
-mat-card:hover{
+.table-card:hover{
     cursor: pointer;
 }
 
@@ -56,4 +56,16 @@ img{
   .middle-filter{
       margin: 0% 4%;
   }
+
+  mat-paginator{
+      font-size: 20px;
+      display: table;
+      margin: auto;
+  }
+
+
+    .footer{
+        padding-top:0px;
+        padding-bottom:0px; 
+    }
 

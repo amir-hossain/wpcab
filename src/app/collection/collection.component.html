@@ -51,6 +51,14 @@
     <td>{{obj.zone}}</td>
     <td>{{obj.subDistrict}}</td>
   </mat-card>
+  <mat-card class="footer">
+  <mat-paginator [length]="length"
+              [pageSize]="pageSize"
+              [pageSizeOptions]="pageSizeOptions"
+              (page)="pageSizeChange()"
+              >
+</mat-paginator>
+</mat-card>
 </table>
 
 
