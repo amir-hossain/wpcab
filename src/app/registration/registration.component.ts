@@ -18,8 +18,10 @@ import {DropDownItemsService} from '../drop-down-items.service';
 export class RegistrationComponent implements OnInit {
   activeUserRole;
   storageRef;
+  uploding=false;
   registrationForm:FormGroup;
   photo;
+  total;
   roles;
   phoneList=[];
   autoInfo=[];
@@ -48,8 +50,6 @@ export class RegistrationComponent implements OnInit {
   
   get fullName() { return this.registrationForm.get('userInfo').get('fullName'); }
 
-  // get dob() { return this.registrationForm.get('userInfo').get('dob'); }
-
   get gender() { return this.registrationForm.get('userInfo').get('gender'); }
 
   get month() { return this.registrationForm.get('userInfo').get('month'); }
@@ -62,6 +62,8 @@ export class RegistrationComponent implements OnInit {
 
   get motherName() { return this.registrationForm.get('userInfo').get('motherName'); }
 
+  get bloodGroup() { return this.registrationForm.get('userInfo').get('bloodGroup'); }
+
   get occupation() { return this.registrationForm.get('userInfo').get('occupation'); }
 
   get invitedBy() { return this.registrationForm.get('userInfo').get('invitedBy'); }
@@ -73,6 +75,10 @@ export class RegistrationComponent implements OnInit {
   get permanentAddress() { return this.registrationForm.get('address').get('permanentAddress'); }
 
   get district() {  return this.registrationForm.get('address').get('district');}
+
+  get country() {  return this.registrationForm.get('address').get('country');}
+
+  get nationality() {  return this.registrationForm.get('address').get('nationality');}
 
   get nId() { return this.registrationForm.get('address').get('nId'); }
 
@@ -152,7 +158,6 @@ export class RegistrationComponent implements OnInit {
       // console.log(this.options);
       }
     });
-
     //get auth table
     this.authRef.once('value',snap=>{
       let data=snap.val();
@@ -164,7 +169,11 @@ export class RegistrationComponent implements OnInit {
       }
     })
 
-
+    this.db.database.ref('total').once('value')
+    .then(snap=>{
+      this.total=snap.val();
+      // console.log(snap.val())
+    });
   
   let userInfoGroup=<FormGroup>this.registrationForm.controls.userInfo;
   this.nameAutoSuggestion(userInfoGroup,'fatherName');
@@ -281,6 +290,23 @@ nameAutoSuggestion(fg:FormGroup,controlName:string){
     // console.log(password);
   }
 
+  uploadPhoto2(key){
+    let storageRef = this.fb.storage().ref('img/'+this.photo.name);
+    var task=storageRef.put(this.photo);
+    task.on('state_changed',
+    snap=>
+      console.log(snap)
+      ,
+  err=>console.log(err)
+    ,()=>{
+     // push to userinfo table
+     this.db.database.ref('/users/'+key+'/userInfo').update({
+      photo:task.snapshot.downloadURL
+     });
+     
+})
+  }
+
   
   uploadPhoto(userInfo){
     let storageRef = this.fb.storage().ref('img/'+this.photo.name);
@@ -299,8 +325,57 @@ nameAutoSuggestion(fg:FormGroup,controlName:string){
 
     })
   }
+
+  pushUserInfoTable():any{
+    return this.db.database.ref('/users/').push({
+      userInfo:{
+      fullName:this.fullName.value,
+      gender:this.gender.value,
+      dob:this.day.value+'/'+this.month.value+'/'+this.year.value,
+      fatherName:this.fatherName.value,
+      motherName:this.motherName.value,
+      invitedBy:this.invitedBy.value,
+      bloodGroup:this.bloodGroup.value,
+      occupation:this.occupation.value
+      }
+    }).key;
+  }
+
+  pushShortTable(key){
+    this.db.database.ref('/short/'+key+'/').set({
+      id:key,
+      fullName:this.fullName.value,
+      zone:this.zone.value,
+      subDistrict:this.subDistrict.value
+    })
+  }
+
+  pushAddressTable(key){
+        // push to address table
+        this.db.database.ref('/users/'+key+'/address').set({
+          permanentAddress:this.permanentAddress.value,
+          zone:this.zone.value,
+          subDistrict:this.subDistrict.value,
+          district:this.district.value,
+          conutry:this.country.value,
+          nationality:this.nationality.value,
+          nId:this.nId.value,
+        }
+      );
+  }
+
+  pushAuthTable(key){
+    this.db.database.ref('/auth/'+key).set({
+      userName:this.userName.value,
+      password:this.password.value,
+      phone:this.phone.value,
+      email:this.email.value,
+      role:this.role.value,
+    });
+  }
   signup(){
     if(this.registrationForm.valid){
+      this.uploding=true;
       let temp=this.registrationForm.controls.userInfo.value;
       let fg=<FormGroup>this.registrationForm.controls.userInfo;
       temp.dob=this.day.value+'/'+this.month.value+'/'+this.year.value;
@@ -309,14 +384,36 @@ nameAutoSuggestion(fg:FormGroup,controlName:string){
       // push to address table
         this.addressRef.push(this.registrationForm.controls.address.value);
       // push to auth table
-        this.authRef.push(this.registrationForm.controls.auth.value);
         console.log(this.registrationForm.controls.auth.value);
         if(this.photo){
           this.uploadPhoto(temp);
         }else{
           this.userInfoRef.push(temp);
-        }   
-        this.router.navigateByUrl('registration-sucessfull'); 
+        } 
+        new Promise(resolve=>{
+          
+          let key=this.pushUserInfoTable();
+          resolve(key)
+        })
+        .then(key=>{
+          // console.log(key)
+          this.pushAddressTable(key);
+          this.pushAuthTable(key);
+          this.pushShortTable(key);
+          if(this.photo){
+            this.uploadPhoto2(key)
+          }else{
+            
+          }
+
+          this.db.database.ref('/').update({
+            total:this.total+1
+          });
+        }).then(()=>{
+          this.uploding=false;
+          // this.router.navigateByUrl('registration-sucessfull')
+        })
+        
     }else{
       Object.keys(this.registrationForm.controls).forEach(groupName=>{
         let formGroup=<FormGroup>this.registrationForm.get(groupName);

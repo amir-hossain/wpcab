@@ -47,9 +47,14 @@ img{
     margin-bottom: 30px;
 }
 
-
+.spinner{
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    z-index: 100;
+  }
   
-  .mat-form-field {
+.mat-form-field {
     font-size: 14px;
     width: 30%;
   }

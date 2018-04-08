@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
-import {MatButtonModule,MatInputModule,MatFormFieldModule,MatCheckboxModule,MatCardModule,MatTabsModule,MatRadioModule,MatDatepickerModule,MatNativeDateModule,MatSnackBarModule,MatAutocompleteModule,MatSelectModule,MatDialogModule,MatPaginatorModule} from '@angular/material'
+import {MatButtonModule,MatInputModule,MatFormFieldModule,MatCheckboxModule,MatCardModule,MatTabsModule,MatRadioModule,MatDatepickerModule,MatNativeDateModule,MatSnackBarModule,MatAutocompleteModule,MatSelectModule,MatDialogModule,MatPaginatorModule,MatProgressSpinnerModule} from '@angular/material'
 @NgModule({
-    imports:[MatButtonModule,MatInputModule,MatFormFieldModule,MatCheckboxModule,MatCardModule,MatTabsModule,MatRadioModule,MatDatepickerModule,MatNativeDateModule,MatSnackBarModule,MatAutocompleteModule,MatSelectModule,MatDialogModule,MatPaginatorModule],
+    imports:[MatButtonModule,MatInputModule,MatFormFieldModule,MatCheckboxModule,MatCardModule,MatTabsModule,MatRadioModule,MatDatepickerModule,MatNativeDateModule,MatSnackBarModule,MatAutocompleteModule,MatSelectModule,MatDialogModule,MatPaginatorModule,MatProgressSpinnerModule],
 
 
-    exports:[MatButtonModule,MatInputModule,MatFormFieldModule,MatCheckboxModule,MatCardModule,MatTabsModule,MatRadioModule,MatDatepickerModule,MatNativeDateModule,MatSnackBarModule,MatAutocompleteModule,MatSelectModule,MatDialogModule,MatPaginatorModule]
+    exports:[MatButtonModule,MatInputModule,MatFormFieldModule,MatCheckboxModule,MatCardModule,MatTabsModule,MatRadioModule,MatDatepickerModule,MatNativeDateModule,MatSnackBarModule,MatAutocompleteModule,MatSelectModule,MatDialogModule,MatPaginatorModule,MatProgressSpinnerModule]
 })
 export class Meterial{}
