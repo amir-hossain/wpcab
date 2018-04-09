@@ -22,6 +22,9 @@
           <img class="pic" [src]="url">
           <a mat-raised-button class='upload-button' (click)='file.click()'>Upload</a>
         </label>
+        <mat-error *ngIf='picError' class="pic-error">
+          Plese select png or jpeg file
+        </mat-error>
         <div>
           <mat-form-field>
         <mat-label>*Full name</mat-label>
@@ -180,8 +183,11 @@
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
-        <mat-error *ngIf="zone.invalid && zone.touched">
+        <mat-error *ngIf="zone.hasError('required') && zone.touched">
           Zone required
+        </mat-error>
+        <mat-error *ngIf="zone.hasError('zoneDoesNotExixt') && zone.touched">
+          Zone does not exist (select other)
         </mat-error>
       </div><!-- zone -->
       <div>
@@ -311,6 +317,7 @@
     <span class="footer-error" *ngIf='footerError'>Try agin after fill up all required field! </span>
     <div class="clearfix"></div>
   </div>
+  <app-footer></app-footer>
     </div> <!-- online -->
     
     

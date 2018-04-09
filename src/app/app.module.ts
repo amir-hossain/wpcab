@@ -36,6 +36,7 @@ import {AntiUtorGuard} from './anti-utor.guard';
 import { EditComponent } from './edit/edit.component';
 import { DialogComponent } from './details/dialog.component';
 import { IgxRippleModule } from 'igniteui-angular/main';
+import { FooterComponent } from './footer/footer.component';
 
 
 const confiq={
@@ -70,7 +71,8 @@ const confiq={
     UserNavComponent,
     AccountsComponent,
     EditComponent,
-    DialogComponent
+    DialogComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

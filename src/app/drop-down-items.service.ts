@@ -4,7 +4,7 @@ const roles=[
   'Leader',
   'Operator',
   'Admin',
-  'Account',
+  'Accountant',
   'Super'
 ]
 
@@ -49,7 +49,8 @@ const zone=[
   'Tongi(Tilergati)',
   'Rajbari',
   'Dhalla(Singair)',
-  'Madaripur'
+  'Madaripur',
+  'Other'
 ]
 const district=[
 'Barguna',

@@ -74,3 +74,9 @@ img{
         padding-bottom:0px; 
     }
 
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+

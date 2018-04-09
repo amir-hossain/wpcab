@@ -1,4 +1,3 @@
-
 .logout-btn{
     background: red;
 }
@@ -7,6 +6,10 @@
     background: #ffffffb4;
 }
 
+.nav-logo{
+    width: 40px;
+    height: 40px;
+}
 
 
 .nav-content{

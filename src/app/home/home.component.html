@@ -8,7 +8,7 @@
 <div *ngIf='activeUserRole=="User"'>
     <app-user-nav></app-user-nav>
 </div>
-<div *ngIf='activeUserRole=="Accountant"'>
+<div *ngIf='activeUserRole==="Accountant"'>
     <app-accountant-nav></app-accountant-nav>
 </div>
 <div *ngIf='activeUserRole=="Super" || activeUserRole=="Leader"'>
@@ -67,4 +67,5 @@
         </mat-card>
       </table>
     </div> <!-- all -->
+    <app-footer></app-footer>
 </div> <!-- main container -->

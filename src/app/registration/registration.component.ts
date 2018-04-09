@@ -26,6 +26,7 @@ export class RegistrationComponent implements OnInit {
   phoneList=[];
   autoInfo=[];
   footerError=false;
+  picError=false;
 
   // table
   userInfoRef;
@@ -125,7 +126,7 @@ export class RegistrationComponent implements OnInit {
         bloodGroup:[''],
       }),
       address:this.builder.group({
-        zone:["",Validators.required],
+        zone:["",[Validators.required,this.zoneDoesNotExixt.bind(this)]],
         subDistrict:["",Validators.required],
         permanentAddress:["",Validators.required],
         district:["",Validators.required],
@@ -185,6 +186,16 @@ export class RegistrationComponent implements OnInit {
   this.subDistrictAutoSuggestion(addressGroup);
   this.zoneAutoSuggestion(addressGroup);
 
+}
+
+zoneDoesNotExixt(ac:AbstractControl):ValidationErrors | null{
+  let data =this.zones.find(zone=>zone.toLowerCase().includes(ac.value.toLowerCase()));
+  console.log(data);
+  if(data){
+    return null;
+  }else{
+    return {zoneDoesNotExixt:true}
+  }
 }
 
 zoneAutoSuggestion(addressGroup:FormGroup){
@@ -267,15 +278,21 @@ nameAutoSuggestion(fg:FormGroup,controlName:string){
   }
 
   readUrl(event:any) {
-    if (event.target.files && event.target.files[0]) {
+    this.url='./assets/img/add.png';
+    this.photo=null;
+    if (event.target.files && (event.target.files[0].type==='image/png' || event.target.files[0].type==='image/jpeg')) {
+      this.picError=false;
       var reader = new FileReader();
   
       reader.onload = (event:any) => {
         this.url = event.target.result;
+        // console.log(this.url.);
       }
-  
+      
       reader.readAsDataURL(event.target.files[0]);
       this.photo=event.target.files[0];
+    }else{
+      this.picError=true;
     }
   }
 

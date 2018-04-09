@@ -1,12 +1,21 @@
-.containter{
-    background:red;
+.logout-btn{
+    background: red;
 }
 
-.content{
-    display:table;
-    margin:auto;
+.nav-container{
+    background: #ffffffb4;
 }
 
-.btn{
-    background:red;
+.nav-logo{
+    width: 40px;
+    height: 40px;
 }
+
+
+.nav-content{
+    display: table;
+    margin: auto;
+    
+}
+
+

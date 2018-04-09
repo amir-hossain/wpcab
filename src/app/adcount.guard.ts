@@ -9,7 +9,7 @@ export class AdcountGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-      if(localStorage.getItem('activeUserRole')==='Admin' && localStorage.getItem('activeUserRole')==='Accountant'){
+      if(localStorage.getItem('activeUserRole')==='Admin' || localStorage.getItem('activeUserRole')==='Accountant'){
         return true;
       }else{
         console.log(state.url);

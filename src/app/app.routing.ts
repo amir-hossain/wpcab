@@ -20,6 +20,7 @@ import {AdminGuard} from './admin.guard';
 import {AdcountGuard} from './adcount.guard';
 import {AntiUtorGuard} from './anti-utor.guard';
 import {EditComponent} from './edit/edit.component';
+import { FooterComponent } from './footer/footer.component';
 const routes:Routes=[
  
     {
@@ -96,13 +97,17 @@ const routes:Routes=[
         ]
     },
     {
+        path:"footer",
+        component:FooterComponent
+    },
+    {
         path:"login",
         component:LoginComponent
     },
-    {
-        path:'**',
-        redirectTo:'login'
-    }
+    // {
+    //     path:'**',
+    //     redirectTo:'login'
+    // }
 ]
 
 @NgModule({

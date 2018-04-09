@@ -1,0 +1,31 @@
+
+.left,.right,.middle{
+    padding-top: 20px;
+    font-size: 15px;
+    line-height: 2px;
+}
+.middle{
+    text-align: center;
+}
+.left{
+    float: left;
+    color: gray;
+    
+}
+
+.right{
+    float: right;
+}
+
+.container{
+    width: 100%;
+    margin-top: 100px;
+    border-top:solid gray 2px;
+    color: gray;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}

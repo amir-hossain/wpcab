@@ -9,6 +9,10 @@ import { Router } from '@angular/router';
 export class UserNavComponent implements OnInit {
   routerLinks=[
     {
+      label:"logo",
+      link:"/home"
+    },
+    {
       label:'Home',
       link:'/home'
     },

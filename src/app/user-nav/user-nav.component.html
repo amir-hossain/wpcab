@@ -1,8 +1,19 @@
-<div mat-tab-nav-bar class='container'>
-  <div class='content'>
-    <a mat-tab-link *ngFor='let routerLink of routerLinks' [routerLink]='routerLink.link' routerLinkActive #rla='routerLinkActive' [active]='rla.isActive'>{{routerLink.label}}</a>
-    <a mat-tab-link disabled>
-      <button mat-raised-button color='primary' (click)='logout()' class='btn'>Logout</button>
-    </a>
+<div mat-tab-nav-bar class="nav-container">
+    <div class="nav-content">
+      <span *ngFor="let routerLink of routerLinks;let i=index">
+          <a mat-tab-link *ngIf='i===0'
+          [routerLink]="routerLink.link">
+             <img class='nav-logo' src="./assets/img/logo.png" alt="">
+         </a>
+          <a mat-tab-link *ngIf='i!==0'
+          [routerLink]="routerLink.link"
+          routerLinkActive #rla="routerLinkActive"
+          [active]="rla.isActive">
+             {{routerLink.label}}
+         </a>
+      </span>
+  <a mat-tab-link disabled>
+   <button mat-raised-button color="primary" type="button" (click)="logout()" class="logout-btn">Logout</button>
+  </a>
   </div>
-</div>
+  </div>
