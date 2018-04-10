@@ -39,7 +39,7 @@
     </th>
   </div>
   <div>
-      <mat-card *ngFor='let obj of filteredArry; let i=index' class="table-card" (click)='itemClick(i)' igxRipple="black">
+      <mat-card *ngFor='let obj of filteredArry;' class="table-card" (click)='itemClick(obj)' igxRipple="black">
           <td *ngIf='obj'>{{obj.fullName}}</td>
           <td *ngIf='obj'>{{obj.zone}}</td>
           <td *ngIf='obj'>{{obj.subDistrict}}</td>

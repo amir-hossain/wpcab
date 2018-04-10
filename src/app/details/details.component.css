@@ -15,8 +15,8 @@ ul{
 
 .payment-btn, .spayment-btn ,.delete-btn{
     display: block;
-    margin-top:4vh; 
-    width: 180px;
+    margin-top:20px; 
+    width: 170px;
     padding: .5em 0;
     font-size: 20px;
     background: green;

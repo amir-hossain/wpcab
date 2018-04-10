@@ -14,53 +14,34 @@ export class DetailsComponent implements OnInit {
   address;
   auth;
   activeUserRole;
-  userInfoKey;
-  addressKey;
-  authKey;
+  selectedItemId=localStorage.getItem('key');
+  
   constructor(private db:AngularFireDatabase,private loc:Location,public dialog: MatDialog) { }
 
   ngOnInit() {
     this.activeUserRole=localStorage.getItem('activeUserRole');
-    let selectedIndex=localStorage.getItem('index');
-    //ger user info
-    this.fetchData('userInfo',selectedIndex).then(val=>this.userInfo=val);
-    this.fetchData('address',selectedIndex).then(val=>this.address=val);
-    this.fetchData('auth',selectedIndex).then(val=>this.auth=val);
+    let selectedItemId=localStorage.getItem('key');
+    // console.log(selectedItemId);
+    this.db.database.ref('users/'+this.selectedItemId).once('value',snap=>{
+      // console.log(snap.val().address);
+      this.userInfo=snap.val().userInfo;
+      this.address=snap.val().address;
+    });
+
+    this.db.database.ref('auth/'+this.selectedItemId).once('value',snap=>{
+      // console.log(snap.val());
+      this.auth=snap.val();  
+    });
+    
   }
   
-  fetchData(tableName,index){
-    //return the promise after resolve
-    return this.db.database.ref(tableName).once('value')
-    //then is a resolved promise
-    .then(snap=>{
-      let temp;
-      if(snap){
-        let data=snap.val();
-        Object.keys(data).forEach((key,i)=>{
-        if(i.toString()===index){
-          temp=data[''+key];
-          this[tableName+'Key']=key;
-          // console.log(tableName+'key');
-        }
-        })
-        //return main data in main callback function
-        return temp;
-      }
-    }
-  )
-  }
-
   back(){
     this.loc.back();
   }
 
   delete(){
-    console.log(this.userInfoKey);
-    console.log(this.addressKey);
-    console.log(this.authKey);
     let dialogRef = this.dialog.open(DialogComponent, {
       disableClose:true,
-      data: { name: this.userInfo.fullName,userInfoKey:this.userInfoKey,authKey:this.authKey,addressKey:this.addressKey}
     });
     
   }

@@ -93,8 +93,9 @@ export class CollectionComponent implements OnInit {
    
     }
 
-    itemClick(index){
-      localStorage.setItem('index',index);
+    itemClick(clickedItem){
+      console.log(clickedItem);
+      localStorage.setItem('key',clickedItem.id);
         this.router.navigateByUrl('details');
     }
     subDistrictFilter(subDistrict:string){
