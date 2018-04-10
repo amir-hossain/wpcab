@@ -8,6 +8,18 @@ ul{
     margin:auto;
 }
 
+.spinner{
+    position: absolute;
+    left: 40%;
+  }
+
+  .pic-error{
+    padding-top:10px; 
+    font-weight: bold;
+    display: table;
+    margin: auto;
+  }
+
 .back-btn{
     margin-top:.5em; 
     float:left;

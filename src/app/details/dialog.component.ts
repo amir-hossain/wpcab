@@ -22,10 +22,15 @@ export class DialogComponent{
     // console.log(this.data.userInfoKey);
     // console.log(this.data.addressKey);
     // console.log(this.data.authKey);
-    this.db.database.ref('/userInfo/' + this.data.userInfoKey).remove();
-    this.db.database.ref('/address/' + this.data.addressKey).remove();
-    this.db.database.ref('/auth/' + this.data.authKey).remove();
-    this.router.navigateByUrl('delete-sucessfull');
+    this.db.database.ref('/users/' + this.data.key).remove();
+    this.db.database.ref('/short/' + this.data.key).remove();
+    this.db.database.ref('/auth/' + this.data.key).remove().then(val=>{
+      localStorage.removeItem('key');
+      this.router.navigateByUrl('delete-sucessfull');
+    }
+      
+    );
+    
   }
 
 }

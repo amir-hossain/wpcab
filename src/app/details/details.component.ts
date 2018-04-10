@@ -42,6 +42,7 @@ export class DetailsComponent implements OnInit {
   delete(){
     let dialogRef = this.dialog.open(DialogComponent, {
       disableClose:true,
+      data: { name: this.userInfo.fullName,key:this.selectedItemId}
     });
     
   }

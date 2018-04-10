@@ -4,6 +4,7 @@ import {Location} from '@angular/common';
 import {DropDownItemsService} from '../drop-down-items.service';
 import {FormBuilder,Validators,FormGroup, AbstractControl, ValidationErrors} from '@angular/forms';
 import { FirebaseApp } from 'angularfire2';
+import {Router} from '@angular/router'
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
@@ -11,6 +12,9 @@ import { FirebaseApp } from 'angularfire2';
   providers: [DropDownItemsService]
 })
 export class EditComponent implements OnInit{
+  loding=false;
+  picError=false;
+  selectedItemId=localStorage.getItem('key');
   userInfoKey;
   addressKey;
   authKey;
@@ -90,24 +94,31 @@ export class EditComponent implements OnInit{
   nationalityForm;
   nIdForm;
 
-  constructor(private db:AngularFireDatabase,private loc:Location,private ddis:DropDownItemsService,private fb:FormBuilder,private fa: FirebaseApp) { }
+  constructor(private db:AngularFireDatabase,private loc:Location,private ddis:DropDownItemsService,private fb:FormBuilder,private fa: FirebaseApp,private router:Router) { }
 
   ngOnInit() {
+    this.loding=true;
     this.activeUserRole=localStorage.getItem('activeUserRole');
-    let selectedIndex=localStorage.getItem('index');
-    //ger user info
-    this.fetchSelectedData('userInfo',selectedIndex).then(val=>this.userInfo=val);
-    this.fetchSelectedData('address',selectedIndex).then(val=>this.address=val);
-    this.fetchSelectedData('auth',selectedIndex).then(val=>{
-      this.auth=val;
-      //form created after data received
-      this.intilizeForm();
-      if(this.userInfo.photo){
-        this.url=this.userInfo.photo;
-      }else{
-        this.url='./assets/img/default-pic.png';
-      }
+
+    this.db.database.ref('users/'+this.selectedItemId).once('value',snap=>{
+      // console.log(snap.val().address);
+      this.userInfo=snap.val().userInfo;
+      this.address=snap.val().address;
     });
+
+    this.db.database.ref('auth/'+this.selectedItemId).once('value',snap=>{
+      // console.log(snap.val());
+      this.auth=snap.val();  
+    }).then(val=>{
+        //form created after data received
+        this.initializeForm();
+        if(this.userInfo.photo){
+          this.url=this.userInfo.photo;
+        }else{
+          this.url='./assets/img/default-pic.png';
+        }
+        this.loding=false;
+      });
 
     // get dropdown items
     this.roles=this.ddis.getRoles();
@@ -154,18 +165,21 @@ export class EditComponent implements OnInit{
   }
 
   readUrl(event:any) {
-    if (event.target.files && event.target.files[0]) {
+    this.url='./assets/img/add.png';
+    this.photo=null;
+    if (event.target.files && (event.target.files[0].type==='image/png' || event.target.files[0].type==='image/jpeg')) {
+      this.picError=false;
       var reader = new FileReader();
   
       reader.onload = (event:any) => {
         this.url = event.target.result;
+        // console.log(this.url.);
       }
-  
+      
       reader.readAsDataURL(event.target.files[0]);
       this.photo=event.target.files[0];
-      this.userInfoChanges++;
-      console.log(this.userInfoChanges)
-      
+    }else{
+      this.picError=true;
     }
   }
 
@@ -193,13 +207,6 @@ export class EditComponent implements OnInit{
     return control.value==='' ? null : this.existenceCheck(this.authFull,control,'phone')
   }
 
-  // notNumber(control:AbstractControl){
-  //   var temp=Number(control.value);
-  //   if()
-  //   return (temp!==NaN) ? null : control.setErrors({nan:'Not number'})
-  // }
-
-  
 
   emailOrEmpty(control: AbstractControl): ValidationErrors | null {
     return control.value === '' ? null : Validators.email(control);
@@ -223,35 +230,59 @@ export class EditComponent implements OnInit{
     
     return error;
   }
+  uploadPhoto2(){
+    this.loding=true;
+    let storageRef = this.fa.storage().ref('img/'+this.photo.name);
+    var task=storageRef.put(this.photo);
+    task.on('state_changed',
+    snap=>
+      console.log(snap)
+      ,
+  err=>console.log(err)
+    ,()=>{
+     // push to userinfo table
+     this.db.database.ref('/users/'+this.selectedItemId+'/userInfo').update({
+      photo:task.snapshot.downloadURL
+     }).then(val=>{
+      this.loding=false;
+       this.router.navigateByUrl('details');
+      });
+     
+})
+  }
   back(){
-    if(this.userInfoChanges){
-      if(this.photo){
-        this.uploadPhoto();
-      }else{
-        var updates = {};
-        updates['/userInfo/' + this.userInfoKey] = this.userInfo;
-        this.db.database.ref().update(updates);
+    new Promise(resolve=>{
+      if(this.userInfoChanges){
+          this.db.database.ref('users/'+this.selectedItemId+'/userInfo').update(this.userInfo);
       }
+      if(this.addressChanges){
+        this.db.database.ref('users/'+this.selectedItemId+'/address').update(this.address);
   
-    }
-    if(this.addressChanges){
-      var updates = {};
-      updates['/address/' + this.addressKey] = this.address;
-      this.db.database.ref().update(updates);
+      }
+      if(this.authChanges){
+        this.db.database.ref('auth/'+this.selectedItemId+'/').update(this.auth);
+      }
 
-    }
-    if(this.authChanges){
-      var updates = {};
-      updates['/auth/' + this.authKey] = this.auth;
-      this.db.database.ref().update(updates);
-    }
-    if(!this.photo){
-      this.loc.back();
-    }
-   
+      resolve();
+
+    })
+    .then(val=>{
+      if(this.photo){
+        this.uploadPhoto2();
+        
+      }
+      return 1;
+    })
+    .then(val=>{
+      if(!this.photo){
+        this.router.navigateByUrl('details');
+      }
+      
+      console.log(val);
+    }) 
   }
 
-  intilizeForm(){
+  initializeForm(){
     this.nameForm=this.fb.group({
       fullName:[this.userInfo.fullName,Validators.required]
     });
@@ -301,7 +332,7 @@ export class EditComponent implements OnInit{
       role:[this.auth.role]
     });
     this.zoneForm=this.fb.group({
-      zone:[this.address.zone,Validators.required]
+      zone:[this.address.zone,[Validators.required,this.zoneDoesNotExixt.bind(this)]]
     });
     this.subDistrictForm=this.fb.group({
       subDistrict:[this.address.subDistrict,Validators.required]
@@ -321,6 +352,16 @@ export class EditComponent implements OnInit{
     this.nIdForm=this.fb.group({
       nId:[this.address.nid,Validators.pattern('^\\d+$')]
     });
+  }
+
+  zoneDoesNotExixt(ac:AbstractControl):ValidationErrors | null{
+    let data =this.zones.find(zone=>zone.toLowerCase().includes(ac.value.toLowerCase()));
+    console.log(data);
+    if(data){
+      return null;
+    }else{
+      return {zoneDoesNotExixt:true}
+    }
   }
 
   matchPassword(ac:FormGroup){

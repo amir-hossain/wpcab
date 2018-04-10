@@ -20,6 +20,9 @@
               <img class="pic" [src]="url">
               <button mat-raised-button (click)='file.click()' class="upload-button">Upload</button>
             </label>
+            <mat-error *ngIf='picError' class="pic-error">
+              Plese select png or jpeg file
+            </mat-error>
       </span>      
       </ul>
       <div class='sub-2'>
@@ -188,7 +191,9 @@
       </li>
       <div class="clearfix"></div>
     </ul>
-      
+    <div class="spinner" *ngIf='loding'>
+      <mat-spinner *ngIf='loding' [diameter]='200'></mat-spinner>
+    </div>
       <ul *ngIf='auth'>
           <h2>Online</h2>
         <li *ngIf='!phoneEditing'>
@@ -325,8 +330,11 @@
           <!-- input type submit image button -->
           <input src="assets/img/right.png" type='image' class='submit-button'>
           <div class="clearfix"></div>
-          <div *ngIf='zoneForm.controls.zone.invalid' class="errorMessege">
+          <div *ngIf='zoneForm.controls.zone.hasError("required")' class="errorMessege">
             Zone can not be empty
+          </div>
+          <div *ngIf='zoneForm.controls.zone.hasError("zoneDoesNotExixt")' class="errorMessege">
+            Zone does not exist (select other)
           </div>
         </form>
       </li>

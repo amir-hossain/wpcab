@@ -422,8 +422,6 @@ nameAutoSuggestion(fg:FormGroup,controlName:string){
           this.pushShortTable(key);
           if(this.photo){
             this.uploadPhoto2(key)
-          }else{
-            
           }
 
           this.db.database.ref('/').update({
@@ -431,7 +429,7 @@ nameAutoSuggestion(fg:FormGroup,controlName:string){
           });
         }).then(()=>{
           this.uploding=false;
-          // this.router.navigateByUrl('registration-sucessfull')
+          this.router.navigateByUrl('registration-sucessfull')
         })
         
     }else{
