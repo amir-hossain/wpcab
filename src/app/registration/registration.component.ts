@@ -146,15 +146,18 @@ export class RegistrationComponent implements OnInit {
       })
     });
 
-    // get user name list
-    this.userInfoRef.on('value',snap=>{
+    // get user short list
+    this.db.database.ref('short').on('value',snap=>{
       this.names=[];
-      // console.log(snap.val());
+      console.log(snap.val());
       let data=snap.val();
       if(data){
         Object.keys(data).forEach(key=>this.names.push(
-          {name:data[''+key].fullName,
-        photo:data[''+key].photo}
+          {
+            name:data[key].fullName,
+            zone:data[key].zone,
+            subDistrict:data[key].subDistrict
+          }
         ));
       // console.log(this.options);
       }

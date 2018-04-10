@@ -82,17 +82,13 @@
       <div>
           <mat-form-field>
           <mat-label>*Father's name</mat-label>
-          <input matInput type="text" formControlName="fatherName" [matAutocomplete]='auto'>
-          <mat-autocomplete #auto='matAutocomplete'>
-              <mat-option  *ngFor='let option of filteredNames' [value]='option.name'>
-                <span *ngIf='option.photo!==""'>
-                    <img class="thumb" aria-hidden src="{{option.photo}}"/>
-                </span>
-                <span *ngIf='option.photo===""'>
-                <img class="thumb" aria-hidden src="./assets/img/default-pic.png"/>
-                </span>
-                <span>{{option.name}}</span> 
-              </mat-option>
+          <input matInput type="text" formControlName="fatherName" [matAutocomplete]='father'>
+          <mat-autocomplete #father='matAutocomplete'>
+            <mat-option  *ngFor='let option of filteredNames' [value]='option.name'>
+              <span>{{option.name}}</span> 
+              <span *ngIf='option.zone!=="Other"'>({{option.zone}})</span>
+              <span *ngIf='option.zone==="Other"'>({{option.subDistrict}})</span>
+            </mat-option>
           </mat-autocomplete>
         </mat-form-field>
           <mat-error *ngIf="fatherName.invalid && fatherName.touched">
@@ -102,16 +98,12 @@
         <div>        
           <mat-form-field>
           <mat-label>*Mother's name</mat-label>
-          <input matInput type="text" formControlName="motherName" [matAutocomplete]='auto'>
-          <mat-autocomplete #auto='matAutocomplete'>
+          <input matInput type="text" formControlName="motherName" [matAutocomplete]='mother'>
+          <mat-autocomplete #mother='matAutocomplete'>
               <mat-option  *ngFor='let option of filteredNames' [value]='option.name'>
-                  <span *ngIf='option.photo!==""'>
-                      <img class="thumb" aria-hidden src="{{option.photo}}"/>
-                  </span>
-                  <span *ngIf='option.photo===""'>
-                  <img class="thumb" aria-hidden src="./assets/img/default-pic.png"/>
-                  </span>
                   <span>{{option.name}}</span> 
+                  <span *ngIf='option.zone!=="Other"'>({{option.zone}})</span>
+                  <span *ngIf='option.zone==="Other"'>({{option.subDistrict}})</span>
                 </mat-option>
           </mat-autocomplete>
         </mat-form-field>
@@ -122,17 +114,13 @@
         <div>
             <mat-form-field>
             <mat-label>*Invited by</mat-label>
-            <input matInput type="textarea" formControlName="invitedBy" [matAutocomplete]='auto'>
-            <mat-autocomplete #auto='matAutocomplete'>
-                <mat-option  *ngFor='let option of filteredNames' [value]='option.name'>
-                    <span *ngIf='option.photo!==""'>
-                        <img class="thumb" aria-hidden src="{{option.photo}}"/>
-                    </span>
-                    <span *ngIf='option.photo===""'>
-                    <img class="thumb" aria-hidden src="./assets/img/default-pic.png"/>
-                    </span>
-                    <span>{{option.name}}</span> 
-                  </mat-option>
+            <input matInput type="textarea" formControlName="invitedBy" [matAutocomplete]='caller'>
+            <mat-autocomplete #caller='matAutocomplete'>
+              <mat-option  *ngFor='let option of filteredNames' [value]='option.name'>
+                <span>{{option.name}}</span> 
+                <span *ngIf='option.zone!=="Other"'>({{option.zone}})</span>
+                <span *ngIf='option.zone==="Other"'>({{option.subDistrict}})</span>
+              </mat-option>
             </mat-autocomplete>
           </mat-form-field>
             <mat-error *ngIf="invitedBy.invalid && invitedBy.touched">
