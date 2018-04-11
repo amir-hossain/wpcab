@@ -10,6 +10,7 @@ import {DialogComponent} from './dialog.component';
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent implements OnInit {
+  total;
   userInfo;
   address;
   auth;
@@ -27,6 +28,10 @@ export class DetailsComponent implements OnInit {
       this.userInfo=snap.val().userInfo;
       this.address=snap.val().address;
     });
+    this.total= this.db.database.ref('/total').once('value',snap=>{
+      this.total=snap.val();
+      console.log(this.total)
+    });
 
     this.db.database.ref('auth/'+this.selectedItemId).once('value',snap=>{
       // console.log(snap.val());
@@ -42,7 +47,7 @@ export class DetailsComponent implements OnInit {
   delete(){
     let dialogRef = this.dialog.open(DialogComponent, {
       disableClose:true,
-      data: { name: this.userInfo.fullName,key:this.selectedItemId}
+      data: { name: this.userInfo.fullName,key:this.selectedItemId,total:this.total}
     });
     
   }

@@ -356,8 +356,11 @@
             <!-- input type submit image button -->
             <input src="assets/img/right.png" type='image' class='submit-button'>
             <div class="clearfix"></div>
-            <div *ngIf='subDistrictForm.controls.subDistrict.invalid' class="errorMessege">
+            <div *ngIf='subDistrictForm.controls.subDistrict.hasError("required")' class="errorMessege">
               Sub district can not be empty
+            </div>
+            <div *ngIf='subDistrictForm.controls.subDistrict.hasError("subDistrictDoesNotExixt")' class="errorMessege">
+              Sub district does not exist
             </div>
           </form>
         </li>
@@ -397,8 +400,11 @@
           <!-- input type submit image button -->
           <input src="assets/img/right.png" type='image' class='submit-button'>
           <div class="clearfix"></div>
-          <div *ngIf='districtForm.controls.district.invalid' class="errorMessege">
+          <div *ngIf='districtForm.controls.district.hasError("required")' class="errorMessege">
             District can not be empty
+          </div>
+          <div *ngIf='districtForm.controls.district.hasError("districtDoesNotExixt")' class="errorMessege">
+            District does not exist
           </div>
         </form>
       </li>

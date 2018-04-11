@@ -42,13 +42,13 @@ export class CollectionComponent implements OnInit {
       this.db.database.ref('short').orderByKey().startAt(key).limitToFirst(this.pageSize).on('value',
       snap=>{
         // console.log(snap.val());
-        this.createArray(snap)
+          this.createArray(snap)
       });
     }else{
       this.db.database.ref('short').orderByKey().limitToFirst(this.pageSize+1).on('value',
       snap=>{
         // console.log(snap.val());
-        this.createArray(snap)
+          this.createArray(snap)
       });
     }
   }
@@ -56,25 +56,25 @@ export class CollectionComponent implements OnInit {
 
   createArray(snap){
     let data=snap.val();
-    Object.keys(data).forEach((key,i)=>{
-      // console.log(key);
-      if(i===0){
-        this.previousTempKey=key;
-      }
-      if(i===this.pageSize){
-        this.nextPageKey=key;
-        
-      }else{
-        this.source.push(data[key]);
-
-      }
-        // console.log(this.source);
-        this.filteredArry=this.source;
-        this.updating=false;
-        console.log('pre-'+this.previousPageKey+'\nnext-'+this.nextPageKey+'\npreT-'+this.previousTempKey)
-      
-    });
-    
+    if(data){
+      Object.keys(data).forEach((key,i)=>{
+        // console.log(key);
+        if(i===0){
+          this.previousTempKey=key;
+        }
+        if(i===this.pageSize){
+          this.nextPageKey=key;
+        }else{
+          this.source.push(data[key]);
+  
+        }
+          // console.log(this.source);
+          this.filteredArry=this.source;
+          this.updating=false;      
+      });
+    }else{
+      this.updating=false; 
+    }
   }
   nameFilter(name:string){
     // console.log(name);

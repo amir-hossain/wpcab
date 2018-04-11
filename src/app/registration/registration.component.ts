@@ -28,10 +28,6 @@ export class RegistrationComponent implements OnInit {
   footerError=false;
   picError=false;
 
-  // table
-  userInfoRef;
-  addressRef;
-  authRef;
   // preview profile  url
   url='./assets/img/add.png';
   
@@ -97,9 +93,6 @@ export class RegistrationComponent implements OnInit {
 
 
   constructor(private builder:FormBuilder,private db:AngularFireDatabase,private router:Router,private fb: FirebaseApp,private ddis:DropDownItemsService) {
-    this.userInfoRef=this.db.database.ref("/userInfo");
-    this.addressRef=this.db.database.ref('/address');
-    this.authRef=this.db.database.ref('/auth');
     this.roles=this.ddis.getRoles();
     this.districts=this.ddis.getDistricts();
     this.subDistricts=this.ddis.getSubDistricts();
@@ -126,10 +119,10 @@ export class RegistrationComponent implements OnInit {
         bloodGroup:[''],
       }),
       address:this.builder.group({
-        zone:["",[Validators.required,this.zoneDoesNotExixt.bind(this)]],
-        subDistrict:["",Validators.required],
+        zone:["",[Validators.required,this.zoneDoesNotExist.bind(this)]],
+        subDistrict:["",[Validators.required,this.subDistrictDoesNotExist.bind(this)]],
         permanentAddress:["",Validators.required],
-        district:["",Validators.required],
+        district:["",[Validators.required,this.districtDoesNotExist.bind(this)]],
         country:[""],
         nationality:[""],
         nId:["",Validators.pattern('^\\d+$')],
@@ -163,7 +156,7 @@ export class RegistrationComponent implements OnInit {
       }
     });
     //get auth table
-    this.authRef.once('value',snap=>{
+    this.db.database.ref('/auth').once('value',snap=>{
       let data=snap.val();
       if(data){
         Object.keys(data).forEach(key=>{
@@ -191,13 +184,33 @@ export class RegistrationComponent implements OnInit {
 
 }
 
-zoneDoesNotExixt(ac:AbstractControl):ValidationErrors | null{
-  let data =this.zones.find(zone=>zone.toLowerCase().includes(ac.value.toLowerCase()));
+zoneDoesNotExist(ac:AbstractControl):ValidationErrors | null{
+  let data =this.zones.find(zone=>zone.toLowerCase()===(ac.value.toLowerCase()));
   console.log(data);
   if(data){
     return null;
   }else{
-    return {zoneDoesNotExixt:true}
+    return {zoneDoesNotExist:true}
+  }
+}
+
+districtDoesNotExist(ac:AbstractControl):ValidationErrors | null{
+  let data =this.districts.find(zone=>zone.toLowerCase()===(ac.value.toLowerCase()));
+  console.log(data);
+  if(data){
+    return null;
+  }else{
+    return {districtDoesNotExist:true}
+  }
+}
+
+subDistrictDoesNotExist(ac:AbstractControl):ValidationErrors | null{
+  let data =this.subDistricts.find(zone=>zone.toLowerCase()===(ac.value.toLowerCase()));
+  console.log(data);
+  if(data){
+    return null;
+  }else{
+    return {subDistrictDoesNotExist:true}
   }
 }
 
@@ -327,24 +340,6 @@ nameAutoSuggestion(fg:FormGroup,controlName:string){
 })
   }
 
-  
-  uploadPhoto(userInfo){
-    let storageRef = this.fb.storage().ref('img/'+this.photo.name);
-        var task=storageRef.put(this.photo);
-        task.on('state_changed',
-        snap=>
-          console.log(snap)
-          ,
-      err=>console.log(err)
-        ,()=>{
-         // push to userinfo table
-         userInfo.photo=task.snapshot.downloadURL;
-      console.log(task.snapshot.downloadURL);
-      this.userInfoRef.push(userInfo);
-      
-
-    })
-  }
 
   pushUserInfoTable():any{
     return this.db.database.ref('/users/').push({
@@ -396,20 +391,6 @@ nameAutoSuggestion(fg:FormGroup,controlName:string){
   signup(){
     if(this.registrationForm.valid){
       this.uploding=true;
-      let temp=this.registrationForm.controls.userInfo.value;
-      let fg=<FormGroup>this.registrationForm.controls.userInfo;
-      temp.dob=this.day.value+'/'+this.month.value+'/'+this.year.value;
-   
-          // console.log(temp);
-      // push to address table
-        this.addressRef.push(this.registrationForm.controls.address.value);
-      // push to auth table
-        console.log(this.registrationForm.controls.auth.value);
-        if(this.photo){
-          this.uploadPhoto(temp);
-        }else{
-          this.userInfoRef.push(temp);
-        } 
         new Promise(resolve=>{
           
           let key=this.pushUserInfoTable();

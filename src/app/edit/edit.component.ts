@@ -224,7 +224,6 @@ export class EditComponent implements OnInit{
         this.uploadPhoto();
         
       }
-      return 1;
     })
     .then(val=>{
       if(!this.photo){
@@ -288,13 +287,13 @@ export class EditComponent implements OnInit{
       zone:[this.address.zone,[Validators.required,this.zoneDoesNotExixt.bind(this)]]
     });
     this.subDistrictForm=this.fb.group({
-      subDistrict:[this.address.subDistrict,Validators.required]
+      subDistrict:[this.address.subDistrict,[Validators.required,this.subDistrictDoesNotExixt.bind(this)]]
     });
     this.permanentAddressForm=this.fb.group({
       permanentAddress:[this.address.permanentAddress,Validators.required]
     });
     this.districtForm=this.fb.group({
-      district:[this.address.district,Validators.required]
+      district:[this.address.district,[Validators.required,this.districtDoesNotExixt.bind(this)]]
     });
     this.countryForm=this.fb.group({
       country:[this.address.country]
@@ -314,6 +313,26 @@ export class EditComponent implements OnInit{
       return null;
     }else{
       return {zoneDoesNotExixt:true}
+    }
+  }
+
+  districtDoesNotExixt(ac:AbstractControl):ValidationErrors | null{
+    let data =this.districts.find(zone=>zone.toLowerCase()===ac.value.toLowerCase());
+    console.log(data);
+    if(data){
+      return null;
+    }else{
+      return {districtDoesNotExixt:true}
+    }
+  }
+
+  subDistrictDoesNotExixt(ac:AbstractControl):ValidationErrors | null{
+    let data =this.subDistricts.find(zone=>zone.toLowerCase()===ac.value.toLowerCase());
+    console.log(data);
+    if(data){
+      return null;
+    }else{
+      return {subDistrictDoesNotExixt:true}
     }
   }
 
