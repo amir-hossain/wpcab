@@ -28,7 +28,7 @@ export class DetailsComponent implements OnInit {
       this.userInfo=snap.val().userInfo;
       this.address=snap.val().address;
     });
-    this.total= this.db.database.ref('/total').once('value',snap=>{
+    this.db.database.ref('/total').once('value',snap=>{
       this.total=snap.val();
       console.log(this.total)
     });
@@ -45,6 +45,7 @@ export class DetailsComponent implements OnInit {
   }
 
   delete(){
+    // console.log(this.total)
     let dialogRef = this.dialog.open(DialogComponent, {
       disableClose:true,
       data: { name: this.userInfo.fullName,key:this.selectedItemId,total:this.total}

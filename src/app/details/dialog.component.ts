@@ -19,21 +19,19 @@ export class DialogComponent{
   }
   yes(): void {
     this.dialogRef.close();
-    // console.log(this.data.userInfoKey);
-    // console.log(this.data.addressKey);
-    // console.log(this.data.authKey);
     this.db.database.ref('/users/' + this.data.key).remove();
     this.db.database.ref('/short/' + this.data.key).remove();
+    this.db.database.ref('/auth/' + this.data.key).remove();
+    console.log(this.data.total);
     this.db.database.ref('/').update({
       total:this.data.total-1
-    });
-    this.db.database.ref('/auth/' + this.data.key).remove().then(val=>{
+    }).then(val=>{
       localStorage.removeItem('key');
       this.router.navigateByUrl('delete-sucessfull');
-    }
-      
+    }  
     );
-    
-  }
+   
+    // console.log(this.data.total-1);
+    }
 
 }

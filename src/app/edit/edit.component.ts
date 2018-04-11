@@ -197,6 +197,9 @@ export class EditComponent implements OnInit{
   }
   back(){
     new Promise(resolve=>{
+      if(this.photo){
+        this.uploadPhoto();
+      }
       if(this.userInfoChanges){
           this.db.database.ref('users/'+this.selectedItemId+'/userInfo').update(this.userInfo);
       }
@@ -220,17 +223,11 @@ export class EditComponent implements OnInit{
 
     })
     .then(val=>{
-      if(this.photo){
-        this.uploadPhoto();
-        
-      }
-    })
-    .then(val=>{
       if(!this.photo){
         this.router.navigateByUrl('details');
       }
       
-      console.log(val);
+      // console.log(val);
     }) 
   }
 

@@ -323,7 +323,7 @@ nameAutoSuggestion(fg:FormGroup,controlName:string){
     // console.log(password);
   }
 
-  uploadPhoto2(key){
+  uploadPhoto(key){
     let storageRef = this.fb.storage().ref('img/'+this.photo.name);
     var task=storageRef.put(this.photo);
     task.on('state_changed',
@@ -335,6 +335,9 @@ nameAutoSuggestion(fg:FormGroup,controlName:string){
      // push to userinfo table
      this.db.database.ref('/users/'+key+'/userInfo').update({
       photo:task.snapshot.downloadURL
+     }).then(val=>{
+       this.uploding=false;
+      this.router.navigateByUrl('registration-sucessfull')
      });
      
 })
@@ -402,15 +405,18 @@ nameAutoSuggestion(fg:FormGroup,controlName:string){
           this.pushAuthTable(key);
           this.pushShortTable(key);
           if(this.photo){
-            this.uploadPhoto2(key)
+            this.uploadPhoto(key)
           }
 
           this.db.database.ref('/').update({
             total:this.total+1
           });
         }).then(()=>{
-          this.uploding=false;
-          this.router.navigateByUrl('registration-sucessfull')
+          if(!this.photo){
+            this.uploding=false;
+            this.router.navigateByUrl('registration-sucessfull')
+          }
+       
         })
         
     }else{
