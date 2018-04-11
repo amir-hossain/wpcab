@@ -319,7 +319,7 @@
           <form [formGroup]='zoneForm' (ngSubmit)='done("zoneForm","zone","address","zoneEditing","addressChanges")'>
               <h4>Zone</h4> 
               <span>
-                  <input  type="text" formControlName='zone' [matAutocomplete]='z' (keyup)='autoSuggestion($event.target.value,"zones","filteredZone")'>
+                  <input  type="text" formControlName='zone' [matAutocomplete]='z' (keyup)='zoneAutoSuggestion($event.target.value)'>
                   <mat-autocomplete #z='matAutocomplete'>
                     <mat-option *ngFor='let option of filteredZone' [value]='option'>
                         {{option}}

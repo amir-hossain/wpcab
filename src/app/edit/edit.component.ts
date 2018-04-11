@@ -15,9 +15,6 @@ export class EditComponent implements OnInit{
   loding=false;
   picError=false;
   selectedItemId=localStorage.getItem('key');
-  userInfoKey;
-  addressKey;
-  authKey;
   activeUserRole;
   dateSegment;
   photo;
@@ -28,6 +25,7 @@ export class EditComponent implements OnInit{
   authChanges=0;
   userInfoChanges=0;
   addressChanges=0;
+  shortChanges=0;
 
   //table name
   userInfo;
@@ -130,40 +128,6 @@ export class EditComponent implements OnInit{
    
   }
 
-  fetchSelectedData(tableName,index){
-    //return the promise after resolve
-    return this.db.database.ref(tableName).once('value')
-    //then is a resolved promise
-    .then(snap=>{
-      let temp;
-      if(!index){
-        temp=[];
-      }
-      
-      if(snap){
-        let data=snap.val();
-        Object.keys(data).forEach((key,i)=>{
-        if(i.toString()===index){
-          temp=data[key];
-          if(tableName==='auth'){
-            this.authKey=key;
-          }else if(tableName==='address'){
-            this.addressKey=key;
-          }else{
-            this.userInfoKey=key;
-          }
-        }
-        if(tableName==='auth'){
-          this.authFull.push(data[key])
-        }
-        })
-        //return main data in main callback function
-        return temp;
-      }
-    }
-  )
-  }
-
   readUrl(event:any) {
     this.url='./assets/img/add.png';
     this.photo=null;
@@ -181,25 +145,6 @@ export class EditComponent implements OnInit{
     }else{
       this.picError=true;
     }
-  }
-
-  uploadPhoto(){
-    let storageRef = this.fa.storage().ref('img/'+this.photo.name);
-        var task=storageRef.put(this.photo);
-        task.on('state_changed',
-        snap=>
-          console.log(snap)
-          ,
-      err=>console.log(err)
-        ,()=>{
-         // push to userinfo table
-         this.userInfo.photo=task.snapshot.downloadURL;
-      console.log(task.snapshot.downloadURL);
-      var updates = {};
-      updates['/userInfo/' + this.userInfoKey] = this.userInfo;
-      this.db.database.ref().update(updates);
-      this.loc.back();
-      })
   }
 
   existPhone(control:AbstractControl):
@@ -230,7 +175,7 @@ export class EditComponent implements OnInit{
     
     return error;
   }
-  uploadPhoto2(){
+  uploadPhoto(){
     this.loding=true;
     let storageRef = this.fa.storage().ref('img/'+this.photo.name);
     var task=storageRef.put(this.photo);
@@ -263,12 +208,20 @@ export class EditComponent implements OnInit{
         this.db.database.ref('auth/'+this.selectedItemId+'/').update(this.auth);
       }
 
+      if(this.shortChanges){
+        this.db.database.ref('short/'+this.selectedItemId+'/').update({
+          fullName:this.userInfo.fullName,
+          zone:this.address.zone,
+          subDistrict:this.address.subDistrict
+        });
+      }
+
       resolve();
 
     })
     .then(val=>{
       if(this.photo){
-        this.uploadPhoto2();
+        this.uploadPhoto();
         
       }
       return 1;
@@ -355,7 +308,7 @@ export class EditComponent implements OnInit{
   }
 
   zoneDoesNotExixt(ac:AbstractControl):ValidationErrors | null{
-    let data =this.zones.find(zone=>zone.toLowerCase().includes(ac.value.toLowerCase()));
+    let data =this.zones.find(zone=>zone.toLowerCase()===ac.value.toLowerCase());
     console.log(data);
     if(data){
       return null;
@@ -382,6 +335,9 @@ export class EditComponent implements OnInit{
     (<Object>this[tableName])[fieldName]=val;
     this[flagName]=false;
     this[changesFlag]++;
+    if(fieldName==='fullNane' || fieldName==='zone' || fieldName==='subDistrict'){
+      this.shortChanges++;
+    }
     console.log(this[changesFlag]);
     }
   }
@@ -425,6 +381,15 @@ export class EditComponent implements OnInit{
       year:this.dateSegment[2],
     })
   this.dobEditing=false;
+}
+
+zoneAutoSuggestion(val){
+  // console.log(val);
+  if(!val){
+    this.filteredZone=[];
+  }else{
+    this.filteredZone=this.zones.filter(option=>option.toLowerCase().includes(val.toLowerCase()));
+  }
 }
 
 

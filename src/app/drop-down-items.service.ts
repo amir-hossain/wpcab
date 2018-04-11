@@ -33,7 +33,7 @@ const zone=[
   'Badda-Batara-Gulshan',
   'Shekher gau',
   'Vober chor',
-  'KAchpur-Narayanganj',
+  'Kachpur-Narayanganj',
   'Savar',
   'Chadpur',
   'Shingair(Manikganj)',
