@@ -3,6 +3,7 @@ import {AngularFireDatabase} from 'angularfire2/database';
 import {Location} from '@angular/common';
 import {MatDialog} from '@angular/material';
 import {DialogComponent} from './dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-details',
@@ -15,13 +16,21 @@ export class DetailsComponent implements OnInit {
   address;
   auth;
   activeUserRole;
-  selectedItemId=localStorage.getItem('key');
+  selectedItemId;
+  path;
   
-  constructor(private db:AngularFireDatabase,private loc:Location,public dialog: MatDialog) { }
+  constructor(private db:AngularFireDatabase,private loc:Location,public dialog: MatDialog,private router:Router) { }
 
   ngOnInit() {
+    this.path=this.router.url;
+    console.log(this.path);
     this.activeUserRole=localStorage.getItem('activeUserRole');
-    let selectedItemId=localStorage.getItem('key');
+    if(this.path==='/profile'){
+      this.selectedItemId=localStorage.getItem('activeUserId');
+    }else{
+      this.selectedItemId=localStorage.getItem('key');
+    }
+    
     // console.log(selectedItemId);
     this.db.database.ref('users/'+this.selectedItemId).once('value',snap=>{
       // console.log(snap.val().address);

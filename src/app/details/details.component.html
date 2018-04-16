@@ -1,8 +1,9 @@
 <div class='container'>
-  <div>
+  <div *ngIf='path!=="/profile"'>
       <a href="collection" mat-raised-button color='primary' class="back-btn">Back</a>
       <h1 *ngIf='userInfo'>Detail's of {{userInfo.fullName}}</h1>
   </div>
+  <div *ngIf='path==="/profile"' style="margin-top: 2em"></div>
   <mat-card>
       <ul *ngIf='userInfo' class='sub-1'>
       <span *ngIf='!userInfo.photo'>
@@ -21,7 +22,7 @@
       <ul *ngIf='userInfo' >
         <div class="sub-header">
             <h2>Info</h2>
-            <a href="/edit" mat-raised-button>Edit</a>
+            <a *ngIf='path!=="/profile"' href="/edit" mat-raised-button>Edit</a>
             <div class="clearfix"></div>
         </div>
       <li><h4>Name</h4>{{userInfo.fullName}}</li>

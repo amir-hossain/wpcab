@@ -38,7 +38,12 @@ export class LoginComponent implements OnInit {
       let data=snap.val();
       if(data){
         let objArry=[];
-      Object.keys(data).forEach(key=>objArry.push(data[""+key]));
+        let temp;
+      Object.keys(data).forEach((key)=>{
+        temp=data[key];
+        temp.id=key;
+        objArry.push(temp);
+      });
       this.check(userInfo,password,objArry);
       }else{
         this.serverError='Internal problem';
@@ -71,6 +76,7 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('password',password);
           }
           localStorage.setItem('activeUserRole',obj.role);
+          localStorage.setItem('activeUserId',obj.id);
           this.router.navigateByUrl('home');
           break;
         }else{
