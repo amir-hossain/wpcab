@@ -147,6 +147,15 @@
       <mat-error class='custom-error' *ngIf="occupation.invalid && occupation.touched">
         Occupation required
       </mat-error>
+      <div *ngIf='otherOccupationSelected'>
+        <mat-form-field>
+      <mat-label>*What is your occupation?</mat-label>
+      <input  matInput type="text" formControlName="otherOccupation">
+    </mat-form-field>
+      <mat-error *ngIf='otherOccupation.invalid && otherOccupation.touched'>
+        Occupation required
+      </mat-error>
+    </div><!-- full name -->
       </mat-card>
     </div><!-- user info -->
     <div class="container">

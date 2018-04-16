@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Validators,FormGroup,FormBuilder,AbstractControl,ValidationErrors} from "@angular/forms";
+import {Validators,FormGroup,FormBuilder,AbstractControl,ValidationErrors, FormControl} from "@angular/forms";
 import {Router} from '@angular/router'
 import {AngularFireDatabase} from "angularfire2/database";
 import { Observable } from 'rxjs/Observable';
@@ -27,6 +27,7 @@ export class RegistrationComponent implements OnInit {
   autoInfo=[];
   footerError=false;
   picError=false;
+  otherOccupationSelected=false;
 
   // preview profile  url
   url='./assets/img/add.png';
@@ -62,6 +63,8 @@ export class RegistrationComponent implements OnInit {
   get bloodGroup() { return this.registrationForm.get('userInfo').get('bloodGroup'); }
 
   get occupation() { return this.registrationForm.get('userInfo').get('occupation'); }
+
+  get otherOccupation() { return this.registrationForm.get('userInfo').get('otherOccupation'); }
 
   get invitedBy() { return this.registrationForm.get('userInfo').get('invitedBy'); }
 
@@ -116,8 +119,13 @@ export class RegistrationComponent implements OnInit {
         motherName:["",Validators.required],
         invitedBy:["",Validators.required],
         occupation:["",Validators.required],
+        otherOccupation:[''],
         bloodGroup:[''],
-      }),
+      },
+      {
+        validator:this.isOtherOccupation.bind(this)
+      }
+    ),
       address:this.builder.group({
         zone:["",[Validators.required,this.zoneDoesNotExist.bind(this)]],
         subDistrict:["",[Validators.required,this.subDistrictDoesNotExist.bind(this)]],
@@ -323,6 +331,28 @@ nameAutoSuggestion(fg:FormGroup,controlName:string){
     // console.log(password);
   }
 
+  isOtherOccupation(ac:FormControl){
+    let occupation=ac.get('occupation');
+    let otherOccupation=ac.get('otherOccupation');
+    // console.log(this.registrationForm)
+  if(occupation.value==='Others'){
+      this.otherOccupationSelected=true;
+      if(!otherOccupation.value){
+        otherOccupation.setErrors(Validators.required);
+      }else{
+        otherOccupation.setErrors(null);
+      }
+      
+  }else{
+      this.otherOccupationSelected=false;
+      otherOccupation.setErrors(null);
+      // return null;
+      
+  
+      
+  }
+}
+
   uploadPhoto(key){
     let storageRef = this.fb.storage().ref('img/'+this.photo.name);
     var task=storageRef.put(this.photo);
@@ -345,7 +375,7 @@ nameAutoSuggestion(fg:FormGroup,controlName:string){
 
 
   pushUserInfoTable():any{
-    return this.db.database.ref('/users/').push({
+    let obj={
       userInfo:{
       fullName:this.fullName.value,
       gender:this.gender.value,
@@ -356,7 +386,12 @@ nameAutoSuggestion(fg:FormGroup,controlName:string){
       bloodGroup:this.bloodGroup.value,
       occupation:this.occupation.value
       }
-    }).key;
+    }
+
+    if(this.otherOccupationSelected){
+      obj.userInfo.occupation=this.otherOccupation.value
+    }
+    return this.db.database.ref('/users/').push(obj).key;
   }
 
   pushShortTable(key){
