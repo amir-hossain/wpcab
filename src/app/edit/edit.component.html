@@ -151,18 +151,29 @@
         <h4>Occupation</h4>{{userInfo.occupation}}
       </li>
       <li *ngIf='occupationEditing' class="alter">
-          <form [formGroup]='occupationForm' (ngSubmit)='done("occupationForm","occupation","userInfo","occupationEditing","userInfoChanges")'>
+          <form [formGroup]='occupationForm' (ngSubmit)='occupationDone()'>
               <h4>Occupation</h4>
               <mat-radio-group formControlName='occupation'>
                   <mat-radio-button type="radio" color='primary' name="occupation" id="student" value="Student"   >Student</mat-radio-button>
                  <mat-radio-button type="radio" color='primary' name="occupation" id="job holder" value="Job holder" > Job holder</mat-radio-button>
-                  <mat-radio-button type="radio" color='primary' name="occupation" id="bussnessman" value="Bussnessman" >Bussnessman</mat-radio-button>
+                  <mat-radio-button type="radio" color='primary' name="occupation" id="businessman" value="Businessman" >Businessman</mat-radio-button>
                   <mat-radio-button type="radio" color='primary' name="occupation" id="others" value="Others" >Others</mat-radio-button>
                 </mat-radio-group>
-          <img src="assets/img/wrong.png" (click)='cencel("occupationForm","occupation","userInfo","occupationEditing")'>
-          <!-- input type submit image button -->
-          <input src="assets/img/right.png" type='image' class='submit-button'>
-          <div class="clearfix"></div>
+                <div *ngIf='otherOccupationSelected'>
+                  <h4></h4>
+                  <input  type="text" formControlName='otherOccupation'>
+                  <img src="assets/img/wrong.png" (click)='cencelOccupation()'>
+                  <!-- input type submit image button -->
+                  <input src="assets/img/right.png" type='image' class='submit-button'>
+                  <div class="clearfix"></div>
+                  <div *ngIf='occupationForm.controls.otherOccupation.invalid' class="errorMessege">
+                    Occupation not be empty
+                  </div>
+                </div>  <!-- dinamic occupation field -->
+        <img *ngIf='!otherOccupationSelected' src="assets/img/wrong.png" (click)='cencelOccupation()'>
+                <!-- input type submit image button -->
+                <input *ngIf='!otherOccupationSelected' src="assets/img/right.png" type='image' class='submit-button'>
+                <div class="clearfix"></div>
         </form>
       </li>
       <li *ngIf='userInfo.bloodGroup && !bloodGroupEditing'>

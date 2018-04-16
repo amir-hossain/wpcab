@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {Location} from '@angular/common';
 import {DropDownItemsService} from '../drop-down-items.service';
-import {FormBuilder,Validators,FormGroup, AbstractControl, ValidationErrors} from '@angular/forms';
+import {FormBuilder,Validators,FormGroup, AbstractControl, ValidationErrors, FormControl} from '@angular/forms';
 import { FirebaseApp } from 'angularfire2';
 import {Router} from '@angular/router'
 @Component({
@@ -12,6 +12,7 @@ import {Router} from '@angular/router'
   providers: [DropDownItemsService]
 })
 export class EditComponent implements OnInit{
+  otherOccupationSelected=false;
   loding=false;
   picError=false;
   selectedItemId=localStorage.getItem('key');
@@ -255,9 +256,25 @@ export class EditComponent implements OnInit{
     this.invitedByForm=this.fb.group({
       invitedBy:[this.userInfo.invitedBy,Validators.required]
     });
-    this.occupationForm=this.fb.group({
-      occupation:[this.userInfo.occupation]
-    });
+
+    if(this.userInfo.occupation==='Student' || this.userInfo.occupation==='Job holder' || this.userInfo.occupation==='Businessman'){
+      this.occupationForm=this.fb.group({
+        occupation:[this.userInfo.occupation],
+        otherOccupation:[''],
+        },
+        {
+          validator:this.isOtherOccupation.bind(this)
+        })
+    }else{
+      this.occupationForm=this.fb.group({
+        occupation:['Others'],
+        otherOccupation:[this.userInfo.occupation],
+        },
+        {
+          validator:this.isOtherOccupation.bind(this)
+        });
+    }
+    
     this.bloodGroupForm=this.fb.group({
       bloodGroup:[this.userInfo.bloodGroup]
     });
@@ -302,6 +319,29 @@ export class EditComponent implements OnInit{
       nId:[this.address.nid,Validators.pattern('^\\d+$')]
     });
   }
+
+  isOtherOccupation(ac:FormControl){
+    let occupation=ac.get('occupation');
+    let otherOccupation=ac.get('otherOccupation');
+    // console.log(this.registrationForm)
+  if(occupation.value==='Others'){
+      this.otherOccupationSelected=true;
+      if(!otherOccupation.value){
+        otherOccupation.setErrors(Validators.required);
+      }else{
+        otherOccupation.setErrors(null);
+      }
+      
+  }else{
+      this.otherOccupationSelected=false;
+      otherOccupation.setErrors(null);
+      // return null;
+      
+  
+      
+  }
+}
+
 
   zoneDoesNotExixt(ac:AbstractControl):ValidationErrors | null{
     let data =this.zones.find(zone=>zone.toLowerCase()===ac.value.toLowerCase());
@@ -358,6 +398,18 @@ export class EditComponent implements OnInit{
     }
   }
 
+  occupationDone(){
+    if(this.occupationForm.valid){
+      if(this.otherOccupationSelected){
+        this.userInfo.occupation=this.occupationForm.controls.otherOccupation.value;
+      }else{
+        this.userInfo.occupation=this.occupationForm.controls.occupation.value;
+      }
+      this.occupationEditing=false;
+      this.userInfoChanges++;
+    }
+  }
+
   dobDone(){
     if(this.dobForm.valid){
       console.log(this.dobForm.controls.day.value);
@@ -382,6 +434,21 @@ export class EditComponent implements OnInit{
       })
     this[flagName]=false;
   }
+
+  cencelOccupation(){
+    if(this.userInfo.occupation==='Student' || this.userInfo.occupation==='Job holder' || this.userInfo.occupation==='Businessman'){
+      this.occupationForm.setValue({
+        occupation:this.userInfo.occupation,
+        otherOccupation:this.userInfo.occupation
+      })
+    }else{
+      this.occupationForm.setValue({
+        occupation:'Others',
+        otherOccupation:this.userInfo.occupation
+      })
+    }
+    this.occupationEditing=false;
+  }  
   cencelPassword(){
     this.passwordForm.setValue({
       password:this.auth.password,

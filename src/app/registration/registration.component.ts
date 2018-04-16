@@ -346,10 +346,7 @@ nameAutoSuggestion(fg:FormGroup,controlName:string){
   }else{
       this.otherOccupationSelected=false;
       otherOccupation.setErrors(null);
-      // return null;
-      
-  
-      
+      // return null;  
   }
 }
 
