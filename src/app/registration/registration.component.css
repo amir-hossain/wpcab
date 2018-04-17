@@ -13,6 +13,16 @@ mat-option{
     left: 40%;
   }
 
+  .field-top-margin{
+      margin-top: 15px;
+  }
+
+  .spoouseWpcabMember{
+      color: red;
+      font-weight: bold;
+      margin:15px 0px;
+  }
+
   .pic-error{
     padding-top:10px; 
     font-weight: bold;

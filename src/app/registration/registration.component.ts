@@ -28,6 +28,8 @@ export class RegistrationComponent implements OnInit {
   footerError=false;
   picError=false;
   otherOccupationSelected=false;
+  marriedSelected=false;
+  spouseWpcabMember=false;
 
   // preview profile  url
   url='./assets/img/add.png';
@@ -59,6 +61,10 @@ export class RegistrationComponent implements OnInit {
   get fatherName() { return this.registrationForm.get('userInfo').get('fatherName'); }
 
   get motherName() { return this.registrationForm.get('userInfo').get('motherName'); }
+
+  get status() { return this.registrationForm.get('userInfo').get('status'); }
+
+  get spouseName() { return this.registrationForm.get('userInfo').get('spouseName'); }
 
   get bloodGroup() { return this.registrationForm.get('userInfo').get('bloodGroup'); }
 
@@ -117,14 +123,17 @@ export class RegistrationComponent implements OnInit {
         year:["",[Validators.required,Validators.pattern('^\\d+$')]],
         fatherName:["",Validators.required],
         motherName:["",Validators.required],
+        status:["",Validators.required],
+        spoouseWpcabMember:[false],
+        spouseName:'',
         invitedBy:["",Validators.required],
         occupation:["",Validators.required],
         otherOccupation:[''],
         bloodGroup:[''],
       },
       {
-        validator:this.isOtherOccupation.bind(this)
-      }
+        validator:this.dinamicField.bind(this)
+      },
     ),
       address:this.builder.group({
         zone:["",[Validators.required,this.zoneDoesNotExist.bind(this)]],
@@ -184,6 +193,7 @@ export class RegistrationComponent implements OnInit {
   this.nameAutoSuggestion(userInfoGroup,'fatherName');
   this.nameAutoSuggestion(userInfoGroup,'motherName');
   this.nameAutoSuggestion(userInfoGroup,'invitedBy');
+  this.nameAutoSuggestion(userInfoGroup,'spouseName');
 
   let addressGroup=<FormGroup>this.registrationForm.controls.address;
   this.districtAutoSuggestion(addressGroup);
@@ -331,9 +341,12 @@ nameAutoSuggestion(fg:FormGroup,controlName:string){
     // console.log(password);
   }
 
-  isOtherOccupation(ac:FormControl){
+  dinamicField(ac:FormControl){
     let occupation=ac.get('occupation');
     let otherOccupation=ac.get('otherOccupation');
+    let status=ac.get('status');
+    let spoouseWpcabMember=ac.get('spoouseWpcabMember');
+    let spouseName=ac.get('spouseName');
     // console.log(this.registrationForm)
   if(occupation.value==='Others'){
       this.otherOccupationSelected=true;
@@ -344,9 +357,26 @@ nameAutoSuggestion(fg:FormGroup,controlName:string){
       }
       
   }else{
-      this.otherOccupationSelected=false;
-      otherOccupation.setErrors(null);
-      // return null;  
+    this.otherOccupationSelected=false;
+    otherOccupation.setErrors(null);
+  }
+  
+  if(status.value==='Married'){
+    this.marriedSelected=true;
+    // console.log(spoouseWpcabMember.value);
+    if(spoouseWpcabMember.value){
+      this.spouseWpcabMember=true;
+    }else{
+      this.spouseWpcabMember=false;
+    }
+    if(!spouseName.value){
+      spouseName.setErrors(Validators.required);
+    }else{
+      spouseName.setErrors(null);
+    }   
+  }else{
+     this.marriedSelected=false;
+      spouseName.setErrors(null);
   }
 }
 
@@ -379,12 +409,17 @@ nameAutoSuggestion(fg:FormGroup,controlName:string){
       dob:this.day.value+'/'+this.month.value+'/'+this.year.value,
       fatherName:this.fatherName.value,
       motherName:this.motherName.value,
+      status:this.status.value,
       invitedBy:this.invitedBy.value,
       bloodGroup:this.bloodGroup.value,
-      occupation:this.occupation.value
+      occupation:this.occupation.value,
       }
     }
 
+
+    if(this.spouseWpcabMember){
+      obj.userInfo['spouseName']=this.spouseName.value
+    }
     if(this.otherOccupationSelected){
       obj.userInfo.occupation=this.otherOccupation.value
     }

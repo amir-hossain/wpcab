@@ -111,8 +111,38 @@
             Mother name required
           </mat-error>
         </div><!-- mother name -->
+        <mat-radio-group   formControlName="status">
+          <div class="label">*Maritial status</div>
+          <mat-radio-button type="radio" color='primary'  name="status" id="married" value="Married" >Married</mat-radio-button>
+         <mat-radio-button type="radio" color='primary' name="status" id="single" value="Single" > Single</mat-radio-button>
+        </mat-radio-group><!-- maritial status -->
+        <div *ngIf='marriedSelected'>
+          <div class='spoouseWpcabMember'>
+          <mat-checkbox   color='primary' formControlName='spoouseWpcabMember'>Spouse is a wpcab member</mat-checkbox>
+          </div>
+        
+        <div *ngIf='spouseWpcabMember'>
+          <mat-form-field>
+          <mat-label>*Spouse Name</mat-label>  
+          <input matInput type="textarea" formControlName="spouseName" [matAutocomplete]='spa'>
+          <mat-autocomplete #spa='matAutocomplete'>
+            <mat-option  *ngFor='let option of filteredNames' [value]='option.name'>
+              <span>{{option.name}}</span> 
+              <span *ngIf='option.zone!=="Other"'>({{option.zone}})</span>
+              <span *ngIf='option.zone==="Other"'>({{option.subDistrict}})</span>
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+          <mat-error *ngIf="spouseName.invalid && spouseName.touched">
+              Spouse name required
+            </mat-error>
+          </div>
+        </div><!-- spouse checkbox -->
+        <mat-error class='custom-error' *ngIf="status.invalid && status.touched">
+          Maritail status required
+        </mat-error>
         <div>
-            <mat-form-field>
+            <mat-form-field class="field-top-margin">
             <mat-label>*Invited by</mat-label>
             <input matInput type="textarea" formControlName="invitedBy" [matAutocomplete]='caller'>
             <mat-autocomplete #caller='matAutocomplete'>
@@ -122,7 +152,7 @@
                 <span *ngIf='option.zone==="Other"'>({{option.subDistrict}})</span>
               </mat-option>
             </mat-autocomplete>
-          </mat-form-field>
+          </mat-form-field >
             <mat-error *ngIf="invitedBy.invalid && invitedBy.touched">
                 Invited by required
               </mat-error>
@@ -148,7 +178,7 @@
         Occupation required
       </mat-error>
       <div *ngIf='otherOccupationSelected'>
-        <mat-form-field>
+        <mat-form-field class="field-top-margin">
       <mat-label>*What is your occupation?</mat-label>
       <input  matInput type="text" formControlName="otherOccupation">
     </mat-form-field>
