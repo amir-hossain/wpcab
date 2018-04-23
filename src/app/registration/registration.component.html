@@ -1,16 +1,4 @@
-<div *ngIf='activeUserRole=="Admin"'>
-  <app-admin-nav></app-admin-nav>
-</div>
-<div *ngIf='activeUserRole=="Operator"'>
-  <app-register-nav></app-register-nav>
-</div>
-<div *ngIf='activeUserRole=="Accountant"'>
-    <app-accountant-nav></app-accountant-nav>
-</div>
-<div *ngIf='activeUserRole=="Super" || activeUserRole=="Leader"'>
-    <app-sule-nav></app-sule-nav>
-</div>
-
+<app-nav></app-nav>
   <h1>Member Registration</h1>
   <form [formGroup]="registrationForm" (ngSubmit)="signup()">
     <div class="container">
@@ -112,7 +100,7 @@
           </mat-error>
         </div><!-- mother name -->
         <mat-radio-group   formControlName="status">
-          <div class="label">*Maritial status</div>
+          <div class="label">*Marital status</div>
           <mat-radio-button type="radio" color='primary'  name="status" id="married" value="Married" >Married</mat-radio-button>
          <mat-radio-button type="radio" color='primary' name="status" id="single" value="Single" > Single</mat-radio-button>
         </mat-radio-group><!-- maritial status -->
@@ -139,7 +127,7 @@
           </div>
         </div><!-- spouse checkbox -->
         <mat-error class='custom-error' *ngIf="status.invalid && status.touched">
-          Maritail status required
+          Marital status required
         </mat-error>
         <div>
             <mat-form-field class="field-top-margin">

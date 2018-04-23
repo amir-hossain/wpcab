@@ -1,0 +1,32 @@
+<div mat-tab-nav-bar class="nav-container">
+  <div class="nav-content">
+    <span *ngFor="let routerLink of routerLinks;let i=index">
+        <a mat-tab-link *ngIf='i===0'
+        [routerLink]="routerLink.link">
+           <img class='nav-logo' src="./assets/img/logo.png" alt="">
+       </a>
+        <a mat-tab-link *ngIf='i!==0'
+        [routerLink]="routerLink.link"
+        routerLinkActive #rla="routerLinkActive"
+        [active]="rla.isActive">
+           {{routerLink.label}}
+       </a>
+    </span>
+    <a mat-tab-link class="full-view">
+        <img class='nav-photo' src="assets/img/translate1.png" alt="">
+    </a>
+<a mat-tab-link (click)='menuClick()' class="full-view">
+        <img class='nav-photo' *ngIf='photoUrl' src="{{photoUrl}}" alt="">
+    <img *ngIf='!up' class='menu-icon' src="assets/img/down.png" alt="">
+    <img *ngIf='up' class='menu-icon' src="assets/img/up.png" alt="">
+</a>
+</div>
+</div>
+<div [class.user]='userRole==="User"'>
+    <div [class.ac]='userRole==="Admin" || userRole==="Accountant"'>
+        <div *ngIf='up' class="dropdown-content" (click)="logout()">
+            <p>Logout</p>
+        </div>
+    </div>
+    
+</div>

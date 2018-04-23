@@ -1,16 +1,2 @@
-<div *ngIf='activeUserRole=="Admin"'>
-  <app-admin-nav></app-admin-nav>
-</div>
-<div *ngIf='activeUserRole=="Operator"'>
-  <app-register-nav></app-register-nav>
-</div>
-<div *ngIf='activeUserRole=="User"'>
-    <app-user-nav></app-user-nav>
-</div>
-<div *ngIf='activeUserRole=="Accountant"'>
-    <app-accountant-nav></app-accountant-nav>
-</div>
-<div *ngIf='activeUserRole=="Super" || activeUserRole=="Leader"'>
-    <app-sule-nav></app-sule-nav>
-</div>
+<app-nav></app-nav>
 <app-details></app-details>

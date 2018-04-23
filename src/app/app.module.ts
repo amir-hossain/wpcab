@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app.routing';
 import { HomeComponent } from './home/home.component';
-import { RegisterNavComponent } from './register-nav/register-nav.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { NotificaionComponent } from './notificaion/notificaion.component';
@@ -17,15 +16,12 @@ import {AngularFireAuth} from "angularfire2/auth";
 import {AngularFireDatabaseModule } from "angularfire2/database";
 import { CollectionComponent } from './collection/collection.component';
 import { AdminComponent } from './admin/admin.component';
-import { AdminNavComponent } from './admin-nav/admin-nav.component';
+import { NavComponent } from './nav/nav.component';
 import { CreateNotificationComponent } from './create-notification/create-notification.component';
 import { RequestComponent } from './request/request.component';
 import { ApproveComponent } from './approve/approve.component';
 import { SucessPageComponent } from './sucess-page/sucess-page.component';
 import { DetailsComponent } from './details/details.component';
-import { SuleNavComponent } from './sule-nav/sule-nav.component';
-import { AccountantNavComponent } from './accountant-nav/accountant-nav.component';
-import { UserNavComponent } from './user-nav/user-nav.component';
 import { AccountsComponent } from './accounts/accounts.component';
 import {LoginGuard} from './login.guard';
 import {AntiUserGuard} from './anti-user.guard';
@@ -53,22 +49,18 @@ const confiq={
     AppComponent,
     LoginComponent,
     HomeComponent,
-    RegisterNavComponent,
     ProfileComponent,
     RegistrationComponent,
     NotificaionComponent,
     FinanceComponent,
     CollectionComponent,
     AdminComponent,
-    AdminNavComponent,
+    NavComponent,
     CreateNotificationComponent,
     RequestComponent,
     ApproveComponent,
     SucessPageComponent,
     DetailsComponent,
-    SuleNavComponent,
-    AccountantNavComponent,
-    UserNavComponent,
     AccountsComponent,
     EditComponent,
     DialogComponent,
