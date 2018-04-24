@@ -70,7 +70,7 @@ const accountantLinks=[
     link:'/profile'
   },
   {
-    label:'Registeration',
+    label:'Registration',
     link:'/registration'
   },
   {
@@ -104,7 +104,7 @@ const otherLinks=[
     link:'/profile'
   },
   {
-    label:'Registeration',
+    label:'Registration',
     link:'/registration'
   },
   {

@@ -9,11 +9,12 @@
         [routerLink]="routerLink.link"
         routerLinkActive #rla="routerLinkActive"
         [active]="rla.isActive">
-           {{routerLink.label}}
+           {{routerLink.label | translate}}
        </a>
     </span>
-    <a mat-tab-link class="full-view">
-        <img class='nav-photo' src="assets/img/translate1.png" alt="">
+    <a mat-tab-link class="full-view" (click)='translate()'>
+        <img *ngIf='lanBD' class='nav-photo' src="assets/img/uk-flag.png" alt="">
+        <img *ngIf='!lanBD' class='nav-photo' src="assets/img/bd-flag.png" alt="">
     </a>
 <a mat-tab-link (click)='menuClick()' class="full-view">
         <img class='nav-photo' *ngIf='photoUrl' src="{{photoUrl}}" alt="">

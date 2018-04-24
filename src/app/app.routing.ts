@@ -21,6 +21,7 @@ import {AdcountGuard} from './adcount.guard';
 import {AntiUtorGuard} from './anti-utor.guard';
 import {EditComponent} from './edit/edit.component';
 import { FooterComponent } from './footer/footer.component';
+import {TestComponent} from './test/test.component';
 const routes:Routes=[
  
     {
@@ -103,6 +104,10 @@ const routes:Routes=[
     {
         path:"login",
         component:LoginComponent
+    },
+    {
+        path:"test",
+        component:TestComponent
     },
     {
         path:'**',

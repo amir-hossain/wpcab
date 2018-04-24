@@ -4,7 +4,8 @@
 
 .nav-container a{
     height: 6em;
-    width: 0em !important;
+    font-size: 18px;
+    font-weight:bold; 
 }
 
 .full-view{

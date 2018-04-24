@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms'
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -33,6 +36,7 @@ import { EditComponent } from './edit/edit.component';
 import { DialogComponent } from './details/dialog.component';
 import { IgxRippleModule } from 'igniteui-angular/main';
 import { FooterComponent } from './footer/footer.component';
+import { TestComponent } from './test/test.component';
 
 
 const confiq={
@@ -42,6 +46,10 @@ const confiq={
   projectId: "wpcab-96299",
   storageBucket: "wpcab-96299.appspot.com",
   messagingSenderId: "967144772560"
+}
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
 }
 
 @NgModule({
@@ -64,10 +72,19 @@ const confiq={
     AccountsComponent,
     EditComponent,
     DialogComponent,
-    FooterComponent
+    FooterComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+}),
     BrowserAnimationsModule,
     IgxRippleModule,
     Meterial,
