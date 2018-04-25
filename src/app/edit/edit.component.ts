@@ -4,7 +4,8 @@ import {Location} from '@angular/common';
 import {DropDownItemsService} from '../drop-down-items.service';
 import {FormBuilder,Validators,FormGroup, AbstractControl, ValidationErrors, FormControl} from '@angular/forms';
 import { FirebaseApp } from 'angularfire2';
-import {Router} from '@angular/router'
+import {Router} from '@angular/router';
+import{CommunicationService} from '../communication.service';
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
@@ -93,7 +94,13 @@ export class EditComponent implements OnInit{
   nationalityForm;
   nIdForm;
 
-  constructor(private db:AngularFireDatabase,private loc:Location,private ddis:DropDownItemsService,private fb:FormBuilder,private fa: FirebaseApp,private router:Router) { }
+  constructor(private db:AngularFireDatabase,private loc:Location,private ddis:DropDownItemsService,private fb:FormBuilder,private fa: FirebaseApp,private router:Router,private communicationService: CommunicationService) { 
+    this.notifyRoot();
+  }
+  notifyRoot(){
+    CommunicationService.navBar=false;
+    this.communicationService.emitChange();
+   }
 
   ngOnInit() {
     this.loding=true;

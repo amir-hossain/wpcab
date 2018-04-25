@@ -2,6 +2,7 @@ import { Component, OnInit,ViewChild} from '@angular/core';
 import {AngularFireDatabase} from 'angularfire2/database';
 import{Router} from '@angular/router';
 import {PageEvent,MatPaginator} from '@angular/material';
+import{CommunicationService} from '../communication.service';
 
 @Component({
   selector: 'app-collection',
@@ -23,7 +24,14 @@ export class CollectionComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private db:AngularFireDatabase,private router:Router) { }
+  constructor(private db:AngularFireDatabase,private router:Router,private communicationService: CommunicationService) {
+    this.notifyRoot();
+   }
+
+   notifyRoot(){
+    CommunicationService.navBar=true;
+    this.communicationService.emitChange();
+   }
 
   ngOnInit() {
     this.activeUserRole=localStorage.getItem('activeUserRole');

@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { FormBuilder, Validators,FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import {AngularFireDatabase} from 'angularfire2/database';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 
 export class LoginComponent implements OnInit {
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   auth(userInfo,password){
     this.db.database.ref('auth').once('value')
     .then(snap=>{
-      console.log(snap.val());
+      // console.log(snap.val());
       let data=snap.val();
       if(data){
         let objArry=[];
@@ -77,6 +77,7 @@ export class LoginComponent implements OnInit {
           }
           localStorage.setItem('activeUserRole',obj.role);
           localStorage.setItem('activeUserId',obj.id);
+          // notifiy app component by communication service
           this.router.navigateByUrl('home');
           break;
         }else{

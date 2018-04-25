@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import{CommunicationService} from '../communication.service';
 
 @Component({
   selector: 'app-create-notification',
@@ -7,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateNotificationComponent implements OnInit {
   activeUserRole;
-  constructor() { }
+  constructor(private communicationService: CommunicationService) {
+    
+   }
 
   ngOnInit() {
     this.activeUserRole=localStorage.getItem('activeUserRole');
   }
-
 }

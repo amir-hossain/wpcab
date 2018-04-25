@@ -18,7 +18,6 @@ import {AngularFireModule} from "angularfire2";
 import {AngularFireAuth} from "angularfire2/auth";
 import {AngularFireDatabaseModule } from "angularfire2/database";
 import { CollectionComponent } from './collection/collection.component';
-import { AdminComponent } from './admin/admin.component';
 import { NavComponent } from './nav/nav.component';
 import { CreateNotificationComponent } from './create-notification/create-notification.component';
 import { RequestComponent } from './request/request.component';
@@ -36,7 +35,7 @@ import { EditComponent } from './edit/edit.component';
 import { DialogComponent } from './details/dialog.component';
 import { IgxRippleModule } from 'igniteui-angular/main';
 import { FooterComponent } from './footer/footer.component';
-import { TestComponent } from './test/test.component';
+import{CommunicationService} from './communication.service';
 
 
 const confiq={
@@ -62,7 +61,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     NotificaionComponent,
     FinanceComponent,
     CollectionComponent,
-    AdminComponent,
     NavComponent,
     CreateNotificationComponent,
     RequestComponent,
@@ -73,7 +71,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     EditComponent,
     DialogComponent,
     FooterComponent,
-    TestComponent
   ],
   imports: [
     BrowserModule,
@@ -84,7 +81,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-}),
+    }),
+    
     BrowserAnimationsModule,
     IgxRippleModule,
     Meterial,
@@ -95,7 +93,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AngularFireDatabaseModule
   ],
   entryComponents:[DialogComponent],
-  providers: [AngularFireAuth,LoginGuard,AntiUserGuard,AccountantGuard,AdminGuard,AdcountGuard,AntiUtorGuard],
+  providers: [AngularFireAuth,LoginGuard,AntiUserGuard,AccountantGuard,AdminGuard,AdcountGuard,AntiUtorGuard,CommunicationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

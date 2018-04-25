@@ -6,5 +6,18 @@
     "Collection":"Collection",
     "Notification":"Notification",
     "Request":"Request",
-    "Accounts":"Accounts"
+    "Accounts":"Accounts",
+    "Logout":"Logout"
+    ,
+    "HomeComponent":{
+        "NearEvent":"Nearby Event",
+        "NameLab":"Name",
+        "DateLab":"Date",
+        "TimeLab":"Time",
+        "DayRemLab":"Day Remaming",
+        "MetLab":"General Meetting",
+        "Date":"1/1/2018",
+        "Time":"6:00 pm",
+        "DayRem":"3 days Remaning"
+    }
 }

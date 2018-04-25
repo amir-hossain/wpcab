@@ -26,8 +26,9 @@
 <div [class.user]='userRole==="User"'>
     <div [class.ac]='userRole==="Admin" || userRole==="Accountant"'>
         <div *ngIf='up' class="dropdown-content" (click)="logout()">
-            <p>Logout</p>
+                <p>{{'Logout' | translate}}</p>
+            
         </div>
     </div>
-    
 </div>
+<!-- <router-outlet (notify)='onNotify($event)'></router-outlet> -->

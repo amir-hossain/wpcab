@@ -8,6 +8,8 @@ import 'firebase/storage';
 import * as firebase from 'firebase/app';
 import { FirebaseApp } from 'angularfire2';
 import {DropDownItemsService} from '../drop-down-items.service';
+import{CommunicationService} from '../communication.service';
+
 
 @Component({
   selector: 'app-registration',
@@ -101,13 +103,19 @@ export class RegistrationComponent implements OnInit {
   get role() { return this.registrationForm.get('auth').get('role'); }
 
 
-  constructor(private builder:FormBuilder,private db:AngularFireDatabase,private router:Router,private fb: FirebaseApp,private ddis:DropDownItemsService) {
+  constructor(private builder:FormBuilder,private db:AngularFireDatabase,private router:Router,private fb: FirebaseApp,private ddis:DropDownItemsService,private communicationService: CommunicationService) {
+    this.notifyRoot();
     this.roles=this.ddis.getRoles();
     this.districts=this.ddis.getDistricts();
     this.subDistricts=this.ddis.getSubDistricts();
     this.zones=this.ddis.getZones();
     this.bloodGroups=this.ddis.getBloodGroups();
     this.months=this.ddis.getMonths();
+   }
+
+   notifyRoot(){
+    CommunicationService.navBar=true;
+    this.communicationService.emitChange();
    }
 
   ngOnInit() {

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input} from '@angular/core';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {Location} from '@angular/common';
 import {MatDialog} from '@angular/material';
 import {DialogComponent} from './dialog.component';
 import { Router } from '@angular/router';
+import{CommunicationService} from '../communication.service';
 
 @Component({
   selector: 'app-details',
@@ -18,10 +19,24 @@ export class DetailsComponent implements OnInit {
   activeUserRole;
   selectedItemId;
   path;
-  
-  constructor(private db:AngularFireDatabase,private loc:Location,public dialog: MatDialog,private router:Router) { }
+  @Input() profile:boolean;
+  constructor(private db:AngularFireDatabase,private loc:Location,public dialog: MatDialog,private router:Router,private communicationService: CommunicationService) { 
+    
+  }
+
+  notifyRoot(){
+    if(this.profile){
+      CommunicationService.navBar=true;
+    this.communicationService.emitChange();
+    }else{
+      CommunicationService.navBar=false;
+      this.communicationService.emitChange();
+    }
+
+   }
 
   ngOnInit() {
+    this.notifyRoot();
     this.path=this.router.url;
     console.log(this.path);
     this.activeUserRole=localStorage.getItem('activeUserRole');

@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {AngularFireDatabase} from 'angularfire2/database';
 import {NavLinksService} from '../nav-links.service';
 import { TranslateService } from '@ngx-translate/core';
+import{CommunicationService} from '../communication.service';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
@@ -15,11 +16,11 @@ export class NavComponent implements OnInit {
   photoUrl;
   up=false;
   userRole;
-  constructor(private router:Router,private db:AngularFireDatabase,private nls:NavLinksService,private ts: TranslateService) { 
+  constructor(private router:Router,private db:AngularFireDatabase,private nls:NavLinksService,private ts: TranslateService,private communicationService: CommunicationService) { 
     let userId=localStorage.getItem('activeUserId');
     this.db.database.ref('users/'+userId+'/userInfo/').once('value',snap=>this.photoUrl=snap.val().photo
   );
-  ts.setDefaultLang('bn');
+    ts.setDefaultLang('bn');
 }
 
   ngOnInit() {
@@ -36,8 +37,11 @@ export class NavComponent implements OnInit {
   }
 
   logout(){
+    // notifiy app component by communication service
+    CommunicationService.navBar=false;
+    this.communicationService.emitChange();
     localStorage.removeItem('activeUserRole');
-    this.router.navigate(["login"]);
+    this.router.navigate(["/login"]);
   }
 
   menuClick(){
@@ -47,11 +51,9 @@ export class NavComponent implements OnInit {
   translate(){
     this.lanBD=!this.lanBD;
     if(this.lanBD){
-      this.ts.use('bd');
+      this.ts.use('bn');
     }else{
       this.ts.use('en');
     }
-    
   }
-
 }

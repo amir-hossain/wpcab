@@ -6,5 +6,17 @@
     "Collection":"খেদমত",
     "Notification":"নোটিফিকেশন",
     "Request":"অনুরোধ",
-    "Accounts":"অ্যাকাউন্টস"
+    "Accounts":"অ্যাকাউন্টস",
+    "Logout":"বের হন",
+    "HomeComponent":{
+        "NearEvent":"নিকটবর্তী ইভেন্ট",
+        "NameLab":"নাম",
+        "DateLab":"তারিখ",
+        "TimeLab":"সময়",
+        "DayRemLab":"দিন বাকি",
+        "MetLab":"সাধারণ সভা",
+        "Date":"১/১/২০১৮",
+        "Time":"৬:০০ দিবা",
+        "DayRem":"৩ দিন বাকি"
+    }
 }
