@@ -1,6 +1,7 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { FormBuilder, Validators,FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import {AngularFireDatabase} from 'angularfire2/database';
 @Component({
   selector: 'app-login',
@@ -11,15 +12,17 @@ import {AngularFireDatabase} from 'angularfire2/database';
 export class LoginComponent implements OnInit {
 
   loginForm:FormGroup;
-  unError="";
-  passError="";
-  serverError='';
+  unError=false;
+  passError=false;
+  serverError=false;
 
   get userInfo() { return this.loginForm.get('userInfo'); }
 
   get password() { return this.loginForm.get('password'); }
   
-  constructor(private builder:FormBuilder,private router:Router,private db:AngularFireDatabase) { }
+  constructor(private builder:FormBuilder,private router:Router,private db:AngularFireDatabase,private ts: TranslateService) { 
+    ts.setDefaultLang('bn');
+  }
 
   ngOnInit() {
     this.loginForm=this.builder.group({
@@ -46,7 +49,7 @@ export class LoginComponent implements OnInit {
       });
       this.check(userInfo,password,objArry);
       }else{
-        this.serverError='Internal problem';
+        this.serverError=true;
       }
       
     });
@@ -81,21 +84,22 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl('home');
           break;
         }else{
-          this.passError='Wrong password';
+          this.passError=true;
           break;
         }
       }
     }
     if(!userInfoMatch){
-      this.unError='Wrong info';
+      this.unError=true;
     }
    
 
   }
 
   login(){
-    this.unError="";
-    this.passError="";
+    this.unError=false;
+    this.passError=false;
+    this.serverError=false;
     if(this.loginForm.valid){
       this.auth(this.userInfo.value,this.password.value);
     }else{

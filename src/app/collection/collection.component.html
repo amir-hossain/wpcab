@@ -1,13 +1,13 @@
 <table>
     <mat-card class="search-card">
         <mat-form-field>
-          <input matInput (keyup)="nameFilter($event.target.value)" placeholder="Search name">
+          <input matInput (keyup)="nameFilter($event.target.value)" placeholder="{{'CollectionComponent.SearchName' | translate}}">
         </mat-form-field>
         <mat-form-field class="middle-filter">
-            <input matInput (keyup)="zoneFilter($event.target.value)" placeholder="Search zone">
+            <input matInput (keyup)="zoneFilter($event.target.value)" placeholder="{{'CollectionComponent.SearchZone' | translate}}">
           </mat-form-field>
           <mat-form-field>
-              <input matInput (keyup)="subDistrictFilter($event.target.value)" placeholder="Search sub district">
+              <input matInput (keyup)="subDistrictFilter($event.target.value)" placeholder="{{'CollectionComponent.SearchSubDistrict' | translate}}">
             </mat-form-field>
       </mat-card>
     

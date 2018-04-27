@@ -20,10 +20,14 @@ export class NavComponent implements OnInit {
     let userId=localStorage.getItem('activeUserId');
     this.db.database.ref('users/'+userId+'/userInfo/').once('value',snap=>this.photoUrl=snap.val().photo
   );
-    ts.setDefaultLang('bn');
 }
 
   ngOnInit() {
+    let lan=localStorage.getItem('lan');
+    if(lan){
+      // console.log(lan);
+    this.ts.use(lan);
+    }
     this.userRole=localStorage.getItem('activeUserRole');
     if(this.userRole==='User'){
       this.routerLinks=this.nls.getUserLinks();
@@ -52,8 +56,10 @@ export class NavComponent implements OnInit {
     this.lanBD=!this.lanBD;
     if(this.lanBD){
       this.ts.use('bn');
+      localStorage.setItem('lan','bn');
     }else{
       this.ts.use('en');
+      localStorage.setItem('lan','en');
     }
   }
 }

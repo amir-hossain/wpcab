@@ -1,66 +1,66 @@
-<h1>Member Registration</h1>
+<h1>{{'RegistrationComponent.Heading' | translate}}</h1>
   <form [formGroup]="registrationForm" (ngSubmit)="signup()">
     <div class="container">
-      <h3>User info</h3>
-      <span class="warning">* Required field</span>
+      <h3>{{'RegistrationComponent.SubHeading1' | translate}}</h3>
+      <span class="warning">* {{'RegistrationComponent.Ins' | translate}}</span>
       <mat-card class="card" formGroupName='userInfo'>
         <label for='upload'>
           <input type='file'  id='upload' (change)="readUrl($event)" style='display:none;' #file > 
           <img class="pic" [src]="url">
-          <a mat-raised-button class='upload-button' (click)='file.click()'>Upload</a>
+          <a mat-raised-button class='upload-button' (click)='file.click()'>{{'RegistrationComponent.Upload' | translate}}</a>
         </label>
         <mat-error *ngIf='picError' class="pic-error">
-          Plese select png or jpeg file
+          {{'RegistrationComponent.Error.Pic' | translate}}
         </mat-error>
         <div>
           <mat-form-field>
-        <mat-label>*Full name</mat-label>
+        <mat-label>*{{'RegistrationComponent.Name' | translate}}</mat-label>
         <input  matInput type="text" formControlName="fullName">
       </mat-form-field>
         <mat-error *ngIf="fullName.invalid && fullName.touched">
-          Full name required
+          {{'RegistrationComponent.Error.Name' | translate}}
         </mat-error>
       </div><!-- full name -->
       <mat-radio-group   formControlName="gender">
-        <div class="label">*Gender</div>
-        <mat-radio-button type="radio" color='primary'  name="gender" id="male" value="Male" >Male</mat-radio-button>
-       <mat-radio-button type="radio" color='primary' name="gender" id="female" value="Female" > Female</mat-radio-button>
+        <div class="label">*{{'RegistrationComponent.Gender' | translate}}</div>
+        <mat-radio-button type="radio" color='primary'  name="gender" id="male" value="Male" >{{'RegistrationComponent.Male' | translate}}</mat-radio-button>
+       <mat-radio-button type="radio" color='primary' name="gender" id="female" value="Female" > {{'RegistrationComponent.Female' | translate}}</mat-radio-button>
       </mat-radio-group><!-- gender -->
       <mat-error class='custom-error' *ngIf="gender.invalid && gender.touched">
-        Gender required
+        {{'RegistrationComponent.Error.Gender' | translate}}
       </mat-error>
       <div>
-      <div class="label">*Date of birth</div>
+      <div class="label">*{{'RegistrationComponent.Dob' | translate}}</div>
       <div class="dob">
       <mat-form-field class='day'>
-          <mat-label>Day</mat-label>
+          <mat-label>{{'RegistrationComponent.Day' | translate}}</mat-label>
           <input matInput  type="text" formControlName='day'>
           <mat-error *ngIf="day.hasError('required') && day.touched">
-              Day of birth required
+            {{'RegistrationComponent.Error.Day' | translate}}
             </mat-error>
             <mat-error *ngIf="day.hasError('pattern')">
-                Not a number
+              {{'RegistrationComponent.Error.Number' | translate}}
               </mat-error>
       </mat-form-field>
       <mat-form-field class="middle">
-          <mat-label>Month</mat-label>
+          <mat-label>{{'RegistrationComponent.Month' | translate}}</mat-label>
           <mat-select formControlName='month'>
               <mat-option *ngFor='let option of months' [value]='option'>
                 {{option}}
               </mat-option>
            </mat-select>
            <mat-error *ngIf="month.invalid && month.touched">
-              Month of birth required
+            {{'RegistrationComponent.Error.Month' | translate}}
            </mat-error>
           </mat-form-field>
           <mat-form-field>
-              <mat-label>Year</mat-label>
+              <mat-label>{{'RegistrationComponent.Year' | translate}}</mat-label>
               <input matInput type="text" formControlName='year'>
               <mat-error *ngIf="year.hasError('required') && year.touched">
-                  Year of birth required
+                {{'RegistrationComponent.Error.Year' | translate}}
                 </mat-error>
                 <mat-error *ngIf="year.hasError('pattern')">
-                    Not a number
+                  {{'RegistrationComponent.Error.Number' | translate}}
                   </mat-error>
           </mat-form-field>
         </div>
@@ -68,7 +68,7 @@
       </div><!-- dob -->
       <div>
           <mat-form-field>
-          <mat-label>*Father's name</mat-label>
+          <mat-label>*{{'RegistrationComponent.FatherName' | translate}}</mat-label>
           <input matInput type="text" formControlName="fatherName" [matAutocomplete]='father'>
           <mat-autocomplete #father='matAutocomplete'>
             <mat-option  *ngFor='let option of filteredNames' [value]='option.name'>
@@ -79,12 +79,12 @@
           </mat-autocomplete>
         </mat-form-field>
           <mat-error *ngIf="fatherName.invalid && fatherName.touched">
-            Father name required
+            {{'RegistrationComponent.Error.FatherName' | translate}}
           </mat-error>
         </div><!-- father name -->
         <div>        
           <mat-form-field>
-          <mat-label>*Mother's name</mat-label>
+          <mat-label>*{{'RegistrationComponent.MotherName' | translate}}</mat-label>
           <input matInput type="text" formControlName="motherName" [matAutocomplete]='mother'>
           <mat-autocomplete #mother='matAutocomplete'>
               <mat-option  *ngFor='let option of filteredNames' [value]='option.name'>
@@ -95,22 +95,22 @@
           </mat-autocomplete>
         </mat-form-field>
           <mat-error *ngIf="motherName.invalid && motherName.touched">
-            Mother name required
+            {{'RegistrationComponent.Error.MotherName' | translate}}
           </mat-error>
         </div><!-- mother name -->
         <mat-radio-group   formControlName="status">
-          <div class="label">*Marital status</div>
-          <mat-radio-button type="radio" color='primary'  name="status" id="married" value="Married" >Married</mat-radio-button>
-         <mat-radio-button type="radio" color='primary' name="status" id="single" value="Single" > Single</mat-radio-button>
+          <div class="label">*{{'RegistrationComponent.status' | translate}}</div>
+          <mat-radio-button type="radio" color='primary'  name="status" id="married" value="Married" >{{'RegistrationComponent.Married' | translate}}</mat-radio-button>
+         <mat-radio-button type="radio" color='primary' name="status" id="single" value="Single" > {{'RegistrationComponent.Single' | translate}}</mat-radio-button>
         </mat-radio-group><!-- maritial status -->
         <div *ngIf='marriedSelected'>
           <div class='spoouseWpcabMember'>
-          <mat-checkbox   color='primary' formControlName='spoouseWpcabMember'>Spouse is a wpcab member</mat-checkbox>
+          <mat-checkbox   color='primary' formControlName='spoouseWpcabMember'>S{{'RegistrationComponent.WPCABMember' | translate}}</mat-checkbox>
           </div>
         
         <div *ngIf='spouseWpcabMember'>
           <mat-form-field>
-          <mat-label>*Spouse Name</mat-label>  
+          <mat-label>*{{'RegistrationComponent.Spouse' | translate}}</mat-label>  
           <input matInput type="textarea" formControlName="spouseName" [matAutocomplete]='spa'>
           <mat-autocomplete #spa='matAutocomplete'>
             <mat-option  *ngFor='let option of filteredNames' [value]='option.name'>
@@ -121,16 +121,16 @@
           </mat-autocomplete>
         </mat-form-field>
           <mat-error *ngIf="spouseName.invalid && spouseName.touched">
-              Spouse name required
+            {{'RegistrationComponent.Error.SpouseName' | translate}}
             </mat-error>
           </div>
         </div><!-- spouse checkbox -->
         <mat-error class='custom-error' *ngIf="status.invalid && status.touched">
-          Marital status required
+          {{'RegistrationComponent.Error.Status' | translate}}
         </mat-error>
         <div>
             <mat-form-field class="field-top-margin">
-            <mat-label>*Invited by</mat-label>
+            <mat-label>*{{'RegistrationComponent.InvitedBy' | translate}}</mat-label>
             <input matInput type="textarea" formControlName="invitedBy" [matAutocomplete]='caller'>
             <mat-autocomplete #caller='matAutocomplete'>
               <mat-option  *ngFor='let option of filteredNames' [value]='option.name'>
@@ -141,12 +141,12 @@
             </mat-autocomplete>
           </mat-form-field >
             <mat-error *ngIf="invitedBy.invalid && invitedBy.touched">
-                Invited by required
+              {{'RegistrationComponent.Error.Inviter' | translate}}
               </mat-error>
             </div><!-- invited by -->
             <div>
                 <mat-form-field>
-                    <mat-label class="not-required">Blood group</mat-label>
+                    <mat-label class="not-required">{{'RegistrationComponent.Blood' | translate}}</mat-label>
                  <mat-select formControlName='bloodGroup'>
                     <mat-option *ngFor='let option of bloodGroups' [value]='option'>
                       {{option}}
@@ -155,14 +155,14 @@
                 </mat-form-field>
               </div> <!-- blood group -->
       <mat-radio-group formControlName="occupation">
-        <div class="label">*Occupation</div>
-        <mat-radio-button type="radio" color='primary' name="occupation" id="student" value="Student" >Student</mat-radio-button>
-       <mat-radio-button type="radio" color='primary' name="occupation" id="job holder" value="Job holder" > Job holder</mat-radio-button>
-        <mat-radio-button type="radio" color='primary' name="occupation" id="businessman" value="Businessman" >Businessman</mat-radio-button>
-        <mat-radio-button type="radio" color='primary' name="occupation" id="others" value="Others" >Others</mat-radio-button>
+        <div class="label">*{{'RegistrationComponent.Occupation' | translate}}</div>
+        <mat-radio-button type="radio" color='primary' name="occupation" id="student" value="Student" >{{'RegistrationComponent.Student' | translate}}</mat-radio-button>
+       <mat-radio-button type="radio" color='primary' name="occupation" id="job holder" value="Job holder" >{{'RegistrationComponent.Job' | translate}}</mat-radio-button>
+        <mat-radio-button type="radio" color='primary' name="occupation" id="businessman" value="Businessman" >{{'RegistrationComponent.Businessman' | translate}}</mat-radio-button>
+        <mat-radio-button type="radio" color='primary' name="occupation" id="others" value="Others" >{{'RegistrationComponent.Other' | translate}}</mat-radio-button>
       </mat-radio-group><!-- occupation -->
       <mat-error class='custom-error' *ngIf="occupation.invalid && occupation.touched">
-        Occupation required
+        {{'RegistrationComponent.Error.Occupation' | translate}}
       </mat-error>
       <div *ngIf='otherOccupationSelected'>
         <mat-form-field class="field-top-margin">
@@ -170,26 +170,26 @@
       <input  matInput type="text" formControlName="otherOccupation">
     </mat-form-field>
       <mat-error *ngIf='otherOccupation.invalid && otherOccupation.touched'>
-        Occupation required
+        {{'RegistrationComponent.Error.Occupation' | translate}}
       </mat-error>
     </div><!-- full name -->
       </mat-card>
     </div><!-- user info -->
     <div class="container">
-        <h3>Address</h3>
+        <h3>{{'RegistrationComponent.SubHeading2' | translate}}</h3>
         <mat-card class="card" formGroupName='address'>
             <div>
                 <mat-form-field>
-                    <mat-label>*Parmemt Address</mat-label>
+                    <mat-label>*{{'RegistrationComponent.PA' | translate}}</mat-label>
                 <input matInput type="textarea" formControlName="permanentAddress">
               </mat-form-field>
                 <mat-error *ngIf="permanentAddress.invalid && permanentAddress.touched">
-                  Permanent address required
+                  {{'RegistrationComponent.Error.PA' | translate}}
                 </mat-error>
               </div><!-- permanent address -->
     <div>
         <mat-form-field>
-        <mat-label>*Zone (current)</mat-label>
+        <mat-label>*{{'RegistrationComponent.Zone' | translate}}</mat-label>
         <input matInput type="text" formControlName="zone" [matAutocomplete]='z'>
         <mat-autocomplete #z='matAutocomplete'>
           <mat-option *ngFor='let option of filteredZone' [value]='option'>
@@ -198,15 +198,15 @@
         </mat-autocomplete>
       </mat-form-field>
         <mat-error *ngIf="zone.hasError('required') && zone.touched">
-          Zone required
+          {{'RegistrationComponent.Error.Zone' | translate}}
         </mat-error>
         <mat-error *ngIf="zone.hasError('zoneDoesNotExist') && zone.touched">
-          Zone does not exist (select other)
+          {{'RegistrationComponent.Error.NotZone' | translate}}
         </mat-error>
       </div><!-- zone -->
       <div>
           <mat-form-field>
-            <mat-label>*Sub district (current)</mat-label>
+            <mat-label>*{{'RegistrationComponent.SubDis' | translate}}</mat-label>
           <input matInput type="text" formControlName="subDistrict" [matAutocomplete]='subDist'>
           <mat-autocomplete #subDist='matAutocomplete'>
             <mat-option *ngFor='let option of filteredSubDistricts' [value]='option'>
@@ -215,15 +215,15 @@
           </mat-autocomplete>
         </mat-form-field>
           <mat-error *ngIf="subDistrict.hasError('required') && subDistrict.touched">
-            Sub district required
+            {{'RegistrationComponent.Error.SubDist' | translate}}
           </mat-error>
           <mat-error *ngIf="subDistrict.hasError('subDistrictDoesNotExist') && subDistrict.touched">
-            Sub district does not exist
+            {{'RegistrationComponent.Error.NotSubDist' | translate}}
           </mat-error>
         </div><!-- subDistrict -->
           <div>
               <mat-form-field>
-              <mat-label>*District (current)</mat-label>
+              <mat-label>*{{'RegistrationComponent.Dist' | translate}}</mat-label>
               <input matInput type="text" formControlName="district" [matAutocomplete]='dist'>
               <mat-autocomplete #dist='matAutocomplete'>
                 <mat-option *ngFor='let option of  filteredDistricts' [value]='option'>
@@ -232,95 +232,95 @@
               </mat-autocomplete>
             </mat-form-field>
               <mat-error *ngIf="district.hasError('required') && district.touched">
-                District required
+                {{'RegistrationComponent.Error.Dist' | translate}}
               </mat-error>
               <mat-error *ngIf="district.hasError('districtDoesNotExist') && district.touched">
-                District does not exist
+                {{'RegistrationComponent.Error.NotDist' | translate}}
               </mat-error>
             </div><!-- district -->
           <div>
               <mat-form-field>
-              <input matInput type="text" placeholder="Country" formControlName="country">
+              <input matInput type="text" placeholder="{{'RegistrationComponent.Country' | translate}}" formControlName="country">
             </mat-form-field>
           </div><!-- country -->
           <div>
               <mat-form-field>
-                <input matInput type="text" placeholder="Nationality" formControlName="nationality">
+                <input matInput type="text" placeholder="{{'RegistrationComponent.Nationality' | translate}}" formControlName="nationality">
               </mat-form-field>
             </div><!-- nationality -->
           <div>
               <mat-form-field>
-                <input matInput type="text" placeholder="National ID" formControlName="nId">
+                <input matInput type="text" placeholder="{{'RegistrationComponent.NID' | translate}}" formControlName="nId">
               </mat-form-field>
               <mat-error *ngIf="nId.hasError('pattern')">
-                  Not a number
+                {{'RegistrationComponent.Error.Number' | translate}}
                 </mat-error> 
             </div><!-- nid -->
         </mat-card>
     </div><!-- address -->
     <div class="container">
-        <h3>Online</h3>
+        <h3>{{'RegistrationComponent.SubHeading3' | translate}}</h3>
         <mat-card class="card" formGroupName='auth'>
             <div>
                 <mat-form-field>
-                <input matInput type="text"  placeholder="User name" formControlName="userName">
+                <input matInput type="text"  placeholder="{{'RegistrationComponent.UN' | translate}}" formControlName="userName">
               </mat-form-field>
               <mat-error *ngIf="userName.hasError('exist')">
-                User name exist
+                {{'RegistrationComponent.Error.UN' | translate}}
               </mat-error>
               </div><!-- user name -->
       <div>
         <mat-form-field>
-        <mat-label>*Password </mat-label>
+        <mat-label>*{{'RegistrationComponent.Password' | translate}} </mat-label>
         <input matInput type="password" formControlName="password">
       </mat-form-field>
         <mat-error *ngIf="password.invalid && password.touched">
-          Password required
+          {{'RegistrationComponent.Error.Password' | translate}}
         </mat-error>
       </div><!-- password -->
       <div>
           <mat-form-field>
-              <mat-label>*Conform password </mat-label>
+              <mat-label>*{{'RegistrationComponent.ConPass' | translate}} </mat-label>
           <input matInput type="password" formControlName="conPassword">
         </mat-form-field>
           <mat-error *ngIf="conPassword.hasError('required') && conPassword.touched">
-            Conform password required
+            {{'RegistrationComponent.Error.ConPass' | translate}}
           </mat-error>
           <mat-error *ngIf="conPassword.hasError('missMatchPassword') && conPassword.touched">
-              Conform password did not match
+            {{'RegistrationComponent.Error.Match' | translate}}
             </mat-error>
         </div><!--conform password -->
       <div>
         <mat-form-field>
-            <mat-label>*Phone </mat-label>
+            <mat-label>*{{'RegistrationComponent.Phone' | translate}} </mat-label>
         <input matInput type="text" formControlName="phone">
       </mat-form-field>
         <mat-error *ngIf="phone.hasError('required') && phone.touched">
-          Phone required
+          {{'RegistrationComponent.Error.Phone' | translate}}
         </mat-error>
         <mat-error *ngIf="phone.hasError('exist')">
-          Phone exist
+          {{'RegistrationComponent.Error.PhomeExist' | translate}}
         </mat-error>
         <mat-error *ngIf="phone.hasError('pattern')">
-            Not a number
+          {{'RegistrationComponent.Error.Number' | translate}}
           </mat-error>
       </div><!-- phone -->
       <div>
           <mat-form-field>
-            <input matInput type="email"  placeholder="Email" formControlName="email">
+            <input matInput type="email"  placeholder="{{'RegistrationComponent.Email' | translate}}" formControlName="email">
           </mat-form-field>
           <mat-error  *ngIf="email.value !='' && email.hasError('email')">
-            Invalid email
+            {{'RegistrationComponent.Error.Email' | translate}}
           </mat-error >
           <mat-error *ngIf="email.hasError('exist')">
-            Email exist
+            {{'RegistrationComponent.Error.EmailExist' | translate}}
           </mat-error>
         </div> <!-- email -->
         <mat-form-field>
             <div class="spinner" *ngIf='uploding' >
                 <mat-spinner *ngIf='uploding' [diameter]='200'></mat-spinner>
               </div>
-            <mat-label>Role</mat-label>
+            <mat-label>{{'RegistrationComponent.Role' | translate}}</mat-label>
         <mat-select formControlName='role'>
           <mat-option *ngFor='let role of roles' [value]='role'>
             {{role}}
@@ -328,13 +328,13 @@
         </mat-select>
       </mat-form-field>
       <mat-error *ngIf="role.invalid && role.touched">
-          Role required
+        {{'RegistrationComponent.Error.Role' | translate}}
         </mat-error>
     </mat-card>
     <div>
     
-    <button type="submit"  mat-raised-button color="primary">Signup</button>
-    <span class="footer-error" *ngIf='footerError'>Try agin after fill up all required field! </span>
+    <button type="submit"  mat-raised-button color="primary">{{'RegistrationComponent.Signup' | translate}}</button>
+    <span class="footer-error" *ngIf='footerError'>{{'RegistrationComponent.Error.Foot' | translate}} </span>
     <div class="clearfix"></div>
   </div>
   <app-footer></app-footer>
