@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 const roles=[
   'User',
-  'Leader',
+  'Assistant',
   'Operator',
   'Admin',
   'Accountant',
@@ -9,7 +9,7 @@ const roles=[
 ]
 
 const bloodGroup=[
-  'A +',
+  "A +",
   'A -',
   'B +',
   'B -',

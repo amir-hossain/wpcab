@@ -105,7 +105,7 @@
         </mat-radio-group><!-- maritial status -->
         <div *ngIf='marriedSelected'>
           <div class='spoouseWpcabMember'>
-          <mat-checkbox   color='primary' formControlName='spoouseWpcabMember'>S{{'RegistrationComponent.WPCABMember' | translate}}</mat-checkbox>
+          <mat-checkbox   color='primary' formControlName='spoouseWpcabMember'>{{'RegistrationComponent.WPCABMember' | translate}}</mat-checkbox>
           </div>
         
         <div *ngIf='spouseWpcabMember'>
@@ -149,7 +149,7 @@
                     <mat-label class="not-required">{{'RegistrationComponent.Blood' | translate}}</mat-label>
                  <mat-select formControlName='bloodGroup'>
                     <mat-option *ngFor='let option of bloodGroups' [value]='option'>
-                      {{option}}
+                      {{option | translate}}
                     </mat-option>
                  </mat-select>
                 </mat-form-field>
@@ -323,7 +323,7 @@
             <mat-label>{{'RegistrationComponent.Role' | translate}}</mat-label>
         <mat-select formControlName='role'>
           <mat-option *ngFor='let role of roles' [value]='role'>
-            {{role}}
+            {{role | translate}}
           </mat-option>
         </mat-select>
       </mat-form-field>
