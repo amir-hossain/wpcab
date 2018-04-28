@@ -47,10 +47,21 @@
     "CollectionComponent":{
         "SearchName":"নাম খুজুন ",
         "SearchZone":"জোন খুজুন",
-        "SearchSubDistrict":"উপজেলা খুজুন"
+        "SearchSubDistrict":"উপজেলা খুজুন",
+        "Name":"নাম",
+        "Zone":"জোন",
+        "SubDistrict":"উপজেলা"
     },
-    "RegistrationComponent":{
+    "MixedComponent":{
         "Heading":"সদস্য নিবদ্ধীকরণ",
+        "Heading1":"সদস্যের বিবরণ",
+        "Back":"পিছনে",
+        "Edit":"পরিবর্তন করুন",
+        "SeeMore":"আরো দেখুন",
+        "Collect":"সংগ্রহ",
+        "SpecialCollect":"বিশেষ সংগ্রহ",
+        "Delete":"মুছুন",
+        "Clear":"সংগ্রহ করা হয়েছে",
         "SubHeading1":"ব্যক্তিগত",
         "SubHeading2":"ঠিকানা",
         "SubHeading3":"অনলাইন",

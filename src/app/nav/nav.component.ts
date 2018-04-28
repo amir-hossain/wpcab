@@ -53,13 +53,15 @@ export class NavComponent implements OnInit {
   }
 
   translate(){
-    this.lanBD=!this.lanBD;
-    if(this.lanBD){
+    
+    if(!this.lanBD){
       this.ts.use('bn');
       localStorage.setItem('lan','bn');
+      this.lanBD=true;
     }else{
       this.ts.use('en');
       localStorage.setItem('lan','en');
+      this.lanBD=false;
     }
   }
 }

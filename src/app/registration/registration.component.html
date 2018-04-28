@@ -1,66 +1,66 @@
-<h1>{{'RegistrationComponent.Heading' | translate}}</h1>
+<h1>{{'MixedComponent.Heading' | translate}}</h1>
   <form [formGroup]="registrationForm" (ngSubmit)="signup()">
     <div class="container">
-      <h3>{{'RegistrationComponent.SubHeading1' | translate}}</h3>
-      <span class="warning">* {{'RegistrationComponent.Ins' | translate}}</span>
+      <h3>{{'MixedComponent.SubHeading1' | translate}}</h3>
+      <span class="warning">* {{'MixedComponent.Ins' | translate}}</span>
       <mat-card class="card" formGroupName='userInfo'>
-        <label for='upload'>
-          <input type='file'  id='upload' (change)="readUrl($event)" style='display:none;' #file > 
+        <label>
+          <input type='file'  id='upload' (change)="readUrl($event)" style='display:none;'> 
           <img class="pic" [src]="url">
-          <a mat-raised-button class='upload-button' (click)='file.click()'>{{'RegistrationComponent.Upload' | translate}}</a>
+          <a mat-raised-button class='upload-button'>{{'MixedComponent.Upload' | translate}}</a>
         </label>
         <mat-error *ngIf='picError' class="pic-error">
-          {{'RegistrationComponent.Error.Pic' | translate}}
+          {{'MixedComponent.Error.Pic' | translate}}
         </mat-error>
         <div>
           <mat-form-field>
-        <mat-label>*{{'RegistrationComponent.Name' | translate}}</mat-label>
+        <mat-label>*{{'MixedComponent.Name' | translate}}</mat-label>
         <input  matInput type="text" formControlName="fullName">
       </mat-form-field>
         <mat-error *ngIf="fullName.invalid && fullName.touched">
-          {{'RegistrationComponent.Error.Name' | translate}}
+          {{'MixedComponent.Error.Name' | translate}}
         </mat-error>
       </div><!-- full name -->
       <mat-radio-group   formControlName="gender">
-        <div class="label">*{{'RegistrationComponent.Gender' | translate}}</div>
-        <mat-radio-button type="radio" color='primary'  name="gender" id="male" value="Male" >{{'RegistrationComponent.Male' | translate}}</mat-radio-button>
-       <mat-radio-button type="radio" color='primary' name="gender" id="female" value="Female" > {{'RegistrationComponent.Female' | translate}}</mat-radio-button>
+        <div class="label">*{{'MixedComponent.Gender' | translate}}</div>
+        <mat-radio-button type="radio" color='primary'  name="gender" id="male" value="Male" >{{'MixedComponent.Male' | translate}}</mat-radio-button>
+       <mat-radio-button type="radio" color='primary' name="gender" id="female" value="Female" > {{'MixedComponent.Female' | translate}}</mat-radio-button>
       </mat-radio-group><!-- gender -->
       <mat-error class='custom-error' *ngIf="gender.invalid && gender.touched">
-        {{'RegistrationComponent.Error.Gender' | translate}}
+        {{'MixedComponent.Error.Gender' | translate}}
       </mat-error>
       <div>
-      <div class="label">*{{'RegistrationComponent.Dob' | translate}}</div>
+      <div class="label">*{{'MixedComponent.Dob' | translate}}</div>
       <div class="dob">
       <mat-form-field class='day'>
-          <mat-label>{{'RegistrationComponent.Day' | translate}}</mat-label>
+          <mat-label>{{'MixedComponent.Day' | translate}}</mat-label>
           <input matInput  type="text" formControlName='day'>
           <mat-error *ngIf="day.hasError('required') && day.touched">
-            {{'RegistrationComponent.Error.Day' | translate}}
+            {{'MixedComponent.Error.Day' | translate}}
             </mat-error>
             <mat-error *ngIf="day.hasError('pattern')">
-              {{'RegistrationComponent.Error.Number' | translate}}
+              {{'MixedComponent.Error.Number' | translate}}
               </mat-error>
       </mat-form-field>
       <mat-form-field class="middle">
-          <mat-label>{{'RegistrationComponent.Month' | translate}}</mat-label>
+          <mat-label>{{'MixedComponent.Month' | translate}}</mat-label>
           <mat-select formControlName='month'>
               <mat-option *ngFor='let option of months' [value]='option'>
                 {{option}}
               </mat-option>
            </mat-select>
            <mat-error *ngIf="month.invalid && month.touched">
-            {{'RegistrationComponent.Error.Month' | translate}}
+            {{'MixedComponent.Error.Month' | translate}}
            </mat-error>
           </mat-form-field>
           <mat-form-field>
-              <mat-label>{{'RegistrationComponent.Year' | translate}}</mat-label>
+              <mat-label>{{'MixedComponent.Year' | translate}}</mat-label>
               <input matInput type="text" formControlName='year'>
               <mat-error *ngIf="year.hasError('required') && year.touched">
-                {{'RegistrationComponent.Error.Year' | translate}}
+                {{'MixedComponent.Error.Year' | translate}}
                 </mat-error>
                 <mat-error *ngIf="year.hasError('pattern')">
-                  {{'RegistrationComponent.Error.Number' | translate}}
+                  {{'MixedComponent.Error.Number' | translate}}
                   </mat-error>
           </mat-form-field>
         </div>
@@ -68,7 +68,7 @@
       </div><!-- dob -->
       <div>
           <mat-form-field>
-          <mat-label>*{{'RegistrationComponent.FatherName' | translate}}</mat-label>
+          <mat-label>*{{'MixedComponent.FatherName' | translate}}</mat-label>
           <input matInput type="text" formControlName="fatherName" [matAutocomplete]='father'>
           <mat-autocomplete #father='matAutocomplete'>
             <mat-option  *ngFor='let option of filteredNames' [value]='option.name'>
@@ -79,12 +79,12 @@
           </mat-autocomplete>
         </mat-form-field>
           <mat-error *ngIf="fatherName.invalid && fatherName.touched">
-            {{'RegistrationComponent.Error.FatherName' | translate}}
+            {{'MixedComponent.Error.FatherName' | translate}}
           </mat-error>
         </div><!-- father name -->
         <div>        
           <mat-form-field>
-          <mat-label>*{{'RegistrationComponent.MotherName' | translate}}</mat-label>
+          <mat-label>*{{'MixedComponent.MotherName' | translate}}</mat-label>
           <input matInput type="text" formControlName="motherName" [matAutocomplete]='mother'>
           <mat-autocomplete #mother='matAutocomplete'>
               <mat-option  *ngFor='let option of filteredNames' [value]='option.name'>
@@ -95,22 +95,22 @@
           </mat-autocomplete>
         </mat-form-field>
           <mat-error *ngIf="motherName.invalid && motherName.touched">
-            {{'RegistrationComponent.Error.MotherName' | translate}}
+            {{'MixedComponent.Error.MotherName' | translate}}
           </mat-error>
         </div><!-- mother name -->
         <mat-radio-group   formControlName="status">
-          <div class="label">*{{'RegistrationComponent.status' | translate}}</div>
-          <mat-radio-button type="radio" color='primary'  name="status" id="married" value="Married" >{{'RegistrationComponent.Married' | translate}}</mat-radio-button>
-         <mat-radio-button type="radio" color='primary' name="status" id="single" value="Single" > {{'RegistrationComponent.Single' | translate}}</mat-radio-button>
+          <div class="label">*{{'MixedComponent.status' | translate}}</div>
+          <mat-radio-button type="radio" color='primary'  name="status" id="married" value="Married" >{{'MixedComponent.Married' | translate}}</mat-radio-button>
+         <mat-radio-button type="radio" color='primary' name="status" id="single" value="Single" > {{'MixedComponent.Single' | translate}}</mat-radio-button>
         </mat-radio-group><!-- maritial status -->
         <div *ngIf='marriedSelected'>
           <div class='spoouseWpcabMember'>
-          <mat-checkbox   color='primary' formControlName='spoouseWpcabMember'>{{'RegistrationComponent.WPCABMember' | translate}}</mat-checkbox>
+          <mat-checkbox   color='primary' formControlName='spoouseWpcabMember'>{{'MixedComponent.WPCABMember' | translate}}</mat-checkbox>
           </div>
         
         <div *ngIf='spouseWpcabMember'>
           <mat-form-field>
-          <mat-label>*{{'RegistrationComponent.Spouse' | translate}}</mat-label>  
+          <mat-label>*{{'MixedComponent.Spouse' | translate}}</mat-label>  
           <input matInput type="textarea" formControlName="spouseName" [matAutocomplete]='spa'>
           <mat-autocomplete #spa='matAutocomplete'>
             <mat-option  *ngFor='let option of filteredNames' [value]='option.name'>
@@ -121,16 +121,16 @@
           </mat-autocomplete>
         </mat-form-field>
           <mat-error *ngIf="spouseName.invalid && spouseName.touched">
-            {{'RegistrationComponent.Error.SpouseName' | translate}}
+            {{'MixedComponent.Error.SpouseName' | translate}}
             </mat-error>
           </div>
         </div><!-- spouse checkbox -->
         <mat-error class='custom-error' *ngIf="status.invalid && status.touched">
-          {{'RegistrationComponent.Error.Status' | translate}}
+          {{'MixedComponent.Error.Status' | translate}}
         </mat-error>
         <div>
             <mat-form-field class="field-top-margin">
-            <mat-label>*{{'RegistrationComponent.InvitedBy' | translate}}</mat-label>
+            <mat-label>*{{'MixedComponent.InvitedBy' | translate}}</mat-label>
             <input matInput type="textarea" formControlName="invitedBy" [matAutocomplete]='caller'>
             <mat-autocomplete #caller='matAutocomplete'>
               <mat-option  *ngFor='let option of filteredNames' [value]='option.name'>
@@ -141,12 +141,12 @@
             </mat-autocomplete>
           </mat-form-field >
             <mat-error *ngIf="invitedBy.invalid && invitedBy.touched">
-              {{'RegistrationComponent.Error.Inviter' | translate}}
+              {{'MixedComponent.Error.Inviter' | translate}}
               </mat-error>
             </div><!-- invited by -->
             <div>
                 <mat-form-field>
-                    <mat-label class="not-required">{{'RegistrationComponent.Blood' | translate}}</mat-label>
+                    <mat-label class="not-required">{{'MixedComponent.Blood' | translate}}</mat-label>
                  <mat-select formControlName='bloodGroup'>
                     <mat-option *ngFor='let option of bloodGroups' [value]='option'>
                       {{option | translate}}
@@ -155,14 +155,14 @@
                 </mat-form-field>
               </div> <!-- blood group -->
       <mat-radio-group formControlName="occupation">
-        <div class="label">*{{'RegistrationComponent.Occupation' | translate}}</div>
-        <mat-radio-button type="radio" color='primary' name="occupation" id="student" value="Student" >{{'RegistrationComponent.Student' | translate}}</mat-radio-button>
-       <mat-radio-button type="radio" color='primary' name="occupation" id="job holder" value="Job holder" >{{'RegistrationComponent.Job' | translate}}</mat-radio-button>
-        <mat-radio-button type="radio" color='primary' name="occupation" id="businessman" value="Businessman" >{{'RegistrationComponent.Businessman' | translate}}</mat-radio-button>
-        <mat-radio-button type="radio" color='primary' name="occupation" id="others" value="Others" >{{'RegistrationComponent.Other' | translate}}</mat-radio-button>
+        <div class="label">*{{'MixedComponent.Occupation' | translate}}</div>
+        <mat-radio-button type="radio" color='primary' name="occupation" id="student" value="Student" >{{'MixedComponent.Student' | translate}}</mat-radio-button>
+       <mat-radio-button type="radio" color='primary' name="occupation" id="job holder" value="Job holder" >{{'MixedComponent.Job' | translate}}</mat-radio-button>
+        <mat-radio-button type="radio" color='primary' name="occupation" id="businessman" value="Businessman" >{{'MixedComponent.Businessman' | translate}}</mat-radio-button>
+        <mat-radio-button type="radio" color='primary' name="occupation" id="others" value="Others" >{{'MixedComponent.Other' | translate}}</mat-radio-button>
       </mat-radio-group><!-- occupation -->
       <mat-error class='custom-error' *ngIf="occupation.invalid && occupation.touched">
-        {{'RegistrationComponent.Error.Occupation' | translate}}
+        {{'MixedComponent.Error.Occupation' | translate}}
       </mat-error>
       <div *ngIf='otherOccupationSelected'>
         <mat-form-field class="field-top-margin">
@@ -170,26 +170,26 @@
       <input  matInput type="text" formControlName="otherOccupation">
     </mat-form-field>
       <mat-error *ngIf='otherOccupation.invalid && otherOccupation.touched'>
-        {{'RegistrationComponent.Error.Occupation' | translate}}
+        {{'MixedComponent.Error.Occupation' | translate}}
       </mat-error>
     </div><!-- full name -->
       </mat-card>
     </div><!-- user info -->
     <div class="container">
-        <h3>{{'RegistrationComponent.SubHeading2' | translate}}</h3>
+        <h3>{{'MixedComponent.SubHeading2' | translate}}</h3>
         <mat-card class="card" formGroupName='address'>
             <div>
                 <mat-form-field>
-                    <mat-label>*{{'RegistrationComponent.PA' | translate}}</mat-label>
+                    <mat-label>*{{'MixedComponent.PA' | translate}}</mat-label>
                 <input matInput type="textarea" formControlName="permanentAddress">
               </mat-form-field>
                 <mat-error *ngIf="permanentAddress.invalid && permanentAddress.touched">
-                  {{'RegistrationComponent.Error.PA' | translate}}
+                  {{'MixedComponent.Error.PA' | translate}}
                 </mat-error>
               </div><!-- permanent address -->
     <div>
         <mat-form-field>
-        <mat-label>*{{'RegistrationComponent.Zone' | translate}}</mat-label>
+        <mat-label>*{{'MixedComponent.Zone' | translate}}</mat-label>
         <input matInput type="text" formControlName="zone" [matAutocomplete]='z'>
         <mat-autocomplete #z='matAutocomplete'>
           <mat-option *ngFor='let option of filteredZone' [value]='option'>
@@ -198,15 +198,15 @@
         </mat-autocomplete>
       </mat-form-field>
         <mat-error *ngIf="zone.hasError('required') && zone.touched">
-          {{'RegistrationComponent.Error.Zone' | translate}}
+          {{'MixedComponent.Error.Zone' | translate}}
         </mat-error>
         <mat-error *ngIf="zone.hasError('zoneDoesNotExist') && zone.touched">
-          {{'RegistrationComponent.Error.NotZone' | translate}}
+          {{'MixedComponent.Error.NotZone' | translate}}
         </mat-error>
       </div><!-- zone -->
       <div>
           <mat-form-field>
-            <mat-label>*{{'RegistrationComponent.SubDis' | translate}}</mat-label>
+            <mat-label>*{{'MixedComponent.SubDis' | translate}}</mat-label>
           <input matInput type="text" formControlName="subDistrict" [matAutocomplete]='subDist'>
           <mat-autocomplete #subDist='matAutocomplete'>
             <mat-option *ngFor='let option of filteredSubDistricts' [value]='option'>
@@ -215,15 +215,15 @@
           </mat-autocomplete>
         </mat-form-field>
           <mat-error *ngIf="subDistrict.hasError('required') && subDistrict.touched">
-            {{'RegistrationComponent.Error.SubDist' | translate}}
+            {{'MixedComponent.Error.SubDist' | translate}}
           </mat-error>
           <mat-error *ngIf="subDistrict.hasError('subDistrictDoesNotExist') && subDistrict.touched">
-            {{'RegistrationComponent.Error.NotSubDist' | translate}}
+            {{'MixedComponent.Error.NotSubDist' | translate}}
           </mat-error>
         </div><!-- subDistrict -->
           <div>
               <mat-form-field>
-              <mat-label>*{{'RegistrationComponent.Dist' | translate}}</mat-label>
+              <mat-label>*{{'MixedComponent.Dist' | translate}}</mat-label>
               <input matInput type="text" formControlName="district" [matAutocomplete]='dist'>
               <mat-autocomplete #dist='matAutocomplete'>
                 <mat-option *ngFor='let option of  filteredDistricts' [value]='option'>
@@ -232,95 +232,95 @@
               </mat-autocomplete>
             </mat-form-field>
               <mat-error *ngIf="district.hasError('required') && district.touched">
-                {{'RegistrationComponent.Error.Dist' | translate}}
+                {{'MixedComponent.Error.Dist' | translate}}
               </mat-error>
               <mat-error *ngIf="district.hasError('districtDoesNotExist') && district.touched">
-                {{'RegistrationComponent.Error.NotDist' | translate}}
+                {{'MixedComponent.Error.NotDist' | translate}}
               </mat-error>
             </div><!-- district -->
           <div>
               <mat-form-field>
-              <input matInput type="text" placeholder="{{'RegistrationComponent.Country' | translate}}" formControlName="country">
+              <input matInput type="text" placeholder="{{'MixedComponent.Country' | translate}}" formControlName="country">
             </mat-form-field>
           </div><!-- country -->
           <div>
               <mat-form-field>
-                <input matInput type="text" placeholder="{{'RegistrationComponent.Nationality' | translate}}" formControlName="nationality">
+                <input matInput type="text" placeholder="{{'MixedComponent.Nationality' | translate}}" formControlName="nationality">
               </mat-form-field>
             </div><!-- nationality -->
           <div>
               <mat-form-field>
-                <input matInput type="text" placeholder="{{'RegistrationComponent.NID' | translate}}" formControlName="nId">
+                <input matInput type="text" placeholder="{{'MixedComponent.NID' | translate}}" formControlName="nId">
               </mat-form-field>
               <mat-error *ngIf="nId.hasError('pattern')">
-                {{'RegistrationComponent.Error.Number' | translate}}
+                {{'MixedComponent.Error.Number' | translate}}
                 </mat-error> 
             </div><!-- nid -->
         </mat-card>
     </div><!-- address -->
     <div class="container">
-        <h3>{{'RegistrationComponent.SubHeading3' | translate}}</h3>
+        <h3>{{'MixedComponent.SubHeading3' | translate}}</h3>
         <mat-card class="card" formGroupName='auth'>
             <div>
                 <mat-form-field>
-                <input matInput type="text"  placeholder="{{'RegistrationComponent.UN' | translate}}" formControlName="userName">
+                <input matInput type="text"  placeholder="{{'MixedComponent.UN' | translate}}" formControlName="userName">
               </mat-form-field>
               <mat-error *ngIf="userName.hasError('exist')">
-                {{'RegistrationComponent.Error.UN' | translate}}
+                {{'MixedComponent.Error.UN' | translate}}
               </mat-error>
               </div><!-- user name -->
       <div>
         <mat-form-field>
-        <mat-label>*{{'RegistrationComponent.Password' | translate}} </mat-label>
+        <mat-label>*{{'MixedComponent.Password' | translate}} </mat-label>
         <input matInput type="password" formControlName="password">
       </mat-form-field>
         <mat-error *ngIf="password.invalid && password.touched">
-          {{'RegistrationComponent.Error.Password' | translate}}
+          {{'MixedComponent.Error.Password' | translate}}
         </mat-error>
       </div><!-- password -->
       <div>
           <mat-form-field>
-              <mat-label>*{{'RegistrationComponent.ConPass' | translate}} </mat-label>
+              <mat-label>*{{'MixedComponent.ConPass' | translate}} </mat-label>
           <input matInput type="password" formControlName="conPassword">
         </mat-form-field>
           <mat-error *ngIf="conPassword.hasError('required') && conPassword.touched">
-            {{'RegistrationComponent.Error.ConPass' | translate}}
+            {{'MixedComponent.Error.ConPass' | translate}}
           </mat-error>
           <mat-error *ngIf="conPassword.hasError('missMatchPassword') && conPassword.touched">
-            {{'RegistrationComponent.Error.Match' | translate}}
+            {{'MixedComponent.Error.Match' | translate}}
             </mat-error>
         </div><!--conform password -->
       <div>
         <mat-form-field>
-            <mat-label>*{{'RegistrationComponent.Phone' | translate}} </mat-label>
+            <mat-label>*{{'MixedComponent.Phone' | translate}} </mat-label>
         <input matInput type="text" formControlName="phone">
       </mat-form-field>
         <mat-error *ngIf="phone.hasError('required') && phone.touched">
-          {{'RegistrationComponent.Error.Phone' | translate}}
+          {{'MixedComponent.Error.Phone' | translate}}
         </mat-error>
         <mat-error *ngIf="phone.hasError('exist')">
-          {{'RegistrationComponent.Error.PhomeExist' | translate}}
+          {{'MixedComponent.Error.PhomeExist' | translate}}
         </mat-error>
         <mat-error *ngIf="phone.hasError('pattern')">
-          {{'RegistrationComponent.Error.Number' | translate}}
+          {{'MixedComponent.Error.Number' | translate}}
           </mat-error>
       </div><!-- phone -->
       <div>
           <mat-form-field>
-            <input matInput type="email"  placeholder="{{'RegistrationComponent.Email' | translate}}" formControlName="email">
+            <input matInput type="email"  placeholder="{{'MixedComponent.Email' | translate}}" formControlName="email">
           </mat-form-field>
           <mat-error  *ngIf="email.value !='' && email.hasError('email')">
-            {{'RegistrationComponent.Error.Email' | translate}}
+            {{'MixedComponent.Error.Email' | translate}}
           </mat-error >
           <mat-error *ngIf="email.hasError('exist')">
-            {{'RegistrationComponent.Error.EmailExist' | translate}}
+            {{'MixedComponent.Error.EmailExist' | translate}}
           </mat-error>
         </div> <!-- email -->
         <mat-form-field>
             <div class="spinner" *ngIf='uploding' >
                 <mat-spinner *ngIf='uploding' [diameter]='200'></mat-spinner>
               </div>
-            <mat-label>{{'RegistrationComponent.Role' | translate}}</mat-label>
+            <mat-label>{{'MixedComponent.Role' | translate}}</mat-label>
         <mat-select formControlName='role'>
           <mat-option *ngFor='let role of roles' [value]='role'>
             {{role | translate}}
@@ -328,13 +328,13 @@
         </mat-select>
       </mat-form-field>
       <mat-error *ngIf="role.invalid && role.touched">
-        {{'RegistrationComponent.Error.Role' | translate}}
+        {{'MixedComponent.Error.Role' | translate}}
         </mat-error>
     </mat-card>
     <div>
     
-    <button type="submit"  mat-raised-button color="primary">{{'RegistrationComponent.Signup' | translate}}</button>
-    <span class="footer-error" *ngIf='footerError'>{{'RegistrationComponent.Error.Foot' | translate}} </span>
+    <button type="submit"  mat-raised-button color="primary">{{'MixedComponent.Signup' | translate}}</button>
+    <span class="footer-error" *ngIf='footerError'>{{'MixedComponent.Error.Foot' | translate}} </span>
     <div class="clearfix"></div>
   </div>
   <app-footer></app-footer>

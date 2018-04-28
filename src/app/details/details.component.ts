@@ -5,6 +5,7 @@ import {MatDialog} from '@angular/material';
 import {DialogComponent} from './dialog.component';
 import { Router } from '@angular/router';
 import{CommunicationService} from '../communication.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-details',
@@ -20,8 +21,9 @@ export class DetailsComponent implements OnInit {
   selectedItemId;
   path;
   @Input() profile:boolean;
-  constructor(private db:AngularFireDatabase,private loc:Location,public dialog: MatDialog,private router:Router,private communicationService: CommunicationService) { 
-    
+  constructor(private db:AngularFireDatabase,private loc:Location,public dialog: MatDialog,private router:Router,private communicationService: CommunicationService,private ts: TranslateService) { 
+    let lan=localStorage.getItem('lan');
+    this.ts.use(lan);
   }
 
   notifyRoot(){
@@ -36,6 +38,7 @@ export class DetailsComponent implements OnInit {
    }
 
   ngOnInit() {
+    
     this.notifyRoot();
     this.path=this.router.url;
     console.log(this.path);
