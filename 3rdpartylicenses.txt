@@ -2,6 +2,10 @@
 MIT
 MIT
 
+@ngx-translate/core@9.1.1
+MIT
+MIT
+
 process@0.11.10
 MIT
 (The MIT License)
