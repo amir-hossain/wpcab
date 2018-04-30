@@ -46,8 +46,8 @@ h4{
 }
 
 .sub-1 img{
-    width: 20vh;
-    height: 20vh;
+    width: 13em;
+    height: 13em;
     border: gray solid 5px;
 }
 
@@ -67,7 +67,7 @@ h4{
     background:orange;
     display: block;
     margin-top:5px; 
-    width: 21vh;
+    width: 15em;
 }
 
 .alter h4{

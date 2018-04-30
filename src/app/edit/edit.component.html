@@ -1,60 +1,60 @@
 <div class='container'>
   <div>
-      <button  mat-raised-button color='primary' class="back-btn" (click)='back()'>Back</button>
-      <h1 *ngIf='userInfo'>Edit info of {{userInfo.fullName}}</h1>
+      <button  mat-raised-button color='primary' class="back-btn" (click)='back()'>{{'MixedComponent.Back' | translate}}</button>
+      <h1>{{'MixedComponent.Heading2' | translate}}</h1>
   </div>
   <mat-card>
       <ul *ngIf='userInfo' class='sub-1'>
       <span *ngIf='!userInfo.photo'>
-        <label for='upload'>
-            <input type='file'  id='upload' (change)="readUrl($event)" style='display:none;' #file>
+        <label>
+            <input type='file'  id='upload' (change)="readUrl($event)" style='display:none;' >
          
             <img class="pic" [src]="url">
-            <button mat-raised-button (click)='file.click()' class="upload-button">Upload</button>
+            <a mat-raised-button class="upload-button">{{'MixedComponent.Upload' | translate}}</a>
           </label>
       </span>
       <span *ngIf='userInfo.photo'>
-          <label for='upload'>
-              <input type='file'  id='upload' (change)="readUrl($event)" style='display:none;' #file>
+          <label>
+              <input type='file'  id='upload' (change)="readUrl($event)" style='display:none;'>
            
               <img class="pic" [src]="url">
-              <button mat-raised-button (click)='file.click()' class="upload-button">Upload</button>
+              <a mat-raised-button class="upload-button">{{'MixedComponent.Upload' | translate}}</a>
             </label>
             <mat-error *ngIf='picError' class="pic-error">
-              Plese select png or jpeg file
+              {{'MixedComponent.Error.Pic' | translate}}
             </mat-error>
       </span>      
       </ul>
       <div class='sub-2'>
       <ul *ngIf='userInfo' >
-      <h2 style="margin-top:0;">Info</h2>
+      <h2 style="margin-top:0;">{{'MixedComponent.SubHeading1' | translate}}</h2>
       <li *ngIf='!nameEditing'>
         <img src="assets/img/edit-icon.png" class="icon" (click)='nameEditing=true'>
-        <h4>Name</h4>{{userInfo.fullName}}
+        <h4>{{'MixedComponent.Name' | translate}}</h4>{{userInfo.fullName}}
       </li>
       <li *ngIf='nameEditing' class="alter">
         <form [formGroup]='nameForm' (ngSubmit)='done("nameForm","fullName","userInfo","nameEditing","userInfoChanges")'>
-            <h4>Name</h4>
+            <h4>{{'MixedComponent.Name' | translate}}</h4>
          <input  type="text" formControlName='fullName'>
         <img src="assets/img/wrong.png" (click)='cencel("nameForm","fullName","userInfo","nameEditing")'>
         <!-- input type submit image button -->
         <input src="assets/img/right.png" type='image' class='submit-button'>
         <div class="clearfix"></div>
         <div *ngIf='nameForm.controls.fullName.invalid' class="errorMessege">
-          Name can not be empty
+          {{'MixedComponent.Error.Name' | translate}}
         </div>
       </form>
       </li>
       <li *ngIf='!genderEditing'>
           <img src="assets/img/edit-icon.png" class="icon" (click)='genderEditing=true'>
-          <h4>Gender</h4>{{userInfo.gender}}
+          <h4>{{'MixedComponent.Gender' | translate}}</h4>{{userInfo.gender}}
         </li>
         <li *ngIf='genderEditing' class="alter">
             <form [formGroup]='genderForm' (ngSubmit)='done("genderForm","gender","userInfo","genderEditing","userInfoChanges")'>
-                <h4>Gender</h4> 
+                <h4>{{'MixedComponent.Gender' | translate}}</h4> 
              <mat-radio-group formControlName='gender'>
-                <mat-radio-button type="radio" color='primary' name="gender" id="male" value="Male"   >Male</mat-radio-button>
-               <mat-radio-button type="radio" color='primary' name="gender" id="female" value="Female" >Female</mat-radio-button>
+                <mat-radio-button type="radio" color='primary' name="gender" id="male" value="{{'MixedComponent.Male' | translate}}"   >{{'MixedComponent.Male' | translate}}</mat-radio-button>
+               <mat-radio-button type="radio" color='primary' name="gender" id="female" value="{{'MixedComponent.Female' | translate}}" >{{'MixedComponent.Female' | translate}}</mat-radio-button>
               </mat-radio-group>
             <img src="assets/img/wrong.png" (click)='cencel("genderForm","gender","userInfo","genderEditing")'>
             <!-- input type submit image button -->
@@ -64,11 +64,11 @@
         </li>
         <li *ngIf='!dobEditing'>
             <img src="assets/img/edit-icon.png" class="icon" (click)='dobEditing=true'>
-            <h4>Date of birth</h4>{{userInfo.dob}}
+            <h4>{{'MixedComponent.Dob' | translate}}</h4>{{userInfo.dob}}
           </li>
           <li *ngIf='dobEditing' class="alter">
             <form [formGroup]='dobForm' (ngSubmit)='dobDone()'>
-                <h4>Date of birth</h4>
+                <h4>{{'MixedComponent.Dob' | translate}}</h4>
                 <span class="dob">
                   <input  type="number" placeholder="Day" formControlName='day'>
                   <select formControlName='month'>
@@ -84,81 +84,81 @@
             <input src="assets/img/right.png" type='image' class='submit-button'>
             <div class="clearfix"></div>
             <div *ngIf='dobForm.controls.day.invalid' class="errorMessege">
-              Day of birth can not be empty
+              {{'MixedComponent.Error.Day' | translate}}
             </div>
-            <div *ngIf='dobForm.controls.month.invalid' class="errorMessege">
-              Month of birth can not be empty
+            <div *ngIf='dobForm.controls.year.invalid' class="errorMessege">
+              {{'MixedComponent.Error.Year' | translate}}
             </div>
           </form>
           </li>
           <li *ngIf='!fatherNameEditing'>
               <img src="assets/img/edit-icon.png" class="icon" (click)='fatherNameEditing=true'>
-              <h4>Father name</h4>{{userInfo.fatherName}}
+              <h4>{{'MixedComponent.FatherName' | translate}}</h4>{{userInfo.fatherName}}
             </li>
             <li *ngIf='fatherNameEditing' class="alter">
                 <form [formGroup]='fatherNameForm' (ngSubmit)='done("fatherNameForm","fatherName","userInfo","fatherNameEditing","userInfoChanges")'>
-                    <h4>Faher name</h4> 
+                    <h4>{{'MixedComponent.FatherName' | translate}}</h4> 
                  <input  type="text" formControlName='fatherName'>
                 <img src="assets/img/wrong.png" (click)='cencel("fatherNameForm","fatherName","userInfo","fatherNameEditing")'>
                 <!-- input type submit image button -->
                 <input src="assets/img/right.png" type='image' class='submit-button'>
                 <div class="clearfix"></div>
                 <div *ngIf='fatherNameForm.controls.fatherName.invalid' class="errorMessege">
-                  Father name can not be empty
+                  {{'MixedComponent.Error.FatherName' | translate}}
                 </div>
               </form>
             </li>
             <li *ngIf='!motherNameEditing'>
                 <img src="assets/img/edit-icon.png" class="icon" (click)='motherNameEditing=true'>
-                <h4>Mother name</h4>{{userInfo.motherName}}
+                <h4>{{'MixedComponent.MotherName' | translate}}</h4>{{userInfo.motherName}}
               </li>
               <li *ngIf='motherNameEditing' class="alter">
                   <form [formGroup]='motherNameForm' (ngSubmit)='done("motherNameForm","motherName","userInfo","motherNameEditing","userInfoChanges")'>
-                      <h4>Mother name</h4> 
+                      <h4>{{'MixedComponent.MotherName' | translate}}</h4> 
                    <input  type="text" formControlName='motherName'>
                   <img src="assets/img/wrong.png" (click)='cencel("motherNameForm","motherName","userInfo","motherNameEditing")'>
                   <!-- input type submit image button -->
                   <input src="assets/img/right.png" type='image' class='submit-button'>
                   <div class="clearfix"></div>
                   <div *ngIf='motherNameForm.controls.motherName.invalid' class="errorMessege">
-                    Mother name can not be empty
+                    {{'MixedComponent.Error.MotherName' | translate}}
                   </div>
                 </form>
               </li>
               <li *ngIf='userInfo.invitedBy && !invitedByEditing'>
                   <img src="assets/img/edit-icon.png" class="icon" (click)='invitedByEditing=true'>
-                  <h4>Invited by</h4>{{userInfo.invitedBy}}
+                  <h4>{{'MixedComponent.InvitedBy' | translate}}</h4>{{userInfo.invitedBy}}
                 </li>
                 <li *ngIf='!userInfo.invitedBy && !invitedByEditing'>
                     <img src="assets/img/edit-icon.png" class="icon" (click)='invitedByEditing=true'>
-                    <h4>Invited by</h4>None
+                    <h4>{{'MixedComponent.InvitedBy' | translate}}</h4>None
                   </li>
                 <li *ngIf='invitedByEditing' class="alter">
                     <form [formGroup]='invitedByForm' (ngSubmit)='done("invitedByForm","invitedBy","userInfo","invitedByEditing","userInfoChanges")'>
-                        <h4>Invited by</h4> 
+                        <h4>{{'MixedComponent.InvitedBy' | translate}}</h4> 
                      <input  type="text" formControlName='invitedBy'>
                     <img src="assets/img/wrong.png" (click)='cencel("invitedByForm","invitedBy","userInfo","invitedByEditing")'>
                     <!-- input type submit image button -->
                     <input src="assets/img/right.png" type='image' class='submit-button'>
                     <div class="clearfix"></div>
                     <div *ngIf='invitedByForm.controls.invitedBy.invalid' class="errorMessege">
-                      Invited by can not be empty
+                      {{'MixedComponent.Error.Inviter' | translate}}
                     </div>
                   </form>
                 </li>
       <li *ngIf='!occupationEditing'>
           <img src="assets/img/edit-icon.png" class="icon" (click)='occupationEditing=true'>
-        <h4>Occupation</h4>{{userInfo.occupation}}
+        <h4>{{'MixedComponent.Occupation' | translate}}</h4>{{userInfo.occupation}}
       </li>
       <li *ngIf='occupationEditing' class="alter">
           <form [formGroup]='occupationForm' (ngSubmit)='occupationDone()'>
-              <h4>Occupation</h4>
-              <mat-radio-group formControlName='occupation'>
-                  <mat-radio-button type="radio" color='primary' name="occupation" id="student" value="Student"   >Student</mat-radio-button>
-                 <mat-radio-button type="radio" color='primary' name="occupation" id="job holder" value="Job holder" > Job holder</mat-radio-button>
-                  <mat-radio-button type="radio" color='primary' name="occupation" id="businessman" value="Businessman" >Businessman</mat-radio-button>
-                  <mat-radio-button type="radio" color='primary' name="occupation" id="others" value="Others" >Others</mat-radio-button>
-                </mat-radio-group>
+              <h4>{{'MixedComponent.Occupation' | translate}}</h4>
+              <mat-radio-group formControlName="occupation">
+                <mat-radio-button type="radio" color='primary' name="occupation" id="student" value="{{'MixedComponent.Student' | translate}}" >{{'MixedComponent.Student' | translate}}</mat-radio-button>
+               <mat-radio-button type="radio" color='primary' name="occupation" id="job holder" value="{{'MixedComponent.Job' | translate}}" >{{'MixedComponent.Job' | translate}}</mat-radio-button>
+                <mat-radio-button type="radio" color='primary' name="occupation" id="businessman" value="{{'MixedComponent.Businessman' | translate}}" >{{'MixedComponent.Businessman' | translate}}</mat-radio-button>
+                <mat-radio-button type="radio" color='primary' name="occupation" id="others" value="Others" >{{'MixedComponent.Other' | translate}}</mat-radio-button>
+              </mat-radio-group><!-- occupation -->
                 <div *ngIf='otherOccupationSelected'>
                   <h4></h4>
                   <input  type="text" formControlName='otherOccupation'>
@@ -167,7 +167,7 @@
                   <input src="assets/img/right.png" type='image' class='submit-button'>
                   <div class="clearfix"></div>
                   <div *ngIf='occupationForm.controls.otherOccupation.invalid' class="errorMessege">
-                    Occupation not be empty
+                    {{'MixedComponent.Error.Occupation' | translate}}
                   </div>
                 </div>  <!-- dinamic occupation field -->
         <img *ngIf='!otherOccupationSelected' src="assets/img/wrong.png" (click)='cencelOccupation()'>
@@ -178,19 +178,19 @@
       </li>
       <li *ngIf='userInfo.bloodGroup && !bloodGroupEditing'>
           <img src="assets/img/edit-icon.png" class="icon" (click)='bloodGroupEditing=true'>
-        <h4>Blood group</h4>{{userInfo.bloodGroup}}
+        <h4>{{'MixedComponent.Blood' | translate}}</h4>{{userInfo.bloodGroup}}
         </li>
       <li *ngIf='!userInfo.bloodGroup && !bloodGroupEditing'>
           <img src="assets/img/edit-icon.png" class="icon" (click)='bloodGroupEditing=true'>
-        <h4>Blood group</h4>None
+        <h4>{{'MixedComponent.Blood' | translate}}</h4>None
       </li>
       <li *ngIf='bloodGroupEditing' class="alter">
           <form [formGroup]='bloodGroupForm' (ngSubmit)='done("bloodGroupForm","bloodGroup","userInfo","bloodGroupEditing","userInfoChanges")'>
-              <h4>Blood Group</h4> 
+              <h4>{{'MixedComponent.Blood' | translate}}</h4> 
               <mat-form-field>
                   <mat-select formControlName='bloodGroup'>
-                     <mat-option *ngFor='let option of bloodGroups' [value]='option'>
-                       {{option}}
+                     <mat-option *ngFor='let option of bloodGroups' value='{{option | translate}}'>
+                      {{option | translate}}
                      </mat-option>
                   </mat-select>
                  </mat-form-field>
@@ -206,43 +206,43 @@
       <mat-spinner *ngIf='loding' [diameter]='200'></mat-spinner>
     </div>
       <ul *ngIf='auth'>
-          <h2>Online</h2>
+          <h2>{{'MixedComponent.SubHeading3' | translate}}</h2>
         <li *ngIf='!phoneEditing'>
             <img src="assets/img/edit-icon.png" class="icon" (click)='phoneEditing=true'>
-          <h4>Phone</h4>{{auth.phone}}
+          <h4>{{'MixedComponent.Phone' | translate}}</h4>{{auth.phone}}
         </li>
         <li *ngIf='phoneEditing' class="alter">
             <form [formGroup]='phoneForm' (ngSubmit)='done("phoneForm","phone","auth","phoneEditing","authChanges")'>
-                <h4>Phone</h4>
+                <h4>{{'MixedComponent.Phone' | translate}}</h4>
              <input  type="text" formControlName='phone'>
             <img src="assets/img/wrong.png" (click)='cencel("phoneForm","phone","auth","phoneEditing")'>
             <!-- input type submit image button -->
             <input src="assets/img/right.png" type='image' class='submit-button'>
             <div class="clearfix"></div>
             <div *ngIf='phoneForm.controls.phone.hasError("required")' class="errorMessege">
-              Phone can not be empty
+              {{'MixedComponent.Error.Phone' | translate}}
             </div>
             <div *ngIf='phoneForm.controls.phone.hasError("exist")' class="errorMessege">
-              Phone exist
+              {{'MixedComponent.Error.PhomeExist' | translate}}
             </div>
             <div *ngIf='phoneForm.controls.phone.hasError("pattern")' class="errorMessege">
-              Not a number
+              {{'MixedComponent.Error.Number' | translate}}
             </div>
           </form>
         </li>
         <li *ngIf='!passwordEditing'>
           <img src="assets/img/edit-icon.png" class="icon" (click)='passwordEditing=true'>
-        <h4>Password</h4>Hidden
+        <h4>{{'MixedComponent.Password' | translate}}</h4>Hidden
       </li>
       <li *ngIf='passwordEditing' class="alter">
           <form [formGroup]='passwordForm' (ngSubmit)='done("passwordForm","password","auth","passwordEditing","authChanges")'>
-              <h4>Password</h4>
+              <h4>{{'MixedComponent.Password' | translate}}</h4>
            <input  type="password"  formControlName='password'>
           <div *ngIf='passwordForm.controls.password.invalid' class="errorMessege">
-            password can not be empty
+            {{'MixedComponent.Error.Password' | translate}}
           </div>
           <div>
-              <h4>confirm Password</h4>
+              <h4>{{'MixedComponent.ConPass' | translate}}</h4>
             <input  type="password"  formControlName='conPassword' class="con-password">
            <img src="assets/img/wrong.png" (click)='cencelPassword()'>
            <!-- input type submit image button -->
@@ -250,47 +250,47 @@
            <div class="clearfix"></div>
          </div>
          <div *ngIf='passwordForm.controls.conPassword.hasError("required")' class="errorMessege">
-          Confirm password can not be empty
+          {{'MixedComponent.Error.ConPass' | translate}}
         </div>
         <div *ngIf='passwordForm.controls.conPassword.hasError("missMatchedPassword")' class="errorMessege">
-            Confirm password not matched
+          {{'MixedComponent.Error.Match' | translate}}
           </div>
         </form>
       </li>
         <li *ngIf='auth.email && !emailEditing'>
         <img src="assets/img/edit-icon.png" class="icon" (click)='emailEditing=true'>
-        <h4>Email</h4>{{auth.email}}
+        <h4>{{'MixedComponent.Email' | translate}}</h4>{{auth.email}}
         </li>
         <li *ngIf='!auth.email && !emailEditing'>
           <img src="assets/img/edit-icon.png" class="icon" (click)='emailEditing=true'>
-          <h4>Email</h4>None</li>
+          <h4>{{'MixedComponent.Email' | translate}}</h4>None</li>
           <li *ngIf='emailEditing' class="alter">
               <form [formGroup]='emailForm' (ngSubmit)='done("emailForm","email","auth","emailEditing","authChanges")'>
-                  <h4>Email</h4>
+                  <h4>{{'MixedComponent.Email' | translate}}</h4>
                <input  type="email" formControlName='email'>
               <img src="assets/img/wrong.png" (click)='cencel("emailForm","email","auth","emailEditing")'>
               <!-- input type submit image button -->
               <input src="assets/img/right.png" type='image' class='submit-button'>
               <div class="clearfix"></div>
               <div *ngIf='emailForm.controls.email.hasError("exist")' class="errorMessege">
-                  Email exist
+                {{'MixedComponent.Error.EmailExist' | translate}}
                 </div>
                 <div *ngIf='emailForm.controls.email.hasError("email")' class="errorMessege">
-                    Invaid email
+                  {{'MixedComponent.Error.Email' | translate}}
                   </div>
             </form>
           </li>
         <li *ngIf='auth.userName && !userNameEditing'>
             <img src="assets/img/edit-icon.png" class="icon" (click)='userNameEditing=true'>
-          <h4>User name</h4>{{auth.userName}}
+          <h4>{{'MixedComponent.UN' | translate}}</h4>{{auth.userName}}
         </li>
         <li *ngIf='!auth.userName && !userNameEditing'>
             <img src="assets/img/edit-icon.png" class="icon" (click)='userNameEditing=true'>
-          <h4>User Name</h4>None
+          <h4>{{'MixedComponent.UN' | translate}}</h4>None
         </li>
         <li *ngIf='userNameEditing' class="alter">
             <form [formGroup]='userNameForm' (ngSubmit)='done("userNameForm","userName","auth","userNameEditing","authChanges")'>
-                <h4>User Name</h4>
+                <h4>{{'MixedComponent.UN' | translate}}</h4>
              <input  type="userName" formControlName='userName'>
             <img src="assets/img/wrong.png" (click)='cencel("userNameForm","userName","auth","userNameEditing")'>
             <!-- input type submit image button -->
@@ -300,15 +300,15 @@
         </li>
         <li *ngIf='!roleEditing'>
             <img src="assets/img/edit-icon.png" class="icon" (click)='roleEditing=true'>
-          <h4>Role</h4>{{auth.role}}
+          <h4>{{'MixedComponent.Role' | translate}}</h4>{{auth.role}}
         </li>
         <li *ngIf='roleEditing' class="alter">
             <form [formGroup]='roleForm' (ngSubmit)='done("roleForm","role","auth","roleEditing","authChanges")'>
-                <h4>Role</h4>
+                <h4>{{'MixedComponent.Role' | translate}}</h4>
                 <mat-form-field>
                     <mat-select formControlName='role'>
-                       <mat-option *ngFor='let option of roles' [value]='option'>
-                         {{option}}
+                       <mat-option *ngFor='let option of roles' value='{{option | translate}}'>
+                        {{option | translate}}
                        </mat-option>
                     </mat-select>
                    </mat-form-field>
@@ -321,14 +321,14 @@
     <div class="clearfix"></div>
     </ul>
     <ul *ngIf='address'>
-        <h2>Address</h2>
+        <h2>{{'MixedComponent.SubHeading2' | translate}}</h2>
       <li *ngIf='!zoneEditing'>
           <img src="assets/img/edit-icon.png" class="icon" (click)='zoneEditing=true'>
-        <h4>Zone</h4>{{address.zone}}
+        <h4>{{'MixedComponent.Zone' | translate}}</h4>{{address.zone}}
       </li>
       <li *ngIf='zoneEditing' class="alter">
           <form [formGroup]='zoneForm' (ngSubmit)='done("zoneForm","zone","address","zoneEditing","addressChanges")'>
-              <h4>Zone</h4> 
+              <h4>{{'MixedComponent.Zone' | translate}}</h4> 
               <span>
                   <input  type="text" formControlName='zone' [matAutocomplete]='z' (keyup)='zoneAutoSuggestion($event.target.value)'>
                   <mat-autocomplete #z='matAutocomplete'>
@@ -342,19 +342,19 @@
           <input src="assets/img/right.png" type='image' class='submit-button'>
           <div class="clearfix"></div>
           <div *ngIf='zoneForm.controls.zone.hasError("required")' class="errorMessege">
-            Zone can not be empty
+            {{'MixedComponent.Error.Zone' | translate}}
           </div>
           <div *ngIf='zoneForm.controls.zone.hasError("zoneDoesNotExixt")' class="errorMessege">
-            Zone does not exist (select other)
+            {{'MixedComponent.Error.NotZone' | translate}}
           </div>
         </form>
       </li>
       <li *ngIf='!subDistrictEditing'>
           <img src="assets/img/edit-icon.png" class="icon" (click)='subDistrictEditing=true'>
-        <h4>Sub district</h4>{{address.subDistrict}}</li>
+        <h4>{{'MixedComponent.SubDis' | translate}}</h4>{{address.subDistrict}}</li>
         <li *ngIf='subDistrictEditing' class="alter">
             <form [formGroup]='subDistrictForm' (ngSubmit)='done("subDistrictForm","subDistrict","address","subDistrictEditing","addressChanges")'>
-                <h4>Sub district</h4> 
+                <h4>{{'MixedComponent.SubDis' | translate}}</h4> 
                 <span>
                     <input  type="text" formControlName='subDistrict' [matAutocomplete]='subDist' (keyup)='autoSuggestion($event.target.value,"subDistricts","filteredsubDistrict")'>
                     <mat-autocomplete #subDist='matAutocomplete'>
@@ -368,37 +368,37 @@
             <input src="assets/img/right.png" type='image' class='submit-button'>
             <div class="clearfix"></div>
             <div *ngIf='subDistrictForm.controls.subDistrict.hasError("required")' class="errorMessege">
-              Sub district can not be empty
+              {{'MixedComponent.Error.SubDist' | translate}}
             </div>
             <div *ngIf='subDistrictForm.controls.subDistrict.hasError("subDistrictDoesNotExixt")' class="errorMessege">
-              Sub district does not exist
+              {{'MixedComponent.Error.NotSubDist' | translate}}
             </div>
           </form>
         </li>
       <li *ngIf='!permanentAddressEditing'>
           <img src="assets/img/edit-icon.png" class="icon" (click)='permanentAddressEditing=true'>
-        <h4>Permanent address</h4>{{address.permanentAddress}}
+        <h4>{{'MixedComponent.PA' | translate}}</h4>{{address.permanentAddress}}
       </li>
       <li *ngIf='permanentAddressEditing' class="alter">
           <form [formGroup]='permanentAddressForm' (ngSubmit)='done("permanentAddressForm","permanentAddress","address","permanentAddressEditing","addressChanges")'>
-              <h4>Permanent address</h4>
+              <h4>{{'MixedComponent.PA' | translate}}</h4>
            <input  type="permanentAddress" formControlName='permanentAddress'>
           <img src="assets/img/wrong.png" (click)='cencel("permanentAddressForm","permanentAddress","address","permanentAddressEditing")'>
           <!-- input type submit image button -->
           <input src="assets/img/right.png" type='image' class='submit-button'>
           <div class="clearfix"></div>
           <div *ngIf='permanentAddressForm.controls.permanentAddress.invalid' class="errorMessege">
-            Parmanent address can not be empty
+            {{'MixedComponent.Error.PA' | translate}}
           </div>
         </form>
       </li>
       <li *ngIf='!districtEditing'>
           <img src="assets/img/edit-icon.png" class="icon" (click)='districtEditing=true'>
-        <h4>District</h4>{{address.district}}
+        <h4>{{'MixedComponent.Dist' | translate}}</h4>{{address.district}}
       </li>
       <li *ngIf='districtEditing' class="alter">
           <form [formGroup]='districtForm' (ngSubmit)='done("districtForm","district","address","districtEditing","addressChanges")'>
-              <h4>District</h4> 
+              <h4>{{'MixedComponent.Dist' | translate}}</h4> 
               <span>
                   <input  type="text" formControlName='district' [matAutocomplete]='dist' (keyup)='autoSuggestion($event.target.value,"districts","filtereddistrict")'>
                   <mat-autocomplete #dist='matAutocomplete'>
@@ -412,24 +412,24 @@
           <input src="assets/img/right.png" type='image' class='submit-button'>
           <div class="clearfix"></div>
           <div *ngIf='districtForm.controls.district.hasError("required")' class="errorMessege">
-            District can not be empty
+            {{'MixedComponent.Error.Dist' | translate}}
           </div>
           <div *ngIf='districtForm.controls.district.hasError("districtDoesNotExixt")' class="errorMessege">
-            District does not exist
+            {{'MixedComponent.Error.NotDist' | translate}}
           </div>
         </form>
       </li>
       <li *ngIf='address.country && !countryEditing'>
           <img src="assets/img/edit-icon.png" class="icon" (click)='countryEditing=true'>
-        <h4>Country</h4>{{address.country}}
+        <h4>{{'MixedComponent.Country' | translate}}</h4>{{address.country}}
       </li>
       <li *ngIf='!address.country && !countryEditing'>
           <img src="assets/img/edit-icon.png" class="icon" (click)='countryEditing=true'>
-        <h4>Country</h4>None
+        <h4>{{'MixedComponent.Country' | translate}}</h4>None
       </li>
       <li *ngIf='countryEditing' class="alter">
           <form [formGroup]='countryForm' (ngSubmit)='done("countryForm","country","address","countryEditing","addressChanges")'>
-              <h4>Country</h4>
+              <h4>{{'MixedComponent.Country' | translate}}</h4>
            <input  type="text" formControlName='country'>
           <img src="assets/img/wrong.png" (click)='cencel("countryForm","country","address","countryEditing")'>
           <!-- input type submit image button -->
@@ -439,14 +439,14 @@
       </li>
       <li *ngIf='address.nationality && !nationalityEditing'>
           <img src="assets/img/edit-icon.png" class="icon" (click)='nationalityEditing=true'>
-        <h4>Nationality</h4>{{address.nationality}}</li>
+        <h4>{{'MixedComponent.Nationality' | translate}}</h4>{{address.nationality}}</li>
       <li *ngIf='!address.nationality && !nationalityEditing'>
           <img src="assets/img/edit-icon.png" class="icon" (click)='nationalityEditing=true'>
-        <h4>Nationality</h4>None
+        <h4>{{'MixedComponent.Nationality' | translate}}</h4>None
       </li>
       <li *ngIf='nationalityEditing' class="alter">
           <form [formGroup]='nationalityForm' (ngSubmit)='done("nationalityForm","nationality","address","nationalityEditing","addressChanges")'>
-              <h4>Nationality</h4> 
+              <h4>{{'MixedComponent.Nationality' | translate}}</h4> 
            <input  type="text" formControlName='nationality'>
           <img src="assets/img/wrong.png" (click)='cencel("nationalityForm","nationality","address","nationalityEditing")'>
           <!-- input type submit image button -->
@@ -456,22 +456,22 @@
       </li>
       <li *ngIf='address.nId && !nIdEditing'>
           <img src="assets/img/edit-icon.png" class="icon" (click)='nIdEditing=true'>
-        <h4>Natioal ID</h4>{{address.nId}}
+        <h4>{{'MixedComponent.NID' | translate}}</h4>{{address.nId}}
       </li>
       <li *ngIf='!address.nId && !nIdEditing'>
           <img src="assets/img/edit-icon.png" class="icon" (click)='nIdEditing=true'>
-        <h4>Natioal ID</h4>None
+        <h4>{{'MixedComponent.NID' | translate}}</h4>None
       </li>
       <li *ngIf='nIdEditing' class="alter">
           <form [formGroup]='nIdForm' (ngSubmit)='done("nIdForm","nId","address","nIdEditing","addressChanges")'>
-              <h4>Natioal ID</h4>
+              <h4>{{'MixedComponent.NID' | translate}}</h4>
            <input  type="text" formControlName='nId'>
           <img src="assets/img/wrong.png" (click)='cencel("nIdForm","nId","address","nIdEditing")'>
           <!-- input type submit image button -->
           <input src="assets/img/right.png" type='image' class='submit-button'>
           <div class="clearfix"></div>
           <div *ngIf='nIdForm.controls.nId.hasError("pattern")' class="errorMessege">
-              Not a number
+            {{'MixedComponent.Error.Number' | translate}}
             </div>
         </form>
       </li>

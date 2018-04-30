@@ -6,6 +6,7 @@ import {FormBuilder,Validators,FormGroup, AbstractControl, ValidationErrors, For
 import { FirebaseApp } from 'angularfire2';
 import {Router} from '@angular/router';
 import{CommunicationService} from '../communication.service';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
@@ -94,8 +95,10 @@ export class EditComponent implements OnInit{
   nationalityForm;
   nIdForm;
 
-  constructor(private db:AngularFireDatabase,private loc:Location,private ddis:DropDownItemsService,private fb:FormBuilder,private fa: FirebaseApp,private router:Router,private communicationService: CommunicationService) { 
-    this.notifyRoot();
+  constructor(private db:AngularFireDatabase,private loc:Location,private ddis:DropDownItemsService,private fb:FormBuilder,private fa: FirebaseApp,private router:Router,private communicationService: CommunicationService,private ts: TranslateService) { 
+    let lan=localStorage.getItem('lan');
+    this.ts.use(lan);
+  
   }
   notifyRoot(){
     CommunicationService.navBar=false;
@@ -103,6 +106,7 @@ export class EditComponent implements OnInit{
    }
 
   ngOnInit() {
+    this.notifyRoot();
     this.loding=true;
     this.activeUserRole=localStorage.getItem('activeUserRole');
 

@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component,ChangeDetectorRef} from '@angular/core';
 import{CommunicationService} from './communication.service';
 
 @Component({
@@ -8,19 +7,18 @@ import{CommunicationService} from './communication.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  path;
-  logedIn=false;
+  navBar=false;
   activeUserRole=localStorage.getItem('activeUserRole');
-  constructor(private router: Router,private communicationService: CommunicationService) {
-    this.path = this.router.url;
-    console.log(this.path);
+  constructor(private communicationService: CommunicationService,private changeDetector: ChangeDetectorRef) {
     communicationService.changeEmitted$.subscribe(data => {
       // console.log(data);
       if(data){
-        this.logedIn=true;
+        this.navBar=true;
       }else{
-        this.logedIn=false;
+        this.navBar=false;
       }
+      // to manually notify paraent 
+      changeDetector.detectChanges();
     })
   }
 }
