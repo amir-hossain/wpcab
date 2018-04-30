@@ -37,13 +37,18 @@
             </li>
             <li>
                 <h4>{{'MixedComponent.MotherName' | translate}}</h4>{{userInfo.motherName}}
-              </li>
+            </li>
+            <li>
+              <h4>{{'MixedComponent.Status' | translate}}</h4>{{userInfo.status}}
+          </li>
+          <li *ngIf='userInfo.spouseName'><h4>{{'MixedComponent.Spouse' | translate}}</h4>{{userInfo.spouseName}}</li>
+          <li *ngIf='!userInfo.spouseName && userInfo.status==="Married"'><h4>{{'MixedComponent.Spouse' | translate}}</h4>{{'MixedComponent.NotMember' | translate}}</li>
               <li>
                   <h4>{{'MixedComponent.InvitedBy' | translate}}</h4>{{userInfo.invitedBy}}
                 </li>
       <li><h4>{{'MixedComponent.Occupation' | translate}}</h4>{{userInfo.occupation}}</li>
       <li *ngIf='userInfo.bloodGroup'><h4>{{'MixedComponent.Blood' | translate}}</h4>{{userInfo.bloodGroup}}</li>
-      <li *ngIf='!userInfo.bloodGroup'><h4>{{'MixedComponent.Blood' | translate}}</h4>None
+      <li *ngIf='!userInfo.bloodGroup'><h4>{{'MixedComponent.Blood' | translate}}</h4>{{'MixedComponent.None' | translate}}
       </li>
       <div class="clearfix"></div>
     </ul>
@@ -52,9 +57,9 @@
         <li><h4>{{'MixedComponent.Phone' | translate}}</h4>{{auth.phone}}</li>
         <li><h4>{{'MixedComponent.Password' | translate}}</h4>Hidden</li>
         <li *ngIf='auth.email'><h4>{{'MixedComponent.Email' | translate}}</h4>{{auth.email}}</li>
-        <li *ngIf='!auth.email'><h4>{{'MixedComponent.Email' | translate}}</h4>None</li>
+        <li *ngIf='!auth.email'><h4>{{'MixedComponent.Email' | translate}}</h4>{{'MixedComponent.None' | translate}}</li>
         <li *ngIf='auth.userName'><h4>{{'MixedComponent.UN' | translate}}</h4>{{auth.userName}}</li>
-        <li *ngIf='!auth.userName'><h4>{{'MixedComponent.UN' | translate}}</h4>None</li>
+        <li *ngIf='!auth.userName'><h4>{{'MixedComponent.UN' | translate}}</h4>{{'MixedComponent.None' | translate}}</li>
         <li><h4>{{'MixedComponent.Role' | translate}}</h4>{{auth.role}}</li>
     <div class="clearfix"></div>
     </ul>
@@ -65,11 +70,11 @@
       <li><h4>{{'MixedComponent.PA' | translate}}</h4>{{address.permanentAddress}}</li>
       <li><h4>{{'MixedComponent.Dist' | translate}}</h4>{{address.district}}</li>
       <li *ngIf='address.country'><h4>{{'MixedComponent.Country' | translate}}</h4>{{address.country}}</li>
-      <li *ngIf='!address.country'><h4>{{'MixedComponent.Country' | translate}}</h4>None</li>
+      <li *ngIf='!address.country'><h4>{{'MixedComponent.Country' | translate}}</h4>{{'MixedComponent.None' | translate}}</li>
       <li *ngIf='address.nationality'><h4>{{'MixedComponent.Nationality' | translate}}</h4>{{address.nationality}}</li>
-      <li *ngIf='!address.nationality'><h4>{{'MixedComponent.Nationality' | translate}}</h4>None</li>
+      <li *ngIf='!address.nationality'><h4>{{'MixedComponent.Nationality' | translate}}</h4>{{'MixedComponent.None' | translate}}</li>
       <li *ngIf='address.nId'><h4>{{'MixedComponent.NID' | translate}}</h4>{{address.nId}}</li>
-      <li *ngIf='!address.nId'><h4>{{'MixedComponent.NID' | translate}}</h4>None</li>
+      <li *ngIf='!address.nId'><h4>{{'MixedComponent.NID' | translate}}</h4>{{'MixedComponent.None' | translate}}</li>
     </ul>
   </div>
     <div class="clearfix"></div>
