@@ -22,7 +22,7 @@ export class EditComponent implements OnInit{
   dateSegment;
   photo;
   //temporary profile url
-  url;
+  url='';
   
   // changes flage
   authChanges=0;
