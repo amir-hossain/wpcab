@@ -374,14 +374,14 @@ nameAutoSuggestion(fg:FormGroup,controlName:string){
     // console.log(spoouseWpcabMember.value);
     if(spoouseWpcabMember.value){
       this.spouseWpcabMember=true;
+      if(!spouseName.value){
+        spouseName.setErrors(Validators.required);
+      }else{
+        spouseName.setErrors(null);
+      } 
     }else{
       this.spouseWpcabMember=false;
-    }
-    if(!spouseName.value){
-      spouseName.setErrors(Validators.required);
-    }else{
-      spouseName.setErrors(null);
-    }   
+    }  
   }else{
      this.marriedSelected=false;
       spouseName.setErrors(null);

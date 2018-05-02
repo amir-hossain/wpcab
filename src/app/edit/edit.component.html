@@ -124,7 +124,58 @@
                     {{'MixedComponent.Error.MotherName' | translate}}
                   </div>
                 </form>
-              </li>
+          
+
+                <li *ngIf='!maritalEditing'>
+                  <img src="assets/img/edit-icon.png" class="icon" (click)='maritalEditing=true'>
+                  <h4>{{'MixedComponent.Status' | translate}}</h4>{{userInfo.status}}
+                </li>
+                <li *ngIf='maritalEditing' class="alter">
+                    <form [formGroup]='maritalForm' (ngSubmit)='statusDone()'>
+                        <h4>{{'MixedComponent.Status' | translate}}</h4> 
+                     <mat-radio-group formControlName='status'>
+                        <mat-radio-button type="radio" color='primary' name="marital" id="married" value="Married"   >{{'MixedComponent.Married' | translate}}</mat-radio-button>
+                       <mat-radio-button type="radio" color='primary' name="marital" id="single" value="Single" >{{'MixedComponent.Single' | translate}}</mat-radio-button>
+                      </mat-radio-group>
+                      <span *ngIf='!spouseWpcabMember || !marriedSelected'>
+                      <img src="assets/img/wrong.png" (click)='cencelStatus()'>
+                      <!-- input type submit image button -->
+                      <input src="assets/img/right.png" type='image' class='submit-button'>
+                    </span>
+                      <div >
+                        <div *ngIf='marriedSelected'>
+                          <div class="check">
+                          <h4></h4>
+                        <mat-checkbox   color='primary' formControlName='member' >{{'MixedComponent.WPCABMember' | translate}}
+                        </mat-checkbox>
+                          </div>
+                        
+                      <div *ngIf='spouseWpcabMember'>
+                        <h4>{{'MixedComponent.Spouse' | translate}}</h4>
+                        <span>
+                        <input type="textarea" formControlName="spouseName" [matAutocomplete]='spa' (keyup)='nameAutoSuggestion($event.target.value)'>
+                        <mat-autocomplete #spa='matAutocomplete'>
+                          <mat-option  *ngFor='let option of filteredName' [value]='option.name'>
+                            <span>{{option.name}}</span> 
+                            <span *ngIf='option.zone!=="Other"'>({{option.zone}})</span>
+                            <span *ngIf='option.zone==="Other"'>({{option.subDistrict}})</span>
+                          </mat-option>
+                        </mat-autocomplete>
+                      </span>
+                      <img src="assets/img/wrong.png" (click)='cencelStatus()'>
+                        <!-- input type submit image button -->
+                        <input src="assets/img/right.png" type='image' class='submit-button'>
+                          <div *ngIf='maritalForm.controls.spouseName.invalid' class="errorMessege">
+                              {{'MixedComponent.Error.SpouseName' | translate}}
+                            </div>
+                          <div class="clearfix"></div>
+                      </div>
+                    </div>
+                      </div><!-- spouse checkbox -->
+                  
+                    <div class="clearfix"></div>
+                  </form>
+                </li><!-- marital status -->
               <li *ngIf='userInfo.invitedBy && !invitedByEditing'>
                   <img src="assets/img/edit-icon.png" class="icon" (click)='invitedByEditing=true'>
                   <h4>{{'MixedComponent.InvitedBy' | translate}}</h4>{{userInfo.invitedBy}}

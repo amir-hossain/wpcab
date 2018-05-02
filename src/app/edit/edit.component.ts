@@ -45,8 +45,10 @@ export class EditComponent implements OnInit{
   zones;
   bloodGroups;
   months;
+  names=[];
 
   // filtered list
+  filteredName=[];
   filteredDistrict=[];
   filteredsubDistrict=[];
   filteredZone=[];
@@ -57,6 +59,7 @@ export class EditComponent implements OnInit{
   dobEditing=false;
   fatherNameEditing=false;
   motherNameEditing=false;
+  maritalEditing=false;
   invitedByEditing=false;
   occupationEditing=false;
   bloodGroupEditing=false;
@@ -79,6 +82,7 @@ export class EditComponent implements OnInit{
   dobForm;
   fatherNameForm;
   motherNameForm;
+  maritalForm;
   invitedByForm;
   occupationForm;
   bloodGroupForm;
@@ -110,6 +114,22 @@ export class EditComponent implements OnInit{
     this.loding=true;
     this.activeUserRole=localStorage.getItem('activeUserRole');
 
+    // get user short list
+    this.db.database.ref('short').on('value',snap=>{
+      this.names=[];
+      console.log(snap.val());
+      let data=snap.val();
+      if(data){
+        Object.keys(data).forEach(key=>this.names.push(
+          {
+            name:data[key].fullName,
+            zone:data[key].zone,
+            subDistrict:data[key].subDistrict
+          }
+        ));
+      // console.log(this.options);
+      }
+    });
     this.db.database.ref('users/'+this.selectedItemId).once('value',snap=>{
       // console.log(snap.val().address);
       this.userInfo=snap.val().userInfo;
@@ -264,6 +284,17 @@ export class EditComponent implements OnInit{
     this.motherNameForm=this.fb.group({
       motherName:[this.userInfo.motherName,Validators.required]
     });
+    this.maritalForm=this.fb.group({
+      status:[this.userInfo.status],
+      member:[this.userInfo.spouseName],
+      spouseName:[this.userInfo.spouseName]
+    },
+    {
+      validator:this.dinamicField.bind(this)
+    });
+
+
+
     this.invitedByForm=this.fb.group({
       invitedBy:[this.userInfo.invitedBy,Validators.required]
     });
@@ -330,6 +361,34 @@ export class EditComponent implements OnInit{
       nId:[this.address.nid,Validators.pattern('^\\d+$')]
     });
   }
+
+  marriedSelected;
+  spouseWpcabMember;
+
+  dinamicField(ac:FormControl){
+    let status=ac.get('status');
+    let spoouseWpcabMember=ac.get('member');
+    let spouseName=ac.get('spouseName');
+    // console.log(this.registrationForm)
+  
+  if(status.value==='Married'){
+    this.marriedSelected=true;
+    // console.log(spoouseWpcabMember.value);
+    if(spoouseWpcabMember.value){
+      this.spouseWpcabMember=true;
+      if(!spouseName.value){
+        spouseName.setErrors(Validators.required);
+      }else{
+        spouseName.setErrors(null);
+      }  
+    }else{
+      this.spouseWpcabMember=false;
+    }
+  }else{
+     this.marriedSelected=false;
+      spouseName.setErrors(null);
+  }
+}
 
   isOtherOccupation(ac:FormControl){
     let occupation=ac.get('occupation');
@@ -409,6 +468,21 @@ export class EditComponent implements OnInit{
     }
   }
 
+  statusDone(){
+    if(this.maritalForm.valid){
+      // console.log(this[formName].get(fieldName).value);
+    let status=this.maritalForm.get('status').value;
+    let spouseName=this.maritalForm.get('spouseName').value;
+    this.userInfo.status=status;
+    if(spouseName){
+      this.userInfo.spouseName=spouseName;
+    }
+    this.maritalEditing=false;
+    this.userInfoChanges++;
+    // console.log(this.userInfoChanges);
+    }
+  }
+
   occupationDone(){
     if(this.occupationForm.valid){
       if(this.otherOccupationSelected){
@@ -445,6 +519,18 @@ export class EditComponent implements OnInit{
       })
     this[flagName]=false;
   }
+
+  cencelStatus(){
+    this.maritalForm.setValue({
+      status:this.userInfo.status,
+      member:[false],
+      spouseName:[this.userInfo.spouseName]
+
+    })
+    this.maritalEditing=false;
+  }
+
+  
 
   cencelOccupation(){
     if(this.userInfo.occupation==='Student' || this.userInfo.occupation==='Job holder' || this.userInfo.occupation==='Businessman'){
@@ -483,6 +569,15 @@ zoneAutoSuggestion(val){
     this.filteredZone=[];
   }else{
     this.filteredZone=this.zones.filter(option=>option.toLowerCase().includes(val.toLowerCase()));
+  }
+}
+
+nameAutoSuggestion(val){
+  // console.log(val);
+  if(!val){
+    this.filteredName=[];
+  }else{
+    this.filteredName=this.names.filter(option=>option.name.toLowerCase().startsWith(val.toLowerCase()));
   }
 }
 
