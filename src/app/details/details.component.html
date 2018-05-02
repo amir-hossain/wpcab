@@ -22,7 +22,7 @@
       <ul *ngIf='userInfo' >
         <div class="sub-header">
             <h2>{{'MixedComponent.SubHeading1' | translate}}</h2>
-            <a *ngIf='path!=="/profile"' href="/edit" mat-raised-button>{{'MixedComponent.Edit' | translate}}</a>
+            <a *ngIf='path!=="/profile"' href="edit" mat-raised-button>{{'MixedComponent.Edit' | translate}}</a>
             <div class="clearfix"></div>
         </div>
       <li><h4>{{'MixedComponent.Name' | translate}}</h4>{{userInfo.fullName}}</li>
