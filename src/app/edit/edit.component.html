@@ -72,8 +72,8 @@
                 <span class="dob">
                   <input  type="number" placeholder="Day" formControlName='day'>
                   <select formControlName='month'>
-                  <option *ngFor='let option of months' [value]='option'>
-                    {{option}}
+                  <option *ngFor='let option of months' value='option'>
+                    {{option| translate}}
                   </option>
                </select>
                   <input  type="number" placeholder="Year" formControlName='year'>
@@ -211,7 +211,7 @@
                 <mat-radio-button type="radio" color='primary' name="occupation" id="others" value="Others" >{{'MixedComponent.Other' | translate}}</mat-radio-button>
               </mat-radio-group><!-- occupation -->
                 <div *ngIf='otherOccupationSelected'>
-                  <h4></h4>
+                  <h4>{{'MixedComponent.Qus' | translate}}</h4>
                   <input  type="text" formControlName='otherOccupation'>
                   <img src="assets/img/wrong.png" (click)='cencelOccupation()'>
                   <!-- input type submit image button -->
@@ -358,7 +358,7 @@
                 <h4>{{'MixedComponent.Role' | translate}}</h4>
                 <mat-form-field>
                     <mat-select formControlName='role'>
-                       <mat-option *ngFor='let option of roles' value='{{option | translate}}'>
+                       <mat-option *ngFor='let option of roles' value='{{option}}'>
                         {{option | translate}}
                        </mat-option>
                     </mat-select>

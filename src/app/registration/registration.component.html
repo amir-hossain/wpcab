@@ -45,8 +45,8 @@
       <mat-form-field class="middle">
           <mat-label>{{'MixedComponent.Month' | translate}}</mat-label>
           <mat-select formControlName='month'>
-              <mat-option *ngFor='let option of months' [value]='option'>
-                {{option}}
+              <mat-option *ngFor='let option of months' value='{{option}}'>
+                {{option | translate}}
               </mat-option>
            </mat-select>
            <mat-error *ngIf="month.invalid && month.touched">
@@ -156,9 +156,9 @@
               </div> <!-- blood group -->
               <mat-radio-group formControlName="occupation">
                 <div class="label">*{{'MixedComponent.Occupation' | translate}}</div>
-                <mat-radio-button type="radio" color='primary' name="occupation" id="student" value="{{'MixedComponent.Student' | translate}}" >{{'MixedComponent.Student' | translate}}</mat-radio-button>
-               <mat-radio-button type="radio" color='primary' name="occupation" id="job holder" value="{{'MixedComponent.Job' | translate}}" >{{'MixedComponent.Job' | translate}}</mat-radio-button>
-                <mat-radio-button type="radio" color='primary' name="occupation" id="businessman" value="{{'MixedComponent.Businessman' | translate}}" >{{'MixedComponent.Businessman' | translate}}</mat-radio-button>
+                <mat-radio-button type="radio" color='primary' name="occupation" id="student" value="Student" >{{'MixedComponent.Student' | translate}}</mat-radio-button>
+               <mat-radio-button type="radio" color='primary' name="occupation" id="job holder" value="Job holder" >{{'MixedComponent.Job' | translate}}</mat-radio-button>
+                <mat-radio-button type="radio" color='primary' name="occupation" id="businessman" value="Businessman" >{{'MixedComponent.Businessman' | translate}}</mat-radio-button>
                 <mat-radio-button type="radio" color='primary' name="occupation" id="others" value="Others" >{{'MixedComponent.Other' | translate}}</mat-radio-button>
               </mat-radio-group><!-- occupation -->
       <mat-error class='custom-error' *ngIf="occupation.invalid && occupation.touched">
@@ -166,7 +166,7 @@
       </mat-error>
       <div *ngIf='otherOccupationSelected'>
         <mat-form-field class="field-top-margin">
-      <mat-label>*What is your occupation?</mat-label>
+      <mat-label>*{{'MixedComponent.Qus' | translate}}</mat-label>
       <input  matInput type="text" formControlName="otherOccupation">
     </mat-form-field>
       <mat-error *ngIf='otherOccupation.invalid && otherOccupation.touched'>
@@ -322,7 +322,7 @@
               </div>
             <mat-label>{{'MixedComponent.Role' | translate}}</mat-label>
         <mat-select formControlName='role'>
-          <mat-option *ngFor='let role of roles' [value]='role'>
+          <mat-option *ngFor='let role of roles' value='{{role}}'>
             {{role | translate}}
           </mat-option>
         </mat-select>
