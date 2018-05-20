@@ -24,9 +24,12 @@ export class NavComponent implements OnInit {
 
   ngOnInit() {
     let lan=localStorage.getItem('lan');
-    if(lan){
+    if(lan==='bn'){
+      this.lanBD=true;
       // console.log(lan);
     this.ts.use(lan);
+    }else{
+      this.lanBD=false;
     }
     this.userRole=localStorage.getItem('activeUserRole');
     if(this.userRole==='User'){

@@ -10,7 +10,7 @@ import {AngularFireDatabase} from 'angularfire2/database';
 })
 
 export class LoginComponent implements OnInit {
-
+  lanBD;
   loginForm:FormGroup;
   unError=false;
   passError=false;
@@ -25,6 +25,18 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    let lan=localStorage.getItem('lan');
+    if(lan){
+      if(lan==='bn'){
+        this.lanBD=true;
+      }else{
+        this.lanBD=false;
+      }
+      // console.log(lan);
+    this.ts.use(lan);
+    }else{
+      this.ts.setDefaultLang('bn');
+    }
     this.loginForm=this.builder.group({
       userInfo:[localStorage.getItem("userInfo"),[Validators.required]],
       password:[localStorage.getItem("password"),[Validators.required]],
@@ -94,6 +106,19 @@ export class LoginComponent implements OnInit {
     }
    
 
+  }
+
+  translate(){
+    
+    if(!this.lanBD){
+      this.ts.use('bn');
+      localStorage.setItem('lan','bn');
+      this.lanBD=true;
+    }else{
+      this.ts.use('en');
+      localStorage.setItem('lan','en');
+      this.lanBD=false;
+    }
   }
 
   login(){

@@ -1,6 +1,6 @@
 <form [formGroup]="loginForm" (ngSubmit)="login()">
         <mat-card class="card">
-        <img  class="inline-center" src="./assets/img/logo.png">
+        <img  class="logo" src="./assets/img/logo.png">
         <div class="controls">
           <div>
             <mat-form-field>
@@ -24,13 +24,18 @@
           <mat-error *ngIf='passError' class="error">
             {{'LoginComponent.passError' | translate}}
             </mat-error>
-         
+            <div style="float: left;" (click)='translate()'>
+              <img class='icon' *ngIf='lanBD'  src="assets/img/uk-flag.png" alt="">
+              <img class='icon' *ngIf='!lanBD' src="assets/img/bd-flag.png" alt="">
+            </div>
+          <div style="float: right;">
           <button mat-raised-button color="primary" type="submit">{{'LoginComponent.Login' | translate}}</button>
           <div *ngIf='serverError' class="otherError">
             {{'LoginComponent.serverError' | translate}}
           </div>
           <div class="remember">
             <mat-checkbox  color='primary' formControlName="remember">{{'LoginComponent.Remember' | translate}}</mat-checkbox>
+          </div>
           </div>
         </div> <!-- controls -->
   </mat-card> 

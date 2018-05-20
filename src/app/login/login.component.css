@@ -1,18 +1,10 @@
 
-img{
+.logo{
     height: 100px;
     width: 130px;
-   }
-
-.inline-center{
     display: block;
     margin: 10px auto;
-}
-
-button{
-    float: right;
-    
-}
+   }
 
 .otherError{
   color:red;
@@ -21,7 +13,6 @@ button{
 .remember{
     margin-top: 1em;
     clear: both;
-    float: right;
     font-size: 13px;
 }
 
@@ -45,6 +36,12 @@ form {
   .card{
     background: #ffffffb4;
     display: inline-block;
+  }
+
+  .icon{
+    width: 4em;
+    height: 4em;
+    border-radius: 2px;
   }
 
   mat-form-field{
