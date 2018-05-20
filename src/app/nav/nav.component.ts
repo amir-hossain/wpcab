@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,HostListener,ElementRef } from '@angular/core';
 import {Router} from "@angular/router";
 import {AngularFireDatabase} from 'angularfire2/database';
 import {NavLinksService} from '../nav-links.service';
@@ -16,7 +16,7 @@ export class NavComponent implements OnInit {
   photoUrl;
   up=false;
   userRole;
-  constructor(private router:Router,private db:AngularFireDatabase,private nls:NavLinksService,private ts: TranslateService,private communicationService: CommunicationService) { 
+  constructor(private router:Router,private db:AngularFireDatabase,private nls:NavLinksService,private ts: TranslateService,private communicationService: CommunicationService,private eRef: ElementRef) { 
     let userId=localStorage.getItem('activeUserId');
     this.db.database.ref('users/'+userId+'/userInfo/').once('value',snap=>this.photoUrl=snap.val().photo
   );
@@ -37,6 +37,14 @@ export class NavComponent implements OnInit {
       this.routerLinks=this.nls.getAccountantLinks();
     }else{
       this.routerLinks=this.nls.getOherLinks();
+    }
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    if(!this.eRef.nativeElement.contains(event.target)) {
+      // console.log("clicked outside");
+      this.up=false;
     }
   }
 
