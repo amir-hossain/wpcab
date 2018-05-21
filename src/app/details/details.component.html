@@ -55,7 +55,7 @@
       <ul *ngIf='auth'>
           <h2>{{'MixedComponent.SubHeading3' | translate}}</h2>
         <li><h4>{{'MixedComponent.Phone' | translate}}</h4>{{auth.phone}}</li>
-        <li><h4>{{'MixedComponent.Password' | translate}}</h4>Hidden</li>
+        <li><h4>{{'MixedComponent.Password' | translate}}</h4>{{'MixedComponent.Hidden' | translate}}</li>
         <li *ngIf='auth.email'><h4>{{'MixedComponent.Email' | translate}}</h4>{{auth.email}}</li>
         <li *ngIf='!auth.email'><h4>{{'MixedComponent.Email' | translate}}</h4>{{'MixedComponent.None' | translate}}</li>
         <li *ngIf='auth.userName'><h4>{{'MixedComponent.UN' | translate}}</h4>{{auth.userName}}</li>

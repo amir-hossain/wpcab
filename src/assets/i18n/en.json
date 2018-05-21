@@ -119,6 +119,7 @@
         "WPCABMember":"Spouse is a wpcab member",
         "None":"None",
         "NotMember":"Not member",
+        "Hidden":"Hidden",
         "Error":{
            "Pic":"Plese select png or jpeg file" ,
             "Name":"Full name required",
