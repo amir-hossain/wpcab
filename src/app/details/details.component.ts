@@ -13,6 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./details.component.css']
 })
 export class DetailsComponent implements OnInit {
+  totalPayment=1;
   total;
   userInfo;
   address;

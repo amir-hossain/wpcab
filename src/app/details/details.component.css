@@ -75,13 +75,18 @@ h4{
 }
 
 .footer h1{
-    display: inline; 
+    margin: 0;
     color: wheat;
     font-size: 30px;
     text-align: center;
 }
 
+.footer div h1{
+    display: inline;
+}
+
 .footer div{
+    margin: auto;
     display: table;
 }
 

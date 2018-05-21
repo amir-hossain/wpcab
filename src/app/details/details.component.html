@@ -80,11 +80,10 @@
     <div class="clearfix"></div>
   </mat-card>
   <mat-card class="footer">
-      <div>
+        <div>
           <h1>{{'MixedComponent.Clear' | translate}} December 2017</h1>
-          <a class="more-btn" mat-raised-button color='primary' >{{'MixedComponent.SeeMore' | translate}}</a>
-      </div>
-      
+          <a *ngIf='totalPayment>1' class="more-btn" mat-raised-button color='primary' >{{'MixedComponent.SeeMore' | translate}}</a>
+        </div>
       <div class="clearfix"></div>
     </mat-card>
   <app-footer></app-footer>
