@@ -3,14 +3,17 @@ import { FormBuilder, Validators,FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import {AngularFireDatabase} from 'angularfire2/database';
+import {DropDownItemsService} from '../drop-down-items.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
+  providers:[DropDownItemsService]
 })
 
 export class LoginComponent implements OnInit {
-  lanBD;
+  lanList;
+  lan='bn';
   loginForm:FormGroup;
   unError=false;
   passError=false;
@@ -20,30 +23,37 @@ export class LoginComponent implements OnInit {
 
   get password() { return this.loginForm.get('password'); }
   
-  constructor(private builder:FormBuilder,private router:Router,private db:AngularFireDatabase,private ts: TranslateService) { 
+  constructor(private builder:FormBuilder,private router:Router,private db:AngularFireDatabase,private ts: TranslateService,private dds:DropDownItemsService) { 
     ts.setDefaultLang('bn');
   }
 
   ngOnInit() {
-    let lan=localStorage.getItem('lan');
-    if(lan){
-      if(lan==='bn'){
-        this.lanBD=true;
-      }else{
-        this.lanBD=false;
-      }
-      // console.log(lan);
-    this.ts.use(lan);
+    this.lanList=this.dds.getLanguage();
+    this.initilizeTranslator();
+    this.initilizeForm();
+  }
+
+  initilizeForm(){
+    let defaultLan;
+    if(this.lan==='bn'){
+      defaultLan="বাংলা";
     }else{
-      this.ts.setDefaultLang('bn');
+      defaultLan="English";
     }
     this.loginForm=this.builder.group({
       userInfo:[localStorage.getItem("userInfo"),[Validators.required]],
       password:[localStorage.getItem("password"),[Validators.required]],
-      remember:[""]
+      remember:[""],
+      language:defaultLan
     })
-
-  
+  }
+  initilizeTranslator(){
+    this.lan=localStorage.getItem('lan');
+    if(this.lan){
+      this.ts.use(this.lan);
+    }else{
+      this.ts.setDefaultLang('bn');
+    }
   }
 
   auth(userInfo,password){
@@ -108,18 +118,21 @@ export class LoginComponent implements OnInit {
 
   }
 
-  translate(){
-    
-    if(!this.lanBD){
-      this.ts.use('bn');
-      localStorage.setItem('lan','bn');
-      this.lanBD=true;
-    }else{
-      this.ts.use('en');
+
+
+  dropdown(val){
+    // console.log(val);
+    if(val==='English'){
+      this.ts.use(val);
+      this.lan='en';
       localStorage.setItem('lan','en');
-      this.lanBD=false;
+    }else{
+      this.ts.use('bn');
+      this.lan='bn';
+      localStorage.setItem('lan','bn');
     }
   }
+
 
   login(){
     this.unError=false;

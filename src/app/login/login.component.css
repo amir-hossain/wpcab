@@ -24,28 +24,35 @@ example-margin {
     margin: 0 10px;
   }
 
+ 
 
-form {
-    position: absolute;
-    left: 50%;
-    top: 40%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -40%);
-  }
+form{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.sub-1{
+  float: left;
+  width: 5em;
+  margin-right: 1.5em;
+}
 
   .card{
     background: #ffffffb4;
-    display: inline-block;
   }
 
-  .icon{
-    width: 4em;
-    height: 4em;
+  .icon img,.icon{
+    width: 2em;
+    height: 2em;
     border-radius: 2px;
+    vertical-align: middle;
+    margin-right:1em; 
   }
 
   mat-form-field{
-    width: 15em !important;
+    width: 100% !important;
   }
   .error{
     margin-bottom: 1em;

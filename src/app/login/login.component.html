@@ -1,45 +1,53 @@
-<form [formGroup]="loginForm" (ngSubmit)="login()">
-        <mat-card class="card">
-        <img  class="logo" src="./assets/img/logo.png">
-        <div class="controls">
-          <div>
-            <mat-form-field>
-              <input matInput class="inline-center input-field" type="text" placeholder="{{'LoginComponent.NameOrEmail' | translate}}" formControlName="userInfo">
-            </mat-form-field>
-          </div>
-          <mat-error class="error" *ngIf="userInfo.invalid && userInfo.touched">
-            {{'LoginComponent.FieldEmpty' | translate}}
-          </mat-error>
-          <mat-error *ngIf='unError' class="error">
-            {{'LoginComponent.unError' | translate}}
-            </mat-error>
-          <div>
-            <mat-form-field>
-              <input matInput type="password" class="inline-center" placeholder="{{'LoginComponent.Password' | translate}}" formControlName="password">
-            </mat-form-field>
-          </div>
-          <mat-error class="error" *ngIf="password.invalid && password.touched">
-            {{'LoginComponent.FieldEmpty' | translate}}
-          </mat-error>
-          <mat-error *ngIf='passError' class="error">
-            {{'LoginComponent.passError' | translate}}
-            </mat-error>
-            <div style="float: left;" (click)='translate()'>
-              <img class='icon' *ngIf='lanBD'  src="assets/img/uk-flag.png" alt="">
-              <img class='icon' *ngIf='!lanBD' src="assets/img/bd-flag.png" alt="">
-            </div>
-          <div style="float: right;">
-          <button mat-raised-button color="primary" type="submit">{{'LoginComponent.Login' | translate}}</button>
-          <div *ngIf='serverError' class="otherError">
-            {{'LoginComponent.serverError' | translate}}
-          </div>
-          <div class="remember">
-            <mat-checkbox  color='primary' formControlName="remember">{{'LoginComponent.Remember' | translate}}</mat-checkbox>
-          </div>
-          </div>
-        </div> <!-- controls -->
-  </mat-card> 
-        
+
+       <form [formGroup]="loginForm" (ngSubmit)="login()"> 
+          <mat-card class="card">
+              <img  class="logo" src="./assets/img/logo.png">
+              <div class="controls">
+                <div>
+                  <mat-form-field>
+                    <input matInput class="inline-center input-field" type="text" placeholder="{{'LoginComponent.NameOrEmail' | translate}}" formControlName="userInfo">
+                  </mat-form-field>
+                </div>
+                <mat-error class="error" *ngIf="userInfo.invalid && userInfo.touched">
+                  {{'LoginComponent.FieldEmpty' | translate}}
+                </mat-error>
+                <mat-error *ngIf='unError' class="error">
+                  {{'LoginComponent.unError' | translate}}
+                  </mat-error>
+                <div>
+                  <mat-form-field>
+                    <input matInput type="password" class="inline-center" placeholder="{{'LoginComponent.Password' | translate}}" formControlName="password">
+                  </mat-form-field>
+                </div>
+                <mat-error class="error" *ngIf="password.invalid && password.touched">
+                  {{'LoginComponent.FieldEmpty' | translate}}
+                </mat-error>
+                <mat-error *ngIf='passError' class="error">
+                  {{'LoginComponent.passError' | translate}}
+                  </mat-error>
+                  <span style="float: left" class='icon'>
+                      <img *ngIf="lan==='bn'" src="assets/img/flag0.png">
+                      <img *ngIf="lan==='en'" src="assets/img/flag1.png"> 
+                  </span>
+                  <div class="sub-1">
+                    <mat-select (change)="dropdown($event.value)" formControlName='language'>
+                      <mat-option *ngFor='let lan of lanList;let i=index;' value='{{lan}}' >
+                        <img class='icon' src="assets/img/flag{{i}}.png">
+                        {{lan}}
+                      </mat-option>
+                    </mat-select>
+                  </div>
+                <div style="float: right;">
+                <button mat-raised-button color="primary" type="submit">{{'LoginComponent.Login' | translate}}</button>
+                <div *ngIf='serverError' class="otherError">
+                  {{'LoginComponent.serverError' | translate}}
+                </div>
+                <div class="remember">
+                  <mat-checkbox  color='primary' formControlName="remember">{{'LoginComponent.Remember' | translate}}</mat-checkbox>
+                </div>
+                </div>
+              </div> <!-- controls -->
+        </mat-card> 
       </form>
 
     

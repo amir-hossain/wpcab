@@ -19,6 +19,11 @@ const bloodGroup=[
   'AB -'
 ]
 
+const language=[
+  'বাংলা',
+  'English',
+]
+
 const zone=[
   'Mirpur 6',
   'Shahalibag',
@@ -667,5 +672,9 @@ export class DropDownItemsService {
 
   getBloodGroups(){
     return bloodGroup;
+  }
+
+  getLanguage(){
+    return language;
   }
 }

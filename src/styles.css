@@ -5,3 +5,7 @@ body{
     background:rgba(0,0,0,.14);
     font-family: 'Ubuntu', sans-serif !important;
 }
+
+body, html{
+    height:100%;
+  }
