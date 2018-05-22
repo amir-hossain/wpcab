@@ -3,6 +3,7 @@ import {AngularFireDatabase} from 'angularfire2/database';
 import{Router} from '@angular/router';
 import {PageEvent,MatPaginator} from '@angular/material';
 import{CommunicationService} from '../communication.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-collection',
@@ -24,7 +25,9 @@ export class CollectionComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private db:AngularFireDatabase,private router:Router,private communicationService: CommunicationService) {
+  constructor(private db:AngularFireDatabase,private router:Router,private communicationService: CommunicationService,private ts: TranslateService) {
+    let lan=localStorage.getItem('lan');
+    this.ts.use(lan);
     this.notifyRoot();
    }
 

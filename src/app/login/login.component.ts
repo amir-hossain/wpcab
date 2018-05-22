@@ -123,7 +123,7 @@ export class LoginComponent implements OnInit {
   dropdown(val){
     // console.log(val);
     if(val==='English'){
-      this.ts.use(val);
+      this.ts.use('en');
       this.lan='en';
       localStorage.setItem('lan','en');
     }else{

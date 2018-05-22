@@ -9,6 +9,7 @@ import * as firebase from 'firebase/app';
 import { FirebaseApp } from 'angularfire2';
 import {DropDownItemsService} from '../drop-down-items.service';
 import{CommunicationService} from '../communication.service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -103,7 +104,9 @@ export class RegistrationComponent implements OnInit {
   get role() { return this.registrationForm.get('auth').get('role'); }
 
 
-  constructor(private builder:FormBuilder,private db:AngularFireDatabase,private router:Router,private fb: FirebaseApp,private ddis:DropDownItemsService,private communicationService: CommunicationService) {
+  constructor(private builder:FormBuilder,private db:AngularFireDatabase,private router:Router,private fb: FirebaseApp,private ddis:DropDownItemsService,private communicationService: CommunicationService,private ts: TranslateService) {
+    let lan=localStorage.getItem('lan');
+    this.ts.use(lan);
     this.notifyRoot();
     this.roles=this.ddis.getRoles();
     this.districts=this.ddis.getDistricts();

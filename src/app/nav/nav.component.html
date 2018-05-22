@@ -12,15 +12,21 @@
            {{routerLink.label | translate}}
        </a>
     </span>
-    <a mat-tab-link class="full-view" (click)='translate()'>
-        <img *ngIf='lanBD' class='nav-photo' src="assets/img/uk-flag.png" alt="">
-        <img *ngIf='!lanBD' class='nav-photo' src="assets/img/bd-flag.png" alt="">
-    </a>
+        <a mat-tab-link class="lan">
+            <mat-select (change)="dropdown($event.value)" [(ngModel)]="defaultLan">
+                <mat-option *ngFor='let lang of lanList;let i=index;' value='{{lang}}' >
+                    <img class='nav-ico middle' src="assets/img/flag{{i}}.png">
+                        {{lang}}
+                    </mat-option>
+            </mat-select>
+        </a>
+   
 <a mat-tab-link (click)='menuClick()' class="full-view">
         <img class='nav-photo' *ngIf='photoUrl' src="{{photoUrl}}" alt="">
     <img *ngIf='!up' class='menu-icon' src="assets/img/down.png" alt="">
     <img *ngIf='up' class='menu-icon' src="assets/img/up.png" alt="">
 </a>
+
 </div>
 </div>
 <div [class.user]='userRole==="User"'>

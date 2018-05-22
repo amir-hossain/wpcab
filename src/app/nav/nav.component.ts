@@ -4,32 +4,40 @@ import {AngularFireDatabase} from 'angularfire2/database';
 import {NavLinksService} from '../nav-links.service';
 import { TranslateService } from '@ngx-translate/core';
 import{CommunicationService} from '../communication.service';
+import {DropDownItemsService} from '../drop-down-items.service';
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css'],
-  providers:[NavLinksService]
+  providers:[NavLinksService,DropDownItemsService]
 })
 export class NavComponent implements OnInit {
+  defaultLan;
+  lanList;
   routerLinks;
   lanBD=true;
   photoUrl;
   up=false;
   userRole;
-  constructor(private router:Router,private db:AngularFireDatabase,private nls:NavLinksService,private ts: TranslateService,private communicationService: CommunicationService,private eRef: ElementRef) { 
+  constructor(private router:Router,private db:AngularFireDatabase,private nls:NavLinksService,private ts: TranslateService,private communicationService: CommunicationService,private eRef: ElementRef,private dds:DropDownItemsService) { 
     let userId=localStorage.getItem('activeUserId');
     this.db.database.ref('users/'+userId+'/userInfo/').once('value',snap=>this.photoUrl=snap.val().photo
   );
 }
 
   ngOnInit() {
+    this.lanList=this.dds.getLanguage();
     let lan=localStorage.getItem('lan');
     if(lan==='bn'){
+      // this.lan='বাংলা';
       this.lanBD=true;
+      this.defaultLan="বাংলা"
       // console.log(lan);
     this.ts.use(lan);
     }else{
+      // this.lan='English';
       this.lanBD=false;
+      this.defaultLan="English"
     }
     this.userRole=localStorage.getItem('activeUserRole');
     if(this.userRole==='User'){
@@ -61,6 +69,17 @@ export class NavComponent implements OnInit {
 
   menuClick(){
     this.up=!this.up;
+  }
+
+  dropdown(val){
+    // console.log(val);
+    if(val==='English'){
+      this.ts.use('en');
+      localStorage.setItem('lan','en');
+    }else{
+      this.ts.use('bn');
+      localStorage.setItem('lan','bn');
+    }
   }
 
   translate(){

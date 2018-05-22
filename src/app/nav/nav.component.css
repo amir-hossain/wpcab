@@ -29,6 +29,22 @@
     
 }
 
+.nav-ico,.nav-ico img{
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 2px;
+    margin-right:1em; 
+}
+
+::ng-deep .lan .mat-select-value {
+    vertical-align: middle;
+    padding: 100% 0%;
+    
+}
+
+.middle{
+    vertical-align: middle;
+}
 
 .nav-content{
     display: table;
