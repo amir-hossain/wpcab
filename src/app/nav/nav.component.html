@@ -12,29 +12,24 @@
            {{routerLink.label | translate}}
        </a>
     </span>
-        <a mat-tab-link class="lan">
-            <mat-select (change)="dropdown($event.value)" [(ngModel)]="defaultLan">
+        <a mat-tab-link class="lan" (click)='select1.open()'>
+            <mat-select (change)="dropdown($event.value)" [(ngModel)]="defaultLan" #select1>
                 <mat-option *ngFor='let lang of lanList;let i=index;' value='{{lang}}' >
                     <img class='nav-ico middle' src="assets/img/flag{{i}}.png">
                         {{lang}}
                     </mat-option>
             </mat-select>
         </a>
-   
-<a mat-tab-link (click)='menuClick()' class="full-view">
-        <img class='nav-photo' *ngIf='photoUrl' src="{{photoUrl}}" alt="">
-    <img *ngIf='!up' class='menu-icon' src="assets/img/down.png" alt="">
-    <img *ngIf='up' class='menu-icon' src="assets/img/up.png" alt="">
-</a>
+        <a mat-tab-link class="lan" (click)='select2.open()' style="opacity: 1;">
+                <img class='nav-photo' *ngIf='photoUrl' src="{{photoUrl}}">
+                <mat-select #select2 style="margin-left:-3em;">
+                    <mat-option (click)="logout()">
+                            <span  style="text-align: center;display: block;color: red;">{{'Logout' | translate}}</span>
+                        </mat-option>
+                </mat-select>
+            </a>
 
 </div>
 </div>
-<div [class.user]='userRole==="User"'>
-    <div [class.ac]='userRole==="Admin" || userRole==="Accountant"'>
-        <div *ngIf='up' class="dropdown-content" (click)="logout()">
-                <p>{{'Logout' | translate}}</p>
-            
-        </div>
-    </div>
-</div>
+
 

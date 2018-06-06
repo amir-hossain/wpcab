@@ -17,7 +17,6 @@ export class NavComponent implements OnInit {
   routerLinks;
   lanBD=true;
   photoUrl;
-  up=false;
   userRole;
   constructor(private router:Router,private db:AngularFireDatabase,private nls:NavLinksService,private ts: TranslateService,private communicationService: CommunicationService,private eRef: ElementRef,private dds:DropDownItemsService) { 
     let userId=localStorage.getItem('activeUserId');
@@ -51,13 +50,7 @@ export class NavComponent implements OnInit {
     }
   }
 
-  @HostListener('document:click', ['$event'])
-  clickout(event) {
-    if(!this.eRef.nativeElement.contains(event.target)) {
-      // console.log("clicked outside");
-      this.up=false;
-    }
-  }
+
 
   logout(){
     // notifiy app component by communication service
@@ -67,9 +60,7 @@ export class NavComponent implements OnInit {
     this.router.navigate(["/login"]);
   }
 
-  menuClick(){
-    this.up=!this.up;
-  }
+
 
   dropdown(val){
     // console.log(val);
