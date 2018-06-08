@@ -179,9 +179,9 @@
         <h3>{{'MixedComponent.SubHeading2' | translate}}</h3>
         <mat-card class="card" formGroupName='address'>
             <div>
-                <mat-form-field>
+                <mat-form-field >
                     <mat-label>*{{'MixedComponent.PA' | translate}}</mat-label>
-                <input matInput type="textarea" formControlName="permanentAddress">
+                <textarea matInput type="textarea" formControlName="permanentAddress" rows="3"></textarea>
               </mat-form-field>
                 <mat-error *ngIf="permanentAddress.invalid && permanentAddress.touched">
                   {{'MixedComponent.Error.PA' | translate}}
