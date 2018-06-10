@@ -1,18 +1,18 @@
-<div mat-tab-nav-bar class="nav-container">
-  <div class="nav-content">
+<div mat-tab-nav-bar class="nav-container" fxLayout="row">
+  <div  fxLayout fxLayoutAlign="center" >
     <span *ngFor="let routerLink of routerLinks;let i=index">
         <a mat-tab-link *ngIf='i===0'
-        [routerLink]="routerLink.link">
-           <img class='nav-logo' src="./assets/img/logo.png" alt="">
-       </a>
+        [routerLink]="routerLink.link" fxFlex="0% 1% 2em">
+           <img class='nav-logo' src="./assets/img/logo.png" alt="" >
+       </a >
         <a mat-tab-link *ngIf='i!==0'
         [routerLink]="routerLink.link"
         routerLinkActive #rla="routerLinkActive"
-        [active]="rla.isActive">
+        [active]="rla.isActive" fxFlex>
            {{routerLink.label | translate}}
        </a>
     </span>
-        <a mat-tab-link class="lan" (click)='select1.open()'>
+        <a mat-tab-link class="lan" (click)='select1.open()' fxFlex="8%" >
             <mat-select (change)="dropdown($event.value)" [(ngModel)]="defaultLan" #select1>
                 <mat-option *ngFor='let lang of lanList;let i=index;' value='{{lang}}' >
                     <img class='nav-ico middle' src="assets/img/flag{{i}}.png">
@@ -20,7 +20,8 @@
                     </mat-option>
             </mat-select>
         </a>
-        <a mat-tab-link class="lan" (click)='select2.open()' style="opacity: 1;">
+        
+        <a mat-tab-link class="lan" (click)='select2.open()' style="opacity: 1;" fxLayout fxFlex="5%" >
                 <img class='nav-photo' *ngIf='photoUrl' src="{{photoUrl}}">
                 <mat-select #select2 style="margin-left:-3em;">
                     <mat-option (click)="logout()">

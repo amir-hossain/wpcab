@@ -36,6 +36,7 @@ import { DialogComponent } from './details/dialog.component';
 import { IgxRippleModule } from 'igniteui-angular/main';
 import { FooterComponent } from './footer/footer.component';
 import{CommunicationService} from './communication.service';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 
 const confiq={
@@ -75,6 +76,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     BrowserModule,
     HttpClientModule,
+    FlexLayoutModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
