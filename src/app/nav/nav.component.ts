@@ -1,4 +1,4 @@
-import { Component, OnInit,HostListener,ElementRef } from '@angular/core';
+import { Component, OnInit,HostListener,ElementRef,ChangeDetectorRef } from '@angular/core';
 import {Router} from "@angular/router";
 import {AngularFireDatabase} from 'angularfire2/database';
 import {NavLinksService} from '../nav-links.service';
@@ -6,22 +6,34 @@ import { TranslateService } from '@ngx-translate/core';
 import{CommunicationService} from '../communication.service';
 import {DropDownItemsService} from '../drop-down-items.service';
 @Component({
-  selector: 'app-nav',
+  selector: 'app-root',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css'],
   providers:[NavLinksService,DropDownItemsService]
 })
 export class NavComponent implements OnInit {
+  navBar=false;
   defaultLan;
   lanList;
   routerLinks;
   lanBD=true;
   photoUrl;
   userRole;
-  constructor(private router:Router,private db:AngularFireDatabase,private nls:NavLinksService,private ts: TranslateService,private communicationService: CommunicationService,private eRef: ElementRef,private dds:DropDownItemsService) { 
+  constructor(private router:Router,private db:AngularFireDatabase,private nls:NavLinksService,private ts: TranslateService,private eRef: ElementRef,private dds:DropDownItemsService,private communicationService: CommunicationService,private changeDetector: ChangeDetectorRef) { 
     let userId=localStorage.getItem('activeUserId');
     this.db.database.ref('users/'+userId+'/userInfo/').once('value',snap=>this.photoUrl=snap.val().photo
   );
+
+  communicationService.changeEmitted$.subscribe(data => {
+    // console.log(data);
+    if(data){
+      this.navBar=true;
+    }else{
+      this.navBar=false;
+    }
+    // to manually notify paraent 
+    changeDetector.detectChanges();
+  });
 }
 
   ngOnInit() {
@@ -54,8 +66,7 @@ export class NavComponent implements OnInit {
 
   logout(){
     // notifiy app component by communication service
-    CommunicationService.navBar=false;
-    this.communicationService.emitChange();
+    this.navBar=false;
     localStorage.removeItem('activeUserRole');
     this.router.navigate(["/login"]);
   }

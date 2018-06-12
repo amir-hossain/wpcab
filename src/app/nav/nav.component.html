@@ -1,4 +1,4 @@
-<div mat-tab-nav-bar ngClass.gt-sm="nav-container" fxLayout="row" >
+<div mat-tab-nav-bar ngClass.gt-sm="nav-container" fxLayout="row" *ngIf="navBar">
   <div  fxLayout fxLayoutAlign.gt-sm="center" >
                   <button mat-icon-button (click)="sidenav.toggle()" fxShow="true"  fxHide.gt-sm>
                     <mat-icon>menu</mat-icon>

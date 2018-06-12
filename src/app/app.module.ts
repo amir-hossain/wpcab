@@ -5,7 +5,6 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import {FormsModule,ReactiveFormsModule} from '@angular/forms'
-import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app.routing';
 import { HomeComponent } from './home/home.component';
@@ -55,7 +54,6 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent,
     LoginComponent,
     HomeComponent,
     ProfileComponent,
@@ -98,6 +96,6 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   entryComponents:[DialogComponent],
   providers: [AngularFireAuth,LoginGuard,AntiUserGuard,AccountantGuard,AdminGuard,AdcountGuard,AntiUtorGuard,CommunicationService],
-  bootstrap: [AppComponent]
+  bootstrap: [NavComponent]
 })
 export class AppModule { }
