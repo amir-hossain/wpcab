@@ -39,14 +39,16 @@
 <mat-sidenav-container fxFlexFill>
     <mat-sidenav #sidenav>
       <mat-nav-list>
-        <a routerLink="/test" routerLinkActive="active" (click)="sidenav.toggle()" mat-list-item>
-          <mat-icon>notifications</mat-icon>
-          Test
-        </a>
-        <a routerLink="/test2" routerLinkActive="active" (click)="sidenav.toggle()" mat-list-item>
-          <mat-icon>account_box</mat-icon>
-          Test2
-        </a>
+          <span *ngFor="let routerLink of routerLinks;let i=index">
+                <a *ngIf="i!==0" [routerLink]="routerLink.link" (click)="sidenav.toggle()" mat-list-item>
+                        {{routerLink.label | translate}}
+                </a>
+          </span>
+          <a mat-list-item (click)="logout()" (click)="sidenav.toggle()">
+                <mat-icon>exit_to_app</mat-icon> 
+                <span  style="color: red;padding-left:10px; ">{{'Logout' | translate}}</span>
+          </a>
+       
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content fxFlexFill>
