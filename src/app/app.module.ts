@@ -36,7 +36,6 @@ import { IgxRippleModule } from 'igniteui-angular/main';
 import { FooterComponent } from './footer/footer.component';
 import{CommunicationService} from './communication.service';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import { NavDrawerComponent } from './nav-drawer/nav-drawer.component';
 
 
 const confiq={
@@ -71,7 +70,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     EditComponent,
     DialogComponent,
     FooterComponent,
-    NavDrawerComponent,
   ],
   imports: [
     BrowserModule,

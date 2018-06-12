@@ -1,4 +1,4 @@
-import { Component, OnInit,HostListener,ElementRef,ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit,ChangeDetectorRef } from '@angular/core';
 import {Router} from "@angular/router";
 import {AngularFireDatabase} from 'angularfire2/database';
 import {NavLinksService} from '../nav-links.service';
@@ -19,7 +19,7 @@ export class NavComponent implements OnInit {
   lanBD=true;
   photoUrl;
   userRole;
-  constructor(private router:Router,private db:AngularFireDatabase,private nls:NavLinksService,private ts: TranslateService,private eRef: ElementRef,private dds:DropDownItemsService,private communicationService: CommunicationService,private changeDetector: ChangeDetectorRef) { 
+  constructor(private router:Router,private db:AngularFireDatabase,private nls:NavLinksService,private ts: TranslateService,private dds:DropDownItemsService,private communicationService: CommunicationService,private changeDetector: ChangeDetectorRef) { 
     let userId=localStorage.getItem('activeUserId');
     this.db.database.ref('users/'+userId+'/userInfo/').once('value',snap=>this.photoUrl=snap.val().photo
   );
