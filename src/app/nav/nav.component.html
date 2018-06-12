@@ -1,8 +1,12 @@
-<div mat-tab-nav-bar class="nav-container" fxLayout="row">
-  <div  fxLayout fxLayoutAlign="center" >
-    <span *ngFor="let routerLink of routerLinks;let i=index">
+<div mat-tab-nav-bar ngClass.gt-sm="nav-container" fxLayout="row" >
+  <div  fxLayout fxLayoutAlign.gt-sm="center" >
+                  <button mat-icon-button (click)="sidenav.toggle()" fxShow="true"  fxHide.gt-sm>
+                    <mat-icon>menu</mat-icon>
+                  </button>
+               
+    <span *ngFor="let routerLink of routerLinks;let i=index" fxHide.lt-md>
         <a mat-tab-link *ngIf='i===0'
-        [routerLink]="routerLink.link" fxFlex="0% 1% 2em">
+        [routerLink]="routerLink.link" fxHide.md>
            <img class='nav-logo' src="./assets/img/logo.png" alt="" >
        </a >
         <a mat-tab-link *ngIf='i!==0'
@@ -12,7 +16,7 @@
            {{routerLink.label | translate}}
        </a>
     </span>
-        <a mat-tab-link class="lan" (click)='select1.open()' fxFlex="8%" >
+        <a mat-tab-link class="lan" (click)='select1.open()' fxFlex="10%">
             <mat-select (change)="dropdown($event.value)" [(ngModel)]="defaultLan" #select1>
                 <mat-option *ngFor='let lang of lanList;let i=index;' value='{{lang}}' >
                     <img class='nav-ico middle' src="assets/img/flag{{i}}.png">
@@ -21,8 +25,8 @@
             </mat-select>
         </a>
         
-        <a mat-tab-link class="lan" (click)='select2.open()' style="opacity: 1;" fxLayout fxFlex="5%" >
-                <img class='nav-photo' *ngIf='photoUrl' src="{{photoUrl}}">
+        <a mat-tab-link class="lan" (click)='select2.open()' style="opacity: 1;" fxLayout fxFlex="5%" fxHide.lt-md>
+                <img class='nav-photo' *ngIf='photoUrl' src="{{photoUrl}}" fxHide.md>
                 <mat-select #select2 style="margin-left:-3em;">
                     <mat-option (click)="logout()">
                             <span  style="text-align: center;display: block;color: red;">{{'Logout' | translate}}</span>
@@ -32,5 +36,21 @@
 
 </div>
 </div>
-
+<mat-sidenav-container fxFlexFill>
+    <mat-sidenav #sidenav>
+      <mat-nav-list>
+        <a routerLink="/test" routerLinkActive="active" (click)="sidenav.toggle()" mat-list-item>
+          <mat-icon>notifications</mat-icon>
+          Test
+        </a>
+        <a routerLink="/test2" routerLinkActive="active" (click)="sidenav.toggle()" mat-list-item>
+          <mat-icon>account_box</mat-icon>
+          Test2
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content fxFlexFill>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 
