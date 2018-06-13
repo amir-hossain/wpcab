@@ -12,7 +12,7 @@
         <a mat-tab-link *ngIf='i!==0'
         [routerLink]="routerLink.link"
         routerLinkActive #rla="routerLinkActive"
-        [active]="rla.isActive" fxFlex>
+        [active]="rla.isActive" fxFlex fxHide.lt-md>
            {{routerLink.label | translate}}
        </a>
     </span>
@@ -40,11 +40,11 @@
     <mat-sidenav #sidenav>
       <mat-nav-list>
           <span *ngFor="let routerLink of routerLinks;let i=index">
-                <a *ngIf="i!==0" [routerLink]="routerLink.link" (click)="sidenav.toggle()" mat-list-item>
+                <a *ngIf="i!==0" [routerLink]="routerLink.link" (click)="sidenav.toggle()"  mat-list-item routerLinkActive="active">
                         {{routerLink.label | translate}}
                 </a>
           </span>
-          <a mat-list-item (click)="logout()" (click)="sidenav.toggle()">
+          <a mat-list-item (click)="logout()" (click)="sidenav.toggle()" routerLinkActive="active">
                 <mat-icon>exit_to_app</mat-icon> 
                 <span  style="color: red;padding-left:10px; ">{{'Logout' | translate}}</span>
           </a>
