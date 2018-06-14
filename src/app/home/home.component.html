@@ -1,25 +1,25 @@
-<div class="main-container">
+<div ngClass.gt-sm="main-container">
 
-  <div class="up-comming">
+  <div ngClass.gt-sm="up-comming">
     <h1>{{'HomeComponent.NearEvent' | translate}}</h1>
     <table>
         <div class="heading">
-            <th>{{'HomeComponent.NameLab' | translate}}</th>
-            <th>{{'HomeComponent.DateLab' | translate}}</th>
-            <th>{{'HomeComponent.TimeLab' | translate}}</th>
-            <th>{{'HomeComponent.DayRemLab' | translate}}</th>
+            <th fxHide.lt-md>{{'HomeComponent.NameLab' | translate}}</th>
+            <th fxHide.lt-md>{{'HomeComponent.DateLab' | translate}}</th>
+            <th fxHide.lt-md>{{'HomeComponent.TimeLab' | translate}}</th>
+            <th fxHide.lt-md>{{'HomeComponent.DayRemLab' | translate}}</th>
           </div>
     <tr>
-      <mat-card class="card">
-      <td>{{'HomeComponent.MetLab' | translate}}</td>
-      <td>{{'HomeComponent.Date' | translate}}</td>
-      <td>{{'HomeComponent.Time' | translate}}</td>
-      <td>{{'HomeComponent.DayRem' | translate}}</td>
+      <mat-card fxLayout.lt-md="row wrap" ngClass.gt-sm="block" > 
+      <td ngClass.lt-md="cell">{{'HomeComponent.MetLab' | translate}}</td>
+      <td ngClass.lt-md="cell">{{'HomeComponent.Date' | translate}}</td>
+      <td ngClass.lt-md="cell">{{'HomeComponent.Time' | translate}}</td>
+      <td ngClass.lt-md="cell">{{'HomeComponent.DayRem' | translate}}</td>
     </mat-card>
     </tr>
   </table>
   </div>
-  <div class="all">
+  <div ngClass.gt-sm="all">
       <h1>{{'HomeComponent.AllEvent' | translate}}</h1>
       <table>
           <div class="heading">
