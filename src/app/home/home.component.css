@@ -27,17 +27,13 @@ h1{
 }
 
 table th{
-    width: 19em;
     font-size: 25px;
-    padding: 10px;
+    padding-bottom: 10px;
     text-align: start;
 }
 
-table td{
-    padding-left:10px; 
-    width: 34em;
-    font-size: 22px;
-    
+table td{ 
+    font-size: 22px;  
 }
 
 .main-container {

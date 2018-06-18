@@ -2,19 +2,19 @@
 
   <div ngClass.gt-sm="up-comming">
     <h1>{{'HomeComponent.NearEvent' | translate}}</h1>
-    <table>
-        <div class="heading">
-            <th fxHide.lt-md>{{'HomeComponent.NameLab' | translate}}</th>
-            <th fxHide.lt-md>{{'HomeComponent.DateLab' | translate}}</th>
-            <th fxHide.lt-md>{{'HomeComponent.TimeLab' | translate}}</th>
-            <th fxHide.lt-md>{{'HomeComponent.DayRemLab' | translate}}</th>
-          </div>
+    <table fxLayoutAlign.lt-md="center">
+        <tr fxHide.lt-md fxLayout="row wrap" style="padding: 0px 24px;">
+            <th fxFlex>{{'HomeComponent.NameLab' | translate}}</th>
+            <th fxFlex>{{'HomeComponent.DateLab' | translate}}</th>
+            <th fxFlex>{{'HomeComponent.TimeLab' | translate}}</th>
+            <th fxFlex>{{'HomeComponent.DayRemLab' | translate}}</th>
+        </tr>
     <tr>
-      <mat-card fxLayout.lt-md="row wrap" ngClass.gt-sm="block" > 
-      <td ngClass.lt-md="cell">{{'HomeComponent.MetLab' | translate}}</td>
-      <td ngClass.lt-md="cell">{{'HomeComponent.Date' | translate}}</td>
-      <td ngClass.lt-md="cell">{{'HomeComponent.Time' | translate}}</td>
-      <td ngClass.lt-md="cell">{{'HomeComponent.DayRem' | translate}}</td>
+      <mat-card fxLayout.gt-sm="row wrap" fxLayout.lt-md="column" fxLayoutGap.lt-md="10px"> 
+      <td fxFlex>{{'HomeComponent.MetLab' | translate}}</td>
+      <td fxFlex>{{'HomeComponent.Date' | translate}}</td>
+      <td fxFlex>{{'HomeComponent.Time' | translate}}</td>
+      <td fxFlex>{{'HomeComponent.DayRem' | translate}}</td>
     </mat-card>
     </tr>
   </table>
