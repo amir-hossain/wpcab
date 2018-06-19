@@ -1,165 +1,140 @@
-.pic{
-    border:gray solid 5px;
-    width:160px;
-    height:160px;
-}
-mat-option{
-   border-bottom: rgba(255, 255, 255, 0.76) solid 5px;
+.pic {
+  border: gray solid 5px;
+  width: 160px;
+  height: 160px;
 }
 
-.spinner{
-    position: absolute;
-    bottom: 0;
-    left: 40%;
-  }
-
-  .field-top-margin{
-      margin-top: 15px;
-  }
-
-  .spoouseWpcabMember{
-      color: red;
-      font-weight: bold;
-      margin:15px 0px;
-  }
-
-  .pic-error{
-    padding-top:10px; 
-    font-weight: bold;
-    display: table;
-    margin: auto;
-  }
-
-.thumb{
-    vertical-align:middle;
-    height:50px;
-    width:50px;
-    padding-right: 5px;
-    
+mat-option {
+  border-bottom: rgba(255, 255, 255, 0.76) solid 5px;
 }
 
-.not-required,.instraction{
-    color:gray;
+.spinner {
+  position: absolute;
+  bottom: 0;
+  left: 40%;
 }
 
-.instraction{
-    font-size:14px;
-
+.field-top-margin {
+  margin-top: 15px;
 }
 
-.warning{
-    display: block;
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom:20px; 
+.spoouseWpcabMember {
+  color: red;
+  font-weight: bold;
+  margin: 15px 0px;
 }
 
-label{
-    display:table;
-    margin:auto;
+.pic-error {
+  padding-top: 10px;
+  font-weight: bold;
+  display: table;
+  margin: auto;
 }
 
-mat-form-field{
-    width: 50em !important;
-
+.thumb {
+  vertical-align: middle;
+  height: 50px;
+  width: 50px;
+  padding-right: 5px;
 }
 
-.day{
-    margin-bottom:10px; 
+.not-required,
+.instraction {
+  color: gray;
 }
 
-.dob mat-form-field{
-    width:30% !important;
+.instraction {
+  font-size: 14px;
 }
 
-.dob .middle{
-    margin: 0 2em;
+.warning {
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
-.dob mat-error{
-    font-size: 17px;
-    padding: 2px !important;
+label {
+  display: table;
+  margin: auto;
 }
 
-
-.card{
-    display: inline-block;
-    }
-
-  .container{
-    display: table;
-    margin: auto;
-    }
-
-  h1,h3{
-    font-size: 30px;
-    text-align: center;
+.dob mat-error {
+  font-size: 17px;
+  padding: 2px !important;
 }
 
-::ng-deep .mat-snack-bar-container{
-    background:#005807;
+.card {
+  display: inline-block;
+  width: 100%;
 }
 
-::ng-deep .mat-simple-snackbar{
-    font-size:22px;
+.container {
+  width: 50%;
+  margin: auto;
 }
 
-.label{
-    font-size: 18px;
-    margin-top:10px;
-    margin-bottom: 10px; 
+h1,
+h3 {
+  font-size: 30px;
+  text-align: center;
 }
 
-
-
-  mat-label,.label,span,mat-option{
-    color:rgb(32, 2, 138);
-    font-weight: bold;
-  }
-
-  .not-required{
-      color:grey;
-      font-weight:normal; 
-  }
-
-  .custom-error{
-      margin-top:15px;
-  }
-
-  .upload-button{
-    background:orange;
-    display: block;
-    margin-top:5px; 
-    width: 160px;
+.label {
+  font-size: 18px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-h3{
-    font-size: 1.2em;
-    padding: 30px 0px;
+mat-label,
+.label,
+span,
+mat-option {
+  color: rgb(32, 2, 138);
+  font-weight: bold;
 }
 
-.mat-radio-button{
-    padding-right: 1.8em;
+.not-required {
+  color: grey;
+  font-weight: normal;
 }
 
-.footer-error{
-    display: table;
-    padding: 2em 0;
-    color:red;
-    margin: auto;
-    font-size: 20px;
+.custom-error {
+  margin-top: 15px;
 }
-button{
-    float: right;
-    margin: 2em 0;
-    padding: .5em 3em;
+
+.upload-button {
+  background: orange;
+  display: block;
+  margin-top: 5px;
+  width: 160px;
+}
+
+h3 {
+  font-size: 1.2em;
+  padding: 30px 0px;
+}
+
+.mat-radio-button {
+  padding-right: 1.8em;
+}
+
+.footer-error {
+  display: table;
+  padding: 2em 0;
+  color: red;
+  margin: auto;
+  font-size: 20px;
+}
+
+.button {
+  float: right;
+  margin: 2em 0;
+  padding: .5em 3em;
 }
 
 .clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
+  content: "";
+  clear: both;
+  display: table;
 }
-
-
-
