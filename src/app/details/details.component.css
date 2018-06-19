@@ -1,111 +1,112 @@
-ul{
-    list-style:none;
-    margin: 0;
+ul {
+  list-style: none;
+  margin: 0;
 }
 
-.container{
-    display: table;
-    margin:auto;
+.container {
+  display: table;
+  margin: auto;
 }
 
-
-.back-btn{
-    margin-top: .5em;
-    float:left;
+.back-btn {
+  margin-top: .5em;
+  float: left;
 }
 
-.payment-btn, .spayment-btn ,.delete-btn{
-    display: block;
-    margin-top:20px; 
-    width: 100%;
-    padding: .5em 0;
-    font-size: 20px;
-    background: green;
-    color: wheat;
+.payment-btn,
+.spayment-btn,
+.delete-btn {
+  display: block;
+  margin-top: 20px;
+  width: 100%;
+  padding: .5em 0;
+  font-size: 20px;
+  background: green;
+  color: wheat;
 }
 
-.delete-btn{
-   
-    background: rgb(212, 3, 3);
+.delete-btn {
+  background: rgb(212, 3, 3);
 }
 
-.spayment-btn{
-  
-    background: rgb(33, 1, 92)
-   
+.spayment-btn {
+  background: rgb(33, 1, 92)
 }
 
-h1{
-    text-align:center;
-    vertical-align: middle;
+h1 {
+  text-align: center;
+  vertical-align: middle;
 }
 
-.sub-1{
-    float: left;
+.sub-1 {
+  float: left;
 }
 
-.sub-2{
-    float:left;
+.sub-2 {
+  float: left;
 }
 
-h4{
-    display: inline-block;
-    padding-bottom: .8em;
-    margin: 0;
-    width: 10em;
+h4 {
+  display: inline-block;
+  padding-bottom: .8em;
+  margin: 0;
+  width: 10em;
 }
 
-.sub-1 img{
-    width: 13em;
-    height: 13em;
-    border: 5px solid gray;
+.sub-1 img {
+  width: 13em;
+  height: 13em;
+  border: 5px solid gray;
 }
-
-
 
 .clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
+  content: "";
+  clear: both;
+  display: table;
 }
 
 .footer {
-    background: green;
-    color: whitesmoke;
+  background: green;
+  color: whitesmoke;
 }
 
-.footer h1{
-    margin: 0;
-    color: wheat;
-    font-size: 30px;
-    text-align: center;
+.footer h1 {
+  margin: 0;
+  color: wheat;
+  font-size: 30px;
+  text-align: center;
 }
 
-.footer div h1{
-    display: inline;
+.footer div h1 {
+  display: inline;
 }
 
-.footer div{
-    margin: auto;
-    display: table;
+.footer div {
+  margin: auto;
+  display: table;
 }
 
-.more-btn{
-    position: relative;
-    right: 0px;
-    vertical-align: middle;
-    background:black;
-    margin-left: 20px;
-}
-.sub-header{
-    margin-bottom:1.2em; 
+.more-btn {
+  position: relative;
+  right: 0px;
+  vertical-align: middle;
+  background: black;
+  margin-left: 20px;
 }
 
-.sub-header h2{
-    display: inline;
+.sub-header {
+  margin-bottom: 1.2em;
 }
 
-.sub-header a{
-    float: right;
-    background: rgb(255, 166, 0);
+.sub-header h2 {
+  display: inline;
+}
+
+.sub-header a {
+  float: right;
+  background: rgb(255, 166, 0);
+}
+
+.bottom-margin{
+    margin-bottom: 1em;
 }

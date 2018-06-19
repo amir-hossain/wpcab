@@ -1,90 +1,115 @@
 <div class='container'>
-  <div>
-      <a href="collection" mat-raised-button color='primary' class="back-btn">{{'MixedComponent.Back' | translate}}</a>
-      <h1>{{'MixedComponent.Heading1' | translate}}</h1>
+  <div >
+    <a *ngIf='path!=="/profile"' href="collection" mat-raised-button color='primary' class="back-btn">{{'MixedComponent.Back' | translate}}</a>
+    <h1>{{'MixedComponent.Heading1' | translate}}</h1>
   </div>
   <div *ngIf='path==="/profile"' style="margin-top: 2em"></div>
   <mat-card>
-      <ul *ngIf='userInfo' class='sub-1'>
+    <ul *ngIf='userInfo' class='sub-1'>
       <span *ngIf='!userInfo.photo'>
         <img src='./assets/img/default-pic.png'>
       </span>
       <span *ngIf='userInfo.photo'>
         <img src="{{userInfo.photo}}">
       </span>
-      
-      <a  mat-raised-button class="payment-btn">{{'MixedComponent.Collect' | translate}}</a>
-      <a *ngIf="activeUserRole==='Super' || activeUserRole==='Accountant'" mat-raised-button class="spayment-btn">{{'MixedComponent.SpecialCollect' | translate}}</a>
-      <a *ngIf="activeUserRole==='Super'" mat-raised-button class="delete-btn" (click)='delete()'>{{'MixedComponent.Delete' | translate}}</a>
+
+      <div ngClass.lt-md="bottom-margin">
+        <a mat-raised-button class="payment-btn">{{'MixedComponent.Collect' | translate}}</a>
+        <a *ngIf="activeUserRole==='Super' || activeUserRole==='Accountant'" mat-raised-button class="spayment-btn">{{'MixedComponent.SpecialCollect' | translate}}</a>
+        <a *ngIf="activeUserRole==='Super'" mat-raised-button class="delete-btn" (click)='delete()'>{{'MixedComponent.Delete' | translate}}</a>
+      </div>
       <div class="clearfix"></div>
-      </ul>
-      <div class='sub-2'>
-      <ul *ngIf='userInfo' >
+    </ul>
+    <div class='sub-2'>
+      <ul *ngIf='userInfo'>
         <div class="sub-header">
-            <h2>{{'MixedComponent.SubHeading1' | translate}}</h2>
-            <a *ngIf='path!=="/profile"' href="edit" mat-raised-button>{{'MixedComponent.Edit' | translate}}</a>
-            <div class="clearfix"></div>
+          <h2>{{'MixedComponent.SubHeading1' | translate}}</h2>
+          <a *ngIf='path!=="/profile"' href="edit" mat-raised-button>{{'MixedComponent.Edit' | translate}}</a>
+          <div class="clearfix"></div>
         </div>
-      <li><h4>{{'MixedComponent.Name' | translate}}</h4>{{userInfo.fullName}}</li>
-      <li>
+        <li>
+          <h4>{{'MixedComponent.Name' | translate}}</h4>{{userInfo.fullName}}</li>
+        <li>
           <h4>{{'MixedComponent.Gender' | translate}}</h4>{{userInfo.gender}}
         </li>
         <li>
-            <h4>{{'MixedComponent.Dob' | translate}}</h4>{{userInfo.dob}}
-          </li>
-          <li>
-            <h4>{{'MixedComponent.FatherName' | translate}}</h4>{{userInfo.fatherName}}
-            </li>
-            <li>
-                <h4>{{'MixedComponent.MotherName' | translate}}</h4>{{userInfo.motherName}}
-            </li>
-            <li>
-              <h4>{{'MixedComponent.Status' | translate}}</h4>{{userInfo.status}}
-          </li>
-          <li *ngIf='userInfo.spouseName'><h4>{{'MixedComponent.Spouse' | translate}}</h4>{{userInfo.spouseName}}</li>
-          <li *ngIf='!userInfo.spouseName && userInfo.status==="Married"'><h4>{{'MixedComponent.Spouse' | translate}}</h4>{{'MixedComponent.NotMember' | translate}}</li>
-              <li>
-                  <h4>{{'MixedComponent.InvitedBy' | translate}}</h4>{{userInfo.invitedBy}}
-                </li>
-      <li><h4>{{'MixedComponent.Occupation' | translate}}</h4>{{userInfo.occupation}}</li>
-      <li *ngIf='userInfo.bloodGroup'><h4>{{'MixedComponent.Blood' | translate}}</h4>{{userInfo.bloodGroup}}</li>
-      <li *ngIf='!userInfo.bloodGroup'><h4>{{'MixedComponent.Blood' | translate}}</h4>{{'MixedComponent.None' | translate}}
-      </li>
-      <div class="clearfix"></div>
-    </ul>
+          <h4>{{'MixedComponent.Dob' | translate}}</h4>{{userInfo.dob}}
+        </li>
+        <li>
+          <h4>{{'MixedComponent.FatherName' | translate}}</h4>{{userInfo.fatherName}}
+        </li>
+        <li>
+          <h4>{{'MixedComponent.MotherName' | translate}}</h4>{{userInfo.motherName}}
+        </li>
+        <li>
+          <h4>{{'MixedComponent.Status' | translate}}</h4>{{userInfo.status}}
+        </li>
+        <li *ngIf='userInfo.spouseName'>
+          <h4>{{'MixedComponent.Spouse' | translate}}</h4>{{userInfo.spouseName}}</li>
+        <li *ngIf='!userInfo.spouseName && userInfo.status==="Married"'>
+          <h4>{{'MixedComponent.Spouse' | translate}}</h4>{{'MixedComponent.NotMember' | translate}}</li>
+        <li>
+          <h4>{{'MixedComponent.InvitedBy' | translate}}</h4>{{userInfo.invitedBy}}
+        </li>
+        <li>
+          <h4>{{'MixedComponent.Occupation' | translate}}</h4>{{userInfo.occupation}}</li>
+        <li *ngIf='userInfo.bloodGroup'>
+          <h4>{{'MixedComponent.Blood' | translate}}</h4>{{userInfo.bloodGroup}}</li>
+        <li *ngIf='!userInfo.bloodGroup'>
+          <h4>{{'MixedComponent.Blood' | translate}}</h4>{{'MixedComponent.None' | translate}}
+        </li>
+        <div class="clearfix"></div>
+      </ul>
       <ul *ngIf='auth'>
-          <h2>{{'MixedComponent.SubHeading3' | translate}}</h2>
-        <li><h4>{{'MixedComponent.Phone' | translate}}</h4>{{auth.phone}}</li>
-        <li><h4>{{'MixedComponent.Password' | translate}}</h4>{{'MixedComponent.Hidden' | translate}}</li>
-        <li *ngIf='auth.email'><h4>{{'MixedComponent.Email' | translate}}</h4>{{auth.email}}</li>
-        <li *ngIf='!auth.email'><h4>{{'MixedComponent.Email' | translate}}</h4>{{'MixedComponent.None' | translate}}</li>
-        <li *ngIf='auth.userName'><h4>{{'MixedComponent.UN' | translate}}</h4>{{auth.userName}}</li>
-        <li *ngIf='!auth.userName'><h4>{{'MixedComponent.UN' | translate}}</h4>{{'MixedComponent.None' | translate}}</li>
-        <li><h4>{{'MixedComponent.Role' | translate}}</h4>{{auth.role}}</li>
-    <div class="clearfix"></div>
-    </ul>
-    <ul *ngIf='address'>
+        <h2>{{'MixedComponent.SubHeading3' | translate}}</h2>
+        <li>
+          <h4>{{'MixedComponent.Phone' | translate}}</h4>{{auth.phone}}</li>
+        <li>
+          <h4>{{'MixedComponent.Password' | translate}}</h4>{{'MixedComponent.Hidden' | translate}}</li>
+        <li *ngIf='auth.email'>
+          <h4>{{'MixedComponent.Email' | translate}}</h4>{{auth.email}}</li>
+        <li *ngIf='!auth.email'>
+          <h4>{{'MixedComponent.Email' | translate}}</h4>{{'MixedComponent.None' | translate}}</li>
+        <li *ngIf='auth.userName'>
+          <h4>{{'MixedComponent.UN' | translate}}</h4>{{auth.userName}}</li>
+        <li *ngIf='!auth.userName'>
+          <h4>{{'MixedComponent.UN' | translate}}</h4>{{'MixedComponent.None' | translate}}</li>
+        <li>
+          <h4>{{'MixedComponent.Role' | translate}}</h4>{{auth.role}}</li>
+        <div class="clearfix"></div>
+      </ul>
+      <ul *ngIf='address'>
         <h2>{{'MixedComponent.SubHeading2' | translate}}</h2>
-      <li><h4>{{'MixedComponent.Zone' | translate}}</h4>{{address.zone}}</li>
-      <li><h4>{{'MixedComponent.SubDis' | translate}}</h4>{{address.subDistrict}}</li>
-      <li><h4>{{'MixedComponent.PA' | translate}}</h4>{{address.permanentAddress}}</li>
-      <li><h4>{{'MixedComponent.Dist' | translate}}</h4>{{address.district}}</li>
-      <li *ngIf='address.country'><h4>{{'MixedComponent.Country' | translate}}</h4>{{address.country}}</li>
-      <li *ngIf='!address.country'><h4>{{'MixedComponent.Country' | translate}}</h4>{{'MixedComponent.None' | translate}}</li>
-      <li *ngIf='address.nationality'><h4>{{'MixedComponent.Nationality' | translate}}</h4>{{address.nationality}}</li>
-      <li *ngIf='!address.nationality'><h4>{{'MixedComponent.Nationality' | translate}}</h4>{{'MixedComponent.None' | translate}}</li>
-      <li *ngIf='address.nId'><h4>{{'MixedComponent.NID' | translate}}</h4>{{address.nId}}</li>
-      <li *ngIf='!address.nId'><h4>{{'MixedComponent.NID' | translate}}</h4>{{'MixedComponent.None' | translate}}</li>
-    </ul>
-  </div>
+        <li>
+          <h4>{{'MixedComponent.Zone' | translate}}</h4>{{address.zone}}</li>
+        <li>
+          <h4>{{'MixedComponent.SubDis' | translate}}</h4>{{address.subDistrict}}</li>
+        <li>
+          <h4>{{'MixedComponent.PA' | translate}}</h4>{{address.permanentAddress}}</li>
+        <li>
+          <h4>{{'MixedComponent.Dist' | translate}}</h4>{{address.district}}</li>
+        <li *ngIf='address.country'>
+          <h4>{{'MixedComponent.Country' | translate}}</h4>{{address.country}}</li>
+        <li *ngIf='!address.country'>
+          <h4>{{'MixedComponent.Country' | translate}}</h4>{{'MixedComponent.None' | translate}}</li>
+        <li *ngIf='address.nationality'>
+          <h4>{{'MixedComponent.Nationality' | translate}}</h4>{{address.nationality}}</li>
+        <li *ngIf='!address.nationality'>
+          <h4>{{'MixedComponent.Nationality' | translate}}</h4>{{'MixedComponent.None' | translate}}</li>
+        <li *ngIf='address.nId'>
+          <h4>{{'MixedComponent.NID' | translate}}</h4>{{address.nId}}</li>
+        <li *ngIf='!address.nId'>
+          <h4>{{'MixedComponent.NID' | translate}}</h4>{{'MixedComponent.None' | translate}}</li>
+      </ul>
+    </div>
     <div class="clearfix"></div>
   </mat-card>
   <mat-card class="footer">
-        <div>
-          <h1>{{'MixedComponent.Clear' | translate}} December 2017</h1>
-          <a *ngIf='totalPayment>1' class="more-btn" mat-raised-button color='primary' >{{'MixedComponent.SeeMore' | translate}}</a>
-        </div>
-      <div class="clearfix"></div>
-    </mat-card>
+    <div>
+      <h1>{{'MixedComponent.Clear' | translate}} December 2017</h1>
+      <a *ngIf='totalPayment>1' class="more-btn" mat-raised-button color='primary'>{{'MixedComponent.SeeMore' | translate}}</a>
+    </div>
+    <div class="clearfix"></div>
+  </mat-card>
   <app-footer></app-footer>
 </div>
