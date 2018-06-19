@@ -19,37 +19,42 @@
     </tr>
   </table>
   </div>
-  <div ngClass.gt-sm="all">
+  <div ngClass.gt-sm="up-comming">
       <h1>{{'HomeComponent.AllEvent' | translate}}</h1>
-      <table>
-          <div class="heading">
-              
-            <th>{{'HomeComponent.NameLab' | translate}}</th>
-            <th>{{'HomeComponent.DateLab' | translate}}</th>
-            <th>{{'HomeComponent.TimeLab' | translate}}</th>
-            <th>{{'HomeComponent.DayRemLab' | translate}}</th>
-            </div>
-      <mat-card class="card">
-      <tr>
-        <td>Traning</td>
-        <td>10/1/2018</td>
-        <td>6:00pm</td>
-        <td>10 days remaining</td>
-      </tr>
-      <tr>
-          <td>Young Mafil</td>
-          <td>12/1/2018</td>
-          <td>9:00am</td>
-          <td>12 days remaining</td>
+
+      <table fxLayoutAlign.lt-md="center">
+        <tr fxHide.lt-md fxLayout="row wrap" style="padding: 0px 24px;">
+          <th fxFlex>{{'HomeComponent.NameLab' | translate}}</th>
+          <th fxFlex>{{'HomeComponent.DateLab' | translate}}</th>
+          <th fxFlex>{{'HomeComponent.TimeLab' | translate}}</th>
+          <th fxFlex>{{'HomeComponent.DayRemLab' | translate}}</th>
         </tr>
-        <tr>
-            <td>Tepra Mafil</td>
-            <td>14/1/2018</td>
-            <td>6:00pm</td>
-            <td>14 days remaining</td>
-          </tr>
-        </mat-card>
-      </table>
+    <tr>
+      <mat-card fxLayout.gt-sm="row wrap" fxLayout.lt-md="column" fxLayoutGap.lt-md="10px"> 
+        <td fxFlex>Traning</td>
+        <td fxFlex>10/1/2018</td>
+        <td fxFlex>6:00pm</td>
+        <td fxFlex>10 days remaining</td>
+    </mat-card>
+    </tr>
+    <tr>
+      <mat-card fxLayout.gt-sm="row wrap" fxLayout.lt-md="column" fxLayoutGap.lt-md="10px"> 
+        <td fxFlex>Young Mafil</td>
+          <td fxFlex>12/1/2018</td>
+          <td fxFlex>9:00am</td>
+          <td fxFlex>12 days remaining</td>
+    </mat-card>
+    </tr>
+
+    <tr>
+      <mat-card fxLayout.gt-sm="row wrap" fxLayout.lt-md="column" fxLayoutGap.lt-md="10px"> 
+          <td fxFlex>Tepra Mafil</td>
+          <td fxFlex>14/1/2018</td>
+          <td fxFlex>6:00pm</td>
+          <td fxFlex>14 days remaining</td>
+    </mat-card>
+    </tr>
+  </table>
     </div> <!-- all -->
     <app-footer></app-footer>
 </div> <!-- main container -->
