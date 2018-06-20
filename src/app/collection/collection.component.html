@@ -1,46 +1,42 @@
-<table>
-    <mat-card class="search-card">
-        <mat-form-field>
+<table ngClass.gt-sm="container">
+    <mat-card class="search-card" fxLayout="row wrap" fxLayoutGap="3.3%">
+        <mat-form-field fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
           <input matInput (keyup)="nameFilter($event.target.value)" placeholder="{{'CollectionComponent.SearchName' | translate}}">
         </mat-form-field>
-        <mat-form-field class="middle-filter">
+        <mat-form-field fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
             <input matInput (keyup)="zoneFilter($event.target.value)" placeholder="{{'CollectionComponent.SearchZone' | translate}}">
           </mat-form-field>
-          <mat-form-field>
+          <mat-form-field fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
               <input matInput (keyup)="subDistrictFilter($event.target.value)" placeholder="{{'CollectionComponent.SearchSubDistrict' | translate}}">
             </mat-form-field>
       </mat-card>
     
-  <div >
-    <!-- <th>
-        <span class="thead">Picture</span>
-    </th> -->
-    <th>
-        <span class="thead">{{'CollectionComponent.Name' | translate}}</span>
+  <div fxHide.lt-md fxLayout.gt-sm='row' fxLayoutGap.gt-sm="2%" style="margin-left: 24px;">
+    <th fxFlex.gt-sm='30%'>
+        <span >{{'CollectionComponent.Name' | translate}}</span>
     </th>
-    <th>
-        <span class="thead">{{'CollectionComponent.Zone' | translate}}</span>
+    <th fxFlex.gt-sm='30%'>
+        <span >{{'CollectionComponent.Zone' | translate}}</span>
     </th>
-    <th>
-        <span class="thead">{{'CollectionComponent.SubDistrict' | translate}}</span>
+    <th fxFlex.gt-sm='30%'>
+        <span >{{'CollectionComponent.SubDistrict' | translate}}</span>
     </th>
   </div>
   <div>
-      <mat-card *ngFor='let obj of filteredArry;' class="table-card" (click)='itemClick(obj)' igxRipple="black">
-          <td *ngIf='obj'>{{obj.fullName}}</td>
-          <td *ngIf='obj'>{{obj.zone}}</td>
-          <td *ngIf='obj'>{{obj.subDistrict}}</td>
+      <mat-card *ngFor='let obj of filteredArry;' (click)='itemClick(obj)' igxRipple="black" fxLayout.lt-md='column' fxLayout.gt-sm='row' fxLayoutGap.gt-sm="3.3%">
+          <td *ngIf='obj' fxFlex.gt-sm='30%'>{{obj.fullName}}</td>
+          <td *ngIf='obj' fxFlex.gt-sm='30%'>{{obj.zone}}</td>
+          <td *ngIf='obj' fxFlex.gt-sm='30%'>{{obj.subDistrict}}</td>
         </mat-card>
   </div>
 
   <div class="spinner" *ngIf='updating'>
       <mat-spinner *ngIf='updating' [diameter]='200'></mat-spinner>
   </div>
-  <mat-card class="footer">
+  <mat-card>
   <mat-paginator [length]="length"
               [pageSize]="pageSize"
-              (page)="pageUpdate()"
-              >
+              (page)="pageUpdate()">
 </mat-paginator>
 </mat-card>
 <div class="clearfix">

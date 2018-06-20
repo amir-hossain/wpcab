@@ -1,5 +1,5 @@
-table,tbody{
-    display: table;
+.container{
+    width: 60%;
     margin:40px auto;
 }
 
@@ -18,15 +18,17 @@ tr{
     cursor: pointer;
 }
 
+::ng-deep .mat-paginator-container{
+    display: block !important;
+}
+
 td{
-    width: 19.2vw;
     font-size: 25px;
-    vertical-align: middle;
+    
 }
 
 
 th{
-    width: 19.2vw;
     text-align: left;
     font-size: 20px;
     padding-bottom: 30px;
