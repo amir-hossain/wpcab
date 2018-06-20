@@ -103,8 +103,11 @@ h4 {
 }
 
 .sub-header a {
-  float: right;
   background: rgb(255, 166, 0);
+}
+
+.f-right{
+  float: right;
 }
 
 .bottom-margin{

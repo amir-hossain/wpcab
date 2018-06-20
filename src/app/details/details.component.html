@@ -22,9 +22,9 @@
     </ul>
     <div class='sub-2'>
       <ul *ngIf='userInfo'>
-        <div class="sub-header">
+        <div class="sub-header" fxLayoutGap.lt-md='7px'>
           <h2>{{'MixedComponent.SubHeading1' | translate}}</h2>
-          <a *ngIf='path!=="/profile"' href="edit" mat-raised-button>{{'MixedComponent.Edit' | translate}}</a>
+          <a *ngIf='path!=="/profile"' href="edit" mat-raised-button ngClass.gt-sm='f-right' >{{'MixedComponent.Edit' | translate}}</a>
           <div class="clearfix"></div>
         </div>
         <li>
