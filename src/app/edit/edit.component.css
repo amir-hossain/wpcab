@@ -38,6 +38,15 @@ h1{
     float:left;
 }
 
+.block{
+    display: block !important;
+}
+
+.margin-top{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
 h4{
     display: inline-block;
     padding-bottom: .8em;
@@ -73,6 +82,7 @@ h4{
     display: block;
     margin-top:5px; 
     width: 100%;
+    margin-bottom:10px;
 }
 
 .alter h4{
@@ -80,7 +90,6 @@ h4{
 }
 
 .alter input{
-    width:18em;
     background: wheat;
 }
 
@@ -107,3 +116,5 @@ h4{
     color:red;
 
 }
+
+
