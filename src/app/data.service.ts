@@ -7,7 +7,7 @@ export class DataService {
 
   constructor(private connectiorService: ConnectorService) { }
 
-  public getUserInfo(selectedItemId) {
+  public getUserInfo(selectedItemId?) {
     return new Promise(resolve => {
       this.connectiorService.getUserInfo(selectedItemId)
         .then(res => {
@@ -18,7 +18,7 @@ export class DataService {
 
   }
 
-  public getAddress(selectedItemId) {
+  public getAddress(selectedItemId?) {
     return new Promise(resolve => {
       this.connectiorService.getAddress(selectedItemId)
         .then(res => {
@@ -41,7 +41,7 @@ export class DataService {
 
   }
 
-  public getAuth(selectedItemId) {
+  public getAuth(selectedItemId?) {
     return new Promise(resolve => {
       this.connectiorService.getAuth(selectedItemId)
         .then(res => {
