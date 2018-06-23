@@ -1,11 +1,12 @@
 import { Component, OnInit,Input} from '@angular/core';
-import {AngularFireDatabase} from 'angularfire2/database';
 import {Location} from '@angular/common';
 import {MatDialog} from '@angular/material';
 import {DialogComponent} from './dialog.component';
 import { Router } from '@angular/router';
 import{CommunicationService} from '../communication.service';
 import { TranslateService } from '@ngx-translate/core';
+import {DataService} from '../data.service';
+import { ConnectorService } from '../connector.service';
 
 @Component({
   selector: 'app-details',
@@ -22,7 +23,7 @@ export class DetailsComponent implements OnInit {
   selectedItemId;
   path;
   @Input() profile:boolean;
-  constructor(private db:AngularFireDatabase,private loc:Location,public dialog: MatDialog,private router:Router,private communicationService: CommunicationService,private ts: TranslateService) { 
+  constructor(private loc:Location,public dialog: MatDialog,private router:Router,private communicationService: CommunicationService,private ts: TranslateService,private dataService:DataService,private connectiorService: ConnectorService) { 
     let lan=localStorage.getItem('lan');
     this.ts.use(lan);
   }
@@ -49,23 +50,15 @@ export class DetailsComponent implements OnInit {
     }else{
       this.selectedItemId=localStorage.getItem('key');
     }
-    
-    // console.log(selectedItemId);
-    this.db.database.ref('users/'+this.selectedItemId).once('value',snap=>{
-      // console.log(snap.val().address);
-      this.userInfo=snap.val().userInfo;
-      this.address=snap.val().address;
-    });
-    this.db.database.ref('/total').once('value',snap=>{
-      this.total=snap.val();
-      console.log(this.total)
-    });
 
-    this.db.database.ref('auth/'+this.selectedItemId).once('value',snap=>{
-      // console.log(snap.val());
-      this.auth=snap.val();  
-    });
-    
+    this.dataService.getUserInfo(this.selectedItemId).then(res =>{
+      // console.log(res.val().userInfo);
+      this.userInfo=res;
+    } );
+    this.dataService.getAddress(this.selectedItemId).then(res => this.address=res);
+    this.dataService.getTotal().then(res => this.total=res);
+    this.dataService.getAuth(this.selectedItemId).then(res => this.auth=res);
+
   }
   
   back(){
