@@ -4,6 +4,7 @@ import{Router} from '@angular/router';
 import {PageEvent,MatPaginator} from '@angular/material';
 import{CommunicationService} from '../communication.service';
 import { TranslateService } from '@ngx-translate/core';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-collection',
@@ -25,7 +26,7 @@ export class CollectionComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private db:AngularFireDatabase,private router:Router,private communicationService: CommunicationService,private ts: TranslateService) {
+  constructor(private db:AngularFireDatabase,private router:Router,private communicationService: CommunicationService,private ts: TranslateService, private dataService: DataService) {
     let lan=localStorage.getItem('lan');
     this.ts.use(lan);
     this.notifyRoot();
@@ -38,10 +39,7 @@ export class CollectionComponent implements OnInit {
 
   ngOnInit() {
     this.activeUserRole=localStorage.getItem('activeUserRole');
-      
-    this.db.database.ref('/total').on('value',snap=>
-    this.length=snap.val()
-  )
+    this.dataService.getTotal().then((res:number) => this.length = res);
     this.getData();
   }
 
@@ -50,39 +48,30 @@ export class CollectionComponent implements OnInit {
     this.filteredArry=[];
     this.source=[];
     if(key){
-      this.db.database.ref('short').orderByKey().startAt(key).limitToFirst(this.pageSize).on('value',
-      snap=>{
-        // console.log(snap.val());
-          this.createArray(snap)
-      });
+      this.dataService.getShort(this.pageSize,key).then((res:any[])=>this.createArray(res));
     }else{
-      this.db.database.ref('short').orderByKey().limitToFirst(this.pageSize+1).on('value',
-      snap=>{
-        // console.log(snap.val());
-          this.createArray(snap)
-      });
+      this.dataService.getShort(this.pageSize+1).then((res:any[])=>this.createArray(res));
     }
   }
 
 
-  createArray(snap){
-    let data=snap.val();
-    if(data){
-      Object.keys(data).forEach((key,i)=>{
+  createArray(obj:any[]){
+    if(obj){
+      for(let i=0;i<obj.length;i++){
         // console.log(key);
         if(i===0){
-          this.previousTempKey=key;
+          this.previousTempKey=obj[i].id;
         }
         if(i===this.pageSize){
-          this.nextPageKey=key;
+          this.nextPageKey=obj[i].id;
         }else{
-          this.source.push(data[key]);
+          this.source.push(obj[i]);
   
         }
           // console.log(this.source);
           this.filteredArry=this.source;
           this.updating=false;      
-      });
+      }
     }else{
       this.updating=false; 
     }

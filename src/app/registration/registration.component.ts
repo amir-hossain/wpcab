@@ -174,7 +174,7 @@ export class RegistrationComponent implements OnInit {
     //get auth table
     this.dataService.getAuth().then((res: any[]) => this.autoInfo = res);
 
-    this.dataService.getTotal().then((res: any[]) => this.total = res);
+    this.dataService.getTotal().then(res => this.total = res);
 
     let userInfoGroup = <FormGroup>this.registrationForm.controls.userInfo;
     this.nameAutoSuggestion(userInfoGroup, 'fatherName');

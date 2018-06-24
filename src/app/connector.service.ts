@@ -33,8 +33,17 @@ export class ConnectorService {
     }
   }
 
-  public getShort() {
-    return this.db.database.ref('short').once('value', snap => console.log(snap.val()));
+  public getShort(limit?:number,startKey?:string,) {
+    if(startKey && limit){
+      return this.db.database.ref('short').orderByKey().startAt(startKey).limitToFirst(limit).once('value',
+      snap=>console.log(snap.val()));
+    }else if(limit){
+      return this.db.database.ref('short').orderByKey().limitToFirst(limit).once('value',
+      snap=>console.log(snap.val()));
+    }else{
+      return this.db.database.ref('short').once('value', snap => console.log(snap.val()));
+    }
+    
   }
 
   public setUser(obj) {
