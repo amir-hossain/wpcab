@@ -42,14 +42,72 @@ export class DataService {
   }
 
   public getAuth(selectedItemId?) {
+    if(selectedItemId){
+      return new Promise(resolve => {
+        this.connectiorService.getAuth(selectedItemId)
+          .then(res => {
+            // console.log(res.val().userInfo);
+            resolve(res.val());
+          });
+  
+      });
+    }else{
+      return new Promise(resolve => {
+        let autoInfo=[];
+        this.connectiorService.getAuth()
+          .then(res => {
+            // console.log(res.val());
+            let data=res.val();
+            if(data){
+              Object.keys(data).forEach(key=>{
+                autoInfo.push(data[''+key])
+              });
+            }
+            resolve(autoInfo);
+          });
+  
+      });
+    }
+
+  }
+
+  public getShort(){
     return new Promise(resolve => {
-      this.connectiorService.getAuth(selectedItemId)
+      let names=[];
+      this.connectiorService.getShort()
         .then(res => {
-          // console.log(res.val().userInfo);
-          resolve(res.val());
+          // console.log(res.val());
+          let data=res.val();
+          if(data){
+            
+            Object.keys(data).forEach(key=>names.push(
+              {
+                name:data[key].fullName,
+                zone:data[key].zone,
+                subDistrict:data[key].subDistrict
+              }
+            ));
+          }
+          resolve(names);
         });
 
     });
+  }
+
+  public setUser(obj) {
+    return this.connectiorService.setUser(obj);
+  }
+
+  public setShort(key:string,obj:{}){
+    this.connectiorService.setShort(key,obj);
+  }
+
+  public setAddress(key:string,obj:{}){
+    this.connectiorService.setAddress(key,obj);
+  }
+
+  public setAuth(key:string,obj:{}){
+    this.connectiorService.setAuth(key,obj);
   }
 
 }
