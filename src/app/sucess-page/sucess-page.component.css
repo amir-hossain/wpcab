@@ -3,7 +3,7 @@ mat-card{
     color:rgb(251, 233, 198);
     text-align: center;
     font-size: 30px;
-    padding: 30px 200px;
+    padding: 10% 15%;
     margin-top:10%; 
    
 }
@@ -13,8 +13,7 @@ mat-card{
     margin:auto;
 }
 .home-btn,.registration-btn{
-    margin: 1em 0em;
-    width: 10em;
+    margin: 1.5em 0em;
     padding:.5em 0em;
     font-size: 20px;
 }
@@ -22,26 +21,21 @@ mat-card{
 .ok-btn{
     display: table;
     margin: 1em auto;
-    width: 14em;
     font-size: 20px;
     padding:.5em 0em;
     
 }
-.home-btn{
-    float: left;
+
+
+
+
+.lt-md-img{
+    width: 85%;
+    height: 85%;
 }
 
-.registration-btn{
-    float: right;
-}
-
-/* .action{
-    display: table;
-    margin: auto;
-} */
-
-img{
-    width: 256px;
-    height: 256px;
+.gt-sm-img{
+    width: 45%;
+    height: 45%;
 }
 
