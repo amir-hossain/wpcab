@@ -21,12 +21,7 @@ mat-input-container label {
 }
 
 
-form{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
+
 
 .sub-1{
   float: left;

@@ -1,6 +1,7 @@
 
-       <form [formGroup]="loginForm" (ngSubmit)="login()"> 
-          <mat-card class="card">
+      <div >
+       <form [formGroup]="loginForm" (ngSubmit)="login()" fxLayout='row' fxLayoutAlign="center center" style="height: 100vh;"> 
+          <mat-card class="card" fxFlex.gt-sm='25%' fxFlex.lt-md='80%'>
               <img  class="logo" src="./assets/img/logo.png">
               <div class="controls">
                 <div>
@@ -14,8 +15,8 @@
                 <mat-error *ngIf='unError' class="error">
                   {{'LoginComponent.unError' | translate}}
                   </mat-error>
-                <div>
-                  <mat-form-field>
+                <div >
+                  <mat-form-field >
                     <input matInput type="password" class="inline-center" placeholder="{{'LoginComponent.Password' | translate}}" formControlName="password">
                   </mat-form-field>
                 </div>
@@ -49,6 +50,7 @@
               </div> <!-- controls -->
         </mat-card> 
       </form>
+    </div> 
 
     
    
