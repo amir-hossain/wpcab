@@ -38,6 +38,7 @@ import { CommunicationService } from './communication.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ConnectorService } from './connector.service';
 import {DataService} from './data.service';
+import { LinkService } from './link/link.service';
 
 
 const confiq = {
@@ -95,7 +96,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AngularFireDatabaseModule
   ],
   entryComponents: [DialogComponent],
-  providers: [AngularFireAuth, LoginGuard, AntiUserGuard, AccountantGuard, AdminGuard, AdcountGuard, AntiUtorGuard, CommunicationService, ConnectorService,DataService],
+  providers: [AngularFireAuth, LoginGuard, AntiUserGuard, AccountantGuard, AdminGuard, AdcountGuard, AntiUtorGuard, CommunicationService, ConnectorService,DataService,LinkService],
   bootstrap: [NavComponent]
 })
 export class AppModule { }

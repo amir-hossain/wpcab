@@ -11,6 +11,8 @@ import { DropDownItemsService } from '../drop-down-items.service';
 import { CommunicationService } from '../communication.service';
 import { TranslateService } from '@ngx-translate/core';
 import { DataService } from '../data.service';
+import { LinkService } from '../link/link.service';
+import { User } from '../model/User';
 
 
 @Component({
@@ -105,8 +107,10 @@ export class RegistrationComponent implements OnInit {
   get role() { return this.registrationForm.get('auth').get('role'); }
 
 
-  constructor(private builder: FormBuilder, private db: AngularFireDatabase, private router: Router, private fb: FirebaseApp, private ddis: DropDownItemsService, private communicationService: CommunicationService, private ts: TranslateService, private dataService: DataService) {
-    let lan = localStorage.getItem('lan');
+  constructor(private builder: FormBuilder, private db: AngularFireDatabase, private router: Router, 
+    private fb: FirebaseApp, private ddis: DropDownItemsService, private communicationService: CommunicationService, 
+    private ts: TranslateService, private dataService: DataService,private link:LinkService) {
+    let lan = this.getSelectedLanguage();
     this.ts.use(lan);
     this.notifyRoot();
     this.roles = this.ddis.getRoles();
@@ -115,6 +119,10 @@ export class RegistrationComponent implements OnInit {
     this.zones = this.ddis.getZones();
     this.bloodGroups = this.ddis.getBloodGroups();
     this.months = this.ddis.getMonths();
+  }
+
+  private getSelectedLanguage() {
+    return localStorage.getItem('lan');
   }
 
   notifyRoot() {
@@ -168,6 +176,10 @@ export class RegistrationComponent implements OnInit {
         })
     });
 
+
+
+    this.resetRadioButton();
+
     // get user short list
     this.dataService.getShort().then((res: any[]) => this.names = res);
     ``
@@ -187,6 +199,12 @@ export class RegistrationComponent implements OnInit {
     this.subDistrictAutoSuggestion(addressGroup);
     this.zoneAutoSuggestion(addressGroup);
 
+  }
+
+  private resetRadioButton() {
+    this.gender.setValue(false);
+    this.status.setValue(false);
+    this.occupation.setValue(false);
   }
 
   zoneDoesNotExist(ac: AbstractControl): ValidationErrors | null {
@@ -348,7 +366,7 @@ export class RegistrationComponent implements OnInit {
       otherOccupation.setErrors(null);
     }
 
-    if (status.value === 'Married') {
+    if (status.value === 'Married' || status.value ==='বিবাহিত') {
       this.marriedSelected = true;
       // console.log(spoouseWpcabMember.value);
       if (spoouseWpcabMember.value) {
@@ -449,33 +467,28 @@ export class RegistrationComponent implements OnInit {
 
     this.dataService.setAuth(key,obj);
   }
+
+  
+
+  getDob(){
+    return this.day.value+"/"+this.month.value+"/"+this.year.value;
+  }
+
   signup() {
     if (this.registrationForm.valid) {
+
       this.uploding = true;
-      new Promise(resolve => {
-
-        let key = this.pushUserInfoTable();
-        resolve(key)
+      this.link.insertUser(new User(this.fullName.value,this.fatherName.value,this.motherName.value,this.gender.value,
+        this.getDob(),this.status.value,this.spouseName.value,this.invitedBy.value,this.bloodGroup.value,
+        this.occupation.value,this.permanentAddress.value,this.zone.value,this.subDistrict.value,this.district.value,
+        this.country.value,this.nationality.value,this.nId.value,this.userName.value,this.password.value,this.phone.value,
+        this.email.value,this.role.value))
+      .subscribe(val=>{
+        if(val){
+          this.uploding = false;
+this.router.navigateByUrl('registration-sucessfull');
+        }
       })
-        .then(key => {
-          // console.log(key)
-          this.pushAddressTable(key);
-          this.pushAuthTable(key);
-          this.pushShortTable(key);
-          if (this.photo) {
-            this.uploadPhoto(key)
-          }
-
-          this.db.database.ref('/').update({
-            total: this.total + 1
-          });
-        }).then(() => {
-          if (!this.photo) {
-            this.uploding = false;
-            this.router.navigateByUrl('registration-sucessfull')
-          }
-
-        })
 
     } else {
       Object.keys(this.registrationForm.controls).forEach(groupName => {
