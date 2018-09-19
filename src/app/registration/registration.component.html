@@ -9,17 +9,17 @@
         <img class="pic" [src]="url">
         <a mat-raised-button class='upload-button'>{{'MixedComponent.Upload' | translate}}</a>
       </label>
-      <mat-error *ngIf='picError' class="pic-error">
+      <!-- <mat-error *ngIf='picError' class="pic-error">
         {{'MixedComponent.Error.Pic' | translate}}
-      </mat-error>
+      </mat-error> -->
       <div>
         <mat-form-field fxFlexFill>
           <mat-label>*{{'MixedComponent.Name' | translate}}</mat-label>
           <input matInput type="text" formControlName="fullName">
         </mat-form-field>
-        <mat-error *ngIf="fullName.invalid && fullName.touched">
+        <!-- <mat-error *ngIf="fullName.invalid && fullName.touched">
           {{'MixedComponent.Error.Name' | translate}}
-        </mat-error>
+        </mat-error> -->
       </div>
       <!-- full name -->
       <mat-radio-group formControlName="gender">
@@ -29,21 +29,21 @@
           {{'MixedComponent.Female' | translate}}</mat-radio-button>
       </mat-radio-group>
       <!-- gender -->
-      <mat-error class='custom-error' *ngIf="gender.invalid && gender.touched">
+      <!-- <mat-error class='custom-error' *ngIf="gender.invalid && gender.touched">
         {{'MixedComponent.Error.Gender' | translate}}
-      </mat-error>
+      </mat-error> -->
       <div>
         <div class="label">*{{'MixedComponent.Dob' | translate}}</div>
         <div class="dob" fxLayout="row wrap" fxLayoutGap="3.3%">
           <mat-form-field fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
             <mat-label>{{'MixedComponent.Day' | translate}}</mat-label>
             <input matInput type="text" formControlName='day'>
-            <mat-error *ngIf="day.hasError('required') && day.touched">
+            <!-- <mat-error *ngIf="day.hasError('required') && day.touched">
               {{'MixedComponent.Error.Day' | translate}}
             </mat-error>
             <mat-error *ngIf="day.hasError('pattern')">
               {{'MixedComponent.Error.Number' | translate}}
-            </mat-error>
+            </mat-error> -->
           </mat-form-field>
           <mat-form-field fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
             <mat-label>{{'MixedComponent.Month' | translate}}</mat-label>
@@ -52,19 +52,19 @@
                 {{option | translate}}
               </mat-option>
             </mat-select>
-            <mat-error *ngIf="month.invalid && month.touched">
+            <!-- <mat-error *ngIf="month.invalid && month.touched">
               {{'MixedComponent.Error.Month' | translate}}
-            </mat-error>
+            </mat-error> -->
           </mat-form-field>
           <mat-form-field fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
             <mat-label>{{'MixedComponent.Year' | translate}}</mat-label>
             <input matInput type="text" formControlName='year'>
-            <mat-error *ngIf="year.hasError('required') && year.touched">
+            <!-- <mat-error *ngIf="year.hasError('required') && year.touched">
               {{'MixedComponent.Error.Year' | translate}}
             </mat-error>
             <mat-error *ngIf="year.hasError('pattern')">
               {{'MixedComponent.Error.Number' | translate}}
-            </mat-error>
+            </mat-error> -->
           </mat-form-field>
         </div>
 
@@ -80,8 +80,7 @@
           <mat-label>{{'MixedComponent.FatherName' | translate}}</mat-label>
 
           <input matInput type="text" formControlName="fatherName" [matAutocomplete]='father'>
-
-          <mat-autocomplete #father='matAutocomplete'>
+          <!-- <mat-autocomplete #father='matAutocomplete'>
 
             <mat-option *ngFor='let option of filteredNames' [value]='option.name'>
 
@@ -92,8 +91,7 @@
               <span *ngIf='option.zone==="Other"'>({{option.subDistrict}})</span>
 
             </mat-option>
-
-          </mat-autocomplete>
+          </mat-autocomplete> -->
 
         </mat-form-field>
 
@@ -120,8 +118,7 @@
           <mat-label>{{'MixedComponent.MotherName' | translate}}</mat-label>
 
           <input matInput type="text" formControlName="motherName" [matAutocomplete]='mother'>
-
-          <mat-autocomplete #mother='matAutocomplete'>
+          <!-- <mat-autocomplete #mother='matAutocomplete'>
 
             <mat-option *ngFor='let option of filteredNames' [value]='option.name'>
 
@@ -132,8 +129,7 @@
               <span *ngIf='option.zone==="Other"'>({{option.subDistrict}})</span>
 
             </mat-option>
-
-          </mat-autocomplete>
+          </mat-autocomplete> -->
 
         </mat-form-field>
 
@@ -154,38 +150,38 @@
           <mat-form-field fxFlexFill>
             <mat-label>*{{'MixedComponent.Spouse' | translate}}</mat-label>
             <input matInput type="textarea" formControlName="spouseName" [matAutocomplete]='spa'>
-            <mat-autocomplete #spa='matAutocomplete'>
+            <!-- <mat-autocomplete #spa='matAutocomplete'>
               <mat-option *ngFor='let option of filteredNames' [value]='option.name'>
                 <span>{{option.name}}</span>
                 <span *ngIf='option.zone!=="Other"'>({{option.zone}})</span>
                 <span *ngIf='option.zone==="Other"'>({{option.subDistrict}})</span>
               </mat-option>
-            </mat-autocomplete>
+            </mat-autocomplete> -->
           </mat-form-field>
-          <mat-error *ngIf="spouseName.invalid && spouseName.touched">
+          <!-- <mat-error *ngIf="spouseName.invalid && spouseName.touched">
             {{'MixedComponent.Error.SpouseName' | translate}}
-          </mat-error>
+          </mat-error> -->
         </div>
       </div>
       <!-- spouse checkbox -->
-      <mat-error class='custom-error' *ngIf="maritalStatus.invalid && maritalStatus.touched">
+      <!-- <mat-error class='custom-error' *ngIf="status.invalid && status.touched">
         {{'MixedComponent.Error.Status' | translate}}
-      </mat-error>
+      </mat-error> -->
       <div>
         <mat-form-field class="field-top-margin" fxFlexFill>
           <mat-label>*{{'MixedComponent.InvitedBy' | translate}}</mat-label>
           <input matInput type="textarea" formControlName="inviter" [matAutocomplete]='caller'>
-          <mat-autocomplete #caller='matAutocomplete'>
+          <!-- <mat-autocomplete #caller='matAutocomplete'>
             <mat-option *ngFor='let option of filteredNames' [value]='option.name'>
               <span>{{option.name}}</span>
               <span *ngIf='option.zone!=="Other"'>({{option.zone}})</span>
               <span *ngIf='option.zone==="Other"'>({{option.subDistrict}})</span>
             </mat-option>
-          </mat-autocomplete>
+          </mat-autocomplete> -->
         </mat-form-field>
-        <mat-error *ngIf="inviter.invalid && inviter.touched">
+        <!-- <mat-error *ngIf="invitedBy.invalid && invitedBy.touched">
           {{'MixedComponent.Error.Inviter' | translate}}
-        </mat-error>
+        </mat-error> -->
       </div>
       <!-- invited by -->
       <div>
@@ -207,17 +203,17 @@
         <mat-radio-button type="radio" color='primary' name="occupation" id="others" value="{{'MixedComponent.Other' | translate}}">{{'MixedComponent.Other' | translate}}</mat-radio-button>
       </mat-radio-group>
       <!-- occupation -->
-      <mat-error class='custom-error' *ngIf="occupation.invalid && occupation.touched">
+      <!-- <mat-error class='custom-error' *ngIf="occupation.invalid && occupation.touched">
         {{'MixedComponent.Error.Occupation' | translate}}
-      </mat-error>
+      </mat-error> -->
       <div *ngIf='otherOccupationSelected'>
         <mat-form-field class="field-top-margin" fxFlexFill>
           <mat-label>*{{'MixedComponent.Qus' | translate}}</mat-label>
           <input matInput type="text" formControlName="otherOccupation">
         </mat-form-field>
-        <mat-error *ngIf='otherOccupation.invalid && otherOccupation.touched'>
+        <!-- <mat-error *ngIf='otherOccupation.invalid && otherOccupation.touched'>
           {{'MixedComponent.Error.Occupation' | translate}}
-        </mat-error>
+        </mat-error> -->
       </div>
       <!-- full name -->
     </mat-card>
@@ -449,12 +445,12 @@
                         </mat-option>
                       </mat-autocomplete>
     
-                      <mat-error *ngIf="presentAddressSubDistrict.hasError('required') && presentAddressSubDistrict.touched">
+        <!-- <mat-error *ngIf="subDistrict.hasError('required') && subDistrict.touched">
                           {{'MixedComponent.Error.SubDist' | translate}}
                         </mat-error>
                         <mat-error *ngIf="presentAddressSubDistrict.hasError('subDistrictDoesNotExist') && presentAddressSubDistrict.touched">
                           {{'MixedComponent.Error.NotSubDist' | translate}}
-                        </mat-error>
+        </mat-error> -->
     
                     </mat-form-field>
               
@@ -474,7 +470,7 @@
                           </mat-option>
                         </mat-autocomplete>
     
-                        <mat-error *ngIf="presentAddressDistrict.hasError('required') && presentAddressDistrict.touched">
+        <!-- <mat-error *ngIf="district.hasError('required') && district.touched">
     
                             {{'MixedComponent.Error.Dist' | translate}}
     
@@ -483,7 +479,7 @@
                           <mat-error *ngIf="presentAddressDistrict.hasError('districtDoesNotExist') && presentAddressDistrict.touched">
     
                             {{'MixedComponent.Error.NotDist' | translate}}
-                          </mat-error>
+        </mat-error> -->
     
                       </mat-form-field>
                       
@@ -554,9 +550,9 @@
         <mat-form-field fxFlexFill>
           <input matInput type="text" placeholder="{{'MixedComponent.UN' | translate}}" formControlName="userName">
         </mat-form-field>
-        <mat-error *ngIf="userName.hasError('exist')">
+        <!-- <mat-error *ngIf="userName.hasError('exist')">
           {{'MixedComponent.Error.UN' | translate}}
-        </mat-error>
+        </mat-error> -->
       </div>
       <!-- user name -->
       <div>
@@ -564,9 +560,9 @@
           <mat-label>*{{'MixedComponent.Password' | translate}} </mat-label>
           <input matInput type="password" formControlName="password">
         </mat-form-field>
-        <mat-error *ngIf="password.invalid && password.touched">
+        <!-- <mat-error *ngIf="password.invalid && password.touched">
           {{'MixedComponent.Error.Password' | translate}}
-        </mat-error>
+        </mat-error> -->
       </div>
       <!-- password -->
       <div>
@@ -574,12 +570,12 @@
           <mat-label>*{{'MixedComponent.ConPass' | translate}} </mat-label>
           <input matInput type="password" formControlName="conPassword">
         </mat-form-field>
-        <mat-error *ngIf="conPassword.hasError('required') && conPassword.touched">
+        <!-- <mat-error *ngIf="conPassword.hasError('required') && conPassword.touched">
           {{'MixedComponent.Error.ConPass' | translate}}
         </mat-error>
         <mat-error *ngIf="conPassword.hasError('missMatchPassword') && conPassword.touched">
           {{'MixedComponent.Error.Match' | translate}}
-        </mat-error>
+        </mat-error> -->
       </div>
       <!--conform password -->
       <div>
@@ -587,27 +583,41 @@
           <mat-label>*{{'MixedComponent.Phone' | translate}} </mat-label>
           <input matInput type="text" formControlName="phone">
         </mat-form-field>
-        <mat-error *ngIf="phone.hasError('required') && phone.touched">
+
+
+        <!-- <mat-error *ngIf="phone.hasError('required') && phone.touched">
           {{'MixedComponent.Error.Phone' | translate}}
         </mat-error>
+
+
         <mat-error *ngIf="phone.hasError('exist')">
           {{'MixedComponent.Error.PhomeExist' | translate}}
         </mat-error>
+
+
         <mat-error *ngIf="phone.hasError('pattern')">
           {{'MixedComponent.Error.Number' | translate}}
-        </mat-error>
+        </mat-error> -->
+
+
       </div>
       <!-- phone -->
       <div>
         <mat-form-field fxFlexFill>
           <input matInput type="email" placeholder="{{'MixedComponent.Email' | translate}}" formControlName="email">
         </mat-form-field>
-        <mat-error *ngIf="email.value !='' && email.hasError('email')">
+
+
+        <!-- <mat-error *ngIf="email.value !='' && email.hasError('email')">
           {{'MixedComponent.Error.Email' | translate}}
-        </mat-error>
-        <mat-error *ngIf="email.hasError('exist')">
+        </mat-error> -->
+
+
+        <!-- <mat-error *ngIf="email.hasError('exist')">
           {{'MixedComponent.Error.EmailExist' | translate}}
-        </mat-error>
+        </mat-error> -->
+
+
       </div>
       <!-- email -->
       <mat-form-field fxFlexFill>
@@ -621,9 +631,13 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-error *ngIf="role.invalid && role.touched">
+
+
+      <!-- <mat-error *ngIf="role.invalid && role.touched">
         {{'MixedComponent.Error.Role' | translate}}
-      </mat-error>
+      </mat-error> -->
+
+
     </mat-card>
     <div class='field-top-margin' fxLayout='column' fxLayoutAlign.gt-sm =" end" >
 

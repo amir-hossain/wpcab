@@ -80,15 +80,8 @@
           <mat-label>{{'MixedComponent.FatherName' | translate}}</mat-label>
 
           <input matInput type="text" formControlName="fatherName" [matAutocomplete]='father'>
-<<<<<<< HEAD
-
-          <mat-autocomplete #father='matAutocomplete'>
-
-||||||| merged common ancestors
-          <mat-autocomplete #father='matAutocomplete'>
-=======
           <!-- <mat-autocomplete #father='matAutocomplete'>
->>>>>>> demo for input done
+
             <mat-option *ngFor='let option of filteredNames' [value]='option.name'>
 
               <span>{{option.name}}</span>
@@ -98,27 +91,10 @@
               <span *ngIf='option.zone==="Other"'>({{option.subDistrict}})</span>
 
             </mat-option>
-<<<<<<< HEAD
-
-          </mat-autocomplete>
-
-||||||| merged common ancestors
-          </mat-autocomplete>
-=======
           </mat-autocomplete> -->
->>>>>>> demo for input done
-        </mat-form-field>
-<<<<<<< HEAD
 
-||||||| merged common ancestors
-        <mat-error *ngIf="fatherName.invalid && fatherName.touched">
-          {{'MixedComponent.Error.FatherName' | translate}}
-        </mat-error>
-=======
-        <!-- <mat-error *ngIf="fatherName.invalid && fatherName.touched">
-          {{'MixedComponent.Error.FatherName' | translate}}
-        </mat-error> -->
->>>>>>> demo for input done
+        </mat-form-field>
+
       </div>
       <!-- father name -->
 
@@ -142,15 +118,8 @@
           <mat-label>{{'MixedComponent.MotherName' | translate}}</mat-label>
 
           <input matInput type="text" formControlName="motherName" [matAutocomplete]='mother'>
-<<<<<<< HEAD
-
-          <mat-autocomplete #mother='matAutocomplete'>
-
-||||||| merged common ancestors
-          <mat-autocomplete #mother='matAutocomplete'>
-=======
           <!-- <mat-autocomplete #mother='matAutocomplete'>
->>>>>>> demo for input done
+
             <mat-option *ngFor='let option of filteredNames' [value]='option.name'>
 
               <span>{{option.name}}</span>
@@ -160,27 +129,10 @@
               <span *ngIf='option.zone==="Other"'>({{option.subDistrict}})</span>
 
             </mat-option>
-<<<<<<< HEAD
-
-          </mat-autocomplete>
-
-||||||| merged common ancestors
-          </mat-autocomplete>
-=======
           </mat-autocomplete> -->
->>>>>>> demo for input done
-        </mat-form-field>
-<<<<<<< HEAD
 
-||||||| merged common ancestors
-        <mat-error *ngIf="motherName.invalid && motherName.touched">
-          {{'MixedComponent.Error.MotherName' | translate}}
-        </mat-error>
-=======
-        <!-- <mat-error *ngIf="motherName.invalid && motherName.touched">
-          {{'MixedComponent.Error.MotherName' | translate}}
-        </mat-error> -->
->>>>>>> demo for input done
+        </mat-form-field>
+
       </div>
       <!-- mother name -->
       <mat-radio-group formControlName="status">
@@ -212,14 +164,28 @@
         </div>
       </div>
       <!-- spouse checkbox -->
+<<<<<<< HEAD
+      <mat-error class='custom-error' *ngIf="maritalStatus.invalid && maritalStatus.touched">
+||||||| merged common ancestors
+      <mat-error class='custom-error' *ngIf="status.invalid && status.touched">
+=======
       <!-- <mat-error class='custom-error' *ngIf="status.invalid && status.touched">
+>>>>>>> demo for input done
         {{'MixedComponent.Error.Status' | translate}}
       </mat-error> -->
       <div>
         <mat-form-field class="field-top-margin" fxFlexFill>
           <mat-label>*{{'MixedComponent.InvitedBy' | translate}}</mat-label>
+<<<<<<< HEAD
+          <input matInput type="textarea" formControlName="inviter" [matAutocomplete]='caller'>
+          <mat-autocomplete #caller='matAutocomplete'>
+||||||| merged common ancestors
+          <input matInput type="textarea" formControlName="invitedBy" [matAutocomplete]='caller'>
+          <mat-autocomplete #caller='matAutocomplete'>
+=======
           <input matInput type="textarea" formControlName="invitedBy" [matAutocomplete]='caller'>
           <!-- <mat-autocomplete #caller='matAutocomplete'>
+>>>>>>> demo for input done
             <mat-option *ngFor='let option of filteredNames' [value]='option.name'>
               <span>{{option.name}}</span>
               <span *ngIf='option.zone!=="Other"'>({{option.zone}})</span>
@@ -227,7 +193,13 @@
             </mat-option>
           </mat-autocomplete> -->
         </mat-form-field>
+<<<<<<< HEAD
+        <mat-error *ngIf="inviter.invalid && inviter.touched">
+||||||| merged common ancestors
+        <mat-error *ngIf="invitedBy.invalid && invitedBy.touched">
+=======
         <!-- <mat-error *ngIf="invitedBy.invalid && invitedBy.touched">
+>>>>>>> demo for input done
           {{'MixedComponent.Error.Inviter' | translate}}
         </mat-error> -->
       </div>
@@ -266,9 +238,42 @@
       <!-- full name -->
     </mat-card>
   </div>
+
   <!-- user info -->
   <div ngClass.gt-sm="container">
+
     <h3>{{'MixedComponent.SubHeading2' | translate}}</h3>
+<<<<<<< HEAD
+    
+    <mat-card class="card" >
+||||||| merged common ancestors
+    <mat-card class="card" formGroupName='address'>
+      <div>
+        <mat-form-field fxFlexFill>
+          <mat-label>*{{'MixedComponent.PA' | translate}}</mat-label>
+          <textarea matInput type="textarea" formControlName="permanentAddress" rows="3"></textarea>
+        </mat-form-field>
+        <mat-error *ngIf="permanentAddress.invalid && permanentAddress.touched">
+          {{'MixedComponent.Error.PA' | translate}}
+        </mat-error>
+      </div>
+      <!-- permanent address -->
+      <mat-form-field fxFlexFill>
+        <mat-label>*{{'MixedComponent.Zone' | translate}}</mat-label>
+        <input matInput type="text" formControlName="zone" [matAutocomplete]='z'>
+        <mat-autocomplete #z='matAutocomplete'>
+          <mat-option *ngFor='let option of filteredZone' [value]='option'>
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-error *ngIf="zone.hasError('required') && zone.touched">
+        {{'MixedComponent.Error.Zone' | translate}}
+      </mat-error>
+      <mat-error *ngIf="zone.hasError('zoneDoesNotExist') && zone.touched">
+        {{'MixedComponent.Error.NotZone' | translate}}
+      </mat-error>
+=======
     <mat-card class="card" formGroupName='address'>
       <div>
         <mat-form-field fxFlexFill>
@@ -295,7 +300,214 @@
       <mat-error *ngIf="zone.hasError('zoneDoesNotExist') && zone.touched">
         {{'MixedComponent.Error.NotZone' | translate}}
       </mat-error> -->
+>>>>>>> demo for input done
 
+<<<<<<< HEAD
+      <!-- PermanentAddress -->
+
+        <h3 class="address-heading">{{'MixedComponent.PermanentAddress' | translate}}</h3>
+
+      <div formGroupName='permanentAddress'>
+          
+
+          <div fxLayout="row wrap" fxLayoutGap="3.3%">
+    
+              <mat-form-field fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
+    
+                <mat-label>{{'MixedComponent.Village' | translate}}</mat-label>
+    
+                <input matInput type="text" formControlName='village'>
+              
+              </mat-form-field>
+    
+              <mat-form-field fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
+    
+                <mat-label>{{'MixedComponent.House' | translate}}</mat-label>
+    
+                <input matInput type="text" formControlName='house'>
+                
+              </mat-form-field>
+    
+              <mat-form-field fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
+    
+                <mat-label>{{'MixedComponent.Road' | translate}}</mat-label>
+    
+                <input matInput type="text" formControlName='road'>
+    
+              </mat-form-field>
+    
+            </div>
+    
+            <div fxLayout="row wrap" fxLayoutGap="3.3%">
+    
+                <mat-form-field fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
+      
+                  <mat-label>{{'MixedComponent.Block' | translate}}</mat-label>
+      
+                  <input matInput type="text" formControlName='block'>
+                
+                </mat-form-field>
+      
+                <mat-form-field fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
+      
+                  <mat-label>{{'MixedComponent.Sector' | translate}}</mat-label>
+      
+                  <input matInput type="text" formControlName='sector'>
+                  
+                </mat-form-field>
+    
+              
+                    <mat-form-field fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
+                      <mat-label>*{{'MixedComponent.SubDis' | translate}}</mat-label>
+                      <input matInput type="text" formControlName="subDistrict" [matAutocomplete]='subDist'>
+                      <mat-autocomplete #subDist='matAutocomplete'>
+                        <mat-option *ngFor='let option of filteredSubDistricts' [value]='option'>
+                          {{option}}
+                        </mat-option>
+                      </mat-autocomplete>
+    
+                      <mat-error *ngIf="permanentAddressSubDistrict.hasError('required') && permanentAddressSubDistrict.touched">
+                          {{'MixedComponent.Error.SubDist' | translate}}
+                        </mat-error>
+                        <mat-error *ngIf="permanentAddressSubDistrict.hasError('subDistrictDoesNotExist') && permanentAddressSubDistrict.touched">
+                          {{'MixedComponent.Error.NotSubDist' | translate}}
+                        </mat-error>
+    
+                    </mat-form-field>
+              
+                  
+      
+              </div>
+    
+    
+              <div fxLayout="row wrap" fxLayoutGap="3.3%">
+    
+                      <mat-form-field fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
+                        <mat-label>*{{'MixedComponent.Dist' | translate}}</mat-label>
+                        <input matInput type="text" formControlName="district" [matAutocomplete]='dist'>
+                        <mat-autocomplete #dist='matAutocomplete'>
+                          <mat-option *ngFor='let option of  filteredDistricts' [value]='option'>
+                            {{option}}
+                          </mat-option>
+                        </mat-autocomplete>
+    
+                        <mat-error *ngIf="permanentAddressDistrict.hasError('required') && permanentAddressDistrict.touched">
+    
+                            {{'MixedComponent.Error.Dist' | translate}}
+    
+                          </mat-error>
+    
+                          <mat-error *ngIf="permanentAddressDistrict.hasError('districtDoesNotExist') && permanentAddressDistrict.touched">
+    
+                            {{'MixedComponent.Error.NotDist' | translate}}
+                          </mat-error>
+    
+                      </mat-form-field>
+                      
+                   
+        
+                  <mat-form-field fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
+        
+                    <mat-label>{{'MixedComponent.PostOffice' | translate}}</mat-label>
+        
+                    <input matInput type="text" formControlName='postOffice'>
+                    
+                  </mat-form-field>
+        
+                  <mat-form-field fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
+        
+                    <mat-label>{{'MixedComponent.PostalCode' | translate}}</mat-label>
+        
+                    <input matInput type="text" formControlName='postalCode'>
+        
+                  </mat-form-field>
+        
+                </div>
+    
+                <div fxLayout="row wrap" fxLayoutGap="3.3%">
+    
+                    <mat-form-field fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
+          
+                      <mat-label>{{'MixedComponent.Country' | translate}}</mat-label>
+          
+                      <input matInput type="text" formControlName='country'>
+                    
+                    </mat-form-field>
+          
+                    <mat-form-field fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
+          
+                      <mat-label>{{'MixedComponent.Nationality' | translate}}</mat-label>
+          
+                      <input matInput type="text" formControlName='nationality'>
+                      
+                    </mat-form-field>
+       
+                        <mat-form-field fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
+    
+                            <mat-label>{{'MixedComponent.NID' | translate}}
+    
+                            </mat-label>
+    
+                          <input matInput type="text"formControlName="nId">
+    
+                          <mat-error *ngIf="permanentAddressnId.hasError('pattern')">
+    
+                              {{'MixedComponent.Error.Number' | translate}}
+    
+                            </mat-error>
+    
+                        </mat-form-field>
+          
+                  </div>
+||||||| merged common ancestors
+      <!-- zone -->
+      <div>
+        <mat-form-field fxFlexFill>
+          <mat-label>*{{'MixedComponent.SubDis' | translate}}</mat-label>
+          <input matInput type="text" formControlName="subDistrict" [matAutocomplete]='subDist'>
+          <mat-autocomplete #subDist='matAutocomplete'>
+            <mat-option *ngFor='let option of filteredSubDistricts' [value]='option'>
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-error *ngIf="subDistrict.hasError('required') && subDistrict.touched">
+          {{'MixedComponent.Error.SubDist' | translate}}
+        </mat-error>
+        <mat-error *ngIf="subDistrict.hasError('subDistrictDoesNotExist') && subDistrict.touched">
+          {{'MixedComponent.Error.NotSubDist' | translate}}
+        </mat-error>
+      </div>
+      <!-- subDistrict -->
+      <div>
+        <mat-form-field fxFlexFill>
+          <mat-label>*{{'MixedComponent.Dist' | translate}}</mat-label>
+          <input matInput type="text" formControlName="district" [matAutocomplete]='dist'>
+          <mat-autocomplete #dist='matAutocomplete'>
+            <mat-option *ngFor='let option of  filteredDistricts' [value]='option'>
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-error *ngIf="district.hasError('required') && district.touched">
+          {{'MixedComponent.Error.Dist' | translate}}
+        </mat-error>
+        <mat-error *ngIf="district.hasError('districtDoesNotExist') && district.touched">
+          {{'MixedComponent.Error.NotDist' | translate}}
+        </mat-error>
+      </div>
+      <!-- district -->
+      <div>
+        <mat-form-field fxFlexFill>
+          <input matInput type="text" placeholder="{{'MixedComponent.Country' | translate}}" formControlName="country">
+        </mat-form-field>
+      </div>
+      <!-- country -->
+      <div>
+        <mat-form-field fxFlexFill>
+          <input matInput type="text" placeholder="{{'MixedComponent.Nationality' | translate}}" formControlName="nationality">
+        </mat-form-field>
+=======
       <!-- zone -->
       <div>
         <mat-form-field fxFlexFill>
@@ -343,7 +555,173 @@
         <mat-form-field fxFlexFill>
           <input matInput type="text" placeholder="{{'MixedComponent.Nationality' | translate}}" formControlName="nationality">
         </mat-form-field>
+>>>>>>> demo for input done
       </div>
+<<<<<<< HEAD
+
+      <h3 class="address-heading">{{'MixedComponent.PresentAddress' | translate}}</h3>
+        
+      <div formGroupName='presentAddress'>
+          
+
+          <div fxLayout="row wrap" fxLayoutGap="3.3%">
+    
+              <mat-form-field fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
+    
+                <mat-label>{{'MixedComponent.Village' | translate}}</mat-label>
+    
+                <input matInput type="text" formControlName='village'>
+              
+              </mat-form-field>
+    
+              <mat-form-field fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
+    
+                <mat-label>{{'MixedComponent.House' | translate}}</mat-label>
+    
+                <input matInput type="text" formControlName='house'>
+                
+              </mat-form-field>
+    
+              <mat-form-field fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
+    
+                <mat-label>{{'MixedComponent.Road' | translate}}</mat-label>
+    
+                <input matInput type="text" formControlName='road'>
+    
+              </mat-form-field>
+    
+            </div>
+    
+            <div fxLayout="row wrap" fxLayoutGap="3.3%">
+    
+                <mat-form-field fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
+      
+                  <mat-label>{{'MixedComponent.Block' | translate}}</mat-label>
+      
+                  <input matInput type="text" formControlName='block'>
+                
+                </mat-form-field>
+      
+                <mat-form-field fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
+      
+                  <mat-label>{{'MixedComponent.Sector' | translate}}</mat-label>
+      
+                  <input matInput type="text" formControlName='sector'>
+                  
+                </mat-form-field>
+    
+              
+                    <mat-form-field fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
+                      <mat-label>*{{'MixedComponent.SubDis' | translate}}</mat-label>
+                      <input matInput type="text" formControlName="subDistrict" [matAutocomplete]='subDist'>
+                      <mat-autocomplete #subDist='matAutocomplete'>
+                        <mat-option *ngFor='let option of filteredSubDistricts' [value]='option'>
+                          {{option}}
+                        </mat-option>
+                      </mat-autocomplete>
+    
+                      <mat-error *ngIf="presentAddressSubDistrict.hasError('required') && presentAddressSubDistrict.touched">
+                          {{'MixedComponent.Error.SubDist' | translate}}
+                        </mat-error>
+                        <mat-error *ngIf="presentAddressSubDistrict.hasError('subDistrictDoesNotExist') && presentAddressSubDistrict.touched">
+                          {{'MixedComponent.Error.NotSubDist' | translate}}
+                        </mat-error>
+    
+                    </mat-form-field>
+              
+                  
+      
+              </div>
+    
+    
+              <div fxLayout="row wrap" fxLayoutGap="3.3%">
+    
+                      <mat-form-field fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
+                        <mat-label>*{{'MixedComponent.Dist' | translate}}</mat-label>
+                        <input matInput type="text" formControlName="district" [matAutocomplete]='dist'>
+                        <mat-autocomplete #dist='matAutocomplete'>
+                          <mat-option *ngFor='let option of  filteredDistricts' [value]='option'>
+                            {{option}}
+                          </mat-option>
+                        </mat-autocomplete>
+    
+                        <mat-error *ngIf="presentAddressDistrict.hasError('required') && presentAddressDistrict.touched">
+    
+                            {{'MixedComponent.Error.Dist' | translate}}
+    
+                          </mat-error>
+    
+                          <mat-error *ngIf="presentAddressDistrict.hasError('districtDoesNotExist') && presentAddressDistrict.touched">
+    
+                            {{'MixedComponent.Error.NotDist' | translate}}
+                          </mat-error>
+    
+                      </mat-form-field>
+                      
+                   
+        
+                  <mat-form-field fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
+        
+                    <mat-label>{{'MixedComponent.PostOffice' | translate}}</mat-label>
+        
+                    <input matInput type="text" formControlName='postOffice'>
+                    
+                  </mat-form-field>
+        
+                  <mat-form-field fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
+        
+                    <mat-label>{{'MixedComponent.PostalCode' | translate}}</mat-label>
+        
+                    <input matInput type="text" formControlName='postalCode'>
+        
+                  </mat-form-field>
+        
+                </div>
+    
+                <div fxLayout="row wrap" fxLayoutGap="3.3%">
+    
+                    <mat-form-field fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
+          
+                      <mat-label>{{'MixedComponent.Country' | translate}}</mat-label>
+          
+                      <input matInput type="text" formControlName='country'>
+                    
+                    </mat-form-field>
+          
+              
+       
+                    <mat-form-field  fxFlex.lt-md="100%" fxFlex.gt-sm="30%">
+                        <mat-label>*{{'MixedComponent.Zone' | translate}}</mat-label>
+                        <input matInput type="text" formControlName="zone" [matAutocomplete]='z'>
+                        <mat-autocomplete #z='matAutocomplete'>
+                          <mat-option *ngFor='let option of filteredZone' [value]='option'>
+                            {{option}}
+                          </mat-option>
+                        </mat-autocomplete>
+
+                        <mat-error *ngIf="presentAddressZone.hasError('required') && presentAddressZone.touched">
+                            {{'MixedComponent.Error.Zone' | translate}}
+                          </mat-error>
+                          <mat-error *ngIf="presentAddressZone.hasError('zoneDoesNotExist') && presentAddressZone.touched">
+                            {{'MixedComponent.Error.NotZone' | translate}}
+                          </mat-error>
+                      </mat-form-field>
+                    
+                
+                      <!-- zone -->
+                    
+          
+                  </div>
+||||||| merged common ancestors
+      <!-- nationality -->
+      <div>
+        <mat-form-field fxFlexFill>
+          <input matInput type="text" placeholder="{{'MixedComponent.NID' | translate}}" formControlName="nId">
+        </mat-form-field>
+        <mat-error *ngIf="nId.hasError('pattern')">
+          {{'MixedComponent.Error.Number' | translate}}
+        </mat-error>
+=======
       <!-- nationality -->
       <div>
         <mat-form-field fxFlexFill>
@@ -352,8 +730,10 @@
         <!-- <mat-error *ngIf="nId.hasError('pattern')">
           {{'MixedComponent.Error.Number' | translate}}
         </mat-error> -->
+>>>>>>> demo for input done
       </div>
-      <!-- nid -->
+      
+      <!-- Present address -->
     </mat-card>
   </div>
   <!-- address -->

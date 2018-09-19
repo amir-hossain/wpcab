@@ -58,24 +58,33 @@ export class LoginComponent implements OnInit {
   }
 
   auth(userInfo,password){
-    this.db.database.ref('auth').once('value')
-    .then(snap=>{
-      // console.log(snap.val());
-      let data=snap.val();
-      if(data){
-        let objArry=[];
-        let temp;
-      Object.keys(data).forEach((key)=>{
-        temp=data[key];
-        temp.id=key;
-        objArry.push(temp);
-      });
-      this.check(userInfo,password,objArry);
-      }else{
-        this.serverError=true;
-      }
+    // this.db.database.ref('auth').once('value')
+    // .then(snap=>{
+    //   // console.log(snap.val());
+    //   let data=snap.val();
+    //   if(data){
+    //     let objArry=[];
+    //     let temp;
+    //   Object.keys(data).forEach((key)=>{
+    //     temp=data[key];
+    //     temp.id=key;
+    //     objArry.push(temp);
+    //   });
+    //   this.check(userInfo,password,objArry);
+    //   }else{
+    //     this.serverError=true;
+    //   }
       
-    });
+    // });
+
+    if(userInfo==="admin" && password==="admin"){
+
+      localStorage.setItem('activeUserRole',"Admin");
+      localStorage.setItem('activeUserId',"4");
+
+      this.router.navigateByUrl('home');
+
+    }
 
   }
 
