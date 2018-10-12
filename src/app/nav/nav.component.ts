@@ -19,10 +19,11 @@ export class NavComponent implements OnInit {
   lanBD=true;
   photoUrl;
   userRole;
+  
   constructor(private router:Router,private db:AngularFireDatabase,private nls:NavLinksService,private ts: TranslateService,private dds:DropDownItemsService,private communicationService: CommunicationService,private changeDetector: ChangeDetectorRef) { 
+    
     let userId=localStorage.getItem('activeUserId');
-    this.db.database.ref('users/'+userId+'/userInfo/').once('value',snap=>this.photoUrl=snap.val().photo
-  );
+    // this.db.database.ref('users/'+userId+'/userInfo/').once('value',snap=>this.photoUrl=snap.val().photo);
 
   communicationService.changeEmitted$.subscribe(data => {
     // console.log(data);

@@ -13,7 +13,11 @@ export class HomeComponent implements OnInit {
   constructor(private builder:FormBuilder,private communicationService: CommunicationService,private ts: TranslateService) { 
     this.notifyRoot();
     let lan=localStorage.getItem('lan');
-    this.ts.use(lan);
+
+    if(lan){
+      this.ts.use(lan);
+    }
+    
   }
 
   ngOnInit() {

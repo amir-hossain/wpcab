@@ -141,7 +141,11 @@ export class RegistrationComponent implements OnInit {
     private fb: FirebaseApp, private ddis: DropDownItemsService, private communicationService: CommunicationService,
     private ts: TranslateService, private link: LinkService) {
     let lan = this.getSelectedLanguage();
-    this.ts.use(lan);
+
+    if(lan){
+      this.ts.use(lan);
+    }
+  
     this.notifyRoot();
     this.roles = this.ddis.getRoles();
     this.districts = this.ddis.getDistricts();

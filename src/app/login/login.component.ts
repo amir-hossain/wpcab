@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   
   constructor(private builder:FormBuilder,private router:Router,private db:AngularFireDatabase,private ts: TranslateService,private dds:DropDownItemsService) { 
     ts.setDefaultLang('bn');
+    localStorage.setItem('lan','bn');
   }
 
   ngOnInit() {
