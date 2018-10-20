@@ -3,7 +3,7 @@ import { User } from "../model/User";
 import { Subscribable } from "rxjs/Observable";
 
 
-
+const endPoing='http://localhost:9000/api/'
 export class Data{
 
  
@@ -17,9 +17,17 @@ export class Data{
 
     insertUser(user:User):Subscribable<boolean>{
 
-        let url="http://192.168.0.100:900/api/InsertUser";
+        let url=endPoing+"insertUser";
 
        return this.http.post(url,user,this.httpOptions)
+       
+    }
+
+    getUser(pageNumber):Subscribable<any>{
+
+        let url=endPoing+"getUser/"+pageNumber;
+
+       return this.http.get(url,this.httpOptions)
        
     }
 }

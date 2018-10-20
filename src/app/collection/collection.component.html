@@ -23,7 +23,7 @@
     </th>
   </div>
   <div>
-      <mat-card *ngFor='let obj of filteredArry;' (click)='itemClick(obj)' igxRipple="black" fxLayout.lt-md='column' fxLayout.gt-sm='row' fxLayoutGap.gt-sm="3.3%">
+      <mat-card *ngFor='let obj of filteredArry' (click)='itemClick(obj)' igxRipple="black" fxLayout.lt-md='column' fxLayout.gt-sm='row' fxLayoutGap.gt-sm="3.3%">
           <td *ngIf='obj' fxFlex.gt-sm='30%'>{{obj.fullName}}</td>
           <td *ngIf='obj' fxFlex.gt-sm='30%'>{{obj.zone}}</td>
           <td *ngIf='obj' fxFlex.gt-sm='30%'>{{obj.subDistrict}}</td>
@@ -34,8 +34,8 @@
       <mat-spinner *ngIf='updating' [diameter]='200'></mat-spinner>
   </div>
   <mat-card>
-  <mat-paginator [length]="length"
-              [pageSize]="pageSize"
+  <mat-paginator [length]="total"
+              [pageSize]="itemPerPage"
               (page)="pageUpdate()">
 </mat-paginator>
 </mat-card>

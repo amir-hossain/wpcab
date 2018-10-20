@@ -1,10 +1,10 @@
 import { Component, OnInit,ViewChild} from '@angular/core';
-import {AngularFireDatabase} from 'angularfire2/database';
 import{Router} from '@angular/router';
-import {PageEvent,MatPaginator} from '@angular/material';
+import {MatPaginator} from '@angular/material';
 import{CommunicationService} from '../communication.service';
 import { TranslateService } from '@ngx-translate/core';
-import { DataService } from '../data.service';
+import { LinkService } from '../link/link.service';
+
 
 @Component({
   selector: 'app-collection',
@@ -13,20 +13,20 @@ import { DataService } from '../data.service';
 })
 export class CollectionComponent implements OnInit {
   activeUserRole;
-  length=0;
-  pageIndex=0;
-  pageSize=10;
-  // pageSizeOptions = [2, 3,6];  
+  total=0;
+  nextId=null;
+  itemPerPage=10;
   updating=false;
   source=[];
   filteredArry=[];
-  previousPageKey;
-  nextPageKey;
   previousTempKey;
+  currentPage=1;
+
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private db:AngularFireDatabase,private router:Router,private communicationService: CommunicationService,private ts: TranslateService, private dataService: DataService) {
+  constructor(private router:Router,private communicationService: CommunicationService,
+    private ts: TranslateService,private linkService:LinkService) {
     let lan=localStorage.getItem('lan');
     this.ts.use(lan);
     this.notifyRoot();
@@ -39,43 +39,42 @@ export class CollectionComponent implements OnInit {
 
   ngOnInit() {
     this.activeUserRole=localStorage.getItem('activeUserRole');
-    this.dataService.getTotal().then((res:number) => this.length = res);
-    this.getData();
-  }
+    
+    this.getUser();
 
-  getData(key?:string):void{
-    this.updating=true;
-    this.filteredArry=[];
-    this.source=[];
-    if(key){
-      this.dataService.getShort(this.pageSize,key).then((res:any[])=>this.createArray(res));
-    }else{
-      this.dataService.getShort(this.pageSize+1).then((res:any[])=>this.createArray(res));
-    }
+    
   }
 
 
-  createArray(obj:any[]){
+
+  private getUser() {
+
+    this.showLogingCircle(); 
+
+    this.linkService.getUsers(this.currentPage)
+      .subscribe(res => {
+        this.createArray(res);
+      });
+  }
+
+  private showLogingCircle() {
+    this.updating = true;
+  }
+
+  createArray(obj){
     if(obj){
-      for(let i=0;i<obj.length;i++){
-        // console.log(key);
-        if(i===0){
-          this.previousTempKey=obj[i].id;
-        }
-        if(i===this.pageSize){
-          this.nextPageKey=obj[i].id;
-        }else{
-          this.source.push(obj[i]);
-  
-        }
-          // console.log(this.source);
-          this.filteredArry=this.source;
-          this.updating=false;      
-      }
+      this.source=obj.users;
+      this.filteredArry=this.source;
+      this.total=obj.total;
+      this.updating=false;
     }else{
-      this.updating=false; 
+      this.hideLodingCircle(); 
     }
   }
+  private hideLodingCircle() {
+    this.updating = false;
+  }
+
   nameFilter(name:string){
     // console.log(name);
     if(!this.updating){
@@ -108,27 +107,30 @@ export class CollectionComponent implements OnInit {
 
 
   pageUpdate(){
-    this.updating=true;
-    let i=this.paginator.pageIndex;
-    let size=this.paginator.pageSize;
-    if( i>this.pageIndex){
-      // console.log('next page');
-      this.previousPageKey=this.previousTempKey;
-      this.getData(this.nextPageKey)
-    }else if( i<this.pageIndex){
-      // console.log('previous page');
-      
-      this.getData(this.previousPageKey)
-    }else{
-      // console.log('size changed');
-      this.pageSize=this.paginator.pageSize;
-      this.getData();
+    this.showLogingCircle();
+    if(this.next()){
+      this.currentPage++;
+      this.getUser();
+    }else  if(this.previous()){
+      this.currentPage--;
+      this.getUser();
     }
-    this.pageIndex=i;
+
+
+    
     
   }
 
   
+
+  private next() {
+    return this.currentPage < this.paginator.pageIndex+1;
+  }
+
+  private previous() {
+    return this.currentPage > this.paginator.pageIndex+1;
+  }
+
 }
 
 

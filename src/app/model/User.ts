@@ -1,4 +1,6 @@
 export class User {
+    // id will be auto generated so no need to set by constracture
+    id;
 
     fullName;
 
