@@ -10,7 +10,6 @@ import { FirebaseApp } from 'angularfire2';
 import { DropDownItemsService } from '../drop-down-items.service';
 import { CommunicationService } from '../communication.service';
 import { TranslateService } from '@ngx-translate/core';
-import { DataService } from '../data.service';
 import { LinkService } from '../link/link.service';
 import { User } from '../model/User';
 
@@ -109,7 +108,7 @@ export class RegistrationComponent implements OnInit {
 
   constructor(private builder: FormBuilder, private db: AngularFireDatabase, private router: Router, 
     private fb: FirebaseApp, private ddis: DropDownItemsService, private communicationService: CommunicationService, 
-    private ts: TranslateService, private dataService: DataService,private link:LinkService) {
+    private ts: TranslateService,private link:LinkService) {
     let lan = this.getSelectedLanguage();
     this.ts.use(lan);
     this.notifyRoot();
@@ -180,13 +179,7 @@ export class RegistrationComponent implements OnInit {
 
     this.resetRadioButton();
 
-    // get user short list
-    this.dataService.getShort().then((res: any[]) => this.names = res);
-    ``
-    //get auth table
-    this.dataService.getAuth().then((res: any[]) => this.autoInfo = res);
-
-    this.dataService.getTotal().then(res => this.total = res);
+   
 
     let userInfoGroup = <FormGroup>this.registrationForm.controls.userInfo;
     this.nameAutoSuggestion(userInfoGroup, 'fatherName');
@@ -406,67 +399,7 @@ export class RegistrationComponent implements OnInit {
   }
 
 
-  pushUserInfoTable(): any {
-    let obj = {
-      userInfo: {
-        fullName: this.fullName.value,
-        gender: this.gender.value,
-        dob: this.day.value + '/' + this.month.value + '/' + this.year.value,
-        fatherName: this.fatherName.value,
-        motherName: this.motherName.value,
-        status: this.status.value,
-        invitedBy: this.invitedBy.value,
-        bloodGroup: this.bloodGroup.value,
-        occupation: this.occupation.value,
-      }
-    }
-
-
-    if (this.spouseWpcabMember) {
-      obj.userInfo['spouseName'] = this.spouseName.value
-    }
-    if (this.otherOccupationSelected) {
-      obj.userInfo.occupation = this.otherOccupation.value
-    }
-    return this.dataService.setUser(obj);
-  }
-
-  pushShortTable(key) {
-  let obj={
-      id: key,
-      fullName: this.fullName.value,
-      zone: this.zone.value,
-      subDistrict: this.subDistrict.value
-    }
-    this.dataService.setShort(key,obj);
-  }
-
-  pushAddressTable(key) {
-    // push to address table
-    let obj={
-      permanentAddress: this.permanentAddress.value,
-      zone: this.zone.value,
-      subDistrict: this.subDistrict.value,
-      district: this.district.value,
-      conutry: this.country.value,
-      nationality: this.nationality.value,
-      nId: this.nId.value,
-    };
-
-    this.dataService.setAddress(key,obj);
-  }
-
-  pushAuthTable(key) {
-    let obj={
-      userName: this.userName.value,
-      password: this.password.value,
-      phone: this.phone.value,
-      email: this.email.value,
-      role: this.role.value,
-    };
-
-    this.dataService.setAuth(key,obj);
-  }
+  
 
   
 

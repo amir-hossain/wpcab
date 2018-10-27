@@ -36,8 +36,6 @@ import { IgxRippleModule } from 'igniteui-angular/main';
 import { FooterComponent } from './footer/footer.component';
 import { CommunicationService } from './communication.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ConnectorService } from './connector.service';
-import {DataService} from './data.service';
 import { LinkService } from './link/link.service';
 
 
@@ -96,7 +94,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AngularFireDatabaseModule
   ],
   entryComponents: [DialogComponent],
-  providers: [AngularFireAuth, LoginGuard, AntiUserGuard, AccountantGuard, AdminGuard, AdcountGuard, AntiUtorGuard, CommunicationService, ConnectorService,DataService,LinkService],
+  providers: [AngularFireAuth, LoginGuard, AntiUserGuard, AccountantGuard, AdminGuard, AdcountGuard, AntiUtorGuard, CommunicationService,LinkService],
   bootstrap: [NavComponent]
 })
 export class AppModule { }
