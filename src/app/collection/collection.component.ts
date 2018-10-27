@@ -14,7 +14,6 @@ import { LinkService } from '../link/link.service';
 export class CollectionComponent implements OnInit {
   activeUserRole;
   total=0;
-  nextId=null;
   itemPerPage=10;
   updating=false;
   source=[];
@@ -51,7 +50,7 @@ export class CollectionComponent implements OnInit {
 
     this.showLogingCircle(); 
 
-    this.linkService.getUsers(this.currentPage)
+    this.linkService.getUsersByPage(this.currentPage)
       .subscribe(res => {
         this.createArray(res);
       });
@@ -92,9 +91,9 @@ export class CollectionComponent implements OnInit {
    
     }
 
-    itemClick(clickedItem){
-      console.log(clickedItem);
-      localStorage.setItem('key',clickedItem.id);
+    userClick(user){
+      console.log(user);
+      localStorage.setItem('key',user.id);
         this.router.navigateByUrl('details');
     }
     subDistrictFilter(subDistrict:string){

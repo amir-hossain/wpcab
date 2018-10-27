@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Data } from '../data/Data'
 import { User } from '../model/User'
 import { HttpClient } from "@angular/common/http";
-import { Subscribable } from 'rxjs/Observable';
+import { Subscribable, Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class LinkService {
@@ -19,9 +19,14 @@ export class LinkService {
 
   }
 
-  public getUsers(pageNumber):Subscribable<any> {
-      return LinkService.data.getUser(pageNumber);
+  public getUsersByPage(pageNumber):Subscribable<any> {
+      return LinkService.data.getUsersByPage(pageNumber);
   };
+
+  public getUserById(id):Subscribable<any> {
+
+    return LinkService.data.getUserById(id);
+};
 
 }
 

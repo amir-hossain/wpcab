@@ -13,23 +13,24 @@ ul {
   float: left;
 }
 
-.payment-btn,
-.spayment-btn,
-.delete-btn {
+.btn{
   display: block;
   margin-top: 20px;
   width: 100%;
   padding: .5em 0;
   font-size: 20px;
-  background: green;
   color: wheat;
 }
 
-.delete-btn {
+.payment{
+  background: green;
+}
+
+.delete{
   background: rgb(212, 3, 3);
 }
 
-.spayment-btn {
+.spayment {
   background: rgb(33, 1, 92)
 }
 
@@ -93,22 +94,27 @@ h4 {
   margin-left: 20px;
 }
 
-.sub-header {
-  margin-bottom: 1.2em;
-}
 
 .sub-header h2 {
-  display: inline;
+  margin-top:0; 
 }
 
 .sub-header a {
   background: rgb(255, 166, 0);
 }
 
-.f-right{
-  float: right;
+.s-edit-btn{
+  margin-bottom: 20px;
+  color:black;
+  width: 10.2em;
 }
 
 .bottom-margin{
     margin-bottom: 1em;
+}
+
+.heading-margin{
+  padding-bottom: 1em;
+  font-size: 2.5rem;
+  line-height: 2.5rem;
 }

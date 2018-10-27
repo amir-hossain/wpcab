@@ -23,7 +23,7 @@
     </th>
   </div>
   <div>
-      <mat-card *ngFor='let obj of filteredArry' (click)='itemClick(obj)' igxRipple="black" fxLayout.lt-md='column' fxLayout.gt-sm='row' fxLayoutGap.gt-sm="3.3%">
+      <mat-card *ngFor='let obj of filteredArry' (click)='userClick(obj)' igxRipple="black" fxLayout.lt-md='column' fxLayout.gt-sm='row' fxLayoutGap.gt-sm="3.3%">
           <td *ngIf='obj' fxFlex.gt-sm='30%'>{{obj.fullName}}</td>
           <td *ngIf='obj' fxFlex.gt-sm='30%'>{{obj.zone}}</td>
           <td *ngIf='obj' fxFlex.gt-sm='30%'>{{obj.subDistrict}}</td>

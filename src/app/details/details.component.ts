@@ -5,6 +5,7 @@ import { DialogComponent } from './dialog.component';
 import { Router } from '@angular/router';
 import { CommunicationService } from '../communication.service';
 import { TranslateService } from '@ngx-translate/core';
+import { LinkService } from '../link/link.service';
 
 
 @Component({
@@ -15,15 +16,13 @@ import { TranslateService } from '@ngx-translate/core';
 export class DetailsComponent implements OnInit {
   totalPayment = 1;
   total;
-  userInfo;
-  address;
-  auth;
+  user;
   activeUserRole;
-  selectedItemId;
+  userId;
   path;
   @Input() profile: boolean;
   constructor(private loc: Location, public dialog: MatDialog, private router: Router, private communicationService: CommunicationService,
-     private ts: TranslateService) {
+     private ts: TranslateService,private  LinkService:LinkService) {
     let lan = localStorage.getItem('lan');
     this.ts.use(lan);
   }
@@ -46,9 +45,11 @@ export class DetailsComponent implements OnInit {
     console.log(this.path);
     this.activeUserRole = localStorage.getItem('activeUserRole');
     if (this.path === '/profile') {
-      this.selectedItemId = localStorage.getItem('activeUserId');
+      this.userId = localStorage.getItem('activeUserId');
     } else {
-      this.selectedItemId = localStorage.getItem('key');
+      this.userId = localStorage.getItem('key');
+      // console.log(this.selectedItemId);
+      this.LinkService.getUserById(this.userId).subscribe(user=>this.user=user);
     }
 
   }
@@ -61,7 +62,7 @@ export class DetailsComponent implements OnInit {
     // console.log(this.total)
     let dialogRef = this.dialog.open(DialogComponent, {
       disableClose: true,
-      data: { name: this.userInfo.fullName, key: this.selectedItemId, total: this.total }
+      // data: { name: this.userInfo.fullName, key: this.userId, total: this.total }
     });
 
   }

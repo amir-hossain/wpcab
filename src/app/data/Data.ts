@@ -23,9 +23,19 @@ export class Data{
        
     }
 
-    getUser(pageNumber):Subscribable<any>{
+    getUsersByPage(pageNumber):Subscribable<any>{
 
-        let url=endPoing+"getUser/"+pageNumber;
+        let url=endPoing+"getUsersByPage/"+pageNumber;
+
+       return this.http.get(url,this.httpOptions)
+       
+    }
+
+
+    
+    getUserById(id):Subscribable<any>{
+
+        let url=endPoing+"getUserById/"+id;
 
        return this.http.get(url,this.httpOptions)
        
