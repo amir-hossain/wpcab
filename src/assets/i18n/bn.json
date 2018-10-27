@@ -64,6 +64,12 @@
         "Zone":"জোন",
         "SubDistrict":"উপজেলা"
     },
+    "SucessComponent":{
+        "RegistrationSuccessfull":"নিবন্ধীকরণ সম্পূর্ণ হয়েছে !",
+        "DeleteSuccessfull":"মুছা হয়েছে !",
+        "Home":"হোম",
+        "Registration":"নিবদ্ধীকরণ"
+    },
     "MixedComponent":{
         "Heading":"সদস্য নিবদ্ধীকরণ",
         "Heading1":"সদস্যের বিবরণ",

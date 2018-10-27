@@ -2,13 +2,13 @@
   <div fxFlex.gt-sm='30%' fxFlex.lt-md='80%' fxLayout='column'>
     <mat-card>
       <img ngClass.lt-md='lt-md-img' ngClass.gt-sm='gt-sm-img' src="./assets/img/right.png" alt="">
-      <h4 *ngIf='path==="/registration-sucessfull"'>Registration sucessfull !</h4>
-      <h4 *ngIf='path==="/delete-sucessfull"'>delete sucessfull !</h4>
+      <h4 *ngIf='path==="/registration-sucessfull"'>{{'SucessComponent.RegistrationSuccessfull' | translate}}</h4>
+      <h4 *ngIf='path==="/delete-sucessfull"'>{{'SucessComponent.DeleteSuccessfull' | translate}}</h4>
     </mat-card>
     <div *ngIf='path==="/registration-sucessfull"' fxFlex='60%' fxLayout.gt-sm='row' fxLayout.lt-md='column' fxLayoutGap.gt-sm='50%'
       fxLayoutGap.lt-md='2%'>
-      <a fxFlex href='home' class='home-btn' mat-raised-button color='primary'>Home</a>
-      <a fxFlex href="registration" mat-raised-button class="registration-btn" color='primary'>Registration</a>
+      <a fxFlex href='home' class='home-btn' mat-raised-button color='primary'>{{'SucessComponent.Home' | translate}}</a>
+      <a fxFlex href="registration" mat-raised-button class="registration-btn" color='primary'>{{'SucessComponent.Registration' | translate}}</a>
     </div>
     <div fxLayout='row' *ngIf='path==="/delete-sucessfull"'>
     <a fxFlex href='home'  class='ok-btn' mat-raised-button color='primary'>Ok</a>

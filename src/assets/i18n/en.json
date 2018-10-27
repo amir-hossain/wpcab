@@ -64,6 +64,12 @@
         "Zone":"Zone",
         "SubDistrict":"Sub District"
     },
+    "SucessComponent":{
+        "RegistrationSuccessfull":"Registration Sucessfull !",
+        "DeleteSuccessfull":"Delete Sucessfull !",
+        "Home":"Home",
+        "Registration":"Registration"
+    },
     "MixedComponent":{
         "Heading":"Member registration",
         "Heading1":"Member Details",

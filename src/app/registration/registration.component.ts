@@ -2,10 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder, AbstractControl, ValidationErrors, FormControl } from "@angular/forms";
 import { Router } from '@angular/router'
 import { AngularFireDatabase } from "angularfire2/database";
-import { Observable } from 'rxjs/Observable';
-import { map } from 'rxjs/operators/map';
 import 'firebase/storage';
-import * as firebase from 'firebase/app';
 import { FirebaseApp } from 'angularfire2';
 import { DropDownItemsService } from '../drop-down-items.service';
 import { CommunicationService } from '../communication.service';
