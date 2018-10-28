@@ -6,7 +6,7 @@
   </div>
   <div *ngIf='path==="/profile"' style="margin-top: 2em"></div>
   <mat-card>
-    <ul *ngIf='user' class='sub-1'>
+    <div *ngIf='user' class='sub-1'>
       <span *ngIf='!user.photo'>
         <img src='./assets/img/default-pic.png'>
       </span>
@@ -14,7 +14,7 @@
         <img src="{{user.photo}}">
       </span>
 
-      <div ngClass.lt-md="bottom-margin" class="btn">
+      <div ngClass.lt-md="bottom-margin">
 
         <a mat-raised-button class="btn payment">{{'MixedComponent.Collect' | translate}}</a>
 
@@ -27,117 +27,117 @@
 
       </div>
       <div class="clearfix"></div>
-    </ul>
+    </div>
     <div *ngIf='user' class='sub-2'>
-      <ul>
-        <div class="sub-header"  fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutGap.gt-sm="1em" fxLayoutAlign="center start ">
+      <ul ngClass.lt-md='null-padding'>
+        <div class="sub-header"  fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutGap.gt-sm="2em" fxLayoutAlign="center start ">
           <h2 ngClass.lt-md="heading-margin" fxFlexOrder.lt-md='2'>{{'MixedComponent.SubHeading1' | translate}}</h2>
           <a ngClass.lt-md="btn s-edit-btn" fxFlexOrder.lt-md='1' *ngIf='path!=="/profile"' href="edit" mat-raised-button ngClass.gt-sm='edit-btn'>{{'MixedComponent.Edit'
             |
             translate}}</a>
         </div>
         <li fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em' fxFlex.lt-md='100%'>{{'MixedComponent.Name' | translate}}</h4>{{user.fullName}}
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em' fxFlex.lt-md='100%'>{{'MixedComponent.Name' | translate}}</h4>{{user.fullName}}
         </li>
         <li fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em'>{{'MixedComponent.Gender' | translate}}</h4>{{user.gender}}
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.Gender' | translate}}</h4>{{user.gender}}
         </li>
         <li fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em'>{{'MixedComponent.Dob' | translate}}</h4>{{user.dob}}
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.Dob' | translate}}</h4>{{user.dob}}
         </li>
         <li fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em'>{{'MixedComponent.FatherName' | translate}}</h4>{{user.fatherName}}
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.FatherName' | translate}}</h4>{{user.fatherName}}
         </li>
         <li fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em'>{{'MixedComponent.MotherName' | translate}}</h4>{{user.motherName}}
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.MotherName' | translate}}</h4>{{user.motherName}}
         </li>
         <li fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em'>{{'MixedComponent.Status' | translate}}</h4>{{user.status}}
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.Status' | translate}}</h4>{{user.status}}
         </li>
         <li *ngIf='user.spouseName' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
 
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em'>{{'MixedComponent.Spouse' | translate}}</h4>{{user.spouseName}}
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.Spouse' | translate}}</h4>{{user.spouseName}}
         </li>
         <li *ngIf='!user.spouseName && user.status==="Married"' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em'>{{'MixedComponent.Spouse' | translate}}</h4>{{'MixedComponent.NotMember'
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.Spouse' | translate}}</h4>{{'MixedComponent.NotMember'
           | translate}}
         </li>
         <li fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em'>{{'MixedComponent.InvitedBy' | translate}}</h4>{{user.invitedBy}}
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.InvitedBy' | translate}}</h4>{{user.invitedBy}}
         </li>
         <li fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em'>{{'MixedComponent.Occupation' | translate}}</h4>{{user.occupation}}
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.Occupation' | translate}}</h4>{{user.occupation}}
         </li>
         <li *ngIf='user.bloodGroup'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em'>{{'MixedComponent.Blood' | translate}}</h4>{{user.bloodGroup}}
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.Blood' | translate}}</h4>{{user.bloodGroup}}
         </li>
         <li *ngIf='!user.bloodGroup' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em'>{{'MixedComponent.Blood' | translate}}</h4>{{'MixedComponent.None'
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.Blood' | translate}}</h4>{{'MixedComponent.None'
           | translate}}
         </li>
         <div class="clearfix"></div>
       </ul>
-      <ul>
+      <ul ngClass.lt-md='null-padding'>
         <h2>{{'MixedComponent.SubHeading3' | translate}}</h2>
         <li fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em'>{{'MixedComponent.Phone' | translate}}</h4>{{user.phone}}
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.Phone' | translate}}</h4>{{user.phone}}
         </li>
         <li fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em'>{{'MixedComponent.Password' | translate}}</h4>{{'MixedComponent.Hidden'
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.Password' | translate}}</h4>{{'MixedComponent.Hidden'
           | translate}}
         </li>
         <li *ngIf='user.email' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em'>{{'MixedComponent.Email' | translate}}</h4>{{user.email}}
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.Email' | translate}}</h4>{{user.email}}
         </li>
         <li *ngIf='!user.email' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em'>{{'MixedComponent.Email' | translate}}</h4>{{'MixedComponent.None'
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.Email' | translate}}</h4>{{'MixedComponent.None'
           | translate}}
         </li>
         <li *ngIf='user.userName' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em'>{{'MixedComponent.UN' | translate}}</h4>{{user.userName}}
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.UN' | translate}}</h4>{{user.userName}}
         </li>
         <li *ngIf='!user.userName' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em'>{{'MixedComponent.UN' | translate}}</h4>{{'MixedComponent.None' |
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.UN' | translate}}</h4>{{'MixedComponent.None' |
           translate}}
         </li>
         <li fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em'>{{'MixedComponent.Role' | translate}}</h4>{{user.role}}
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.Role' | translate}}</h4>{{user.role}}
         </li>
         <div class="clearfix"></div>
       </ul>
-      <ul>
+      <ul ngClass.lt-md='null-padding'>
         <h2>{{'MixedComponent.SubHeading2' | translate}}</h2>
         <li fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em'>{{'MixedComponent.Zone' | translate}}</h4>{{user.zone}}
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.Zone' | translate}}</h4>{{user.zone}}
         </li>
         <li fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em'>{{'MixedComponent.SubDis' | translate}}</h4>{{user.subDistrict}}
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.SubDis' | translate}}</h4>{{user.subDistrict}}
         </li>
         <li fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em'>{{'MixedComponent.PA' | translate}}</h4>{{user.permanentAddress}}
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.PA' | translate}}</h4>{{user.permanentAddress}}
         </li>
         <li fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em'>{{'MixedComponent.Dist' | translate}}</h4>{{user.district}}
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.Dist' | translate}}</h4>{{user.district}}
         </li>
         <li *ngIf='user.country' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em'>{{'MixedComponent.Country' | translate}}</h4>{{user.country}}
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.Country' | translate}}</h4>{{user.country}}
         </li>
         <li *ngIf='!user.country' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em'>{{'MixedComponent.Country' | translate}}</h4>{{'MixedComponent.None'
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.Country' | translate}}</h4>{{'MixedComponent.None'
           | translate}}
         </li>
         <li *ngIf='user.nationality' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em'>{{'MixedComponent.Nationality' | translate}}</h4>{{user.nationality}}
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.Nationality' | translate}}</h4>{{user.nationality}}
         </li>
         <li *ngIf='!user.nationality' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em'>{{'MixedComponent.Nationality' | translate}}</h4>{{'MixedComponent.None'
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.Nationality' | translate}}</h4>{{'MixedComponent.None'
           | translate}}
         </li>
         <li *ngIf='user.nId' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em'>{{'MixedComponent.NID' | translate}}</h4>{{user.nId}}
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.NID' | translate}}</h4>{{user.nId}}
         </li>
         <li *ngIf='!user.nId' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='10em'>{{'MixedComponent.NID' | translate}}</h4>{{'MixedComponent.None'
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.NID' | translate}}</h4>{{'MixedComponent.None'
           | translate}}
         </li>
       </ul>
