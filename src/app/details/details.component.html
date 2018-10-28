@@ -68,7 +68,7 @@
         <li fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
           <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.Occupation' | translate}}</h4>{{user.occupation}}
         </li>
-        <li *ngIf='user.bloodGroup'>
+        <li *ngIf='user.bloodGroup' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
           <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.Blood' | translate}}</h4>{{user.bloodGroup}}
         </li>
         <li *ngIf='!user.bloodGroup' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
