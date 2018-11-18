@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit {
       this.ts.use(this.lan);
     }else{
       this.ts.setDefaultLang('bn');
+      localStorage.setItem('lan','bn');
     }
   }
 

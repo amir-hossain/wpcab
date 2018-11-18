@@ -52,18 +52,18 @@
           <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.MotherName' | translate}}</h4>{{user.motherName}}
         </li>
         <li fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.Status' | translate}}</h4>{{user.status}}
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.Status' | translate}}</h4>{{user.maritalStatus}}
         </li>
         <li *ngIf='user.spouseName' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
 
           <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.Spouse' | translate}}</h4>{{user.spouseName}}
         </li>
-        <li *ngIf='!user.spouseName && user.status==="Married"' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
+        <li *ngIf='!user.spouseName && user.maritalStatus==="Married"' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
           <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.Spouse' | translate}}</h4>{{'MixedComponent.NotMember'
           | translate}}
         </li>
         <li fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.InvitedBy' | translate}}</h4>{{user.invitedBy}}
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.InvitedBy' | translate}}</h4>{{user.inviter}}
         </li>
         <li fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
           <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.Occupation' | translate}}</h4>{{user.occupation}}
@@ -134,7 +134,7 @@
           | translate}}
         </li>
         <li *ngIf='user.nId' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.NID' | translate}}</h4>{{user.nId}}
+          <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.NID' | translate}}</h4>{{user.nid}}
         </li>
         <li *ngIf='!user.nId' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
           <h4 fxFlex.lt-md='100%' fxFlex.gt-sm='11em'>{{'MixedComponent.NID' | translate}}</h4>{{'MixedComponent.None'

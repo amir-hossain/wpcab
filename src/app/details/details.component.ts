@@ -22,12 +22,16 @@ export class DetailsComponent implements OnInit {
   path;
   @Input() profile: boolean;
   constructor(private loc: Location, public dialog: MatDialog, private router: Router, private communicationService: CommunicationService,
-     private ts: TranslateService,private  LinkService:LinkService) {
+    private ts: TranslateService, private LinkService: LinkService) {
+    this.loadLanguage();
+  }
+
+  private loadLanguage() {
     let lan = localStorage.getItem('lan');
     this.ts.use(lan);
   }
 
-  notifyRoot() {
+  setNavBarVisibility() {
     if (this.profile) {
       CommunicationService.navBar = true;
       this.communicationService.emitChange();
@@ -40,18 +44,24 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit() {
 
-    this.notifyRoot();
+    this.setNavBarVisibility();
     this.path = this.router.url;
     console.log(this.path);
     this.activeUserRole = localStorage.getItem('activeUserRole');
-    if (this.path === '/profile') {
-      this.userId = localStorage.getItem('activeUserId');
-    } else {
-      this.userId = localStorage.getItem('key');
-      // console.log(this.selectedItemId);
-      this.LinkService.getUserById(this.userId).subscribe(user=>this.user=user);
-    }
+    this.userId=this.getUserId();
+    // console.log(this.selectedItemId);
+    this.LinkService.getUserById(this.userId).subscribe(user => this.user = user);
 
+
+  }
+
+  private getUserId() {
+    if (this.path === '/profile') {
+      return localStorage.getItem('activeUserId');
+    }
+    else {
+      return localStorage.getItem('key');
+    }
   }
 
   back() {

@@ -40,4 +40,12 @@ export class Data{
        return this.http.get(url,this.httpOptions)
        
     }
+
+    edirUser(user):Subscribable<any>{
+
+        let url=endPoing+"editUser";
+
+       return this.http.put(url,user,this.httpOptions);
+       
+    }
 }

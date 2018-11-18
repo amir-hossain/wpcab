@@ -22,7 +22,7 @@ export class User {
 
     occupation;
 
-    parmanentAddress;
+    permanentAddress;
 
     zone;
 
@@ -46,7 +46,7 @@ export class User {
 
     role;
 
-    constructor(fullName, gender?, fatherName?, motherName?, DOB?, maritalStatus?, spouseName?, inviter?, bloodGroup?, occupation?, parmanentAddress?, zone?,
+    constructor(fullName, fatherName?, motherName?, gender?, DOB?, maritalStatus?, spouseName?, inviter?, bloodGroup?, occupation?, permanentAddress?, zone?,
         subDistrict?, district?, country?, nationality?, nID?, userName?, password?, phone?, email?, role?) {
 
             this.fullName=fullName ,
@@ -69,7 +69,7 @@ export class User {
         
             this.occupation=occupation ,
         
-            this.parmanentAddress=parmanentAddress ,
+            this.permanentAddress=permanentAddress ,
         
             this.zone=zone ,
         

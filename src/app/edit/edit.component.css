@@ -30,6 +30,17 @@ h1{
     vertical-align: middle;
 }
 
+h2{
+    padding-right: 5em;
+    margin-top: 0;
+}
+
+.spinner{
+    
+    left: 10%;
+    top: 15em;
+}
+
 .sub-1{
     float: left;
 }

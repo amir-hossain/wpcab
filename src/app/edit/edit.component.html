@@ -4,16 +4,17 @@
     <h1>{{'MixedComponent.Heading2' | translate}}</h1>
   </div>
   <mat-card>
-    <ul *ngIf='userInfo' class='sub-1'>
-      <span *ngIf='!userInfo.photo'>
+     
+    <div *ngIf='user' class='sub-1'>
+      <span *ngIf='!user.photo'>
         <label>
           <input type='file' id='upload' (change)="readUrl($event)" style='display:none;'>
 
-          <img class="pic" [src]="url">
+          <img class="pic" src='./assets/img/default-pic.png'>
           <a mat-raised-button class="upload-button">{{'MixedComponent.Upload' | translate}}</a>
         </label>
       </span>
-      <span *ngIf='userInfo.photo'>
+      <span *ngIf='user.photo'>
         <label>
           <input type='file' id='upload' (change)="readUrl($event)" style='display:none;'>
 
@@ -24,28 +25,38 @@
           {{'MixedComponent.Error.Pic' | translate}}
         </mat-error>
       </span>
-    </ul>
+    </div>
+
+    
+  
+
     <div class='sub-2'>
-      <ul *ngIf='userInfo'>
-        <h2 style="margin-top:0;">{{'MixedComponent.SubHeading1' | translate}}</h2>
-        <li *ngIf='!nameEditing' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <span fxFlex.gt-sm='13em' fxFlex.lt-md='100%'>
+        
+      <ul *ngIf='user'>
+        <h2>{{'MixedComponent.SubHeading1' | translate}}</h2>
+        <div  *ngIf='loding' style="position:absolute;" fxLayout.lt-md='column' fxLayout.lt-md='row' ngClass.lt-md="spinner">
+            <mat-spinner  [diameter]='200'></mat-spinner>
+          </div>
+        
+        <li *ngIf='!nameEditing' fxLayout.gt-sm='row' fxLayout.lt-md='column' ngClass.lt-md='bottom-margin'>
+          <span fxFlex.gt-sm="0 0 13.5em">
             <img src="assets/img/edit-icon.png" class="icon" (click)='nameEditing=true'>
             <h4>{{'MixedComponent.Name' | translate}}</h4>
           </span>
-          {{userInfo.fullName}}
+          <span fxFlex.gt-sm='1 0 auto'>{{user.fullName}}</span>
+
         </li>
         <li *ngIf='nameEditing' class="alter">
-          <form [formGroup]='nameForm' (ngSubmit)='done("nameForm","fullName","userInfo","nameEditing","userInfoChanges")' fxLayout.gt-sm='row'
-            fxLayout.lt-md='column'>
+          <form [formGroup]='nameForm' (ngSubmit)='done("nameForm","fullName","user","nameEditing","userChanges")'
+            fxLayout.gt-sm='row' fxLayout.lt-md='column'>
             <span>
               <h4>{{'MixedComponent.Name' | translate}}</h4>
               <input type="text" formControlName='fullName'>
             </span>
             <div fxLayoutAlign.lt-md='center' ngClass.lt-md='margin-top'>
-              <img src="assets/img/wrong.png" (click)='cencel("nameForm","fullName","userInfo","nameEditing")'>
               <!-- input type submit image button -->
               <input src="assets/img/right.png" type='image' class='submit-button'>
+              <img src="assets/img/wrong.png" (click)='cencel("nameForm","fullName","user","nameEditing")'>
             </div>
 
             <!-- <div class="clearfix"></div> -->
@@ -54,46 +65,50 @@
             </div>
           </form>
         </li>
-        <li *ngIf='!genderEditing' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin' fxLayoutGap='10px'>
-          <span fxFlex.lt-md='100%' fxFlex.gt-sm='13em' fxFlex.lt-md='100%'>
+        <li *ngIf='!genderEditing' fxLayout.gt-sm='row' fxLayout.lt-md='column' ngClass.lt-md='bottom-margin'>
+          <span fxFlex.gt-sm="0 0 13.5em">
             <img src="assets/img/edit-icon.png" class="icon" (click)='genderEditing=true'>
             <h4>{{'MixedComponent.Gender' | translate}}</h4>
           </span>
-          {{userInfo.gender}}
+          <span fxFlex="1 0 auto">{{user.gender}}</span>
+
         </li>
         <li *ngIf='genderEditing' class="alter">
-          <form [formGroup]='genderForm' (ngSubmit)='done("genderForm","gender","userInfo","genderEditing","userInfoChanges")' fxLayout.gt-sm='row'
-            fxLayout.lt-md='column'>
+          <form [formGroup]='genderForm' (ngSubmit)='done("genderForm","gender","user","genderEditing","userChanges")'
+            fxLayout.gt-sm='row' fxLayout.lt-md='column'>
             <span>
               <h4>{{'MixedComponent.Gender' | translate}}</h4>
               <mat-radio-group formControlName='gender'>
-                <mat-radio-button type="radio" color='primary' name="gender" id="male" value="{{'MixedComponent.Male' | translate}}">{{'MixedComponent.Male' | translate}}</mat-radio-button>
-                <mat-radio-button type="radio" color='primary' name="gender" id="female" value="{{'MixedComponent.Female' | translate}}">{{'MixedComponent.Female' | translate}}</mat-radio-button>
+                <mat-radio-button type="radio" color='primary' name="gender" id="male" value="{{'MixedComponent.Male' | translate}}">{{'MixedComponent.Male'
+                  | translate}}</mat-radio-button>
+                <mat-radio-button type="radio" color='primary' name="gender" id="female" value="{{'MixedComponent.Female' | translate}}">{{'MixedComponent.Female'
+                  | translate}}</mat-radio-button>
               </mat-radio-group>
             </span>
             <div fxLayoutAlign.lt-md='center' ngClass.lt-md='margin-top' ngClass.gt-sm='block'>
-              <img src="assets/img/wrong.png" (click)='cencel("genderForm","gender","userInfo","genderEditing")'>
+              <img src="assets/img/wrong.png" (click)='cencel("genderForm","gender","user","genderEditing")'>
               <!-- input type submit image button -->
               <input src="assets/img/right.png" type='image' class='submit-button'>
             </div>
             <div class="clearfix"></div>
           </form>
         </li>
-        <li *ngIf='!dobEditing' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <span fxFlex.lt-md='100%' fxFlex.gt-sm='13em' fxFlex.lt-md='100%'>
+        <li *ngIf='!dobEditing' fxLayout.gt-sm='row' fxLayout.lt-md='column' ngClass.lt-md='bottom-margin'>
+          <span fxFlex.gt-sm="0 0 13.5em">
             <img src="assets/img/edit-icon.png" class="icon" (click)='dobEditing=true'>
             <h4>{{'MixedComponent.Dob' | translate}}</h4>
           </span>
-          {{userInfo.dob}}
+          <span fxFlex="1 0 auto">{{user.dob}}</span>
+
         </li>
         <li *ngIf='dobEditing' class="alter">
           <form [formGroup]='dobForm' (ngSubmit)='dobDone()' fxLayout.gt-sm='row' fxLayout.lt-md='column'>
-            <span fxLayout.gt-sm='row' fxLayout.lt-md='column' fxLayoutGap='10px' >
+            <span fxLayout.gt-sm='row' fxLayout.lt-md='column' fxLayoutGap='10px'>
               <h4>{{'MixedComponent.Dob' | translate}}</h4>
               <span class="dob" fxLayout.lt-md='column' fxLayoutGap.lt-md='10px'>
                 <input type="number" placeholder="Day" formControlName='day'>
                 <select formControlName='month'>
-                  <option *ngFor='let option of months' value='{{option}}'>
+                  <option *ngFor='let option of months' value='{{option| translate}}'>
                     {{option| translate}}
                   </option>
                 </select>
@@ -114,22 +129,23 @@
             </div>
           </form>
         </li>
-        <li *ngIf='!fatherNameEditing' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <span fxFlex.lt-md='100%' fxFlex.gt-sm='13em' fxFlex.lt-md='100%'>
+        <li *ngIf='!fatherNameEditing' fxLayout.gt-sm='row' fxLayout.lt-md='column' ngClass.lt-md='bottom-margin'>
+          <span fxFlex.gt-sm="0 0 13.5em">
             <img src="assets/img/edit-icon.png" class="icon" (click)='fatherNameEditing=true'>
             <h4>{{'MixedComponent.FatherName' | translate}}</h4>
           </span>
-          {{userInfo.fatherName}}
+          <span fxFlex="1 0 auto">{{user.fatherName}}</span>
+
         </li>
         <li *ngIf='fatherNameEditing' class="alter">
-          <form [formGroup]='fatherNameForm' (ngSubmit)='done("fatherNameForm","fatherName","userInfo","fatherNameEditing","userInfoChanges")'
+          <form [formGroup]='fatherNameForm' (ngSubmit)='done("fatherNameForm","fatherName","user","fatherNameEditing","userChanges")'
             fxLayout.gt-sm='row' fxLayout.lt-md='column'>
             <span>
               <h4>{{'MixedComponent.FatherName' | translate}}</h4>
               <input type="text" formControlName='fatherName'>
             </span>
             <div fxLayoutAlign.lt-md='center' ngClass.lt-md='margin-top' ngClass.gt-sm='block'>
-              <img src="assets/img/wrong.png" (click)='cencel("fatherNameForm","fatherName","userInfo","fatherNameEditing")'>
+              <img src="assets/img/wrong.png" (click)='cencel("fatherNameForm","fatherName","user","fatherNameEditing")'>
               <!-- input type submit image button -->
               <input src="assets/img/right.png" type='image' class='submit-button'>
             </div>
@@ -139,22 +155,23 @@
             </div>
           </form>
         </li>
-        <li *ngIf='!motherNameEditing' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <span fxFlex.lt-md='100%' fxFlex.gt-sm='13em' fxFlex.lt-md='100%'>
+        <li *ngIf='!motherNameEditing' fxLayout.gt-sm='row' fxLayout.lt-md='column' ngClass.lt-md='bottom-margin'>
+          <span fxFlex.gt-sm="0 0 13.5em">
             <img src="assets/img/edit-icon.png" class="icon" (click)='motherNameEditing=true'>
             <h4>{{'MixedComponent.MotherName' | translate}}</h4>
           </span>
-          {{userInfo.motherName}}
+          <span fxFlex="1 0 auto">{{user.motherName}}</span>
+
         </li>
         <li *ngIf='motherNameEditing' class="alter">
-          <form [formGroup]='motherNameForm' (ngSubmit)='done("motherNameForm","motherName","userInfo","motherNameEditing","userInfoChanges")'
+          <form [formGroup]='motherNameForm' (ngSubmit)='done("motherNameForm","motherName","user","motherNameEditing","userChanges")'
             fxLayout.gt-sm='row' fxLayout.lt-md='column'>
             <span>
               <h4>{{'MixedComponent.MotherName' | translate}}</h4>
               <input type="text" formControlName='motherName'>
             </span>
             <div fxLayoutAlign.lt-md='center' ngClass.lt-md='margin-top' ngClass.gt-sm='block'>
-              <img src="assets/img/wrong.png" (click)='cencel("motherNameForm","motherName","userInfo","motherNameEditing")'>
+              <img src="assets/img/wrong.png" (click)='cencel("motherNameForm","motherName","user","motherNameEditing")'>
               <!-- input type submit image button -->
               <input src="assets/img/right.png" type='image' class='submit-button'>
             </div>
@@ -165,205 +182,218 @@
           </form>
 
 
-          <li *ngIf='!maritalEditing' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-            <span fxFlex.lt-md='100%' fxFlex.gt-sm='13em' fxFlex.lt-md='100%'>
-              <img src="assets/img/edit-icon.png" class="icon" (click)='maritalEditing=true'>
-              <h4>{{'MixedComponent.Status' | translate}}</h4>
-            </span>
-            {{userInfo.status}}
-          </li>
-          <li *ngIf='maritalEditing' class="alter">
-            <form [formGroup]='maritalForm' (ngSubmit)='statusDone()' fxLayout='column'>
-              <span fxLayout.gt-sm='row' fxLayout.lt-md='column' fxLayoutGap.gt-sm='10px'>
-                <h4>{{'MixedComponent.Status' | translate}}</h4>
-                <mat-radio-group formControlName='status' fxLayout.lt-md='column' fxLayoutGap.gt-sm='10px'>
-                  <mat-radio-button type="radio" color='primary' name="marital" id="married" value="Married">{{'MixedComponent.Married' | translate}}</mat-radio-button>
-                  <mat-radio-button type="radio" color='primary' name="marital" id="single" value="Single">{{'MixedComponent.Single' | translate}}</mat-radio-button>
-                </mat-radio-group>
+        <li *ngIf='!maritalEditing' fxLayout.gt-sm='row' fxLayout.lt-md='column' ngClass.lt-md='bottom-margin'>
+          <span fxFlex.gt-sm="0 0 13.5em">
+            <img src="assets/img/edit-icon.png" class="icon" (click)='maritalEditing=true'>
+            <h4>{{'MixedComponent.Status' | translate}}</h4>
+          </span>
+          <span fxFlex="1 0 auto">{{user.maritalStatus}}</span>
 
-                <span *ngIf='!spouseWpcabMember || !marriedSelected'>
+        </li>
+        <li *ngIf='maritalEditing' class="alter">
+          <form [formGroup]='maritalForm' (ngSubmit)='statusDone()' fxLayout='column'>
+            <span fxLayout.gt-sm='row' fxLayout.lt-md='column' fxLayoutGap.gt-sm='10px'>
+              <h4>{{'MixedComponent.Status' | translate}}</h4>
+              <mat-radio-group formControlName='status' fxLayout.lt-md='column' fxLayoutGap.gt-sm='10px'>
+                <mat-radio-button type="radio" color='primary' name="marital" id="married" value="{{'MixedComponent.Married'
+                | translate}}">{{'MixedComponent.Married'
+                  | translate}}</mat-radio-button>
+                <mat-radio-button type="radio" color='primary' name="marital" id="single" value="{{'MixedComponent.Single'
+                | translate}}">{{'MixedComponent.Single'
+                  | translate}}</mat-radio-button>
+              </mat-radio-group>
+
+              <span *ngIf='!spouseWpcabMember || !marriedSelected'>
+                <div fxLayoutAlign.lt-md='center' ngClass.lt-md='margin-top' ngClass.gt-sm='block'>
+                  <img src="assets/img/wrong.png" (click)='cencelStatus()'>
+                  <!-- input type submit image button -->
+                  <input src="assets/img/right.png" type='image' class='submit-button'>
+                </div>
+              </span>
+            </span>
+            <div>
+              <div *ngIf='marriedSelected'>
+                <div class="check">
+                  <h4></h4>
+                  <mat-checkbox color='primary' formControlName='member'>{{'MixedComponent.WPCABMember' | translate}}
+                  </mat-checkbox>
+                </div>
+
+                <div *ngIf='spouseWpcabMember' fxLayout.gt-md='row' fxLayout.lt-sm='column'>
+                  <h4>{{'MixedComponent.Spouse' | translate}}</h4>
+                  <span>
+                    <input type="textarea" formControlName="spouseName" [matAutocomplete]='spa' (keyup)='nameAutoSuggestion($event.target.value)'>
+                    <mat-autocomplete #spa='matAutocomplete'>
+                      <mat-option *ngFor='let option of filteredName' [value]='option.name'>
+                        <span>{{option.name}}</span>
+                        <span *ngIf='option.zone!=="Other"'>({{option.zone}})</span>
+                        <span *ngIf='option.zone==="Other"'>({{option.subDistrict}})</span>
+                      </mat-option>
+                    </mat-autocomplete>
+                  </span>
+
                   <div fxLayoutAlign.lt-md='center' ngClass.lt-md='margin-top' ngClass.gt-sm='block'>
                     <img src="assets/img/wrong.png" (click)='cencelStatus()'>
                     <!-- input type submit image button -->
                     <input src="assets/img/right.png" type='image' class='submit-button'>
                   </div>
-                </span>
-              </span>
-              <div>
-                <div *ngIf='marriedSelected'>
-                  <div class="check">
-                    <h4></h4>
-                    <mat-checkbox color='primary' formControlName='member'>{{'MixedComponent.WPCABMember' | translate}}
-                    </mat-checkbox>
+                  <div *ngIf='maritalForm.controls.spouseName.invalid' class="errorMessege">
+                    {{'MixedComponent.Error.SpouseName' | translate}}
                   </div>
-
-                  <div *ngIf='spouseWpcabMember' fxLayout.gt-md='row' fxLayout.lt-sm='column'>
-                    <h4>{{'MixedComponent.Spouse' | translate}}</h4>
-                    <span>
-                      <input type="textarea" formControlName="spouseName" [matAutocomplete]='spa' (keyup)='nameAutoSuggestion($event.target.value)'>
-                      <mat-autocomplete #spa='matAutocomplete'>
-                        <mat-option *ngFor='let option of filteredName' [value]='option.name'>
-                          <span>{{option.name}}</span>
-                          <span *ngIf='option.zone!=="Other"'>({{option.zone}})</span>
-                          <span *ngIf='option.zone==="Other"'>({{option.subDistrict}})</span>
-                        </mat-option>
-                      </mat-autocomplete>
-                    </span>
-
-                    <div fxLayoutAlign.lt-md='center' ngClass.lt-md='margin-top' ngClass.gt-sm='block'>
-                      <img src="assets/img/wrong.png" (click)='cencelStatus()'>
-                      <!-- input type submit image button -->
-                      <input src="assets/img/right.png" type='image' class='submit-button'>
-                    </div>
-                    <div *ngIf='maritalForm.controls.spouseName.invalid' class="errorMessege">
-                      {{'MixedComponent.Error.SpouseName' | translate}}
-                    </div>
-                    <div class="clearfix"></div>
-                  </div>
+                  <div class="clearfix"></div>
                 </div>
               </div>
-              <!-- spouse checkbox -->
+            </div>
+            <!-- spouse checkbox -->
 
-              <div class="clearfix"></div>
-            </form>
-          </li>
-          <!-- marital status -->
-          <li *ngIf='userInfo.invitedBy && !invitedByEditing' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-            <span fxFlex.lt-md='100%' fxFlex.gt-sm='13em' fxFlex.lt-md='100%'>
-              <img src="assets/img/edit-icon.png" class="icon" (click)='invitedByEditing=true'>
+            <div class="clearfix"></div>
+          </form>
+        </li>
+        <!-- marital status -->
+        <li *ngIf='user.invitedBy && !invitedByEditing' fxLayout.gt-sm='row' fxLayout.lt-md='column' ngClass.lt-md='bottom-margin'>
+          <span fxFlex.gt-sm="0 0 13.5em">
+            <img src="assets/img/edit-icon.png" class="icon" (click)='invitedByEditing=true'>
+            <h4>{{'MixedComponent.InvitedBy' | translate}}</h4>
+          </span>
+          <span fxFlex="1 0 auto">{{user.invitedBy}}</span>
+
+        </li>
+        <li *ngIf='!user.invitedBy && !invitedByEditing' fxLayout.gt-sm='row' fxLayout.lt-md='column' ngClass.lt-md='bottom-margin'>
+          <span fxFlex.gt-sm="0 0 13.5em">
+            <img src="assets/img/edit-icon.png" class="icon" (click)='invitedByEditing=true'>
+            <h4>{{'MixedComponent.InvitedBy' | translate}}</h4>
+          </span>
+          <span fxFlex="1 0 auto">{{'MixedComponent.None' | translate}}</span>
+
+        </li>
+        <li *ngIf='invitedByEditing' class="alter">
+          <form [formGroup]='invitedByForm' (ngSubmit)='done("invitedByForm","invitedBy","user","invitedByEditing","userChanges")'
+            fxLayout.gt-sm='row' fxLayout.lt-md='column'>
+            <span>
               <h4>{{'MixedComponent.InvitedBy' | translate}}</h4>
+              <input type="text" formControlName='invitedBy'>
             </span>
-            {{userInfo.invitedBy}}
-          </li>
-          <li *ngIf='!userInfo.invitedBy && !invitedByEditing' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-            <span fxFlex.lt-md='100%' fxFlex.gt-sm='13em' fxFlex.lt-md='100%'>
-              <img src="assets/img/edit-icon.png" class="icon" (click)='invitedByEditing=true'>
-              <h4>{{'MixedComponent.InvitedBy' | translate}}</h4>
-            </span>
-            None
-          </li>
-          <li *ngIf='invitedByEditing' class="alter">
-            <form [formGroup]='invitedByForm' (ngSubmit)='done("invitedByForm","invitedBy","userInfo","invitedByEditing","userInfoChanges")'
-              fxLayout.gt-sm='row' fxLayout.lt-md='column'>
-              <span>
-                <h4>{{'MixedComponent.InvitedBy' | translate}}</h4>
-                <input type="text" formControlName='invitedBy'>
-              </span>
-              <div fxLayoutAlign.lt-md='center' ngClass.lt-md='margin-top' ngClass.gt-sm='block'>
-                <img src="assets/img/wrong.png" (click)='cencel("invitedByForm","invitedBy","userInfo","invitedByEditing")'>
-                <!-- input type submit image button -->
-                <input src="assets/img/right.png" type='image' class='submit-button'>
-              </div>
-              <div class="clearfix"></div>
-              <div *ngIf='invitedByForm.controls.invitedBy.invalid' class="errorMessege">
-                {{'MixedComponent.Error.Inviter' | translate}}
-              </div>
-            </form>
-          </li>
-          <li *ngIf='!occupationEditing' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-            <span fxFlex.lt-md='100%' fxFlex.gt-sm='13em' fxFlex.lt-md='100%'>
-              <img src="assets/img/edit-icon.png" class="icon" (click)='occupationEditing=true'>
+            <div fxLayoutAlign.lt-md='center' ngClass.lt-md='margin-top' ngClass.gt-sm='block'>
+              <img src="assets/img/wrong.png" (click)='cencel("invitedByForm","invitedBy","user","invitedByEditing")'>
+              <!-- input type submit image button -->
+              <input src="assets/img/right.png" type='image' class='submit-button'>
+            </div>
+            <div class="clearfix"></div>
+            <div *ngIf='invitedByForm.controls.invitedBy.invalid' class="errorMessege">
+              {{'MixedComponent.Error.Inviter' | translate}}
+            </div>
+          </form>
+        </li>
+        <li *ngIf='!occupationEditing' fxLayout.gt-sm='row' fxLayout.lt-md='column' ngClass.lt-md='bottom-margin'>
+          <span fxFlex.gt-sm="0 0 13.5em">
+            <img src="assets/img/edit-icon.png" class="icon" (click)='occupationEditing=true'>
+            <h4>{{'MixedComponent.Occupation' | translate}}</h4>
+          </span>
+          <span fxFlex="1 0 auto">{{user.occupation}}</span>
+
+        </li>
+        <li *ngIf='occupationEditing' class="alter">
+          <form [formGroup]='occupationForm' (ngSubmit)='occupationDone()' fxLayout='column'>
+
+            <span fxLayout.gt-sm='row' fxLayout.lt-md='column' fxLayoutGap='10px'>
               <h4>{{'MixedComponent.Occupation' | translate}}</h4>
+              <mat-radio-group formControlName="occupation" fxLayout.lt-md='column' fxLayoutGap='10px'>
+                <mat-radio-button type="radio" color='primary' name="occupation" id="student" value="{{'MixedComponent.Student' | translate}}">{{'MixedComponent.Student'
+                  | translate}}</mat-radio-button>
+                <mat-radio-button type="radio" color='primary' name="occupation" id="job holder" value="{{'MixedComponent.Job' | translate}}">{{'MixedComponent.Job'
+                  | translate}}</mat-radio-button>
+                <mat-radio-button type="radio" color='primary' name="occupation" id="businessman" value="{{'MixedComponent.Businessman' | translate}}">{{'MixedComponent.Businessman'
+                  | translate}}</mat-radio-button>
+                <mat-radio-button type="radio" color='primary' name="occupation" id="others" value="Others">{{'MixedComponent.Other'
+                  | translate}}</mat-radio-button>
+              </mat-radio-group>
+              <div fxLayoutAlign.lt-md='center' ngClass.lt-md='margin-top' ngClass.gt-sm='block'>
+                <img *ngIf='!otherOccupationSelected' src="assets/img/wrong.png" (click)='cencelOccupation()'>
+
+                <input *ngIf='!otherOccupationSelected' src="assets/img/right.png" type='image' class='submit-button'>
+              </div>
             </span>
-            {{userInfo.occupation}}
-          </li>
-          <li *ngIf='occupationEditing' class="alter">
-            <form [formGroup]='occupationForm' (ngSubmit)='occupationDone()' fxLayout='column'>
-
-              <span fxLayout.gt-sm='row' fxLayout.lt-md='column' fxLayoutGap='10px'>
-                <h4>{{'MixedComponent.Occupation' | translate}}</h4>
-                <mat-radio-group formControlName="occupation" fxLayout.lt-md='column' fxLayoutGap='10px'>
-                  <mat-radio-button type="radio" color='primary' name="occupation" id="student" value="{{'MixedComponent.Student' | translate}}">{{'MixedComponent.Student' | translate}}</mat-radio-button>
-                  <mat-radio-button type="radio" color='primary' name="occupation" id="job holder" value="{{'MixedComponent.Job' | translate}}">{{'MixedComponent.Job' | translate}}</mat-radio-button>
-                  <mat-radio-button type="radio" color='primary' name="occupation" id="businessman" value="{{'MixedComponent.Businessman' | translate}}">{{'MixedComponent.Businessman' | translate}}</mat-radio-button>
-                  <mat-radio-button type="radio" color='primary' name="occupation" id="others" value="Others">{{'MixedComponent.Other' | translate}}</mat-radio-button>
-                </mat-radio-group>
-                <div fxLayoutAlign.lt-md='center' ngClass.lt-md='margin-top' ngClass.gt-sm='block'>
-                  <img *ngIf='!otherOccupationSelected' src="assets/img/wrong.png" (click)='cencelOccupation()'>
-
-                  <input *ngIf='!otherOccupationSelected' src="assets/img/right.png" type='image' class='submit-button'>
+            <!-- occupation -->
+            <div *ngIf='otherOccupationSelected' fxLayout.gt-md='row' fxLayout.lt-sm='column'>
+              <span>
+                <h4>{{'MixedComponent.Qus' | translate}}</h4>
+                <input type="text" formControlName='otherOccupation'>
+              </span>
+              <span>
+                <div fxLayoutAlign.lt-md='center' ngClass.lt-md='margin-top'>
+                  <div fxLayoutAlign.lt-md='center' ngClass.lt-md='margin-top' ngClass.gt-sm='block'>
+                    <img src="assets/img/wrong.png" (click)='cencelOccupation()'>
+                    <!-- input type submit image button -->
+                    <input src="assets/img/right.png" type='image' class='submit-button'>
+                  </div>
+                </div>
+                <div *ngIf='occupationForm.controls.otherOccupation.invalid' class="errorMessege">
+                  {{'MixedComponent.Error.Occupation' | translate}}
                 </div>
               </span>
-              <!-- occupation -->
-              <div *ngIf='otherOccupationSelected' fxLayout.gt-md='row' fxLayout.lt-sm='column'>
-                <span>
-                  <h4>{{'MixedComponent.Qus' | translate}}</h4>
-                  <input type="text" formControlName='otherOccupation'>
-                </span>
-                <span>
-                  <div fxLayoutAlign.lt-md='center' ngClass.lt-md='margin-top'>
-                    <div fxLayoutAlign.lt-md='center' ngClass.lt-md='margin-top' ngClass.gt-sm='block'>
-                      <img src="assets/img/wrong.png" (click)='cencelOccupation()'>
-                      <!-- input type submit image button -->
-                      <input src="assets/img/right.png" type='image' class='submit-button'>
-                    </div>
-                  </div>
-                  <div *ngIf='occupationForm.controls.otherOccupation.invalid' class="errorMessege">
-                    {{'MixedComponent.Error.Occupation' | translate}}
-                  </div>
-                </span>
-              </div>
-              <!-- dinamic occupation field -->
-            </form>
-          </li>
-          <li *ngIf='userInfo.bloodGroup && !bloodGroupEditing' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-            <span fxFlex.lt-md='100%' fxFlex.gt-sm='13em' fxFlex.lt-md='100%'>
-              <img src="assets/img/edit-icon.png" class="icon" (click)='bloodGroupEditing=true'>
+            </div>
+            <!-- dinamic occupation field -->
+          </form>
+        </li>
+        <li *ngIf='user.bloodGroup && !bloodGroupEditing' fxLayout.gt-sm='row' fxLayout.lt-md='column' ngClass.lt-md='bottom-margin'>
+          <span fxFlex.gt-sm="0 0 13.5em">
+            <img src="assets/img/edit-icon.png" class="icon" (click)='bloodGroupEditing=true'>
+            <h4>{{'MixedComponent.Blood' | translate}}</h4>
+          </span>
+          <span fxFlex="1 0 auto">{{user.bloodGroup}}</span>
+
+        </li>
+        <li *ngIf='!user.bloodGroup && !bloodGroupEditing' fxLayout.gt-sm='row' fxLayout.lt-md='column' ngClass.lt-md='bottom-margin'>
+          <span fxFlex.gt-sm="0 0 13.5em">
+            <img src="assets/img/edit-icon.png" class="icon" (click)='bloodGroupEditing=true'>
+            <h4>{{'MixedComponent.Blood' | translate}}</h4>
+          </span>
+          <span fxFlex="1 0 auto">{{'MixedComponent.None' | translate}}</span>
+
+        </li>
+        <li *ngIf='bloodGroupEditing' class="alter">
+          <form [formGroup]='bloodGroupForm' (ngSubmit)='done("bloodGroupForm","bloodGroup","user","bloodGroupEditing","userChanges")'
+            fxLayout.gt-sm='row' fxLayout.lt-md='column'>
+            <span>
               <h4>{{'MixedComponent.Blood' | translate}}</h4>
+              <mat-form-field>
+                <mat-select formControlName='bloodGroup'>
+                  <mat-option *ngFor='let option of bloodGroups' value='{{option | translate}}'>
+                    {{option | translate}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
             </span>
-            {{userInfo.bloodGroup}}
-          </li>
-          <li *ngIf='!userInfo.bloodGroup && !bloodGroupEditing' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-            <span fxFlex.lt-md='100%' fxFlex.gt-sm='13em' fxFlex.lt-md='100%'>
-              <img src="assets/img/edit-icon.png" class="icon" (click)='bloodGroupEditing=true'>
-              <h4>{{'MixedComponent.Blood' | translate}}</h4>
-            </span>
-            None
-          </li>
-          <li *ngIf='bloodGroupEditing' class="alter">
-            <form [formGroup]='bloodGroupForm' (ngSubmit)='done("bloodGroupForm","bloodGroup","userInfo","bloodGroupEditing","userInfoChanges")'
-              fxLayout.gt-sm='row' fxLayout.lt-md='column'>
-              <span>
-                <h4>{{'MixedComponent.Blood' | translate}}</h4>
-                <mat-form-field>
-                  <mat-select formControlName='bloodGroup'>
-                    <mat-option *ngFor='let option of bloodGroups' value='{{option | translate}}'>
-                      {{option | translate}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </span>
-              <div fxLayoutAlign='center center' ngClass.lt-md='margin-top'>
-                <img src="assets/img/wrong.png" (click)='cencel("bloodGroupForm","bloodGroup","userInfo","bloodGroupEditing")'>
-                <!-- input type submit image button -->
-                <input src="assets/img/right.png" type='image' class='submit-button'>
-              </div>
-              <div class="clearfix"></div>
-            </form>
-          </li>
-          <div class="clearfix"></div>
+            <div fxLayoutAlign='center center' ngClass.lt-md='margin-top'>
+              <!-- input type submit image button -->
+              <input src="assets/img/right.png" type='image' class='submit-button'>
+              <img src="assets/img/wrong.png" (click)='cencel("bloodGroupForm","bloodGroup","user","bloodGroupEditing")'>
+              
+            </div>
+            <div class="clearfix"></div>
+          </form>
+        </li>
+        <div class="clearfix"></div>
       </ul>
-      <div class="spinner" *ngIf='loding'>
-        <mat-spinner *ngIf='loding' [diameter]='200'></mat-spinner>
-      </div>
-      <ul *ngIf='auth'>
+      <ul *ngIf='user'>
         <h2>{{'MixedComponent.SubHeading3' | translate}}</h2>
-        <li *ngIf='!phoneEditing' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <span fxFlex.lt-md='100%' fxFlex.gt-sm='13em' fxFlex.lt-md='100%'>
+        <li *ngIf='!phoneEditing' fxLayout.gt-sm='row' fxLayout.lt-md='column' ngClass.lt-md='bottom-margin'>
+          <span fxFlex.gt-sm="0 0 13.5em">
             <img src="assets/img/edit-icon.png" class="icon" (click)='phoneEditing=true'>
             <h4>{{'MixedComponent.Phone' | translate}}</h4>
           </span>
-          {{auth.phone}}
+          <span fxFlex="1 0 auto">{{user.phone}}</span>
+
         </li>
         <li *ngIf='phoneEditing' class="alter">
-          <form [formGroup]='phoneForm' (ngSubmit)='done("phoneForm","phone","auth","phoneEditing","authChanges")' fxLayout.gt-sm='row'
-            fxLayout.lt-md='column'>
+          <form [formGroup]='phoneForm' (ngSubmit)='done("phoneForm","phone","user","phoneEditing","userChanges")'
+            fxLayout.gt-sm='row' fxLayout.lt-md='column'>
             <span>
               <h4>{{'MixedComponent.Phone' | translate}}</h4>
               <input type="text" formControlName='phone'>
             </span>
             <div fxLayoutAlign.lt-md='center' ngClass.lt-md='margin-top' ngClass.gt-sm='block'>
-              <img src="assets/img/wrong.png" (click)='cencel("phoneForm","phone","auth","phoneEditing")'>
+              <img src="assets/img/wrong.png" (click)='cencel("phoneForm","phone","user","phoneEditing")'>
               <!-- input type submit image button -->
               <input src="assets/img/right.png" type='image' class='submit-button'>
             </div>
@@ -379,36 +409,37 @@
             </div>
           </form>
         </li>
-        <li *ngIf='!passwordEditing' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <span fxFlex.lt-md='100%' fxFlex.gt-sm='13em' fxFlex.lt-md='100%'>
+        <li *ngIf='!passwordEditing' fxLayout.gt-sm='row' fxLayout.lt-md='column' ngClass.lt-md='bottom-margin'>
+          <span fxFlex.gt-sm="0 0 13.5em">
             <img src="assets/img/edit-icon.png" class="icon" (click)='passwordEditing=true'>
             <h4>{{'MixedComponent.Password' | translate}}</h4>
           </span>
-          Hidden
+          <span fxFlex="1 0 auto"> {{'MixedComponent.Hidden' | translate}}</span>
+
         </li>
         <li *ngIf='passwordEditing' class="alter">
-          <form [formGroup]='passwordForm' (ngSubmit)='done("passwordForm","password","auth","passwordEditing","authChanges")' 
+          <form [formGroup]='passwordForm' (ngSubmit)='done("passwordForm","password","user","passwordEditing","userChanges")'
             fxLayout='column'>
             <span>
-            <h4>{{'MixedComponent.Password' | translate}}</h4>
-            <input type="password" formControlName='password'>
-            <div *ngIf='passwordForm.controls.password.invalid' class="errorMessege">
-              {{'MixedComponent.Error.Password' | translate}}
-            </div>
-          </span>
-          <span fxLayout.gt-sm='row' fxLayout.lt-md='column'>
-            <span>
-              <h4>{{'MixedComponent.ConPass' | translate}}</h4>
-              <input type="password" formControlName='conPassword' class="con-password">
+              <h4>{{'MixedComponent.Password' | translate}}</h4>
+              <input type="password" formControlName='password'>
+              <div *ngIf='passwordForm.controls.password.invalid' class="errorMessege">
+                {{'MixedComponent.Error.Password' | translate}}
+              </div>
             </span>
-              <div fxLayoutAlign.lt-md='center' ngClass.lt-md='margin-top' ngClass.gt-sm='block'>
-                  <img src="assets/img/wrong.png" (click)='cencelPassword()'>
-                  <!-- input type submit image button -->
-                  <input src="assets/img/right.png" type='image' class='submit-button'>
-                </div>
+            <span fxLayout.gt-sm='row' fxLayout.lt-md='column'>
+              <span>
+                <h4>{{'MixedComponent.ConPass' | translate}}</h4>
+                <input type="password" formControlName='conPassword' class="con-password">
               </span>
-              
-            
+              <div fxLayoutAlign.lt-md='center' ngClass.lt-md='margin-top' ngClass.gt-sm='block'>
+                <img src="assets/img/wrong.png" (click)='cencelPassword()'>
+                <!-- input type submit image button -->
+                <input src="assets/img/right.png" type='image' class='submit-button'>
+              </div>
+            </span>
+
+
             <div *ngIf='passwordForm.controls.conPassword.hasError("required")' class="errorMessege">
               {{'MixedComponent.Error.ConPass' | translate}}
             </div>
@@ -417,28 +448,30 @@
             </div>
           </form>
         </li>
-        <li *ngIf='auth.email && !emailEditing' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <span fxFlex.lt-md='100%' fxFlex.gt-sm='13em' fxFlex.lt-md='100%'>
+        <li *ngIf='user.email && !emailEditing' fxLayout.gt-sm='row' fxLayout.lt-md='column' ngClass.lt-md='bottom-margin'>
+          <span fxFlex.gt-sm="0 0 13.5em">
             <img src="assets/img/edit-icon.png" class="icon" (click)='emailEditing=true'>
             <h4>{{'MixedComponent.Email' | translate}}</h4>
           </span>
-          {{auth.email}}
+          <span fxFlex="1 0 auto">{{user.email}}</span>
+
         </li>
-        <li *ngIf='!auth.email && !emailEditing' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <span fxFlex.lt-md='100%' fxFlex.gt-sm='13em' fxFlex.lt-md='100%'>
+        <li *ngIf='!user.email && !emailEditing' fxLayout.gt-sm='row' fxLayout.lt-md='column' ngClass.lt-md='bottom-margin'>
+          <span fxFlex.gt-sm="0 0 13.5em">
             <img src="assets/img/edit-icon.png" class="icon" (click)='emailEditing=true'>
             <h4>{{'MixedComponent.Email' | translate}}</h4>
           </span>
-          None</li>
+          <span fxFlex="1 0 auto">{{'MixedComponent.None' | translate}}</span>
+        </li>
         <li *ngIf='emailEditing' class="alter">
-          <form [formGroup]='emailForm' (ngSubmit)='done("emailForm","email","auth","emailEditing","authChanges")' fxLayout.gt-sm='row'
-            fxLayout.lt-md='column'>
+          <form [formGroup]='emailForm' (ngSubmit)='done("emailForm","email","user","emailEditing","userChanges")'
+            fxLayout.gt-sm='row' fxLayout.lt-md='column'>
             <span>
               <h4>{{'MixedComponent.Email' | translate}}</h4>
               <input type="email" formControlName='email'>
             </span>
             <div fxLayoutAlign.lt-md='center' ngClass.lt-md='margin-top' ngClass.gt-sm='block'>
-              <img src="assets/img/wrong.png" (click)='cencel("emailForm","email","auth","emailEditing")'>
+              <img src="assets/img/wrong.png" (click)='cencel("emailForm","email","user","emailEditing")'>
               <!-- input type submit image button -->
               <input src="assets/img/right.png" type='image' class='submit-button'>
             </div>
@@ -451,77 +484,83 @@
             </div>
           </form>
         </li>
-        <li *ngIf='auth.userName && !userNameEditing' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <span fxFlex.lt-md='100%' fxFlex.gt-sm='13em' fxFlex.lt-md='100%'>
+        <li *ngIf='user.userName && !userNameEditing' fxLayout.gt-sm='row' fxLayout.lt-md='column' ngClass.lt-md='bottom-margin'>
+          <span fxFlex.gt-sm="0 0 13.5em">
             <img src="assets/img/edit-icon.png" class="icon" (click)='userNameEditing=true'>
             <h4>{{'MixedComponent.UN' | translate}}</h4>
           </span>
-          {{auth.userName}}
+          <span fxFlex="1 0 auto">{{user.userName}}</span>
+
         </li>
-        <li *ngIf='!auth.userName && !userNameEditing' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <span fxFlex.lt-md='100%' fxFlex.gt-sm='13em' fxFlex.lt-md='100%'>
+        <li *ngIf='!user.userName && !userNameEditing' fxLayout.gt-sm='row' fxLayout.lt-md='column' ngClass.lt-md='bottom-margin'>
+          <span fxFlex.gt-sm="0 0 13.5em">
             <img src="assets/img/edit-icon.png" class="icon" (click)='userNameEditing=true'>
             <h4>{{'MixedComponent.UN' | translate}}</h4>
           </span>
-          None
+          <span fxFlex="1 0 auto">{{'MixedComponent.None' | translate}}</span>
+
         </li>
         <li *ngIf='userNameEditing' class="alter">
-          <form [formGroup]='userNameForm' (ngSubmit)='done("userNameForm","userName","auth","userNameEditing","authChanges")' fxLayout.gt-sm='row'
-            fxLayout.lt-md='column'>
+          <form [formGroup]='userNameForm' (ngSubmit)='done("userNameForm","userName","user","userNameEditing","userChanges")'
+            fxLayout.gt-sm='row' fxLayout.lt-md='column'>
             <span>
               <h4>{{'MixedComponent.UN' | translate}}</h4>
               <input type="userName" formControlName='userName'>
             </span>
             <div fxLayoutAlign.lt-md='center' ngClass.lt-md='margin-top' ngClass.gt-sm='block'>
-              <img src="assets/img/wrong.png" (click)='cencel("userNameForm","userName","auth","userNameEditing")'>
+              <img src="assets/img/wrong.png" (click)='cencel("userNameForm","userName","user","userNameEditing")'>
               <!-- input type submit image button -->
               <input src="assets/img/right.png" type='image' class='submit-button'>
             </div>
             <div class="clearfix"></div>
           </form>
         </li>
-        <li *ngIf='!roleEditing' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <span fxFlex.lt-md='100%' fxFlex.gt-sm='13em' fxFlex.lt-md='100%'>
+        <li *ngIf='!roleEditing' fxLayout.gt-sm='row' fxLayout.lt-md='column' ngClass.lt-md='bottom-margin'>
+          <span fxFlex.gt-sm="0 0 13.5em">
             <img src="assets/img/edit-icon.png" class="icon" (click)='roleEditing=true'>
             <h4>{{'MixedComponent.Role' | translate}}</h4>
           </span>
-          {{auth.role}}
+          <span fxFlex="1 0 auto">{{user.role}}</span>
+
         </li>
         <li *ngIf='roleEditing' class="alter">
-          <form [formGroup]='roleForm' (ngSubmit)='done("roleForm","role","auth","roleEditing","authChanges")' fxLayout.gt-sm='row'
-            fxLayout.lt-md='column'>
+          <form [formGroup]='roleForm' (ngSubmit)='done("roleForm","role","user","roleEditing","userChanges")'
+            fxLayout.gt-sm='row' fxLayout.lt-md='column'>
             <span>
               <h4>{{'MixedComponent.Role' | translate}}</h4>
               <mat-form-field>
                 <mat-select formControlName='role'>
-                  <mat-option *ngFor='let option of roles' value='{{option}}'>
+                  <mat-option *ngFor='let option of roles' value='{{option | translate}}'>
                     {{option | translate}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
             </span>
             <div fxLayoutAlign='center center' ngClass.lt-md='margin-top'>
-              <img src="assets/img/wrong.png" (click)='cencel("roleForm","role","auth","roleEditing")'>
+             
               <!-- input type submit image button -->
               <input src="assets/img/right.png" type='image' class='submit-button'>
+
+               <img src="assets/img/wrong.png" (click)='cencel("roleForm","role","user","roleEditing")'>
             </div>
             <div class="clearfix"></div>
           </form>
         </li>
         <div class="clearfix"></div>
       </ul>
-      <ul *ngIf='address'>
+      <ul *ngIf='user'>
         <h2>{{'MixedComponent.SubHeading2' | translate}}</h2>
-        <li *ngIf='!zoneEditing' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <span fxFlex.lt-md='100%' fxFlex.gt-sm='13em' fxFlex.lt-md='100%'>
+        <li *ngIf='!zoneEditing' fxLayout.gt-sm='row' fxLayout.lt-md='column' ngClass.lt-md='bottom-margin'>
+          <span fxFlex.gt-sm="0 0 13.5em">
             <img src="assets/img/edit-icon.png" class="icon" (click)='zoneEditing=true'>
             <h4>{{'MixedComponent.Zone' | translate}}</h4>
           </span>
-          {{address.zone}}
+          <span fxFlex="1 0 auto"> {{user.zone}}</span>
+
         </li>
         <li *ngIf='zoneEditing' class="alter">
-          <form [formGroup]='zoneForm' (ngSubmit)='done("zoneForm","zone","address","zoneEditing","addressChanges")' fxLayout.gt-sm='row'
-            fxLayout.lt-md='column'>
+          <form [formGroup]='zoneForm' (ngSubmit)='done("zoneForm","zone","user","zoneEditing","userChanges")'
+            fxLayout.gt-sm='row' fxLayout.lt-md='column'>
             <span>
               <h4>{{'MixedComponent.Zone' | translate}}</h4>
               <span>
@@ -534,7 +573,7 @@
               </span>
             </span>
             <div fxLayoutAlign.lt-md='center' ngClass.lt-md='margin-top' ngClass.gt-sm='block'>
-              <img src="assets/img/wrong.png" (click)='cencel("zoneForm","zone","address","zoneEditing")'>
+              <img src="assets/img/wrong.png" (click)='cencel("zoneForm","zone","user","zoneEditing")'>
               <!-- input type submit image button -->
               <input src="assets/img/right.png" type='image' class='submit-button'>
             </div>
@@ -547,14 +586,15 @@
             </div>
           </form>
         </li>
-        <li *ngIf='!subDistrictEditing' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <span fxFlex.gt-sm='13em' fxFlex.lt-md='100%'>
+        <li *ngIf='!subDistrictEditing' fxLayout.gt-sm='row' fxLayout.lt-md='column' ngClass.lt-md='bottom-margin'>
+          <span fxFlex.gt-sm="0 0 13.5em">
             <img src="assets/img/edit-icon.png" class="icon" (click)='subDistrictEditing=true'>
             <h4>{{'MixedComponent.SubDis' | translate}}</h4>
           </span>
-          {{address.subDistrict}}</li>
+          <span fxFlex="1 0 auto">{{user.subDistrict}}</span>
+        </li>
         <li *ngIf='subDistrictEditing' class="alter">
-          <form [formGroup]='subDistrictForm' (ngSubmit)='done("subDistrictForm","subDistrict","address","subDistrictEditing","addressChanges")'
+          <form [formGroup]='subDistrictForm' (ngSubmit)='done("subDistrictForm","subDistrict","user","subDistrictEditing","userChanges")'
             fxLayout.gt-sm='row' fxLayout.lt-md='column'>
             <span>
               <h4>{{'MixedComponent.SubDis' | translate}}</h4>
@@ -568,7 +608,7 @@
               </span>
             </span>
             <div fxLayoutAlign.lt-md='center' ngClass.lt-md='margin-top' ngClass.gt-sm='block'>
-              <img src="assets/img/wrong.png" (click)='cencel("subDistrictForm","subDistrict","address","subDistrictEditing")'>
+              <img src="assets/img/wrong.png" (click)='cencel("subDistrictForm","subDistrict","user","subDistrictEditing")'>
               <!-- input type submit image button -->
               <input src="assets/img/right.png" type='image' class='submit-button'>
             </div>
@@ -581,22 +621,31 @@
             </div>
           </form>
         </li>
-        <li *ngIf='!permanentAddressEditing' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <span fxFlex.lt-md='100%' fxFlex.gt-sm='13em' fxFlex.lt-md='100%'>
+
+
+
+        <li *ngIf='!permanentAddressEditing' fxLayout.gt-sm='row' fxLayout.lt-md='column' ngClass.lt-md='bottom-margin'>
+          <span fxFlex.gt-sm="0 0 13.5em">
             <img src="assets/img/edit-icon.png" class="icon" (click)='permanentAddressEditing=true'>
             <h4>{{'MixedComponent.PA' | translate}}</h4>
           </span>
-          {{address.permanentAddress}}
+          <span fxFlex="1 0 auto">{{user.permanentAddress}}</span>
+
         </li>
+
+
+
+
+
         <li *ngIf='permanentAddressEditing' class="alter">
-          <form [formGroup]='permanentAddressForm' (ngSubmit)='done("permanentAddressForm","permanentAddress","address","permanentAddressEditing","addressChanges")'
+          <form [formGroup]='permanentAddressForm' (ngSubmit)='done("permanentAddressForm","permanentAddress","user","permanentAddressEditing","userChanges")'
             fxLayout.gt-sm='row' fxLayout.lt-md='column'>
             <span>
               <h4>{{'MixedComponent.PA' | translate}}</h4>
               <input type="permanentAddress" formControlName='permanentAddress'>
             </span>
             <div fxLayoutAlign.lt-md='center' ngClass.lt-md='margin-top' ngClass.gt-sm='block'>
-              <img src="assets/img/wrong.png" (click)='cencel("permanentAddressForm","permanentAddress","address","permanentAddressEditing")'>
+              <img src="assets/img/wrong.png" (click)='cencel("permanentAddressForm","permanentAddress","user","permanentAddressEditing")'>
               <!-- input type submit image button -->
               <input src="assets/img/right.png" type='image' class='submit-button'>
             </div>
@@ -606,15 +655,19 @@
             </div>
           </form>
         </li>
-        <li *ngIf='!districtEditing' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <span fxFlex.lt-md='100%' fxFlex.gt-sm='13em' fxFlex.lt-md='100%'>
+
+
+
+        <li *ngIf='!districtEditing' fxLayout.gt-sm='row' fxLayout.lt-md='column' ngClass.lt-md='bottom-margin'>
+          <span fxFlex.gt-sm="0 0 13.5em">
             <img src="assets/img/edit-icon.png" class="icon" (click)='districtEditing=true'>
             <h4>{{'MixedComponent.Dist' | translate}}</h4>
           </span>
-          {{address.district}}
+          <span fxFlex="1 0 auto">{{user.district}}</span>
+
         </li>
         <li *ngIf='districtEditing' class="alter">
-          <form [formGroup]='districtForm' (ngSubmit)='done("districtForm","district","address","districtEditing","addressChanges")'
+          <form [formGroup]='districtForm' (ngSubmit)='done("districtForm","district","user","districtEditing","userChanges")'
             fxLayout.gt-sm='row' fxLayout.lt-md='column'>
             <span>
               <h4>{{'MixedComponent.Dist' | translate}}</h4>
@@ -628,7 +681,7 @@
               </span>
             </span>
             <div fxLayoutAlign.lt-md='center' ngClass.lt-md='margin-top' ngClass.gt-sm='block'>
-              <img src="assets/img/wrong.png" (click)='cencel("districtForm","district","address","districtEditing")'>
+              <img src="assets/img/wrong.png" (click)='cencel("districtForm","district","user","districtEditing")'>
               <!-- input type submit image button -->
               <input src="assets/img/right.png" type='image' class='submit-button'>
             </div>
@@ -641,97 +694,120 @@
             </div>
           </form>
         </li>
-        <li *ngIf='address.country && !countryEditing' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <span fxFlex.lt-md='100%' fxFlex.gt-sm='13em' fxFlex.lt-md='100%'>
+        <li *ngIf='user.country && !countryEditing' fxLayout.gt-sm='row' fxLayout.lt-md='column' ngClass.lt-md='bottom-margin'>
+          <span fxFlex.gt-sm="0 0 13.5em">
             <img src="assets/img/edit-icon.png" class="icon" (click)='countryEditing=true'>
             <h4>{{'MixedComponent.Country' | translate}}</h4>
           </span>
-          {{address.country}}
+          <span fxFlex="1 0 auto">{{user.country}}</span>
+
         </li>
-        <li *ngIf='!address.country && !countryEditing' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <span fxFlex.lt-md='100%' fxFlex.gt-sm='13em' fxFlex.lt-md='100%'>
+        <li *ngIf='!user.country && !countryEditing' fxLayout.gt-sm='row' fxLayout.lt-md='column' ngClass.lt-md='bottom-margin'>
+          <span fxFlex.gt-sm="0 0 13.5em">
             <img src="assets/img/edit-icon.png" class="icon" (click)='countryEditing=true'>
             <h4>{{'MixedComponent.Country' | translate}}</h4>
           </span>
-          None
+          <span fxFlex="1 0 auto">{{'MixedComponent.None' | translate}}</span>
+
         </li>
         <li *ngIf='countryEditing' class="alter">
-          <form [formGroup]='countryForm' (ngSubmit)='done("countryForm","country","address","countryEditing","addressChanges")' fxLayout.gt-sm='row'
-            fxLayout.lt-md='column'>
+          <form [formGroup]='countryForm' (ngSubmit)='done("countryForm","country","user","countryEditing","userChanges")'
+            fxLayout.gt-sm='row' fxLayout.lt-md='column'>
             <span>
               <h4>{{'MixedComponent.Country' | translate}}</h4>
               <input type="text" formControlName='country'>
             </span>
             <div fxLayoutAlign.lt-md='center' ngClass.lt-md='margin-top' ngClass.gt-sm='block'>
-              <img src="assets/img/wrong.png" (click)='cencel("countryForm","country","address","countryEditing")'>
+              <img src="assets/img/wrong.png" (click)='cencel("countryForm","country","user","countryEditing")'>
               <!-- input type submit image button -->
               <input src="assets/img/right.png" type='image' class='submit-button'>
             </div>
             <div class="clearfix"></div>
           </form>
         </li>
-        <li *ngIf='address.nationality && !nationalityEditing' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <span fxFlex.lt-md='100%' fxFlex.gt-sm='13em' fxFlex.lt-md='100%'>
+        <li *ngIf='user.nationality && !nationalityEditing' fxLayout.gt-sm='row' fxLayout.lt-md='column' ngClass.lt-md='bottom-margin'>
+          <span fxFlex.gt-sm="0 0 13.5em">
             <img src="assets/img/edit-icon.png" class="icon" (click)='nationalityEditing=true'>
             <h4>{{'MixedComponent.Nationality' | translate}}</h4>
           </span>
-          {{address.nationality}}</li>
-        <li *ngIf='!address.nationality && !nationalityEditing' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <span fxFlex.lt-md='100%' fxFlex.gt-sm='13em' fxFlex.lt-md='100%'>
+          <span fxFlex="1 0 auto"> {{user.nationality}}</span>
+        </li>
+        <li *ngIf='!user.nationality && !nationalityEditing' fxLayout.gt-sm='row' fxLayout.lt-md='column' ngClass.lt-md='bottom-margin'>
+          <span fxFlex.gt-sm="0 0 13.5em">
             <img src="assets/img/edit-icon.png" class="icon" (click)='nationalityEditing=true'>
             <h4>{{'MixedComponent.Nationality' | translate}}</h4>
           </span>
-          None
+          <span fxFlex="1 0 auto">{{'MixedComponent.None' | translate}}</span>
+
         </li>
         <li *ngIf='nationalityEditing' class="alter">
-          <form [formGroup]='nationalityForm' (ngSubmit)='done("nationalityForm","nationality","address","nationalityEditing","addressChanges")'
+          <form [formGroup]='nationalityForm' (ngSubmit)='done("nationalityForm","nationality","user","nationalityEditing","userChanges")'
             fxLayout.gt-sm='row' fxLayout.lt-md='column'>
             <span>
               <h4>{{'MixedComponent.Nationality' | translate}}</h4>
               <input type="text" formControlName='nationality'>
             </span>
             <div fxLayoutAlign.lt-md='center' ngClass.lt-md='margin-top' ngClass.gt-sm='block'>
-              <img src="assets/img/wrong.png" (click)='cencel("nationalityForm","nationality","address","nationalityEditing")'>
+              <img src="assets/img/wrong.png" (click)='cencel("nationalityForm","nationality","user","nationalityEditing")'>
               <!-- input type submit image button -->
               <input src="assets/img/right.png" type='image' class='submit-button'>
             </div>
             <div class="clearfix"></div>
           </form>
         </li>
-        <li *ngIf='address.nId && !nIdEditing' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <span fxFlex.lt-md='100%' fxFlex.gt-sm='13em' fxFlex.lt-md='100%'>
-            <img src="assets/img/edit-icon.png" class="icon" (click)='nIdEditing=true'>
+        <li *ngIf='user.nid && !nidEditing' fxLayout.gt-sm='row' fxLayout.lt-md='column'>
+          <span fxFlex.gt-sm="0 0 13.5em">
+            <img src="assets/img/edit-icon.png" class="icon" (click)='nidEditing=true'>
             <h4>{{'MixedComponent.NID' | translate}}</h4>
           </span>
-          {{address.nId}}
+          <span fxFlex="1 0 auto">{{user.nid}}</span>
+
         </li>
-        <li *ngIf='!address.nId && !nIdEditing' fxLayout.lt-md='row wrap' ngClass.lt-md='bottom-margin'>
-          <span fxFlex.lt-md='100%' fxFlex.gt-sm='13em' fxFlex.lt-md='100%'>
-            <img src="assets/img/edit-icon.png" class="icon" (click)='nIdEditing=true'>
+
+
+
+        <li *ngIf='!user.nid && !nidEditing' fxLayout.gt-sm='row' fxLayout.lt-md='column'>
+          <span fxFlex.gt-sm="0 0 13.5em">
+            <img src="assets/img/edit-icon.png" class="icon" (click)='nidEditing=true'>
             <h4>{{'MixedComponent.NID' | translate}}</h4>
           </span>
-          None
+
+          <span fxFlex="1 0 auto">{{'MixedComponent.None' | translate}}</span>
         </li>
-        <li *ngIf='nIdEditing' class="alter">
-          <form [formGroup]='nIdForm' (ngSubmit)='done("nIdForm","nId","address","nIdEditing","addressChanges")' fxLayout.gt-sm='row'
-            fxLayout.lt-md='column'>
+
+
+
+
+        <li *ngIf='nidEditing' class="alter">
+          <form [formGroup]='nidForm' (ngSubmit)='done("nidForm","nid","user","nidEditing","userChanges")'
+            fxLayout.gt-sm='row' fxLayout.lt-md='column'>
             <span>
               <h4>{{'MixedComponent.NID' | translate}}</h4>
-              <input type="text" formControlName='nId'>
+              <input type="text" formControlName='nid'>
             </span>
             <div fxLayoutAlign.lt-md='center' ngClass.lt-md='margin-top' ngClass.gt-sm='block'>
-              <img src="assets/img/wrong.png" (click)='cencel("nIdForm","nId","address","nIdEditing")'>
+              <img src="assets/img/wrong.png" (click)='cencel("nidForm","nid","user","nidEditing")'>
               <!-- input type submit image button -->
               <input src="assets/img/right.png" type='image' class='submit-button'>
             </div>
             <div class="clearfix"></div>
-            <div *ngIf='nIdForm.controls.nId.hasError("pattern")' class="errorMessege">
+            <div *ngIf='nidForm.controls.nid.hasError("pattern")' class="errorMessege">
               {{'MixedComponent.Error.Number' | translate}}
             </div>
           </form>
         </li>
+        <div class="clearfix"></div>
       </ul>
+      <div class="clearfix"></div>
     </div>
+
+
+
+
+
+
+
+
     <div class="clearfix"></div>
   </mat-card>
   <app-footer></app-footer>

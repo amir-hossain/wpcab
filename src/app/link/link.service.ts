@@ -19,14 +19,19 @@ export class LinkService {
 
   }
 
-  public getUsersByPage(pageNumber):Subscribable<any> {
-      return LinkService.data.getUsersByPage(pageNumber);
+  public getUsersByPage(pageNumber): Subscribable<any> {
+    return LinkService.data.getUsersByPage(pageNumber);
   };
 
-  public getUserById(id):Subscribable<any> {
+  public getUserById(id): Subscribable<any> {
 
     return LinkService.data.getUserById(id);
-};
+  };
+
+  public editUser(user): Subscribable<any> {
+
+    return LinkService.data.edirUser(user);
+  };
 
 }
 
