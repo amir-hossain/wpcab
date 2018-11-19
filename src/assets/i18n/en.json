@@ -95,6 +95,7 @@
         "Month":"Month",
         "Year":"Year",
         "FatherName":"Father's name",
+        "HusbandName":"Husband's name",
         "MotherName":"Mother's name",
         "Status":"Marital status",
         "Married":"Married",

@@ -62,6 +62,8 @@ export class RegistrationComponent implements OnInit {
 
   get fatherName() { return this.registrationForm.get('userInfo').get('fatherName'); }
 
+  get husbandName(){return this.registrationForm.get("userInfo").get("husbandName");}
+
   get motherName() { return this.registrationForm.get('userInfo').get('motherName'); }
 
   get status() { return this.registrationForm.get('userInfo').get('status'); }
@@ -137,7 +139,8 @@ export class RegistrationComponent implements OnInit {
         day: ["", [Validators.required, Validators.pattern('^\\d+$')]],
         month: ["", Validators.required],
         year: ["", [Validators.required, Validators.pattern('^\\d+$')]],
-        fatherName: ["", Validators.required],
+        fatherName: [""],
+        husbandName:[""],
         motherName: ["", Validators.required],
         status: ["", Validators.required],
         spoouseWpcabMember: [false],

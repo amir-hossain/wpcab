@@ -70,38 +70,73 @@
 
       </div>
       <!-- dob -->
+
+
+
       <div>
+
         <mat-form-field fxFlexFill>
-          <mat-label>*{{'MixedComponent.FatherName' | translate}}</mat-label>
+
+          <mat-label>{{'MixedComponent.FatherName' | translate}}</mat-label>
+
           <input matInput type="text" formControlName="fatherName" [matAutocomplete]='father'>
+
           <mat-autocomplete #father='matAutocomplete'>
+
             <mat-option *ngFor='let option of filteredNames' [value]='option.name'>
+
               <span>{{option.name}}</span>
+
               <span *ngIf='option.zone!=="Other"'>({{option.zone}})</span>
+
               <span *ngIf='option.zone==="Other"'>({{option.subDistrict}})</span>
+
             </mat-option>
+
           </mat-autocomplete>
+
         </mat-form-field>
-        <mat-error *ngIf="fatherName.invalid && fatherName.touched">
-          {{'MixedComponent.Error.FatherName' | translate}}
-        </mat-error>
+
       </div>
       <!-- father name -->
+
       <div>
+
         <mat-form-field fxFlexFill>
-          <mat-label>*{{'MixedComponent.MotherName' | translate}}</mat-label>
-          <input matInput type="text" formControlName="motherName" [matAutocomplete]='mother'>
-          <mat-autocomplete #mother='matAutocomplete'>
-            <mat-option *ngFor='let option of filteredNames' [value]='option.name'>
-              <span>{{option.name}}</span>
-              <span *ngIf='option.zone!=="Other"'>({{option.zone}})</span>
-              <span *ngIf='option.zone==="Other"'>({{option.subDistrict}})</span>
-            </mat-option>
-          </mat-autocomplete>
+
+          <mat-label>{{'MixedComponent.HusbandName' | translate}}</mat-label>
+
+          <input matInput type="text" formControlName='husbandName'>
+
         </mat-form-field>
-        <mat-error *ngIf="motherName.invalid && motherName.touched">
-          {{'MixedComponent.Error.MotherName' | translate}}
-        </mat-error>
+
+      </div>
+      <!-- husband name -->
+
+      <div>
+
+        <mat-form-field fxFlexFill>
+
+          <mat-label>{{'MixedComponent.MotherName' | translate}}</mat-label>
+
+          <input matInput type="text" formControlName="motherName" [matAutocomplete]='mother'>
+
+          <mat-autocomplete #mother='matAutocomplete'>
+
+            <mat-option *ngFor='let option of filteredNames' [value]='option.name'>
+
+              <span>{{option.name}}</span>
+
+              <span *ngIf='option.zone!=="Other"'>({{option.zone}})</span>
+
+              <span *ngIf='option.zone==="Other"'>({{option.subDistrict}})</span>
+
+            </mat-option>
+
+          </mat-autocomplete>
+
+        </mat-form-field>
+
       </div>
       <!-- mother name -->
       <mat-radio-group formControlName="status">
