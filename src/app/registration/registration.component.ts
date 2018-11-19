@@ -141,7 +141,7 @@ export class RegistrationComponent implements OnInit {
         year: ["", [Validators.required, Validators.pattern('^\\d+$')]],
         fatherName: [""],
         husbandName:[""],
-        motherName: ["", Validators.required],
+        motherName: [""],
         status: ["", Validators.required],
         spoouseWpcabMember: [false],
         spouseName: '',
