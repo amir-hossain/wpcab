@@ -346,7 +346,7 @@ export class RegistrationComponent implements OnInit {
     let spoouseWpcabMember = ac.get('spoouseWpcabMember');
     let spouseName = ac.get('spouseName');
     // console.log(this.registrationForm)
-    if (occupation.value === 'Others') {
+    if (occupation.value === 'Other' || occupation.value === 'অন্যান্য') {
       this.otherOccupationSelected = true;
       if (!otherOccupation.value) {
         otherOccupation.setErrors(Validators.required);
