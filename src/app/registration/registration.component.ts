@@ -62,11 +62,11 @@ export class RegistrationComponent implements OnInit {
 
   get fatherName() { return this.registrationForm.get('userInfo').get('fatherName'); }
 
-  get husbandName(){return this.registrationForm.get("userInfo").get("husbandName");}
+  get husbandName() { return this.registrationForm.get("userInfo").get("husbandName"); }
 
   get motherName() { return this.registrationForm.get('userInfo').get('motherName'); }
 
-  get status() { return this.registrationForm.get('userInfo').get('status'); }
+  get maritalStatus() { return this.registrationForm.get('userInfo').get('status'); }
 
   get spouseName() { return this.registrationForm.get('userInfo').get('spouseName'); }
 
@@ -76,21 +76,53 @@ export class RegistrationComponent implements OnInit {
 
   get otherOccupation() { return this.registrationForm.get('userInfo').get('otherOccupation'); }
 
-  get invitedBy() { return this.registrationForm.get('userInfo').get('invitedBy'); }
+  get inviter() { return this.registrationForm.get('userInfo').get('inviter'); }
 
-  get zone() { return this.registrationForm.get('address').get('zone'); }
+  get permanentAddressVillage() { return this.registrationForm.get('permanentAddress').get('village'); }
 
-  get subDistrict() { return this.registrationForm.get('address').get('subDistrict'); }
+  get permanentAddressHouse() { return this.registrationForm.get('permanentAddress').get('house'); }
 
-  get permanentAddress() { return this.registrationForm.get('address').get('permanentAddress'); }
+  get permanentAddressRoad() { return this.registrationForm.get('permanentAddress').get('road'); }
 
-  get district() { return this.registrationForm.get('address').get('district'); }
+  get permanentAddressSector() { return this.registrationForm.get('permanentAddress').get('sector'); }
 
-  get country() { return this.registrationForm.get('address').get('country'); }
+  get permanentAddressBlock() { return this.registrationForm.get('permanentAddress').get('block'); }
 
-  get nationality() { return this.registrationForm.get('address').get('nationality'); }
+  get permanentAddressDistrict() { return this.registrationForm.get('permanentAddress').get('district'); }
 
-  get nId() { return this.registrationForm.get('address').get('nId'); }
+  get permanentAddressSubDistrict() { return this.registrationForm.get('permanentAddress').get('subDistrict'); }
+
+  get permanentAddressPostOffice() { return this.registrationForm.get('permanentAddress').get('postOffice'); }
+
+  get permanentAddressPostalCode() { return this.registrationForm.get('permanentAddress').get('postalCode'); }
+
+  get permanentAddressCountry() { return this.registrationForm.get('permanentAddress').get('country'); }
+
+  get permanentAddressNationality() { return this.registrationForm.get('permanentAddress').get('nationality'); }
+
+  get permanentAddressnId() { return this.registrationForm.get('permanentAddress').get('nId'); }
+
+  get presentAddressVillage() { return this.registrationForm.get('presentAddress').get('village'); }
+
+  get presentAddressHouse() { return this.registrationForm.get('presentAddress').get('house'); }
+
+  get presentAddressRoad() { return this.registrationForm.get('presentAddress').get('road'); }
+
+  get presentAddressSector() { return this.registrationForm.get('presentAddress').get('sector'); }
+
+  get presentAddressBlock() { return this.registrationForm.get('presentAddress').get('block'); }
+
+  get presentAddressDistrict() { return this.registrationForm.get('presentAddress').get('district'); }
+
+  get presentAddressSubDistrict() { return this.registrationForm.get('presentAddress').get('subDistrict'); }
+
+  get presentAddressPostOffice() { return this.registrationForm.get('presentAddress').get('postOffice'); }
+
+  get presentAddressPostalCode() { return this.registrationForm.get('presentAddress').get('postalCode'); }
+
+  get presentAddressCountry() { return this.registrationForm.get('presentAddress').get('country'); }
+
+  get presentAddressZone() { return this.registrationForm.get('presentAddress').get('zone'); }
 
   get userName() { return this.registrationForm.get('auth').get('userName'); }
 
@@ -105,9 +137,9 @@ export class RegistrationComponent implements OnInit {
   get role() { return this.registrationForm.get('auth').get('role'); }
 
 
-  constructor(private builder: FormBuilder, private db: AngularFireDatabase, private router: Router, 
-    private fb: FirebaseApp, private ddis: DropDownItemsService, private communicationService: CommunicationService, 
-    private ts: TranslateService,private link:LinkService) {
+  constructor(private builder: FormBuilder, private db: AngularFireDatabase, private router: Router,
+    private fb: FirebaseApp, private ddis: DropDownItemsService, private communicationService: CommunicationService,
+    private ts: TranslateService, private link: LinkService) {
     let lan = this.getSelectedLanguage();
     this.ts.use(lan);
     this.notifyRoot();
@@ -140,12 +172,12 @@ export class RegistrationComponent implements OnInit {
         month: ["", Validators.required],
         year: ["", [Validators.required, Validators.pattern('^\\d+$')]],
         fatherName: [""],
-        husbandName:[""],
+        husbandName: [""],
         motherName: [""],
         status: ["", Validators.required],
         spoouseWpcabMember: [false],
         spouseName: '',
-        invitedBy: ["", Validators.required],
+        inviter: ["", Validators.required],
         occupation: ["", Validators.required],
         otherOccupation: [''],
         bloodGroup: [''],
@@ -154,15 +186,37 @@ export class RegistrationComponent implements OnInit {
           validator: this.dinamicField.bind(this)
         },
       ),
-      address: this.builder.group({
-        zone: ["", [Validators.required, this.zoneDoesNotExist.bind(this)]],
-        subDistrict: ["", [Validators.required, this.subDistrictDoesNotExist.bind(this)]],
-        permanentAddress: ["", Validators.required],
-        district: ["", [Validators.required, this.districtDoesNotExist.bind(this)]],
+
+      permanentAddress: this.builder.group({
+        village: [""],
+        house: [""],
+        road: [""],
+        sector: [""],
+        block: [""],
+        subDistrict: [""],
+        district: [""],
+        postOffice: [""],
+        postalCode: [""],
         country: [""],
         nationality: [""],
-        nId: ["", Validators.pattern('^\\d+$')],
+        nId: ["", Validators.pattern('^\\d+$')]
       }),
+
+      presentAddress: this.builder.group({
+        village: [""],
+        house: [""],
+        road: [""],
+        sector: [""],
+        block: [""],
+        subDistrict: ["", [Validators.required, this.subDistrictDoesNotExist.bind(this)]],
+        district: ["", [Validators.required, this.districtDoesNotExist.bind(this)]],
+        postOffice: [""],
+        postalCode: [""],
+        country: [""],
+        zone: ["", [Validators.required, this.zoneDoesNotExist.bind(this)]],
+
+      }),
+
       auth: this.builder.group({
         userName: ['', [this.existUserName.bind(this)]],
         password: ["", Validators.required],
@@ -179,24 +233,24 @@ export class RegistrationComponent implements OnInit {
 
     this.resetRadioButton();
 
-   
+
 
     let userInfoGroup = <FormGroup>this.registrationForm.controls.userInfo;
     this.nameAutoSuggestion(userInfoGroup, 'fatherName');
     this.nameAutoSuggestion(userInfoGroup, 'motherName');
-    this.nameAutoSuggestion(userInfoGroup, 'invitedBy');
+    this.nameAutoSuggestion(userInfoGroup, 'inviter');
     this.nameAutoSuggestion(userInfoGroup, 'spouseName');
 
-    let addressGroup = <FormGroup>this.registrationForm.controls.address;
-    this.districtAutoSuggestion(addressGroup);
-    this.subDistrictAutoSuggestion(addressGroup);
-    this.zoneAutoSuggestion(addressGroup);
+
+    this.districtAutoSuggestion();
+    this.subDistrictAutoSuggestion();
+    this.zoneAutoSuggestion();
 
   }
 
   private resetRadioButton() {
     this.gender.setValue(false);
-    this.status.setValue(false);
+    this.maritalStatus.setValue(false);
     this.occupation.setValue(false);
   }
 
@@ -230,8 +284,8 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
-  zoneAutoSuggestion(addressGroup: FormGroup) {
-    addressGroup.controls.zone.valueChanges
+  zoneAutoSuggestion() {
+    this.presentAddressZone.valueChanges
       .subscribe(val => {
         if (!val) {
           this.filteredZone = [];
@@ -243,21 +297,42 @@ export class RegistrationComponent implements OnInit {
       })
   }
 
-  districtAutoSuggestion(addressGroup: FormGroup) {
+  districtAutoSuggestion() {
 
-    addressGroup.controls.district.valueChanges
+    this.presentAddressDistrict.valueChanges
       .subscribe(val => {
         if (!val) {
           this.filteredDistricts = [];
         } else {
           this.filteredDistricts = this.districts.filter(option => option.toLowerCase().startsWith(val.toLowerCase()));
         }
-      })
+      });
+
+    this.permanentAddressDistrict.valueChanges
+      .subscribe(val => {
+        if (!val) {
+          this.filteredDistricts = [];
+        } else {
+          this.filteredDistricts = this.districts.filter(option => option.toLowerCase().startsWith(val.toLowerCase()));
+        }
+      });
+
+
 
   }
 
-  subDistrictAutoSuggestion(addressGroup: FormGroup) {
-    addressGroup.controls.subDistrict.valueChanges
+  subDistrictAutoSuggestion() {
+
+    this.presentAddressSubDistrict.valueChanges
+      .subscribe(val => {
+        if (!val) {
+          this.filteredSubDistricts = [];
+        } else {
+          this.filteredSubDistricts = this.subDistricts.filter(option => option.toLowerCase().startsWith(val.toLowerCase()));
+        }
+      })
+
+    this.permanentAddressSubDistrict.valueChanges
       .subscribe(val => {
         if (!val) {
           this.filteredSubDistricts = [];
@@ -359,7 +434,7 @@ export class RegistrationComponent implements OnInit {
       otherOccupation.setErrors(null);
     }
 
-    if (status.value === 'Married' || status.value ==='বিবাহিত') {
+    if (status.value === 'Married' || status.value === 'বিবাহিত') {
       this.marriedSelected = true;
       // console.log(spoouseWpcabMember.value);
       if (spoouseWpcabMember.value) {
@@ -399,29 +474,44 @@ export class RegistrationComponent implements OnInit {
   }
 
 
-  
 
-  
 
-  getDob(){
-    return this.day.value+"/"+this.month.value+"/"+this.year.value;
+
+
+  getDob() {
+    return this.day.value + "/" + this.month.value + "/" + this.year.value;
   }
+
+  getOccupation() {
+    if (this.otherOccupationSelected) {
+
+      return this.otherOccupation.value;
+
+    } else {
+
+
+      return this.occupation.value;
+
+    }
+
+  }
+
+
 
   signup() {
     if (this.registrationForm.valid) {
 
       this.uploding = true;
-      this.link.insertUser(new User(this.fullName.value,this.fatherName.value,this.motherName.value,this.gender.value,
-        this.getDob(),this.status.value,this.spouseName.value,this.invitedBy.value,this.bloodGroup.value,
-        this.occupation.value,this.permanentAddress.value,this.zone.value,this.subDistrict.value,this.district.value,
-        this.country.value,this.nationality.value,this.nId.value,this.userName.value,this.password.value,this.phone.value,
-        this.email.value,this.role.value))
-      .subscribe(val=>{
-        if(val){
-          this.uploding = false;
-this.router.navigateByUrl('registration-sucessfull');
-        }
-      })
+
+      let user = this.getUserObject();
+
+      this.link.insertUser(user)
+        .subscribe(val => {
+          if (val) {
+            this.uploding = false;
+            this.router.navigateByUrl('registration-sucessfull');
+          }
+        })
 
     } else {
       Object.keys(this.registrationForm.controls).forEach(groupName => {
@@ -437,6 +527,89 @@ this.router.navigateByUrl('registration-sucessfull');
       this.footerError = true;
     }
 
+  }
+  getUserObject(): any {
+
+    return new User(
+
+      this.fullName.value,
+
+      this.fatherName.value,
+
+      this.husbandName.value,
+
+      this.motherName.value,
+
+      this.gender.value,
+
+      this.getDob(),
+
+      this.maritalStatus.value,
+
+      this.spouseName.value,
+
+      this.inviter.value,
+
+      this.bloodGroup.value,
+
+      this.getOccupation(),
+
+      this.permanentAddressVillage.value,
+
+      this.permanentAddressHouse.value,
+
+      this.permanentAddressRoad.value,
+
+      this.permanentAddressSector.value,
+
+      this.permanentAddressBlock.value,
+
+      this.permanentAddressSubDistrict.value,
+
+      this.permanentAddressDistrict.value,
+
+      this.permanentAddressPostOffice.value,
+
+      this.permanentAddressPostalCode.value,
+
+      this.permanentAddressCountry.value,
+
+      this.permanentAddressNationality.value,
+
+      this.permanentAddressnId.value,
+
+      this.presentAddressVillage.value,
+
+      this.presentAddressHouse.value,
+
+      this.presentAddressRoad.value,
+
+      this.presentAddressSector.value,
+
+      this.presentAddressBlock.value,
+
+      this.presentAddressSubDistrict.value,
+
+      this.presentAddressDistrict.value,
+
+      this.presentAddressPostOffice.value,
+
+      this.presentAddressPostalCode.value,
+
+      this.presentAddressCountry.value,
+
+      this.presentAddressZone.value,
+
+      this.userName.value,
+
+      this.password.value,
+
+      this.phone.value,
+
+      this.email.value,
+
+      this.role.value
+    )
   }
 
 }

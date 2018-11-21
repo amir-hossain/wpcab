@@ -8,6 +8,8 @@ export class User {
 
     fatherName;
 
+    husbandName;
+
     motherName;
 
     DOB;
@@ -22,19 +24,51 @@ export class User {
 
     occupation;
 
-    permanentAddress;
+    permanentAddressVillage;
 
-    zone;
+    permanentAddressHouse;
 
-    subDistrict;
+    permanentAddressRoad;
 
-    district;
+    permanentAddressSector;
 
-    country;
+    permanentAddressBlock;
 
-    nationality;
+    permanentAddressSubdistrict;
 
-    nID;
+    permanentAddressDristrict;
+
+    permanentAddressPostOffice;
+
+    permanentAddressPostalCode;
+
+    permanentAddressCountry;
+
+    permanentAddressNationality;
+
+    permanentAddressNID;
+
+    presentAddressVillage;
+
+    presentAddressHouse;
+
+    presentAddressRoad;
+
+    presentAddressSector;
+
+    presentAddressBlock;
+
+    presentAddressSubDistrict;
+
+    presentAddressDistrict;
+
+    presentAddressPostOffice;
+
+    presentAddressPostalCode;
+
+    presentAddressCountry;
+
+    presentAddressZone;
 
     userName;
 
@@ -46,51 +80,162 @@ export class User {
 
     role;
 
-    constructor(fullName, fatherName?, motherName?, gender?, DOB?, maritalStatus?, spouseName?, inviter?, bloodGroup?, occupation?, permanentAddress?, zone?,
-        subDistrict?, district?, country?, nationality?, nID?, userName?, password?, phone?, email?, role?) {
+    constructor(
+        
+        fullName,
 
-            this.fullName=fullName ,
+        fatherName?,
 
-            this.gender=gender ,
-        
-            this.fatherName=fatherName ,
-        
-            this.motherName=motherName ,
-        
-            this.DOB=DOB ,
-        
-            this.maritalStatus=maritalStatus ,
-        
-            this.spouseName=spouseName ,
-        
-            this.inviter=inviter ,
-        
-            this.bloodGroup=bloodGroup ,
-        
-            this.occupation=occupation ,
-        
-            this.permanentAddress=permanentAddress ,
-        
-            this.zone=zone ,
-        
-            this.subDistrict=subDistrict ,
-        
-            this.district=district ,
-        
-            this.country=country ,
-        
-            this.nationality=nationality ,
-        
-            this.nID=nID ,
-        
-            this.userName=userName ,
-        
-            this.password=password ,
-        
-            this.phone=phone ,
-        
-            this.email=email ,
-        
-            this.role=role
+        husbandName?,
+
+        motherName?,
+
+        gender?,
+
+        DOB?,
+
+        maritalStatus?,
+
+        spouseName?,
+
+        inviter?,
+
+        bloodGroup?,
+
+        occupation?,
+
+        permanentAddressVillage?,
+
+        permanentAddressHouse?,
+
+        permanentAddressRoad?,
+
+        permanentAddressSector?,
+
+        permanentAddressBlock?,
+
+        permanentAddressSubdistrict?,
+
+        permanentAddressDristrict?,
+
+        permanentAddressPostOffice?,
+
+        permanentAddressPostalCode?,
+
+        permanentAddressCountry?,
+
+        permanentAddressNationality?,
+
+        permanentAddressNID?,
+
+        presentAddressVillage?,
+
+        presentAddressHouse?,
+
+        presentAddressRoad?,
+
+        presentAddressSector?,
+
+        presentAddressBlock?,
+
+        presentAddressSubDistrict?,
+
+        presentAddressDistrict?,
+
+        presentAddressPostOffice?,
+
+        presentAddressPostalCode?,
+
+        presentAddressCountry?,
+
+        presentAddressZone?,
+
+        userName?,
+
+        password?, phone?,
+
+        email?,
+
+        role?
+
+    ) {
+
+        this.fullName = fullName,
+
+            this.gender = gender,
+
+            this.fatherName = fatherName,
+
+            this.husbandName = husbandName,
+
+            this.motherName = motherName,
+
+            this.DOB = DOB,
+
+            this.maritalStatus = maritalStatus,
+
+            this.spouseName = spouseName,
+
+            this.inviter = inviter,
+
+            this.bloodGroup = bloodGroup,
+
+            this.occupation = occupation,
+
+            this.permanentAddressVillage = permanentAddressVillage,
+
+            this.permanentAddressHouse = permanentAddressHouse,
+
+            this.permanentAddressRoad = permanentAddressRoad,
+
+            this.permanentAddressSector = permanentAddressSector,
+
+            this.permanentAddressBlock = permanentAddressBlock,
+
+            this.permanentAddressSubdistrict = permanentAddressSubdistrict,
+
+            this.permanentAddressDristrict = permanentAddressDristrict,
+
+            this.permanentAddressPostOffice = permanentAddressPostOffice,
+
+            this.permanentAddressPostalCode = permanentAddressPostalCode,
+
+            this.permanentAddressCountry = permanentAddressCountry,
+
+            this.permanentAddressNationality = permanentAddressNationality,
+
+            this.permanentAddressNID = permanentAddressNID,
+
+            this.presentAddressVillage = presentAddressVillage,
+
+            this.presentAddressHouse = presentAddressHouse,
+
+            this.presentAddressRoad = presentAddressRoad,
+
+            this.presentAddressSector = presentAddressSector,
+
+            this.presentAddressBlock = presentAddressBlock,
+
+            this.presentAddressSubDistrict = presentAddressSubDistrict,
+
+            this.presentAddressDistrict = presentAddressDistrict,
+
+            this.presentAddressPostOffice = presentAddressPostOffice,
+
+            this.presentAddressPostalCode = presentAddressPostalCode,
+
+            this.presentAddressCountry = presentAddressCountry,
+
+            this.presentAddressZone = presentAddressZone,
+
+            this.userName = userName,
+
+            this.password = password,
+
+            this.phone = phone,
+
+            this.email = email,
+
+            this.role = role
     }
 }

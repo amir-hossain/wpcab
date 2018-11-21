@@ -2,8 +2,13 @@ import {HttpClient,HttpHeaders} from "@angular/common/http";
 import { User } from "../model/User";
 import { Subscribable } from "rxjs/Observable";
 
-
+// main endpoint
 const endPoing='http://localhost:9000/api/'
+
+// dedug endpoint
+
+// const endPoing='http://localhost:52426/api/'
+
 export class Data{
 
  
