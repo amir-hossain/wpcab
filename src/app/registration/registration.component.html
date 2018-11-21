@@ -1,5 +1,5 @@
 <h1>{{'MixedComponent.Heading' | translate}}</h1>
-<form [formGroup]="registrationForm" (ngSubmit)="signup()">
+<form [formGroup]="registrationForm" (ngSubmit)="signup()" (keydown.enter)="$event.preventDefault()">
   <div ngClass.gt-sm="container">
     <h3>{{'MixedComponent.SubHeading1' | translate}}</h3>
     <span class="warning" fxLayoutAlign.lt-md="center">* {{'MixedComponent.Ins' | translate}}</span>
