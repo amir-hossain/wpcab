@@ -313,8 +313,8 @@
                         <mat-label>*{{'MixedComponent.Dist' | translate}}</mat-label>
                         <input matInput type="text" formControlName="district" [matAutocomplete]='dist'>
                         <mat-autocomplete #dist='matAutocomplete'>
-                          <mat-option *ngFor='let option of  filteredDistricts' [value]='option'>
-                            {{option}}
+                          <mat-option *ngFor='let option of  filteredDistricts' value='{{option | translate}}'>
+                            {{option | translate}}
                           </mat-option>
                         </mat-autocomplete>
     
@@ -469,8 +469,8 @@
                         <mat-label>*{{'MixedComponent.Dist' | translate}}</mat-label>
                         <input matInput type="text" formControlName="district" [matAutocomplete]='dist'>
                         <mat-autocomplete #dist='matAutocomplete'>
-                          <mat-option *ngFor='let option of  filteredDistricts' [value]='option'>
-                            {{option}}
+                          <mat-option *ngFor='let option of  filteredDistricts' value='{{option | translate}}'>
+                            {{option | translate}}
                           </mat-option>
                         </mat-autocomplete>
     
